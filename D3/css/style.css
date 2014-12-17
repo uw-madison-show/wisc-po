@@ -1,0 +1,14 @@
+body {
+  background-image: url(../img/pw_maze_white.png);
+}
+
+#logo {
+  max-height: 135px;
+}
+
+.main {
+  margin-top: 50px;
+  padding: 30px;
+  background-color: #fafafa;
+  border-radius: 15px;
+}
