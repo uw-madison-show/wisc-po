@@ -2,14 +2,34 @@ body {
   background-image: url(../img/pw_maze_white.png);
 }
 
+.main {
+  background-color: #fcfcfc;
+  border-radius: 15px;
+}
+
+/* Styling for responsive layout stuff */
+
+@media (min-width: 768px) {
+  .main {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    margin: 15px;
+    padding: 7px;
+  }
+}
+
+/* End main responsive stuff */
+
 #logo {
   max-height: 135px;
 }
 
-.main {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  padding: 30px;
-  background-color: #fafafa;
-  border-radius: 15px;
+#map {
+  height: 600px;
 }
