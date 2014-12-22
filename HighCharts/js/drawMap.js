@@ -295,8 +295,8 @@ $(function () {
   var average = 0;
 
   var color = [
-   "#AA3C39",
    "#AA6D39",
+   "#AA3C39",
    "#236467",
    "#2D8632",
    "#AA8E39"
@@ -356,14 +356,14 @@ $(function () {
       name: 'Random data',
       states: {
         hover: {
-          color: '#BADA55'
+          color: '#CB6'
         }
       },
       dataLabels: {
         enabled: false,
         format: '{point.name}'
       },
-      borderWidth: 2
+      borderWidth: 3
     }]
   });
 
@@ -373,7 +373,7 @@ $(function () {
       backgroundColor: null
     },
     title: {
-      text: 'Random Wisconsin Data'
+      text: 'Highcharts basic demo'
     },
     subtitle: {
       text: 'Source: Random'
