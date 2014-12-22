@@ -7,6 +7,10 @@ body {
   border-radius: 15px;
 }
 
+hr {
+  border-top: 1px solid #ddd;
+}
+
 /* Styling for responsive layout stuff */
 
 @media (min-width: 768px) {
@@ -30,6 +34,6 @@ body {
   max-height: 135px;
 }
 
-#map {
+.chart {
   height: 600px;
 }
