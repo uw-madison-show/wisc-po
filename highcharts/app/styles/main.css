@@ -1,0 +1,29 @@
+body {
+  background-image: url(../images/pw_maze_white.png);
+}
+
+.container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 7px;
+}
+
+hr {
+  border-top: 1px solid #ddd;
+}
+
+nav {
+  padding: 12px;
+}
+
+.navbar-default .navbar-nav > li > a {
+  border-radius: 5px;
+}
+
+#logo {
+  max-height: 96px;
+}
+
+.chart {
+  height: 600px;
+}
