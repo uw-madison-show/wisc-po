@@ -10,6 +10,14 @@ var color = [
   "#AA8E39"
 ];
 
+var color2 = [
+  "rgba(170, 60, 57, ",
+  "rgba(35, 100, 103, ",
+  "rgba(170, 109, 57, ",
+  "rgba(45, 134, 50, ",
+  "rgba(170, 142, 57, "
+];
+
 // Print out a list of this data
 
 $.each(Highcharts.maps["countries/us/us-wi-all"].features, function(i, item) {
@@ -17,12 +25,12 @@ $.each(Highcharts.maps["countries/us/us-wi-all"].features, function(i, item) {
   //data[i].value = Math.floor((Math.random() * 1000) + 1);
   data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
   data[i].y = data[i].value;
-  data[i].section = Math.floor(i/(data.length/5));
-  data[i].borderColor = color[data[i].section];
+  data[i].borderColor = color[data[i].region - 1];
+  data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ")";
   data[i].name = item.properties.name;
 
   average += data[i].value;
-  $('#myTable tr:last').after('<tr><td>' + i + '</td><td>' + item.properties.name + '</td><td>' + data[i].section
+  $('#myTable tr:last').after('<tr><td>' + i + '</td><td>' + item.properties.name + '</td><td>' + data[i].region
       + '</td><td>' + data[i].value + '</td><td>' + item.id + '</td></tr>');
 });
 
@@ -31,20 +39,16 @@ $('#avg').text(average);
 
 // Initiate the map
 $('#map1').highcharts('Map', {
-
   chart: {
     backgroundColor: null,
     renderTo: 'map1'
   },
-
   title : {
     text : 'Highmaps basic demo'
   },
-
   subtitle : {
     text : 'Source map: <a href="http://code.highcharts.com/mapdata/countries/us/us-wi-all.js">Wisconsin</a>'
   },
-
   /*
   mapNavigation: {
     enabled: true,
@@ -53,16 +57,15 @@ $('#map1').highcharts('Map', {
     }
   },
   */
-
   chart: {
     backgroundColor: null,
   },
-
+  /*
   colorAxis: {
     min: 0,
     max: 1000
   },
-
+  */
   series : [{
     data : data,
     mapData: Highcharts.maps['countries/us/us-wi-all'],
@@ -123,9 +126,9 @@ $('#chart1').highcharts({
         return this.point.name;
       },
       verticalAlign: 'top'
-    },
-    shadow: true,
-    color: '#fff'
+    }
+    //shadow: true,
+    //color: '#fff'
   }]
 });
 
@@ -134,6 +137,7 @@ function randomData() {
   for (var i = 0; i < data.length; i++) {
     data[i].value = Math.floor((Math.random() * 1000) + 1);
     data[i].y = data[i].value;
+    data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ")";
   }
 
   setTimeout(function(){ $('#chart1').highcharts().series[0].setData(data) }, 200);
