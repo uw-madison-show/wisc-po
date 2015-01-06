@@ -1,5 +1,18 @@
 console.log('\'Allo \'Allo!');
 
+// Set up watcher for collapsible
+$("#plusIcon").hide();
+$('#collapseOne').on('hide.bs.collapse', function () {
+  $("#plusIcon").show();
+  $("#minusIcon").hide();
+});
+
+$('#collapseOne').on('show.bs.collapse', function () {
+  $("#plusIcon").hide();
+  $("#minusIcon").show();
+});
+
+
 var average = 0;
 
 var color = [
@@ -28,13 +41,9 @@ for (var i = 0; i < data.length; i++) {
   data[i].borderColor = color[data[i].region - 1];
   data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ")";
 
-  average += data[i].value;
-  $('#myTable tr:last').after('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region
+  $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region
       + '</td><td>' + data[i].value + '</td><td>' + data[i]["hc-key"] + '</td></tr>');
 }
-
-average = Math.floor(average / data.length);
-$('#avg').text(average);
 
 // Initiate the map
 $('#map1').highcharts('Map', {
@@ -117,7 +126,8 @@ $('#chart1').highcharts({
         return this.point.name;
       },
       verticalAlign: 'top'
-    }
+    },
+    name: 'Random data'
   }]
 });
 
@@ -185,10 +195,16 @@ var lineChart = new Highcharts.Chart(lineChartOptions);
 
 function randomData() {
   console.log("randomness!");
+
+  $("#myTable tbody").empty();
+
   for (var i = 0; i < data.length; i++) {
     data[i].value = Math.floor((Math.random() * 1000) + 1);
     data[i].y = data[i].value;
     data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ")";
+
+    $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region
+        + '</td><td>' + data[i].value + '</td><td>' + data[i]["hc-key"] + '</td></tr>');
   }
 
   setTimeout(function(){ $('#chart1').highcharts().series[0].setData(data) }, 200);

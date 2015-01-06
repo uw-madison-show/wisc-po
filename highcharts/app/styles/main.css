@@ -40,6 +40,14 @@ nav {
   border-radius: 5px;
 }
 
+.panel-heading:hover {
+  cursor: pointer;
+}
+
+.panel-title h3 {
+  margin-top: 10px;
+}
+
 #logo {
   max-height: 96px;
 }
