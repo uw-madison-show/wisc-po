@@ -20,19 +20,18 @@ var color2 = [
 
 // Print out a list of this data
 
-$.each(Highcharts.maps["countries/us/us-wi-all"].features, function(i, item) {
+for (var i = 0; i < data.length; i++) {
   // Make the data random and fun :)
   //data[i].value = Math.floor((Math.random() * 1000) + 1);
   data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
   data[i].y = data[i].value;
   data[i].borderColor = color[data[i].region - 1];
   data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ")";
-  data[i].name = item.properties.name;
 
   average += data[i].value;
-  $('#myTable tr:last').after('<tr><td>' + i + '</td><td>' + item.properties.name + '</td><td>' + data[i].region
-      + '</td><td>' + data[i].value + '</td><td>' + item.id + '</td></tr>');
-});
+  $('#myTable tr:last').after('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region
+      + '</td><td>' + data[i].value + '</td><td>' + data[i]["hc-key"] + '</td></tr>');
+}
 
 average = Math.floor(average / data.length);
 $('#avg').text(average);
@@ -107,14 +106,6 @@ $('#chart1').highcharts({
       text: 'Random Data'
     }
   },
-  /*
-  plotOptions: {
-    column: {
-      pointPadding: 0.2,
-      borderWidth: 0
-    }
-  },
-  */
   series : [{
     data : data,
     dataLabels: {
@@ -127,59 +118,70 @@ $('#chart1').highcharts({
       },
       verticalAlign: 'top'
     }
-    //shadow: true,
-    //color: '#fff'
   }]
 });
 
-$('#line1').highcharts({
+var lineChartOptions = {
   chart: {
-    zoomType: 'xy'
+    zoomType: 'xy',
+    renderTo: 'line1'
   },
   title: {
-    text: 'Temperature'
+    text: 'Hypertension Across Wisconsin'
   },
   xAxis: [{
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    categories: ['2008', '2009', '2010', '2011', '2012', '2013']
   }],
   yAxis: [{ // Primary yAxis
     labels: {
       formatter: function() {
-        return this.value + '°C';
-      },
-      style: {
-        color: '#89A54E'
+        return this.value + '%';
       }
     },
     title: {
-      text: 'Temperature',
-      style: {
-        color: '#89A54E'
-      }
+      text: 'Percentage'
     }
   }],
-
   tooltip: {
     shared: true
   },
 
-  series: [{
-    name: 'Temperature',
-    color: '#89A54E',
+  series: []
+};
+
+
+for (var i = 0; i < lineData.length; i++) {
+  var lineError = [];
+  var lineFinal = [];
+  for (var j = 0; j < lineData[i].length; j++) {
+    lineFinal[j] = lineData[i][j].value;
+    lineError[j] = [
+      lineData[i][j].value - lineData[i][j]["Margin of Error"],
+      lineData[i][j].value + lineData[i][j]["Margin of Error"]
+    ];
+  }
+
+  lineChartOptions.series.push({
+    name: 'Hypertension Rate, Region ' + (i+1),
     type: 'spline',
-    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+    data: lineFinal,
     tooltip: {
-      pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f}°C</b> '
-    }
+      pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.3f}%</b> '
+    },
+    color: color[i]
   }, {
-    name: 'Temperature error',
+    name: 'Measurement error',
     type: 'errorbar',
-    data: [[6, 8], [5.9, 7.6], [9.4, 10.4], [14.1, 15.9], [18.0, 20.1], [21.0, 24.0], [23.2, 25.3], [26.1, 27.8], [23.2, 23.9], [18.0, 21.1], [12.9, 14.0], [7.6, 10.0]],
+    data: lineError,
     tooltip: {
-      pointFormat: '(error range: {point.low}-{point.high}°C)<br/>'
-    }
-  }]
-});
+      pointFormat: '(error range: {point.low:.3f} to {point.high:.3f}%)<br/>'
+    },
+    color: color[i]
+  });
+
+}
+
+var lineChart = new Highcharts.Chart(lineChartOptions);
 
 function randomData() {
   console.log("randomness!");
