@@ -12,6 +12,22 @@ $('#collapseOne').on('show.bs.collapse', function () {
   $("#minusIcon").show();
 });
 
+$("#errorbar #on").click(function() {
+  for(var i = 0; i < lineChart.series.length; i++) {
+    if (lineChart.series[i].type === "errorbar" && lineChart.series[i-1].visible) {
+      lineChart.series[i].show();
+    }
+  }
+});
+
+$("#errorbar #off").click(function() {
+  for(var i = 0; i < lineChart.series.length; i++) {
+    if (lineChart.series[i].type === "errorbar" && lineChart.series[i-1].visible) {
+      lineChart.series[i].hide();
+    }
+  }
+});
+
 
 var average = 0;
 
