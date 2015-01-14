@@ -1,0 +1,51 @@
+<div class="container">
+
+  {{> header}}
+
+  <hr>
+
+  <h1>
+    <span clas="pull-left">Hello, world - from Highcharts / Highmaps</span>
+    <button id="randomData" class="btn btn-default pull-right">Randomize the Data!</button>
+  </h1>
+
+  <div class="clearfix"></div>
+
+  <div class="col-xs-12">
+    <h3>
+      Number of Charts:
+      <div class="btn-group" data-toggle="buttons">
+        <label id="on" class="btn btn-default">
+          <input type="radio" name="numcharts" autocomplete="off" value="1">1 Chart
+        </label>
+        <label id="off" class="btn btn-default active">
+          <input type="radio" name="numcharts" autocomplete="off" value="2" checked>2 Charts
+        </label>
+      </div>
+    </h3>
+  </div>
+
+  {{> halfChart id='chart999'}}
+
+  {{> halfChart}}
+
+  <div class="clearfix"></div>
+
+  <div class="btn-group" data-toggle="buttons">
+    <label id="on" class="btn btn-default">
+      <input type="radio" name="errorbar" autocomplete="off" value="true">Show Errorbars
+    </label>
+    <label id="off" class="btn btn-default active">
+      <input type="radio" name="errorbar" autocomplete="off" value="false" checked>Hide Errorbars
+    </label>
+  </div>
+
+  {{> linechart}}
+
+  <hr>
+
+  {{> table}}
+
+  {{> footer}}
+
+</div>

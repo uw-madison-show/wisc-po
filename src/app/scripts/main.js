@@ -1,9 +1,10 @@
 // JSHint options:
-/* global data, lineData, Highcharts, setTimeout, $, console */
+/* global data, lineData, Highcharts, setTimeout, $, console, templates */
 'use strict';
 
 console.log('\'Allo \'Allo!');
 
+$('#index').html(templates.index);
 
 var color = [
   '#AA3C39',
@@ -38,8 +39,7 @@ for (var i = 0; i < data.length; i++) {
 // Initiate the map
 var mapChartOptions = {
   chart: {
-    backgroundColor: null,
-    renderTo: 'chart1'
+    backgroundColor: null
   },
   title : {
     text : 'Highmaps basic demo'
@@ -76,8 +76,6 @@ var mapChartOptions = {
     borderWidth: 3
   }]
 };
-
-new Highcharts.Map(mapChartOptions);
 
 var columnChartOptions = {
   chart: {
@@ -119,12 +117,9 @@ var columnChartOptions = {
   }]
 };
 
-new Highcharts.Chart(columnChartOptions);
-
 var lineChartOptions = {
   chart: {
-    zoomType: 'xy',
-    renderTo: 'line1'
+    zoomType: 'xy'
   },
   title: {
     text: 'Hypertension Across Wisconsin'
@@ -196,8 +191,15 @@ for (var i = 0; i < lineData.length; i++) {
 
 }
 
-var lineChart = new Highcharts.Chart(lineChartOptions);
+$('.chart').each(function(i) {
+  $(this).attr('id', 'chart' + i);
+});
 
+$('.chart:eq(0)').highcharts('Map', mapChartOptions);
+$('.chart:eq(1)').highcharts(columnChartOptions);
+$('.chart:eq(2)').highcharts(lineChartOptions);
+
+var lineChart = $('.chart:eq(2)').highcharts();
 for(var i = 0; i < lineChart.series.length; i++) {
   if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
     lineChart.series[i].hide();
@@ -218,8 +220,8 @@ function randomData() {
         '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
   }
 
-  setTimeout(function(){ $('#chart1').highcharts().series[0].setData(data); }, 200);
-  setTimeout(function(){ $('#chart2').highcharts().series[0].setData(data); }, 200);
+  setTimeout(function(){ $('.chart:eq(0)').highcharts().series[0].setData(data); }, 200);
+  setTimeout(function(){ $('.chart:eq(1)').highcharts().series[0].setData(data); }, 200);
 }
 
 
@@ -239,8 +241,8 @@ $('#collapseOne').on('show.bs.collapse', function () {
 $('#randomData').on('click', function() { randomData(); } );
 
 $('input[name="numcharts"]').change(function() {
-  var chart1 = $('#chart1');
-  var chart2 = $('#chart2');
+  var chart1 = $('.chart:eq(0)');
+  var chart2 = $('.chart:eq(1)');
   if ($(this).val() === '1') {
     chart1.parent().removeClass('col-md-6');
     chart2.parent().hide();

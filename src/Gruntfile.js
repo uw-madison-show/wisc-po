@@ -16,6 +16,9 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
+  // Load handlebars and single quotes
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
+
   // Configurable paths
   var config = {
     app: 'app',
@@ -61,6 +64,10 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= config.app %>/images/{,*/}*'
         ]
+      },
+      handlebars: {
+        files: ['<%= config.app %>/templates/**/*.hbs'],
+        tasks: ['handlebars']
       }
     },
 
@@ -131,7 +138,8 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= config.app %>/scripts/{,*/}*.js',
         '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
+        'test/spec/{,*/}*.js',
+        '!<%= config.app %>/scripts/templates.js'
       ]
     },
 
@@ -176,7 +184,7 @@ module.exports = function (grunt) {
           src: [
             '<%= config.dist %>/scripts/{,*/}*.js',
             '<%= config.dist %>/styles/{,*/}*.css',
-            '<%= config.dist %>/images/{,*/}*.*',
+            // '<%= config.dist %>/images/{,*/}*.*',
             '<%= config.dist %>/styles/fonts/{,*/}*.*',
             '<%= config.dist %>/*.{ico,png}'
           ]
@@ -315,17 +323,40 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
+        'handlebars',
         'copy:styles'
       ],
       test: [
         'copy:styles'
       ],
       dist: [
+        'handlebars',
         'copy:styles',
         'imagemin',
         'svgmin'
       ]
+    },
+
+    // Register handlebars stuff
+    handlebars: {
+      options: {
+        // configure a namespace for your templates
+        namespace: 'templates',
+
+        // convert file path into a function name
+        // in this example, I convert grab just the filename without the extension
+        processName: function(filePath) {
+          var pieces = filePath.split('/');
+          return pieces[pieces.length - 1].split('.')[0];
+        }
+      },
+      all: {
+        files: {
+          '<%= config.app %>/scripts/templates.js': ['<%= config.app %>/templates/**/*.hbs']
+        }
+      }
     }
+
   });
 
 
@@ -387,4 +418,17 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('server-shutdown-listener',function(step){
+    var name = this.name;
+    if (step === 'exit') {
+      process.exit();
+    } else {
+      process.on('SIGINT',function(){
+        grunt.log.writeln('').writeln('Shutting down server...');
+        grunt.task.run(['forever:stop', name + ':exit']);
+        grunt.task.current.async()();
+      });
+    }
+  });
 };
