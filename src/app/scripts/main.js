@@ -22,7 +22,7 @@ var color2 = [
   'rgba(170, 142, 57, '
 ];
 
-// Print out a list of this data
+// Print out a list of this data and set it up
 
 for (var i = 0; i < data.length; i++) {
   // Make the data random and fun :)
@@ -80,7 +80,6 @@ var mapChartOptions = {
 var columnChartOptions = {
   chart: {
     type: 'column',
-    renderTo: 'chart2',
     backgroundColor: null
   },
   title: {
@@ -118,6 +117,46 @@ var columnChartOptions = {
 };
 
 var lineChartOptions = {
+  chart: {
+    type: 'line',
+    backgroundColor: null
+  },
+  title: {
+    text: 'Highcharts basic demo'
+  },
+  subtitle: {
+    text: 'Source: Random'
+  },
+  xAxis: {
+    title: {
+      text: 'Index Number'
+    }
+  },
+  yAxis: {
+    min: 0,
+    max: 1000,
+    title: {
+      text: 'Random Data'
+    }
+  },
+  series : [{
+    data : data,
+    dataLabels: {
+      enabled: true,
+      formatter: function() {
+        if (this.point.x % 3 !== 0) {
+          return '';
+        }
+        return this.point.name;
+      },
+      verticalAlign: 'top'
+    },
+    name: 'Random data'
+  }]
+};
+
+
+var errorChartOptions = {
   chart: {
     zoomType: 'xy'
   },
@@ -170,7 +209,7 @@ for (var i = 0; i < lineData.length; i++) {
     ];
   }
 
-  lineChartOptions.series.push({
+  errorChartOptions.series.push({
     name: 'Hypertension Rate, Region ' + (i+1),
     // TODO: spline or line???
     type: 'line',
@@ -186,7 +225,8 @@ for (var i = 0; i < lineData.length; i++) {
     tooltip: {
       pointFormat: '(error range: {point.low:.3f} to {point.high:.3f}%)<br/>'
     },
-    color: color[i]
+    color: color[i],
+    visible: false
   });
 
 }
@@ -195,16 +235,12 @@ $('.chart').each(function(i) {
   $(this).attr('id', 'chart' + i);
 });
 
-$('.chart:eq(0)').highcharts('Map', mapChartOptions);
-$('.chart:eq(1)').highcharts(columnChartOptions);
-$('.chart:eq(2)').highcharts(lineChartOptions);
+$('.chart:eq(0)').highcharts('Map', $.extend(true, {}, mapChartOptions));
+$('.chart:eq(1)').highcharts($.extend(true, {}, columnChartOptions));
+$('.chart:eq(2)').highcharts($.extend(true, {}, errorChartOptions));
 
-var lineChart = $('.chart:eq(2)').highcharts();
-for(var i = 0; i < lineChart.series.length; i++) {
-  if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
-    lineChart.series[i].hide();
-  }
-}
+
+/* Helper functions */
 
 function randomData() {
   console.log('randomness!');
@@ -225,7 +261,6 @@ function randomData() {
 }
 
 
-
 /* Set up watchers */
 $('#minusIcon').hide();
 $('#collapseOne').on('hide.bs.collapse', function () {
@@ -236,6 +271,29 @@ $('#collapseOne').on('hide.bs.collapse', function () {
 $('#collapseOne').on('show.bs.collapse', function () {
   $('#plusIcon').hide();
   $('#minusIcon').show();
+});
+
+$('.chartSelect ul li').on('click', function() {
+  var type = this.getAttribute('data-type');
+  var chart = $(this).closest('.chartContainer').find('.chart');
+
+  if (type) {
+    chart.highcharts().destroy();
+
+    switch (type) {
+      case 'bar':
+        chart.highcharts($.extend(true, {}, columnChartOptions));
+        break;
+      case 'line':
+        chart.highcharts($.extend(true, {}, lineChartOptions));
+        break;
+      case 'map':
+        chart.highcharts('Map', $.extend(true, {}, mapChartOptions));
+        break;
+      default:
+        break;
+    }
+  }
 });
 
 $('#randomData').on('click', function() { randomData(); } );
@@ -259,6 +317,8 @@ $('input[name="numcharts"]').change(function() {
     chart2.highcharts().redraw();
   }
 });
+
+var lineChart = $('.chart:eq(2)').highcharts();
 
 $('input[name="errorbar"]').change(function() {
   for(var i = 0; i < lineChart.series.length; i++) {
