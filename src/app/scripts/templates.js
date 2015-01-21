@@ -7,16 +7,22 @@ Handlebars.registerPartial("halfChart", Handlebars.template({"1":function(depth0
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"col-xs-12 col-md-6 chartContainer\">\n  <nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <span class=\"navbar-brand\">Chart "
     + escapeExpression(((helper = (helper = helpers.num || (depth0 != null ? depth0.num : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"num","hash":{},"data":data}) : helper)))
-    + "</span>\n    </div>\n\n    <!-- Collection of nav links and other content for toggling -->\n    <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li ";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.bar : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += " data-type=\"bar\" data-toggle=\"pill\">\n          <a href=\"#\">Bar Chart</a>\n        </li>\n        <li ";
+    + "</span>\n    </div>\n\n    <!-- Collection of nav links and other content for toggling -->\n    <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n      <ul id=\"chartType\" class=\"nav navbar-nav navbar-right\">\n        <li ";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.line : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  buffer += " data-type=\"line\" data-toggle=\"pill\">\n          <a href=\"#\">Line Chart</a>\n        </li>\n        <li ";
+  buffer += " data-type=\"line\" data-toggle=\"pill\">\n          <a href=\"#\">Line</a>\n        </li>\n        <li ";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.spline : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " data-type=\"spline\" data-toggle=\"pill\">\n          <a href=\"#\">Spline</a>\n        </li>\n        <li ";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.column : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " data-type=\"column\" data-toggle=\"pill\">\n          <a href=\"#\">Bar</a>\n        </li>\n        <li ";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.pie : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += " data-type=\"pie\" data-toggle=\"pill\">\n          <a href=\"#\">Pie</a>\n        </li>\n        <li ";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.map : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + " data-type=\"map\" data-toggle=\"pill\">\n          <a href=\"#\">Map</a>\n        </li>\n        <!--\n        <li>\n          <a data-toggle=\"dropdown\" href=\"#\">Dropdown <b class=\"caret\"></b></a>\n            <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">\n              <li><a href=\"#\">Var 1</a></li>\n              <li><a href=\"#\">Var 2</a></li>\n              <li><a href=\"#\">Var 3</a></li>\n              <li><a href=\"#\">Var 4</a></li>\n              <li><a href=\"#\">Var 5</a></li>\n            </ul>\n        </li>\n        -->\n\n      </ul>\n\n      <div class=\"clearfix\"></div>\n\n      <form class=\"form-horizontal\">\n\n        <div class=\"form-group nav-select\">\n          <label class=\"col-sm-4 control-label\">Variable A</label>\n          <div class=\"col-sm-8\">\n            <select class=\"form-control dropDownA\">\n            </select>\n          </div>\n        </div>\n\n        <div class=\"form-group nav-select\">\n          <label class=\"col-sm-4 control-label\">Variable B</label>\n          <div class=\"col-sm-8\">\n            <select class=\"form-control dropDownB\">\n            </select>\n          </div>\n        </div>\n\n      </form>\n\n    </div>\n  </nav>\n\n  <div class=\"chart col-xs-12\"></div>\n</div>";
+  return buffer + " data-type=\"map\" data-toggle=\"pill\">\n          <a href=\"#\">Map</a>\n        </li>\n\n        <!--\n        <li>\n          <a data-toggle=\"dropdown\" href=\"#\">Dropdown <b class=\"caret\"></b></a>\n            <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">\n              <li><a href=\"#\">Var 1</a></li>\n              <li><a href=\"#\">Var 2</a></li>\n              <li><a href=\"#\">Var 3</a></li>\n              <li><a href=\"#\">Var 4</a></li>\n              <li><a href=\"#\">Var 5</a></li>\n            </ul>\n        </li>\n        -->\n\n      </ul>\n\n      <div class=\"clearfix\"></div>\n\n      <form class=\"form-horizontal\">\n\n        <div class=\"form-group nav-select\">\n          <label class=\"col-sm-4 control-label\">Variable A</label>\n          <div class=\"col-sm-8\">\n            <select class=\"form-control dropDownA\">\n            </select>\n          </div>\n        </div>\n\n        <div class=\"form-group nav-select\">\n          <label class=\"col-sm-4 control-label\">Variable B</label>\n          <div class=\"col-sm-8\">\n            <select class=\"form-control dropDownB\">\n            </select>\n          </div>\n        </div>\n\n      </form>\n\n    </div>\n  </nav>\n\n  <div class=\"chart col-xs-12\"></div>\n</div>";
 },"useData":true}));
 
 Handlebars.registerPartial("header", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -24,7 +30,7 @@ Handlebars.registerPartial("header", Handlebars.template({"compiler":[6,">= 2.0.
   },"useData":true}));
 
 Handlebars.registerPartial("linechart", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "<div class=\"col-xs-12 chart\"></div>";
+  return "<div class=\"chart lineChart col-xs-12\"></div>";
   },"useData":true}));
 
 Handlebars.registerPartial("table", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -44,7 +50,7 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
-    'bar': (true),
+    'column': (true),
     'num': ("2")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }

@@ -14,16 +14,23 @@
 
     <!-- Collection of nav links and other content for toggling -->
     <div id="dataCollapse" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li {{#if bar}} class="active" {{/if}} data-type="bar" data-toggle="pill">
-          <a href="#">Bar Chart</a>
-        </li>
+      <ul id="chartType" class="nav navbar-nav navbar-right">
         <li {{#if line}} class="active" {{/if}} data-type="line" data-toggle="pill">
-          <a href="#">Line Chart</a>
+          <a href="#">Line</a>
+        </li>
+        <li {{#if spline}} class="active" {{/if}} data-type="spline" data-toggle="pill">
+          <a href="#">Spline</a>
+        </li>
+        <li {{#if column}} class="active" {{/if}} data-type="column" data-toggle="pill">
+          <a href="#">Bar</a>
+        </li>
+        <li {{#if pie}} class="active" {{/if}} data-type="pie" data-toggle="pill">
+          <a href="#">Pie</a>
         </li>
         <li {{#if map}} class="active" {{/if}} data-type="map" data-toggle="pill">
           <a href="#">Map</a>
         </li>
+
         <!--
         <li>
           <a data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>

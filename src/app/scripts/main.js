@@ -58,167 +58,6 @@ for (var i = 0; i < data.length; i++) {
       '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
 }
 
-// Initiate the map
-var mapChartOptions = {
-  chart: {
-    backgroundColor: null
-  },
-  title : {
-    text : 'Highmaps basic demo'
-  },
-  subtitle : {
-    text : 'Source map: <a href="http://code.highcharts.com/mapdata/countries/us/us-wi-all.js">Wisconsin</a>'
-  },
-  /*
-  mapNavigation: {
-    enabled: true,
-    buttonOptions: {
-      verticalAlign: 'bottom'
-    }
-  },
-  colorAxis: {
-    min: 0,
-    max: 1000
-  },
-  */
-  series : [{
-    data : data,
-    mapData: Highcharts.maps['countries/us/us-wi-all'],
-    joinBy: 'hc-key',
-    name: 'Random data',
-    states: {
-      hover: {
-        color: '#CB6'
-      }
-    },
-    dataLabels: {
-      enabled: false,
-      format: '{point.name}'
-    },
-    borderWidth: 3
-  }]
-};
-
-var columnChartOptions = {
-  chart: {
-    type: 'column',
-    backgroundColor: null
-  },
-  title: {
-    text: 'Highcharts basic demo'
-  },
-  subtitle: {
-    text: 'Source: Random'
-  },
-  xAxis: {
-    title: {
-      text: 'Index Number'
-    }
-  },
-  yAxis: {
-    min: 0,
-    max: 1000,
-    title: {
-      text: 'Random Data'
-    }
-  },
-  series : [{
-    data : data,
-    dataLabels: {
-      enabled: true,
-      formatter: function() {
-        if (this.point.x % 3 !== 0) {
-          return '';
-        }
-        return this.point.name;
-      },
-      verticalAlign: 'top'
-    },
-    name: 'Random data'
-  }]
-};
-
-var lineChartOptions = {
-  chart: {
-    type: 'line',
-    backgroundColor: null
-  },
-  title: {
-    text: 'Highcharts basic demo'
-  },
-  subtitle: {
-    text: 'Source: Random'
-  },
-  xAxis: {
-    title: {
-      text: 'Index Number'
-    }
-  },
-  yAxis: {
-    min: 0,
-    max: 1000,
-    title: {
-      text: 'Random Data'
-    }
-  },
-  series : [{
-    data : data,
-    dataLabels: {
-      enabled: true,
-      formatter: function() {
-        if (this.point.x % 3 !== 0) {
-          return '';
-        }
-        return this.point.name;
-      },
-      verticalAlign: 'top'
-    },
-    name: 'Random data'
-  }]
-};
-
-
-var errorChartOptions = {
-  chart: {
-    zoomType: 'xy'
-  },
-  title: {
-    text: 'Hypertension Across Wisconsin'
-  },
-  xAxis: [{
-    categories: ['2008', '2009', '2010', '2011', '2012', '2013']
-  }],
-  yAxis: [{ // Primary yAxis
-    labels: {
-      formatter: function() {
-        return this.value + '%';
-      }
-    },
-    title: {
-      text: 'Percentage'
-    }
-  }],
-  tooltip: {
-    shared: true
-  },
-  plotOptions: {
-    series: {
-      events: {
-        legendItemClick: function() {
-          if (!this.visible && $('input[name="errorbar"]:checked').val() === 'false') {
-            this.show();
-
-            this.linkedSeries[0].hide();
-            return false;
-          }
-        }
-      }
-    }
-  },
-
-  series: []
-};
-
 
 for (var i = 0; i < lineData.length; i++) {
   var lineError = [];
@@ -253,13 +92,22 @@ for (var i = 0; i < lineData.length; i++) {
 
 }
 
+// Serialize each chart with a unique ID
 $('.chart').each(function(i) {
   $(this).attr('id', 'chart' + i);
 });
 
-$('.chart:eq(0)').highcharts('Map', $.extend(true, {}, mapChartOptions));
-$('.chart:eq(1)').highcharts($.extend(true, {}, columnChartOptions));
-$('.chart:eq(2)').highcharts($.extend(true, {}, errorChartOptions));
+
+$('.chart:not(".lineChart")').each(function(item) {
+  var type = $(".chartContainer .chartSelect #chartType li.active")[item].getAttribute("data-type");
+  createChart($(this), type);
+});
+
+//$('.chart:eq(0)').highcharts('Map', $.extend(true, {}, mapChartOptions));
+//$('.chart:eq(1)').highcharts($.extend(true, {}, columnChartOptions));
+
+
+$('.lineChart').highcharts($.extend(true, {}, errorChartOptions));
 
 
 /* Helper functions */
@@ -280,6 +128,31 @@ function randomData() {
   setTimeout(function(){ $('.chart:eq(1)').highcharts().series[0].setData(data); }, 200);
 }
 
+function createChart(chart, type, options) {
+  var options = $.extend(true, {}, chartOptions);
+  switch (type) {
+    case 'line':
+      options.chart.type = 'line';
+      chart.highcharts(options);
+      break;
+    case 'spline':
+      options.chart.type = 'spline';
+      chart.highcharts(options);
+      break;
+    case 'column':
+      options.chart.type = 'column';
+      chart.highcharts(options);
+      break;
+    case 'pie':
+      options.chart.type = 'pie';
+      chart.highcharts(options);
+      break;
+    case 'map':
+      chart.highcharts('Map', $.extend(true, {}, mapChartOptions));
+      break;
+  }
+}
+
 
 /* Set up watchers */
 $('#minusIcon').hide();
@@ -293,26 +166,13 @@ $('#collapseOne').on('show.bs.collapse', function () {
   $('#minusIcon').show();
 });
 
-$('.chartSelect ul li').on('click', function() {
+$('.chartSelect #chartType li').on('click', function() {
   var type = this.getAttribute('data-type');
   var chart = $(this).closest('.chartContainer').find('.chart');
 
   if (type) {
     chart.highcharts().destroy();
-
-    switch (type) {
-      case 'bar':
-        chart.highcharts($.extend(true, {}, columnChartOptions));
-        break;
-      case 'line':
-        chart.highcharts($.extend(true, {}, lineChartOptions));
-        break;
-      case 'map':
-        chart.highcharts('Map', $.extend(true, {}, mapChartOptions));
-        break;
-      default:
-        break;
-    }
+    createChart(chart, type);
   }
 });
 
@@ -338,9 +198,8 @@ $('input[name="numcharts"]').change(function() {
   }
 });
 
-var lineChart = $('.chart:eq(2)').highcharts();
-
 $('input[name="errorbar"]').change(function() {
+  var lineChart = $('.lineChart').highcharts();
   for(var i = 0; i < lineChart.series.length; i++) {
     if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
       if ($(this).val() === 'true') {
