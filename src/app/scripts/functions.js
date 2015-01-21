@@ -23,6 +23,7 @@ function randomData() {
 
 function createChart(chart, type) {
   var options = $.extend(true, {}, chartOptions);
+  var container = chart.closest('.chartContainer');
   switch (type) {
     case 'line':
       options.chart.type = 'line';
@@ -41,6 +42,7 @@ function createChart(chart, type) {
       chart.highcharts(options);
       break;
     case 'map':
+      container.find('.dropDownC').prop('disabled', true);
       chart.highcharts('Map', $.extend(true, {}, mapChartOptions));
       break;
   }

@@ -17,9 +17,16 @@ $('#collapseOne').on('show.bs.collapse', function () {
 
 $('.chartSelect #chartType li').on('click', function() {
   var type = this.getAttribute('data-type');
-  var chart = $(this).closest('.chartContainer').find('.chart');
+  var container = $(this).closest('.chartContainer');
+  var chart = container.find('.chart');
 
   if (type) {
+    if (type === 'map') {
+      container.find('.dropDownC').prop('disabled', true);
+    } else {
+      container.find('.dropDownC').prop('disabled', false);
+    }
+
     chart.highcharts().destroy();
     createChart(chart, type);
   }
