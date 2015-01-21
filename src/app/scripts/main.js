@@ -333,4 +333,9 @@ $('input[name="errorbar"]').change(function() {
   }
 });
 
+$('.nav-select select').change(function() {
+  console.log('Selected: ' + $('option:selected', this).text());
+  randomData();
+});
+
 /* End watchers */
