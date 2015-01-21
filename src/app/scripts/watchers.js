@@ -1,0 +1,69 @@
+// JSHint options:
+/* global $, console, createChart, randomData */
+
+'use strict';
+
+/* Set up watchers */
+$('#minusIcon').hide();
+$('#collapseOne').on('hide.bs.collapse', function () {
+  $('#plusIcon').show();
+  $('#minusIcon').hide();
+});
+
+$('#collapseOne').on('show.bs.collapse', function () {
+  $('#plusIcon').hide();
+  $('#minusIcon').show();
+});
+
+$('.chartSelect #chartType li').on('click', function() {
+  var type = this.getAttribute('data-type');
+  var chart = $(this).closest('.chartContainer').find('.chart');
+
+  if (type) {
+    chart.highcharts().destroy();
+    createChart(chart, type);
+  }
+});
+
+$('#randomData').on('click', function() { randomData(); } );
+
+$('input[name="numcharts"]').change(function() {
+  var chart1 = $('.chart:eq(0)');
+  var chart2 = $('.chart:eq(1)');
+  if ($(this).val() === '1') {
+    chart1.parent().removeClass('col-md-6');
+    chart2.parent().hide();
+    chart1.highcharts().reflow();
+    chart1.highcharts().redraw();
+    // chart1.highcharts().series[0].setData(data);
+
+  } else {
+    chart1.parent().addClass('col-md-6');
+    chart2.parent().show();
+    chart1.highcharts().reflow();
+    chart1.highcharts().redraw();
+    chart2.highcharts().reflow();
+    chart2.highcharts().redraw();
+  }
+});
+
+$('input[name="errorbar"]').change(function() {
+  var lineChart = $('.lineChart').highcharts();
+  for(var i = 0; i < lineChart.series.length; i++) {
+    if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
+      if ($(this).val() === 'true') {
+        lineChart.series[i].show();
+      }
+      else {
+        lineChart.series[i].hide();
+      }
+    }
+  }
+});
+
+$('.nav-select select').change(function() {
+  console.log('Selected: ' + $('option:selected', this).text());
+  randomData();
+});
+
+/* End watchers */

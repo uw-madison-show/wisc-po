@@ -1,3 +1,9 @@
+// JSHint options:
+/* global Highcharts, data */
+/* exported mapChartOptions, chartOptions, errorChartOptions */
+
+'use strict';
+
 // Chart options
 
 var mapChartOptions = {
@@ -76,44 +82,6 @@ var chartOptions = {
     name: 'Random data'
   }]
 };
-
-var lineChartOptions = {
-  chart: {
-    type: 'line',
-    backgroundColor: null
-  },
-  title: {
-    text: 'Highcharts basic demo'
-  },
-  subtitle: {
-    text: 'Source: Random'
-  },
-  xAxis: {
-    title: {
-      text: 'Index Number'
-    }
-  },
-  yAxis: {
-    title: {
-      text: 'Random Data'
-    }
-  },
-  series : [{
-    data : data,
-    dataLabels: {
-      enabled: true,
-      formatter: function() {
-        if (this.point.x % 3 !== 0) {
-          return '';
-        }
-        return this.point.name;
-      },
-      verticalAlign: 'top'
-    },
-    name: 'Random data'
-  }]
-};
-
 
 var errorChartOptions = {
   chart: {
