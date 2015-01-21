@@ -22,6 +22,28 @@ var color2 = [
   'rgba(170, 142, 57, '
 ];
 
+var dropDownOptsA = [
+  'pre-pop-1',
+  'pre-pop-2',
+  'pre-pop-3',
+  'pre-pop-4',
+  'pre-pop-5'
+];
+
+var dropDownOptsB = [
+  'year'
+];
+
+var selectorA = $('.dropDownA');
+$.each(dropDownOptsA, function() {
+  selectorA.append('<option>' + this + '</option>');
+});
+
+var selectorB = $('.dropDownB');
+$.each(dropDownOptsB, function() {
+  selectorB.append('<option>' + this + '</option>');
+});
+
 // Print out a list of this data and set it up
 
 for (var i = 0; i < data.length; i++) {
@@ -243,8 +265,6 @@ $('.chart:eq(2)').highcharts($.extend(true, {}, errorChartOptions));
 /* Helper functions */
 
 function randomData() {
-  console.log('randomness!');
-
   $('#myTable tbody').empty();
 
   for (var i = 0; i < data.length; i++) {
