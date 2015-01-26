@@ -1,6 +1,6 @@
 // JSHint options:
-/* global data, lineData, $, console, templates, errorChartOptions, createChart */
-/* exported color2 */
+/* global $, Highcharts, console, data, lineData, templates, createChart, createMap */
+/* exported color2, county, region, country */
 'use strict';
 
 /* Global variables */
@@ -48,7 +48,7 @@ var dropDownOptsC = [
 
 var county = Highcharts.maps['countries/us/us-wi-all'];
 var region = Highcharts.maps['countries/us/us-wi-region'];
-var us = Highcharts.maps['countries/us/us-all']
+var country = Highcharts.maps['countries/us/us-all'];
 
 /* End global variables */
 
@@ -106,7 +106,6 @@ $('.chart').each(function(i) {
 //   createChart($('.chart:eq(0)'), type);
 // });
 
-//createChart($('.chart:eq(0)'), 'map', mapSeries);
 createMap($('.chart:eq(0)'), data, county);
 
 // Garbage region, state and country data

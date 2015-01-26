@@ -1,6 +1,6 @@
 // JSHint options:
 /* global Highcharts, data */
-/* exported mapChartOptions, chartOptions, errorChartOptions */
+/* exported chartOptions, mapSeries */
 
 'use strict';
 
@@ -97,4 +97,3 @@ var mapSeries = {
     }
   }
 };
-

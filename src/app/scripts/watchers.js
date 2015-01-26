@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, console, createChart, randomData */
+/* global $, console, createMap, randomData, data, dataRegion, dataCountry, county, region, country */
 
 'use strict';
 
@@ -15,24 +15,42 @@ $('#collapseOne').on('show.bs.collapse', function () {
   $('#minusIcon').show();
 });
 
-$('.chartSelect #chartType li').on('click', function() {
-  var type = this.getAttribute('data-type');
-  var container = $(this).closest('.chartContainer');
-  var chart = container.find('.chart');
+// $('.chartSelect #chartType li').on('click', function() {
+//   var type = this.getAttribute('data-type');
+//   var container = $(this).closest('.chartContainer');
+//   var chart = container.find('.chart');
+//
+//   if (type) {
+//
+//     //disable form dropdown
+//     /*
+//     if (type === 'map') {
+//       container.find('.dropDownC').prop('disabled', true);
+//     } else {
+//       container.find('.dropDownC').prop('disabled', false);
+//     }
+//     */
+//
+//     chart.highcharts().destroy();
+//     createChart(chart, type);
+//   }
+// });
 
-  if (type) {
-
-    //disable form dropdown
-    /*
-    if (type === 'map') {
-      container.find('.dropDownC').prop('disabled', true);
-    } else {
-      container.find('.dropDownC').prop('disabled', false);
-    }
-    */
-
-    chart.highcharts().destroy();
-    createChart(chart, type);
+$('.chartSelect .dropDownC').change(function() {
+  console.log('new map - ' + $(this).val());
+  var chart = $('.chart:eq(0)');
+  //chart.highcharts().destroy();
+  $('.chart:eq(0)').highcharts().destroy();
+  switch ($(this).val()) {
+    case 'State - County':
+      createMap(chart, data, county);
+      break;
+    case 'State - Region':
+      createMap(chart, dataRegion, region);
+      break;
+    case 'Country':
+      createMap(chart, dataCountry, country);
+      break;
   }
 });
 
@@ -72,11 +90,11 @@ $('input[name="errorbar"]').change(function() {
   }
 });
 
-$('.nav-select select').change(function() {
-  console.log('Selected: ' + $('option:selected', this).text());
-  $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
-  $('#val').text('Value: No region selected');
-  randomData();
-});
+// $('.nav-select select').change(function() {
+//   console.log('Selected: ' + $('option:selected', this).text());
+//   $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+//   $('#val').text('Value: No region selected');
+//   randomData();
+// });
 
 /* End watchers */
