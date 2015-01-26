@@ -9,9 +9,9 @@ function randomData() {
   $('#myTable tbody').empty();
 
   for (var i = 0; i < data.length; i++) {
-    data[i].value = Math.floor((Math.random() * 1000) + 1);
+    data[i].value = Math.floor((Math.random() * 100) + 1);
     data[i].y = data[i].value;
-    data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
+    //data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
 
     $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
         '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
@@ -57,8 +57,13 @@ function createChart(chart, type, series, xAxis, yAxis) {
       break;
     case 'map':
       options.chart.type = 'map';
+      options.colorAxis = {
+        min: 0,
+        minColor: '#E6E7E8',
+        maxColor: '#005645'
+      };
       chart.highcharts('Map', options);
-      container.find('.dropDownC').prop('disabled', true);
+      //container.find('.dropDownC').prop('disabled', true);
       break;
   }
 }
@@ -68,10 +73,6 @@ function createMap(chart, series, map) {
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
   createChart(chart, 'map', seriesNew);
-}
-
-function createChart(chart, type, series) {
-  createChart(chart, type, series, [], []);
 }
 
 /* End helper funtions */

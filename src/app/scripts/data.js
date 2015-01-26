@@ -444,31 +444,31 @@ var dataRegion =
     'name': 'South Region',
     'hc-key':'us-wi-region1',
     'region':1,
-    'value':200
+    'value':20
   },
   {
     'name': 'North Region',
     'hc-key':'us-wi-region2',
     'region':2,
-    'value':400
+    'value':40
   },
   {
     'name': 'West Region',
     'hc-key':'us-wi-region3',
     'region':3,
-    'value':600
+    'value':60
   },
   {
     'name': 'Northeast Region',
     'hc-key':'us-wi-region4',
     'region':4,
-    'value':800
+    'value':80
   },
   {
     'name': 'Southeast Region',
     'hc-key':'us-wi-region5',
     'region':5,
-    'value':1000
+    'value':100
   }
 ];
 

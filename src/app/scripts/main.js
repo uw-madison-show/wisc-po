@@ -77,18 +77,18 @@ $.each(dropDownOptsC, function() {
 
 // Print out a table of data and set it up
 for (var i = 0; i < data.length; i++) {
-  // Make the data random and fun :)
-  //data[i].value = Math.floor((Math.random() * 1000) + 1);
-  data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
-  data[i].y = data[i].value;
-  //data[i].borderColor = color[data[i].region - 1];
-  data[i].edgeColor = color[data[i].region - 1];
-  if (!(data[i].value) || data[i].value === 0) {
-    data[i].color = '#444';
-    data[i].value = 'No data';
-  } else {
-    data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
-  }
+  // // Make the data random and fun :)
+  // //data[i].value = Math.floor((Math.random() * 1000) + 1);
+  // data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
+  // data[i].y = data[i].value;
+  // data[i].borderColor = color[data[i].region - 1];
+  // data[i].edgeColor = color[data[i].region - 1];
+  // if (!(data[i].value) || data[i].value === 0) {
+  //   //data[i].color = '#444';
+  //   data[i].value = 'No data';
+  // } else {
+  //   //data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
+  // }
 
   $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
       '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
@@ -111,21 +111,21 @@ createMap($('.chart:eq(0)'), data, county);
 // Garbage region, state and country data
 var garbage = [
   {
-    data: [150, 200, 250, 500, 30],
+    data: [15, 20, 20, 50, 30],
     name: 'Region'
   },
   {
-    data: [600, 300, 400, 500, 550],
+    data: [60, 30, 40, 50, 55],
     name: 'State'
   },
   {
-    data: [750, 723, 700, 644, 500],
+    data: [75, 72, 70, 64, 50],
     name: 'Country'
   }
 ];
 
 var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013'] };
-var y = { title: { text: 'Values'}, min: 0, max: 1000 };
+var y = { title: { text: 'Values'}, min: 0, max: 100 };
 
 createChart($('.chart:eq(1)'), 'line', garbage, x, y);
 

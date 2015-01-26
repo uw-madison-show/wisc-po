@@ -72,7 +72,7 @@ var mapSeries = {
     events: {
       select: function() {
         var value = this.value;
-        var color = this.edgeColor;
+        var color = '#187cd4';
         $('#val').text('Value: ' + this.name + ' - ' + value);
 
         // remove previously region line
@@ -83,7 +83,11 @@ var mapSeries = {
             width: 3,
             color: color,
             id: 'plot-band-1',
-            dashStyle : 'longdash'
+            dashStyle: 'longdash',
+            label: {
+              text: this.name,
+              align: 'right'
+            }
           }
         );
       },
