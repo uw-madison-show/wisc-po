@@ -70,8 +70,14 @@ for (var i = 0; i < data.length; i++) {
   //data[i].value = Math.floor((Math.random() * 1000) + 1);
   data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
   data[i].y = data[i].value;
-  data[i].borderColor = color[data[i].region - 1];
-  data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
+  //data[i].borderColor = color[data[i].region - 1];
+  data[i].edgeColor = color[data[i].region - 1];
+  if (!(data[i].value) || data[i].value === 0) {
+    data[i].color = '#444';
+    data[i].value = 'No data';
+  } else {
+    data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
+  }
 
   $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
       '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
@@ -84,13 +90,89 @@ $('.chart').each(function(i) {
 });
 
 // Create main charts based on defined types
-$('.chart:not(".lineChart")').each(function(item) {
-  var type = $('.chartContainer .chartSelect #chartType li.active')[item].getAttribute('data-type');
-  createChart($(this), type);
-});
+// $('.chart:not(".lineChart")').each(function(item) {
+//   var type = $('.chartContainer .chartSelect #chartType li.active')[item].getAttribute('data-type');
+//   createChart($('.chart:eq(0)'), type);
+// });
 
+createChart($('.chart:eq(0)'), 'map',
+  [{
+    data : data,
+    mapData: Highcharts.maps['countries/us/us-wi-all'],
+    joinBy: 'hc-key',
+    name: 'Random data',
+    states: {
+      /*
+      hover: {
+        color: '#CB6'
+      },
+      */
+      select: {
+        color: '#b700ff'
+      }
+    },
+    dataLabels: {
+      enabled: false,
+      format: '{point.name}'
+    },
+    //borderWidth: 2,
+    allowPointSelect: true,
+    cursor: 'pointer',
+    point: {
+      events: {
+        select: function() {
+          var value = this.value;
+          var color = this.edgeColor;
+          $('#val').text('Value: ' + this.name + ' - ' + value);
+
+          // remove previously region line
+          $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+          $(".chart:eq(1)").highcharts().yAxis[0].addPlotLine(
+            {
+              value: value,
+              width: 3,
+              color: color,
+              id: 'plot-band-1',
+              dashStyle : 'longdash'
+            }
+          );
+        },
+        unselect: function() {
+          // only remove current line if toggling (not switching to another region)
+          if (this.selected) {
+            $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+            $('#val').text('Value: No region selected');
+          }
+        }
+      }
+    }
+  }]
+);
+
+
+// Garbage region, state and country data
+var garbage = [
+  {
+    data: [150, 200, 250, 500, 30],
+    name: 'Region'
+  },
+  {
+    data: [600, 300, 400, 500, 550],
+    name: 'State'
+  },
+  {
+    data: [750, 723, 700, 644, 500],
+    name: 'Country'
+  }
+];
+
+var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013'] };
+var y = { title: { text: 'Values'}, min: 0, max: 1000 };
+
+createChart($('.chart:eq(1)'), 'line', garbage, x, y);
 
 // Make error chart
+var errorSeries = [];
 for (var i = 0; i < lineData.length; i++) {
   var lineError = [];
   var lineFinal = [];
@@ -102,7 +184,7 @@ for (var i = 0; i < lineData.length; i++) {
     ];
   }
 
-  errorChartOptions.series.push({
+  errorSeries.push({
     name: 'Hypertension Rate, Region ' + (i+1),
     type: 'line',
     data: lineFinal,
@@ -123,4 +205,6 @@ for (var i = 0; i < lineData.length; i++) {
 
 }
 
-$('.lineChart').highcharts($.extend(true, {}, errorChartOptions));
+// Make the line chart on bottom
+createChart($('.lineChart'), 'line', errorSeries, x, []);
+// $('.lineChart').highcharts($.extend(true, {}, errorChartOptions));

@@ -73,4 +73,25 @@ $('.nav-select select').change(function() {
   randomData();
 });
 
+
+// Watch selected event
+/*
+Highcharts.wrap(Highcharts.Point.prototype, 'select', function (proceed) {
+  var value = $('.chart:eq(0)').highcharts().series[0].data[this.index].value;
+  var color = $('.chart:eq(0)').highcharts().series[0].data[this.index].edgeColor;
+  $('#val').text('Value: ' + value);
+  $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+  $(".chart:eq(1)").highcharts().yAxis[0].addPlotLine(
+    {
+      value: value,
+      width: 3,
+      color: color,
+      id: 'plot-band-1',
+      dashStyle : 'longdash'
+    }
+  );
+  proceed();
+});
+*/
+
 /* End watchers */

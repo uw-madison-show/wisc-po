@@ -1,86 +1,92 @@
 <div class="col-xs-12 col-md-6 chartContainer">
-  <nav role="navigation" class="navbar navbar-default chartSelect">
-
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" data-target="#dataCollapse" data-toggle="collapse" class="navbar-toggle">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">Chart {{num}}</span>
-    </div>
-
-    <!-- Collection of nav links and other content for toggling -->
-    <div id="dataCollapse" class="collapse navbar-collapse">
-      <ul id="chartType" class="nav navbar-nav navbar-right">
-        <li {{#if line}} class="active" {{/if}} data-type="line" data-toggle="pill">
-          <a href="#">Line</a>
-        </li>
-        <li {{#if spline}} class="active" {{/if}} data-type="spline" data-toggle="pill">
-          <a href="#">Spline</a>
-        </li>
-        <li {{#if column}} class="active" {{/if}} data-type="column" data-toggle="pill">
-          <a href="#">Bar</a>
-        </li>
-        <li {{#if pie}} class="active" {{/if}} data-type="pie" data-toggle="pill">
-          <a href="#">Pie</a>
-        </li>
-        <li {{#if map}} class="active" {{/if}} data-type="map" data-toggle="pill">
-          <a href="#">Map</a>
-        </li>
-
-        <!--
-        <li>
-          <a data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a href="#">Var 1</a></li>
-              <li><a href="#">Var 2</a></li>
-              <li><a href="#">Var 3</a></li>
-              <li><a href="#">Var 4</a></li>
-              <li><a href="#">Var 5</a></li>
-            </ul>
-        </li>
-        -->
-
-      </ul>
-
-      <div class="clearfix"></div>
-
-      <form class="form-horizontal">
-
-        <div class="form-group nav-select">
-          <label class="col-sm-3 control-label">Location</label>
-          <div class="col-sm-9">
-            <select class="form-control dropDownA">
-              {{!-- Filled from database served header? --}}
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group nav-select">
-          <label class="col-sm-3 control-label">Variable B</label>
-          <div class="col-sm-9">
-            <select class="form-control dropDownB">
-              {{!-- Filled from database served header? --}}
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group nav-select">
-          <label class="col-sm-3 control-label">Variable C</label>
-          <div class="col-sm-9">
-            <select class="form-control dropDownC">
-              {{!-- Filled from database served header? --}}
-            </select>
-          </div>
-        </div>
-
-      </form>
-
-    </div>
-  </nav>
-
   <div class="chart col-xs-12"></div>
+
+  {{#if details}}
+    <div class="clearfix"></div>
+
+    <nav role="navigation" class="navbar navbar-default chartSelect">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" data-target="#dataCollapse" data-toggle="collapse" class="navbar-toggle">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span class="navbar-brand">Chart {{num}}</span>
+      </div>
+
+      <!-- Collection of nav links and other content for toggling -->
+      <div id="dataCollapse" class="collapse navbar-collapse">
+        <ul id="chartType" class="nav navbar-nav navbar-right">
+          <li {{#if line}} class="active" {{/if}} data-type="line" data-toggle="pill">
+            <a href="#">Line</a>
+          </li>
+          <li {{#if spline}} class="active" {{/if}} data-type="spline" data-toggle="pill">
+            <a href="#">Spline</a>
+          </li>
+          <li {{#if column}} class="active" {{/if}} data-type="column" data-toggle="pill">
+            <a href="#">Bar</a>
+          </li>
+          <li {{#if pie}} class="active" {{/if}} data-type="pie" data-toggle="pill">
+            <a href="#">Pie</a>
+          </li>
+          <li {{#if map}} class="active" {{/if}} data-type="map" data-toggle="pill">
+            <a href="#">Map</a>
+          </li>
+
+          <!--
+          <li>
+            <a data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><a href="#">Var 1</a></li>
+                <li><a href="#">Var 2</a></li>
+                <li><a href="#">Var 3</a></li>
+                <li><a href="#">Var 4</a></li>
+                <li><a href="#">Var 5</a></li>
+              </ul>
+          </li>
+          -->
+
+        </ul>
+
+        <div class="clearfix"></div>
+
+        <form class="form-horizontal">
+
+          <div class="form-group nav-select">
+            <label class="col-sm-3 control-label">Location</label>
+            <div class="col-sm-9">
+              <select class="form-control dropDownA">
+                {{!-- Filled from database served header? --}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group nav-select">
+            <label class="col-sm-3 control-label">Variable B</label>
+            <div class="col-sm-9">
+              <select class="form-control dropDownB">
+                {{!-- Filled from database served header? --}}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group nav-select">
+            <label class="col-sm-3 control-label">Variable C</label>
+            <div class="col-sm-9">
+              <select class="form-control dropDownC">
+                {{!-- Filled from database served header? --}}
+              </select>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+    </nav>
+
+    {{/if}}
+
 </div>

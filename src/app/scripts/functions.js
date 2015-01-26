@@ -18,12 +18,30 @@ function randomData() {
   }
 
   setTimeout(function(){ $('.chart:eq(0)').highcharts().series[0].setData(data); }, 200);
-  setTimeout(function(){ $('.chart:eq(1)').highcharts().series[0].setData(data); }, 200);
+  //setTimeout(function(){ $('.chart:eq(1)').highcharts().series[0].setData(data); }, 200);
 }
 
-function createChart(chart, type) {
+function createChart(chart, type, series) {
+  createChart(chart, type, series, [], []);
+}
+
+function createChart(chart, type, series, xAxis, yAxis) {
   var options = $.extend(true, {}, chartOptions);
   var container = chart.closest('.chartContainer');
+  options.series = series;
+
+  if (xAxis) {
+    if (xAxis.length !== 0) {
+      options.xAxis = xAxis;
+    }
+  }
+
+  if (yAxis) {
+    if (yAxis.length !== 0) {
+      options.yAxis = yAxis;
+    }
+  }
+
   switch (type) {
     case 'line':
       options.chart.type = 'line';
@@ -42,8 +60,9 @@ function createChart(chart, type) {
       chart.highcharts(options);
       break;
     case 'map':
+      options.chart.type = 'map';
+      chart.highcharts('Map', options);
       container.find('.dropDownC').prop('disabled', true);
-      chart.highcharts('Map', $.extend(true, {}, mapChartOptions));
       break;
   }
 }
