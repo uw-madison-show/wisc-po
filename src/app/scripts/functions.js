@@ -21,6 +21,13 @@ function randomData() {
   //setTimeout(function(){ $('.chart:eq(1)').highcharts().series[0].setData(data); }, 200);
 }
 
+function createMap(chart, series, map) {
+  var seriesNew = new Array($.extend(true, {}, mapSeries));
+  seriesNew[0].data = series;
+  seriesNew[0].mapData = map;
+  createChart(chart, 'map', seriesNew);
+}
+
 function createChart(chart, type, series) {
   createChart(chart, type, series, [], []);
 }

@@ -41,10 +41,14 @@ var dropDownOptsB = [
 ];
 
 var dropDownOptsC = [
-  'State',
-  'Region',
+  'State - County',
+  'State - Region',
   'Country'
 ];
+
+var county = Highcharts.maps['countries/us/us-wi-all'];
+var region = Highcharts.maps['countries/us/us-wi-region'];
+var us = Highcharts.maps['countries/us/us-all']
 
 /* End global variables */
 
@@ -102,124 +106,8 @@ $('.chart').each(function(i) {
 //   createChart($('.chart:eq(0)'), type);
 // });
 
-createChart($('.chart:eq(0)'), 'map',
-  [{
-    data : data,
-    mapData: Highcharts.maps['countries/us/us-wi-all'],
-    joinBy: 'hc-key',
-    name: 'Random data',
-    states: {
-      /*
-      hover: {
-        color: '#CB6'
-      },
-      */
-      select: {
-        color: '#b700ff'
-      }
-    },
-    dataLabels: {
-      enabled: false,
-      format: '{point.name}'
-    },
-    //borderWidth: 2,
-    allowPointSelect: true,
-    cursor: 'pointer',
-    point: {
-      events: {
-        select: function() {
-          var value = this.value;
-          var color = this.edgeColor;
-          $('#val').text('Value: ' + this.name + ' - ' + value);
-
-          // remove previously region line
-          $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
-          $('.chart:eq(1)').highcharts().yAxis[0].addPlotLine(
-            {
-              value: value,
-              width: 3,
-              color: color,
-              id: 'plot-band-1',
-              dashStyle : 'longdash'
-            }
-          );
-        },
-        unselect: function() {
-          // only remove current line if toggling (not switching to another region)
-          if (this.selected) {
-            $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
-            $('#val').text('Value: No region selected');
-          }
-        }
-      }
-    }
-  }]
-);
-
-var dater = [
-  {
-    //'name': 'Southeast Region',
-    'hc-key': 'us-wa',
-    'region': 2,
-    'value': 50
-  }
-];
-
-createChart($('.chart:eq(3)'), 'map', [
-  {
-    //data: Highcharts.maps['countries/us/us-wi-region'],
-    data: dater,
-    mapData: Highcharts.maps['countries/us/us-all'],
-    joinBy: 'hc-key',
-    name: 'Random data',
-    states: {
-      /*
-      hover: {
-      color: '#CB6'
-    },
-    */
-    select: {
-      color: '#b700ff'
-    }
-  },
-  dataLabels: {
-    enabled: false,
-    format: '{point.name}'
-  },
-  //borderWidth: 2,
-  allowPointSelect: true,
-  cursor: 'pointer',
-  point: {
-    events: {
-      select: function() {
-        var value = this.value;
-        var color = this.edgeColor;
-        $('#val').text('Value: ' + this.name + ' - ' + value);
-
-        // remove previously region line
-        $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
-        $('.chart:eq(1)').highcharts().yAxis[0].addPlotLine(
-          {
-            value: value,
-            width: 3,
-            color: color,
-            id: 'plot-band-1',
-            dashStyle : 'longdash'
-          }
-        );
-      },
-      unselect: function() {
-        // only remove current line if toggling (not switching to another region)
-        if (this.selected) {
-          $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
-          $('#val').text('Value: No region selected');
-        }
-      }
-    }
-  }
-  }]
-);
-
+//createChart($('.chart:eq(0)'), 'map', mapSeries);
+createMap($('.chart:eq(0)'), data, county);
 
 // Garbage region, state and country data
 var garbage = [

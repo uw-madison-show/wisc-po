@@ -1,5 +1,5 @@
 Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Factor</label>\n        <select class=\"form-control dropDownA\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Year</label>\n        <select class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Area</label>\n        <select class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
+  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Factor</label>\n        <select class=\"form-control dropDownA\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Year</label>\n        <select class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Map Detail</label>\n        <select class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
 },"useData":true}));
 
 Handlebars.registerPartial("footer", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -80,12 +80,6 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   stack1 = this.invokePartial(partials.linechart, '    ', 'linechart', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "  </div>\n\n  <hr>\n\n  <div class=\"row\">\n";
-  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
-    'map': (true),
-    'num': ("3")
-  }, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.table, '    ', 'table', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "  </div>\n\n";
