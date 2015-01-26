@@ -47,9 +47,11 @@ $('.chartSelect .dropDownC').change(function() {
       break;
     case 'State - Region':
       createMap(chart, dataRegion, region);
+      $('.chart:eq(1)').highcharts().series[0].setData([]);
       break;
     case 'Country':
       createMap(chart, dataCountry, country);
+      $('.chart:eq(1)').highcharts().series[0].setData([]);
       break;
   }
 });

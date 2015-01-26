@@ -111,7 +111,7 @@ createMap($('.chart:eq(0)'), data, county);
 // Garbage region, state and country data
 var garbage = [
   {
-    data: [15, 20, 20, 50, 30],
+    data: [],
     name: 'Region'
   },
   {
@@ -124,7 +124,7 @@ var garbage = [
   }
 ];
 
-var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013'] };
+var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012'] };
 var y = { title: { text: 'Values'}, min: 0, max: 100 };
 
 createChart($('.chart:eq(1)'), 'line', garbage, x, y);

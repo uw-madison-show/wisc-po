@@ -1,5 +1,5 @@
 // JSHint options:
-/* global data, $, chartOptions, mapSeries, color2 */
+/* global data, $, chartOptions, mapSeries */
 /* exported randomData, createChart, createMap */
 'use strict';
 
@@ -23,7 +23,7 @@ function randomData() {
 
 function createChart(chart, type, series, xAxis, yAxis) {
   var options = $.extend(true, {}, chartOptions);
-  var container = chart.closest('.chartContainer');
+  //var container = chart.closest('.chartContainer');
   options.series = series;
 
   if (xAxis) {

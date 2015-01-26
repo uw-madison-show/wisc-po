@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, data */
+/* global Highcharts, data, dataRegion */
 /* exported chartOptions, mapSeries */
 
 'use strict';
@@ -72,7 +72,7 @@ var mapSeries = {
     events: {
       select: function() {
         var value = this.value;
-        var color = '#187cd4';
+        var color = '#005645';
         $('#val').text('Value: ' + this.name + ' - ' + value);
 
         // remove previously region line
@@ -85,11 +85,21 @@ var mapSeries = {
             id: 'plot-band-1',
             dashStyle: 'longdash',
             label: {
-              text: this.name,
-              align: 'right'
+              text: this.name + ' (' + this.value + ')',
+              align: 'right',
+              style: {
+                fontSize: '12pt'
+              }
             }
           }
         );
+
+        if (this.region) {
+          var region = this.region;
+          var val = dataRegion[region-1].value;
+          $('.chart:eq(1)').highcharts().series[0].setData([val, val, val, val, val]);
+        }
+
       },
       unselect: function() {
         // only remove current line if toggling (not switching to another region)

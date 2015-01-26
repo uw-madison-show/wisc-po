@@ -5,7 +5,7 @@
   <hr>
 
   <h1>
-    <span clas="pull-left">Hello, world - from Highcharts / Highmaps</span>
+    <span clas="pull-left">ICTR Data Dissemination</span>
     <button id="randomData" class="btn btn-default pull-right">Randomize the Data!</button>
   </h1>
 
@@ -23,14 +23,14 @@
 
   <br></br>
 
-  {{> dropdown}}
-
   <h2 id="val">Value: No region selected</h2>
 
   <div class="row">
     {{> halfChart num='1' map=true}}
     {{> halfChart num='2' column=true}}
   </div>
+
+  {{> dropdown}}
 
   <div class="btn-group" data-toggle="buttons">
     <label id="on" class="btn btn-default">
