@@ -21,11 +21,15 @@ $('.chartSelect #chartType li').on('click', function() {
   var chart = container.find('.chart');
 
   if (type) {
+
+    //disable form dropdown
+    /*
     if (type === 'map') {
       container.find('.dropDownC').prop('disabled', true);
     } else {
       container.find('.dropDownC').prop('disabled', false);
     }
+    */
 
     chart.highcharts().destroy();
     createChart(chart, type);
@@ -70,28 +74,9 @@ $('input[name="errorbar"]').change(function() {
 
 $('.nav-select select').change(function() {
   console.log('Selected: ' + $('option:selected', this).text());
+  $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+  $('#val').text('Value: No region selected');
   randomData();
 });
-
-
-// Watch selected event
-/*
-Highcharts.wrap(Highcharts.Point.prototype, 'select', function (proceed) {
-  var value = $('.chart:eq(0)').highcharts().series[0].data[this.index].value;
-  var color = $('.chart:eq(0)').highcharts().series[0].data[this.index].edgeColor;
-  $('#val').text('Value: ' + value);
-  $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
-  $(".chart:eq(1)").highcharts().yAxis[0].addPlotLine(
-    {
-      value: value,
-      width: 3,
-      color: color,
-      id: 'plot-band-1',
-      dashStyle : 'longdash'
-    }
-  );
-  proceed();
-});
-*/
 
 /* End watchers */

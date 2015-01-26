@@ -22,12 +22,6 @@ var color2 = [
 ];
 
 var dropDownOptsA = [
-  'Country',
-  'State',
-  'Region'
-];
-
-var dropDownOptsB = [
   'pre-pop-1',
   'pre-pop-2',
   'pre-pop-3',
@@ -35,8 +29,21 @@ var dropDownOptsB = [
   'pre-pop-5'
 ];
 
+var dropDownOptsB = [
+  '2008',
+  '2009',
+  '2010',
+  '2011',
+  '2012',
+  '2013',
+  '2014',
+  '2015'
+];
+
 var dropDownOptsC = [
-  'Year'
+  'State',
+  'Region',
+  'Country'
 ];
 
 /* End global variables */
@@ -126,8 +133,8 @@ createChart($('.chart:eq(0)'), 'map',
           $('#val').text('Value: ' + this.name + ' - ' + value);
 
           // remove previously region line
-          $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
-          $(".chart:eq(1)").highcharts().yAxis[0].addPlotLine(
+          $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
+          $('.chart:eq(1)').highcharts().yAxis[0].addPlotLine(
             {
               value: value,
               width: 3,
@@ -140,12 +147,76 @@ createChart($('.chart:eq(0)'), 'map',
         unselect: function() {
           // only remove current line if toggling (not switching to another region)
           if (this.selected) {
-            $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
+            $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
             $('#val').text('Value: No region selected');
           }
         }
       }
     }
+  }]
+);
+
+var dater = [
+  {
+    //'name': 'Southeast Region',
+    'hc-key': 'us-wa',
+    'region': 2,
+    'value': 50
+  }
+];
+
+createChart($('.chart:eq(3)'), 'map', [
+  {
+    //data: Highcharts.maps['countries/us/us-wi-region'],
+    data: dater,
+    mapData: Highcharts.maps['countries/us/us-all'],
+    joinBy: 'hc-key',
+    name: 'Random data',
+    states: {
+      /*
+      hover: {
+      color: '#CB6'
+    },
+    */
+    select: {
+      color: '#b700ff'
+    }
+  },
+  dataLabels: {
+    enabled: false,
+    format: '{point.name}'
+  },
+  //borderWidth: 2,
+  allowPointSelect: true,
+  cursor: 'pointer',
+  point: {
+    events: {
+      select: function() {
+        var value = this.value;
+        var color = this.edgeColor;
+        $('#val').text('Value: ' + this.name + ' - ' + value);
+
+        // remove previously region line
+        $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
+        $('.chart:eq(1)').highcharts().yAxis[0].addPlotLine(
+          {
+            value: value,
+            width: 3,
+            color: color,
+            id: 'plot-band-1',
+            dashStyle : 'longdash'
+          }
+        );
+      },
+      unselect: function() {
+        // only remove current line if toggling (not switching to another region)
+        if (this.selected) {
+          $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
+          $('#val').text('Value: No region selected');
+        }
+      }
+    }
+  }
   }]
 );
 

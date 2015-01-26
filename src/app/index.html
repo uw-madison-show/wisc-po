@@ -41,6 +41,7 @@
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <!--
     <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -49,6 +50,7 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
+    -->
 
     <!-- build:js(.) scripts/plugins.js -->
     <script src="bower_components/bootstrap/js/affix.js"></script>
@@ -65,8 +67,12 @@
     <script src="bower_components/bootstrap/js/tab.js"></script>
     <!-- endbuild -->
 
+    <script src="http://code.highcharts.com/mapdata/countries/us/us-all.js"></script>
+
     <!-- build:js({app,.tmp}) scripts/main.js -->
-    <script src="scripts/highcharts-modules/us-wi-all.js"></script>
+    <script src="scripts/highcharts-maps/us-all.js"></script>
+    <script src="scripts/highcharts-maps/us-wi-all.js"></script>
+    <script src="scripts/highcharts-maps/us-wi-region.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="scripts/data.js"></script>
     <script src="scripts/chartOptions.js"></script>

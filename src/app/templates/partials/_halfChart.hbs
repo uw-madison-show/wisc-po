@@ -19,6 +19,7 @@
 
       <!-- Collection of nav links and other content for toggling -->
       <div id="dataCollapse" class="collapse navbar-collapse">
+        {{#if type}}
         <ul id="chartType" class="nav navbar-nav navbar-right">
           <li {{#if line}} class="active" {{/if}} data-type="line" data-toggle="pill">
             <a href="#">Line</a>
@@ -51,7 +52,13 @@
 
         </ul>
 
+        {{/if}}
+
         <div class="clearfix"></div>
+
+
+
+        {{#if dropdown}}
 
         <form class="form-horizontal">
 
@@ -83,6 +90,8 @@
           </div>
 
         </form>
+
+        {{/if}}
 
       </div>
     </nav>

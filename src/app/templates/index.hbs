@@ -9,7 +9,7 @@
     <button id="randomData" class="btn btn-default pull-right">Randomize the Data!</button>
   </h1>
 
-  <h3 class="padding-bottom">
+  <!-- <h3 class="padding-bottom">
     Number of Charts:
     <div class="btn-group" data-toggle="buttons">
       <label id="on" class="btn btn-default">
@@ -19,7 +19,11 @@
         <input type="radio" name="numcharts" autocomplete="off" value="2" checked>2 Charts
       </label>
     </div>
-  </h3>
+  </h3> -->
+
+  <br></br>
+
+  {{> dropdown}}
 
   <h2 id="val">Value: No region selected</h2>
 
@@ -42,6 +46,10 @@
   </div>
 
   <hr>
+
+  <div class="row">
+    {{> halfChart num='3' map=true}}
+  </div>
 
   <div class="row">
     {{> table}}
