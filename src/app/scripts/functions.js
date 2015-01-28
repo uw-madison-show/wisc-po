@@ -1,6 +1,6 @@
 // JSHint options:
 /* global data, $, chartOptions, mapSeries */
-/* exported randomData, createChart, createMap */
+/* exported randomData, createChart, createMap, humanize */
 'use strict';
 
 /* Helper functions */
@@ -87,6 +87,17 @@ function createMap(chart, series, map) {
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
   createChart(chart, 'map', seriesNew);
+}
+
+/* Useful little function found at:
+  http://stackoverflow.com/questions/21792367/replace-underscores-with-spaces-and-capitalize-words
+*/
+function humanize(str) {
+  var frags = str.split('_');
+  for (var i = 0; i < frags.length; i++) {
+    frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
+  }
+  return frags.join(' ');
 }
 
 /* End helper funtions */

@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, console, createMap, randomData, data, dataRegion, dataCountry, county, region, country */
+/* global $, console, createMap, csv, numVars, randomData, dataRegion, dataCountry, county, region, country */
 
 'use strict';
 
@@ -36,14 +36,26 @@ $('#collapseOne').on('show.bs.collapse', function () {
 //   }
 // });
 
+$('.chartSelect .dropDownA').change(function() {
+  var index = $('option:selected', this).index();
+  var chart = $('.chart:eq(1)').highcharts();
+  for (var i = 0; i < numVars * 2; i += 2) {
+    chart.series[i].hide();
+  }
+  chart.series[index*2].show();
+  console.log(csv[index*2]);
+  $('.chart:eq(0)').highcharts().series[0].setData(csv[index*2].data);
+});
+
 $('.chartSelect .dropDownC').change(function() {
   console.log('new map - ' + $(this).val());
   var chart = $('.chart:eq(0)');
   //chart.highcharts().destroy();
   $('.chart:eq(0)').highcharts().destroy();
+  console.log($('.chartSelect .dropDownA').val());
   switch ($(this).val()) {
     case 'State - County':
-      createMap(chart, data, county);
+      createMap($('.chart:eq(0)'), csv[0].data, county);
       break;
     case 'State - Region':
       createMap(chart, dataRegion, region);

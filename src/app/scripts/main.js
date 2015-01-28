@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Highcharts, console, data, dataRegion, lineData, templates, createChart, createMap */
+/* global $, Highcharts, console, data, dataRegion, humanize, lineData, templates, createChart, createMap */
 /* exported color2, county, region, country */
 'use strict';
 
@@ -56,22 +56,6 @@ console.log('\'Allo \'Allo!');
 
 // Init templates
 $('#index').html(templates.index);
-
-// Init selectors
-var selectorA = $('.dropDownA');
-$.each(dropDownOptsA, function() {
-  selectorA.append('<option>' + this + '</option>');
-});
-
-var selectorB = $('.dropDownB');
-$.each(dropDownOptsB, function() {
-  selectorB.append('<option>' + this + '</option>');
-});
-
-var selectorC = $('.dropDownC');
-$.each(dropDownOptsC, function() {
-  selectorC.append('<option>' + this + '</option>');
-});
 
 
 // Print out a table of data and set it up
@@ -151,19 +135,36 @@ var y = { title: { text: 'Values'}, min: 0, max: 100 };
 
 // custom parsing
 
-var csv = {series: []};
+var csv = [];
 
 var lines = document.getElementById('csv').innerHTML.split('\n');
 // Iterate over the lines and add categories or series
 var categories = lines[0].split(',');
 var numVars = (categories.length - 2) / 2;
 
-for (var i = 0; i < numVars; i++) {
+// Get drop down opt from csv
+dropDownOptsA = [];
+
+// Make vars * 2 series (to account for errorbars too)
+for (var i = 0; i < numVars*2; i++) {
+  var type = 'line';
+  var category = humanize(categories[i+2]);
+
+  // If errorbar
+  if (i % 2) {
+    type = 'errorbar';
+  } else {
+    dropDownOptsA.push(category);
+  }
+
   var series = {
     data: [],
-    name: categories[i*2+2]
+    name: category,
+    type: type,
+    showInLegend: false
   };
-  csv.series.push(series);
+
+  csv.push(series);
 }
 
 $.each(lines, function(lineNo, line) {
@@ -174,12 +175,17 @@ $.each(lines, function(lineNo, line) {
     for (var i = 0; i < numVars; i ++) {
       var item = items[i*2+2].trim();
       var value = parseFloat(item);
+      var error = items[i*2+3].trim();
 
       if (value < 1.0) {
         value *= 100;
+        error *= 100;
       }
 
-      csv.series[i].data.push(
+      var errorNeg = value - parseFloat(error);
+      var errorPos = value + parseFloat(error);
+
+      csv[i*2].data.push(
         {
           'hc-key': 'us-wi-' + items[0].trim().substr(2),
           'name': items[1].trim(),
@@ -187,38 +193,45 @@ $.each(lines, function(lineNo, line) {
           'y': value
         }
       );
+
+      csv[i*2 + 1].data.push(
+        [errorNeg, errorPos]
+      );
     }
 
-    //options.series.push(series);
   }
 
 });
 
-for (var i = 1; i < numVars; i++) {
-  csv.series[i].visible = false;
+for (var i = 2; i < csv.length; i++) {
+  csv[i].visible = false;
+}
+/* Done parsing csv */
+
+// Init selectors
+var selectorA = $('.dropDownA');
+$.each(dropDownOptsA, function() {
+  selectorA.append('<option>' + this + '</option>');
+});
+
+var selectorB = $('.dropDownB');
+$.each(dropDownOptsB, function() {
+  selectorB.append('<option>' + this + '</option>');
+});
+
+var selectorC = $('.dropDownC');
+$.each(dropDownOptsC, function() {
+  selectorC.append('<option>' + this + '</option>');
+});
+
+// Add other data to csv
+for (var i = 0; i < garbage.length; i++) {
+  //csv.push(garbage[i]);
 }
 
-createMap($('.chart:eq(0)'), $.extend(true, {}, csv.series[0]).data, county);
-createChart($('.chart:eq(1)'), 'line', csv.series);
-//$('.chart:eq(1)').highcharts(options);
 
-// $('.chart:eq(1)').highcharts({
-//   chart: {
-//     type: 'areaspline'
-//   },
-//   data: {
-//     csv: document.getElementById('csv').innerHTML,
-//     // seriesMapping: [{
-//     //   name: 1
-//     // }],
-//     startColumn: 1
-//   },
-//   xAxis: {
-//     labels: {
-//       enabled: false
-//     }
-//   }
-// });
+createMap($('.chart:eq(0)'), $.extend(true, {}, csv[0]).data, county);
+createChart($('.chart:eq(1)'), 'line', csv);
 
 // Make error chart
 var errorSeries = [];

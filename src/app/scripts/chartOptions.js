@@ -19,7 +19,7 @@ var chartOptions = {
     series: {
       events: {
         legendItemClick: function() {
-          console.log(this);
+          //console.log(this);
           if (!this.visible && $('input[name="errorbar"]:checked').val() === 'false' && this.linkedSeries.length === 2) {
             this.show();
 
@@ -29,6 +29,10 @@ var chartOptions = {
         }
       }
     }
+  },
+  tooltip: {
+    crosshairs: true,
+    shared: true
   },
   series : [{
     data : data,
