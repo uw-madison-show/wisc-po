@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, data, dataRegion */
+/* global Highcharts, data */
 /* exported chartOptions, mapSeries */
 
 'use strict';
@@ -72,12 +72,16 @@ var mapSeries = {
     events: {
       select: function() {
         var value = this.value;
+        if (value === -1) {
+          value = 'No Data';
+        }
         var color = '#005645';
+        var chart = $('.chart:eq(1)').highcharts();
         $('#val').text('Value: ' + this.name + ' - ' + value);
 
         // remove previously region line
-        $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
-        $('.chart:eq(1)').highcharts().yAxis[0].addPlotLine(
+        chart.yAxis[0].removePlotLine('plot-band-1');
+        chart.yAxis[0].addPlotLine(
           {
             value: value,
             width: 3,
@@ -96,15 +100,20 @@ var mapSeries = {
 
         if (this.region) {
           var region = this.region;
-          var val = dataRegion[region-1].value;
-          $('.chart:eq(1)').highcharts().series[0].setData([val, val, val, val, val]);
+          for (var i = 0; i < 5; i++) {
+            chart.series[i].hide();
+          }
+          chart.series[region-1].show();
         }
 
       },
       unselect: function() {
         // only remove current line if toggling (not switching to another region)
         if (this.selected) {
-          $('.chart:eq(1)').highcharts().yAxis[0].removePlotLine('plot-band-1');
+          var region = this.region;
+          var chart = $('.chart:eq(1)').highcharts();
+          chart.yAxis[0].removePlotLine('plot-band-1');
+          chart.series[region-1].hide();
           $('#val').text('Value: No region selected');
         }
       }

@@ -8,7 +8,7 @@ var data =
     'name':'Sauk',
     'hc-key':'us-wi-111',
     'region':2,
-    'value':0
+    'value':-1
   },
   {
     'name':'Iowa',

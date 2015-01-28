@@ -1,3 +1,7 @@
+Handlebars.registerPartial("csv", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "";
+},"useData":true}));
+
 Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Factor</label>\n        <select class=\"form-control dropDownA\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Year</label>\n        <select class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-4\">\n        <label class=\"control-label\">Map Detail</label>\n        <select class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
 },"useData":true}));
@@ -62,7 +66,10 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <hr>\n\n  <h1>\n    <span clas=\"pull-left\">ICTR Data Dissemination</span>\n    <button id=\"randomData\" class=\"btn btn-default pull-right\">Randomize the Data!</button>\n  </h1>\n\n  <!-- <h3 class=\"padding-bottom\">\n    Number of Charts:\n    <div class=\"btn-group\" data-toggle=\"buttons\">\n      <label id=\"on\" class=\"btn btn-default\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"1\">1 Chart\n      </label>\n      <label id=\"off\" class=\"btn btn-default active\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"2\" checked>2 Charts\n      </label>\n    </div>\n  </h3> -->\n\n  <br></br>\n\n  <h2 id=\"val\">Value: No region selected</h2>\n\n  <div class=\"row\">\n";
+  buffer += "\n  <hr>\n\n  <h1>\n    <span clas=\"pull-left\">ICTR Data Dissemination</span>\n    <button id=\"randomData\" class=\"btn btn-default pull-right\">Randomize the Data!</button>\n  </h1>\n\n  <!-- <h3 class=\"padding-bottom\">\n    Number of Charts:\n    <div class=\"btn-group\" data-toggle=\"buttons\">\n      <label id=\"on\" class=\"btn btn-default\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"1\">1 Chart\n      </label>\n      <label id=\"off\" class=\"btn btn-default active\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"2\" checked>2 Charts\n      </label>\n    </div>\n  </h3> -->\n\n  <br></br>\n\n  <pre id=\"csv\" style=\"display:none\">\n";
+  stack1 = this.invokePartial(partials.csv, '    ', 'csv', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "  </pre>\n\n  <h2 id=\"val\">Value: No region selected</h2>\n\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'map': (true),
     'num': ("1")

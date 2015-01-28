@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Highcharts, console, data, lineData, templates, createChart, createMap */
+/* global $, Highcharts, console, data, dataRegion, lineData, templates, createChart, createMap */
 /* exported color2, county, region, country */
 'use strict';
 
@@ -22,11 +22,10 @@ var color2 = [
 ];
 
 var dropDownOptsA = [
-  'pre-pop-1',
-  'pre-pop-2',
-  'pre-pop-3',
-  'pre-pop-4',
-  'pre-pop-5'
+  'Obesity',
+  'Flu Vaccines',
+  'Asthma',
+  'Oral Health Status'
 ];
 
 var dropDownOptsB = [
@@ -111,8 +110,29 @@ createMap($('.chart:eq(0)'), data, county);
 // Garbage region, state and country data
 var garbage = [
   {
-    data: [],
-    name: 'Region'
+    data: [dataRegion[0].value, dataRegion[0].value, dataRegion[0].value, dataRegion[0].value, dataRegion[0].value],
+    name: 'Region 1',
+    visible: false
+  },
+  {
+    data: [dataRegion[1].value, dataRegion[1].value, dataRegion[1].value, dataRegion[1].value, dataRegion[1].value],
+    name: 'Region 2',
+    visible: false
+  },
+  {
+    data: [dataRegion[2].value, dataRegion[2].value, dataRegion[2].value, dataRegion[2].value, dataRegion[2].value],
+    name: 'Region 3',
+    visible: false
+  },
+  {
+    data: [dataRegion[3].value, dataRegion[3].value, dataRegion[3].value, dataRegion[3].value, dataRegion[3].value],
+    name: 'Region 4',
+    visible: false
+  },
+  {
+    data: [dataRegion[4].value, dataRegion[4].value, dataRegion[4].value, dataRegion[4].value, dataRegion[4].value],
+    name: 'Region 5',
+    visible: false
   },
   {
     data: [60, 30, 40, 50, 55],
