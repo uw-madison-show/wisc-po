@@ -105,7 +105,7 @@ $('.chart').each(function(i) {
 //   createChart($('.chart:eq(0)'), type);
 // });
 
-createMap($('.chart:eq(0)'), data, county);
+//createMap($('.chart:eq(0)'), data, county);
 
 // Garbage region, state and country data
 var garbage = [
@@ -147,7 +147,78 @@ var garbage = [
 var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012'] };
 var y = { title: { text: 'Values'}, min: 0, max: 100 };
 
-createChart($('.chart:eq(1)'), 'line', garbage, x, y);
+//createChart($('.chart:eq(1)'), 'line', garbage, x, y);
+
+// custom parsing
+
+var csv = {series: []};
+
+var lines = document.getElementById('csv').innerHTML.split('\n');
+// Iterate over the lines and add categories or series
+var categories = lines[0].split(',');
+var numVars = (categories.length - 2) / 2;
+
+for (var i = 0; i < numVars; i++) {
+  var series = {
+    data: [],
+    name: categories[i*2+2]
+  };
+  csv.series.push(series);
+}
+
+$.each(lines, function(lineNo, line) {
+  var items = line.split(',');
+
+  if (lineNo !== 0 && items[0].trim()){
+
+    for (var i = 0; i < numVars; i ++) {
+      var item = items[i*2+2].trim();
+      var value = parseFloat(item);
+
+      if (value < 1.0) {
+        value *= 100;
+      }
+
+      csv.series[i].data.push(
+        {
+          'hc-key': 'us-wi-' + items[0].trim().substr(2),
+          'name': items[1].trim(),
+          'value': value,
+          'y': value
+        }
+      );
+    }
+
+    //options.series.push(series);
+  }
+
+});
+
+for (var i = 1; i < numVars; i++) {
+  csv.series[i].visible = false;
+}
+
+createMap($('.chart:eq(0)'), $.extend(true, {}, csv.series[0]).data, county);
+createChart($('.chart:eq(1)'), 'line', csv.series);
+//$('.chart:eq(1)').highcharts(options);
+
+// $('.chart:eq(1)').highcharts({
+//   chart: {
+//     type: 'areaspline'
+//   },
+//   data: {
+//     csv: document.getElementById('csv').innerHTML,
+//     // seriesMapping: [{
+//     //   name: 1
+//     // }],
+//     startColumn: 1
+//   },
+//   xAxis: {
+//     labels: {
+//       enabled: false
+//     }
+//   }
+// });
 
 // Make error chart
 var errorSeries = [];

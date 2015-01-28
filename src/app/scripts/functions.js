@@ -57,22 +57,25 @@ function createChart(chart, type, series, xAxis, yAxis) {
       break;
     case 'map':
       options.chart.type = 'map';
+
       options.colorAxis = {
         min: 0,
         minColor: '#E6E7E8',
         maxColor: '#005645'
       };
+
       options.tooltip = {
         formatter: function () {
           var val = this.point.value;
           if (this.point.value === -1) {
-            val = 'No Data'
+            val = 'No Data';
           }
           return '<b>' + this.series.name + '</b><br>' +
           'Point name: ' + this.point.name + '<br>' +
           'Value: ' + val;
         }
-      }
+      };
+
       chart.highcharts('Map', options);
       //container.find('.dropDownC').prop('disabled', true);
       break;

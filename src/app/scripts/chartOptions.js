@@ -103,7 +103,7 @@ var mapSeries = {
           for (var i = 0; i < 5; i++) {
             chart.series[i].hide();
           }
-          chart.series[region-1].show();
+          //chart.series[region-1].show();
         }
 
       },
@@ -113,7 +113,7 @@ var mapSeries = {
           var region = this.region;
           var chart = $('.chart:eq(1)').highcharts();
           chart.yAxis[0].removePlotLine('plot-band-1');
-          chart.series[region-1].hide();
+          //chart.series[region-1].hide();
           $('#val').text('Value: No region selected');
         }
       }
