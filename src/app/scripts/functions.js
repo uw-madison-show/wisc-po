@@ -82,10 +82,11 @@ function createChart(chart, type, series, xAxis, yAxis) {
   }
 }
 
-function createMap(chart, series, map) {
+function createMap(chart, series, map, name) {
   var seriesNew = new Array($.extend(true, {}, mapSeries));
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
+  seriesNew[0].name = name;
   createChart(chart, 'map', seriesNew);
 }
 
