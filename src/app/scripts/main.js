@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Highcharts, console, data, humanize, lineData, templates, createChart, createMap, regionDictionary */
+/* global $, Highcharts, console, humanize, lineData, templates, createChart, createMap, regionDictionary */
 /* exported color2, county, region, country */
 'use strict';
 
@@ -59,25 +59,26 @@ console.log('\'Allo \'Allo!');
 // Init templates
 $('#index').html(templates.index);
 
+$('.bootstrapSwitch').bootstrapSwitch();
 
 // Print out a table of data and set it up
-for (i = 0; i < data.length; i++) {
-  // // Make the data random and fun :)
-  // //data[i].value = Math.floor((Math.random() * 1000) + 1);
-  // data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
-  // data[i].y = data[i].value;
-  // data[i].borderColor = color[data[i].region - 1];
-  // data[i].edgeColor = color[data[i].region - 1];
-  // if (!(data[i].value) || data[i].value === 0) {
-  //   //data[i].color = '#444';
-  //   data[i].value = 'No data';
-  // } else {
-  //   //data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
-  // }
-
-  $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
-      '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
-}
+// for (i = 0; i < data.length; i++) {
+//   // // Make the data random and fun :)
+//   // //data[i].value = Math.floor((Math.random() * 1000) + 1);
+//   // data[i].value = Math.sin((i / data.length) * 3.1415) * 1000;
+//   // data[i].y = data[i].value;
+//   // data[i].borderColor = color[data[i].region - 1];
+//   // data[i].edgeColor = color[data[i].region - 1];
+//   // if (!(data[i].value) || data[i].value === 0) {
+//   //   //data[i].color = '#444';
+//   //   data[i].value = 'No data';
+//   // } else {
+//   //   //data[i].color = color2[data[i].region - 1] + data[i].value / 1000 + ')';
+//   // }
+//
+//   $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
+//       '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
+// }
 
 
 // Serialize each chart with a unique ID
@@ -136,12 +137,14 @@ var meh = [];
 for (i = 0; i < garbage.length; i++) {
   var temp = [];
   for (j = 0; j < garbage[i].data.length; j++) {
-    temp.push([garbage[i].data[j] - 5, garbage[i].data[j] + 5]);
+    var high = Math.random() * 5;
+    var low = Math.random() * 5;
+    temp.push([garbage[i].data[j] - low, garbage[i].data[j] + high]);
   }
-  var visible = garbage[i].visible;
+
   var title = garbage[i].name + ' Error';
   meh.push(garbage[i]);
-  meh.push({name: title, data: temp, type: 'errorbar', visible: visible});
+  meh.push({name: title, data: temp, type: 'errorbar', visible: false});
 }
 
 garbage = meh;

@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, console, createMap, csv, randomData, dataRegion, dataCountry, county, region, country */
+/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage */
 
 'use strict';
 
@@ -75,7 +75,7 @@ $('.chartSelect .dropDownC').change(function() {
   }
 });
 
-$('#randomData').on('click', function() { randomData(); } );
+// $('#randomData').on('click', function() { randomData(); } );
 
 $('input[name="numcharts"]').change(function() {
   var chart1 = $('.chart:eq(0)');
@@ -97,18 +97,32 @@ $('input[name="numcharts"]').change(function() {
   }
 });
 
-$('input[name="errorbar"]').change(function() {
-  var lineChart = $('.lineChart').highcharts();
-  for(var i = 0; i < lineChart.series.length; i++) {
-    if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
-      if ($(this).val() === 'true') {
-        lineChart.series[i].show();
-      }
-      else {
-        lineChart.series[i].hide();
+$('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
+  // Make animations a bit cleaner (animate chart after switch toggle)
+  setTimeout(function() {
+    var lineChart = $('.lineChart').highcharts();
+    for(var i = 0; i < lineChart.series.length; i++) {
+      if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
+        if (state) {
+          lineChart.series[i].show();
+        } else {
+          lineChart.series[i].hide();
+        }
       }
     }
-  }
+
+    var chart = $('.chart:eq(1)').highcharts();
+    for (i = 0; i < garbage.length; i++) {
+      if (chart.series[i].type === 'errorbar' && chart.series[i-1].visible) {
+        if (state) {
+          chart.series[i].show();
+        } else {
+          chart.series[i].hide();
+        }
+      }
+    }
+  }, 500);
+  //var
 });
 
 // $('.nav-select select').change(function() {

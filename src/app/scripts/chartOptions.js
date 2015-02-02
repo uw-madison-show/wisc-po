@@ -19,11 +19,14 @@ var chartOptions = {
     series: {
       events: {
         legendItemClick: function() {
-          //console.log(this);
-          if (!this.visible && $('input[name="errorbar"]:checked').val() === 'false' && this.linkedSeries.length === 2) {
+          if (!this.visible) {
+            //console.log(this);
+            var error = $('input[name="errorbar"]').bootstrapSwitch('state');
             this.show();
-
-            this.linkedSeries[0].hide();
+            if (!error && this.linkedSeries) {
+              this.linkedSeries[0].hide();
+            }
+            // override default toggle behavior
             return false;
           }
         }
@@ -96,18 +99,27 @@ var mapSeries = {
               text: this.name + ' (' + this.value + ')',
               align: 'right',
               style: {
-                fontSize: '12pt'
+                fontSize: '11pt'
               }
             }
           }
         );
 
+        // Bring label to front
+        $('.chart:eq(1)').highcharts().yAxis[0].plotLinesAndBands[0].label.toFront();
+
         if (this.region) {
           var region = this.region;
           for (var i = 0; i < 5; i++) {
-            chart.series[i].hide();
+            chart.series[i*2].hide();
           }
           chart.series[(region-1)*2].show();
+
+          var error = $('input[name="errorbar"]').bootstrapSwitch('state');
+          var linked = chart.series[(region-1)*2];
+          if (!error && linked.linkedSeries) {
+            linked.linkedSeries[0].hide();
+          }
         }
 
       },
