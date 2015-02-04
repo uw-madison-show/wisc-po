@@ -25,12 +25,14 @@
 
   <h2 id="val">Value: No region selected</h2>
 
+  {{> dropdown}}
+
   <div class="row">
-    {{> halfChart num='1' map=true}}
-    {{> halfChart num='2' column=true}}
+    {{> halfChart num='0' map=true}}
+    {{> halfChart num='1' column=true}}
   </div>
 
-  {{> dropdown}}
+
 
   <!-- <div class="btn-group" data-toggle="buttons">
     <label id="on" class="btn btn-default">
@@ -41,11 +43,12 @@
     </label>
   </div> -->
 
-  <div class="row">
-    {{> linechart}}
-  </div>
 
-  <hr>
+  <!-- <div class="row">
+    {{> linechart}}
+  </div> -->
+
+  <!-- <hr> -->
 
   <!-- <div class="row">
     {{> table}}

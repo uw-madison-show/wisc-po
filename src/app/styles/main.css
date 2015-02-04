@@ -54,8 +54,16 @@ nav {
 }
 
 .chart {
-  height: 600px;
+  height: 100%;
   padding: 40px 0;
+}
+
+.smallChart {
+  height: 600px;
+}
+
+.largeChart {
+  height: 800px;
 }
 
 .nav-select {

@@ -40,7 +40,7 @@ $('.chartSelect .dropDownA').change(function() {
   var index = $('option:selected', this).index();
   var type = $('.dropDownC option:selected').val();
   var map = $('.chart:eq(0)').highcharts();
-  // var chart = $('.chart:eq(1)').highcharts();
+  var chart = $('.chart:eq(1)').highcharts();
   // for (var i = 0; i < numVars * 2; i += 2) {
   //   chart.series[i].hide();
   // }
@@ -49,7 +49,12 @@ $('.chartSelect .dropDownA').change(function() {
   if (type === 'State - County') {
     map.series[0].update({name:csv[index*2].name}, false);
     map.setTitle({text: csv[index*2].name});
-    $('.chart:eq(0)').highcharts().series[0].setData(csv[index*2].data);
+    map.series[0].setData(csv[index*2].data);
+
+    chart.yAxis[0].removePlotLine('plot-band-1');
+    for (var i = 0; i < 5; i++) {
+      chart.series[i*2].hide();
+    }
   }
 });
 
@@ -100,19 +105,19 @@ $('input[name="numcharts"]').change(function() {
 $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
   // Make animations a bit cleaner (animate chart after switch toggle)
   setTimeout(function() {
-    var lineChart = $('.lineChart').highcharts();
-    for(var i = 0; i < lineChart.series.length; i++) {
-      if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
-        if (state) {
-          lineChart.series[i].show();
-        } else {
-          lineChart.series[i].hide();
-        }
-      }
-    }
+    // var lineChart = $('.lineChart').highcharts();
+    // for(var i = 0; i < lineChart.series.length; i++) {
+    //   if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
+    //     if (state) {
+    //       lineChart.series[i].show();
+    //     } else {
+    //       lineChart.series[i].hide();
+    //     }
+    //   }
+    // }
 
     var chart = $('.chart:eq(1)').highcharts();
-    for (i = 0; i < garbage.length; i++) {
+    for (var i = 0; i < garbage.length; i++) {
       if (chart.series[i].type === 'errorbar' && chart.series[i-1].visible) {
         if (state) {
           chart.series[i].show();
@@ -123,6 +128,23 @@ $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, s
     }
   }, 500);
   //var
+});
+
+$('input[name="largecharts"]').on('switchChange.bootstrapSwitch', function() {
+  var chart1 = $('.chart:eq(0)');
+  var chart2 = $('.chart:eq(1)');
+
+  chart1.parent().toggleClass('col-md-6');
+  chart2.parent().toggleClass('col-md-6');
+  chart1.parent().toggleClass('largeChart');
+  chart2.parent().toggleClass('largeChart');
+  chart1.parent().toggleClass('smallChart');
+  chart2.parent().toggleClass('smallChart');
+
+  chart1.highcharts().reflow();
+  chart1.highcharts().redraw();
+  chart2.highcharts().reflow();
+  chart2.highcharts().redraw();
 });
 
 // $('.nav-select select').change(function() {

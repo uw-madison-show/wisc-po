@@ -82,9 +82,9 @@ $('.bootstrapSwitch').bootstrapSwitch();
 
 
 // Serialize each chart with a unique ID
-$('.chart').each(function(i) {
-  $(this).attr('id', 'chart' + i);
-});
+// $('.chart').each(function(i) {
+//   $(this).attr('id', 'chart' + i);
+// });
 
 // Create main charts based on defined types
 // $('.chart:not(".lineChart")').each(function(item) {
@@ -262,46 +262,46 @@ $.get('data/data.csv', function(data) {
   $('.dropDownC').prop('disabled', false);
 
   createMap($('.chart:eq(0)'), $.extend(true, {}, csv[0]).data, county, csv[0].name);
-  createChart($('.chart:eq(1)'), 'line', garbage, x, y);
+  createChart($('.chart:eq(1)'), 'column', garbage, x, y);
 
 });
 
 
 
-// Make error chart
-var errorSeries = [];
-for (i = 0; i < lineData.length; i++) {
-  var lineError = [];
-  var lineFinal = [];
-  for (j = 0; j < lineData[i].length; j++) {
-    lineFinal[j] = lineData[i][j].value;
-    lineError[j] = [
-      lineData[i][j].value - lineData[i][j]['Margin of Error'],
-      lineData[i][j].value + lineData[i][j]['Margin of Error']
-    ];
-  }
-
-  errorSeries.push({
-    name: 'Hypertension Rate, Region ' + (i+1),
-    type: 'line',
-    data: lineFinal,
-    tooltip: {
-      pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.3f}%</b><br>'
-    },
-    color: color[i]
-  }, {
-    name: 'Measurement error',
-    type: 'errorbar',
-    data: lineError,
-    tooltip: {
-      pointFormat: '(error range: {point.low:.3f} to {point.high:.3f}%)<br/>'
-    },
-    color: color[i],
-    visible: false
-  });
-
-}
+// // Make error chart
+// var errorSeries = [];
+// for (i = 0; i < lineData.length; i++) {
+//   var lineError = [];
+//   var lineFinal = [];
+//   for (j = 0; j < lineData[i].length; j++) {
+//     lineFinal[j] = lineData[i][j].value;
+//     lineError[j] = [
+//       lineData[i][j].value - lineData[i][j]['Margin of Error'],
+//       lineData[i][j].value + lineData[i][j]['Margin of Error']
+//     ];
+//   }
+//
+//   errorSeries.push({
+//     name: 'Hypertension Rate, Region ' + (i+1),
+//     type: 'line',
+//     data: lineFinal,
+//     tooltip: {
+//       pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.3f}%</b><br>'
+//     },
+//     color: color[i]
+//   }, {
+//     name: 'Measurement error',
+//     type: 'errorbar',
+//     data: lineError,
+//     tooltip: {
+//       pointFormat: '(error range: {point.low:.3f} to {point.high:.3f}%)<br/>'
+//     },
+//     color: color[i],
+//     visible: false
+//   });
+//
+// }
 
 // Make the line chart on bottom
-createChart($('.lineChart'), 'line', errorSeries, x, []);
+// createChart($('.lineChart'), 'line', errorSeries, x, []);
 // $('.lineChart').highcharts($.extend(true, {}, errorChartOptions));

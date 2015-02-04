@@ -1,5 +1,5 @@
 Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Factor</label>\n        <select disabled class=\"form-control dropDownA\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Year</label>\n        <select disabled class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Map Detail</label>\n        <select disabled class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Errorbars</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
+  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Factor</label>\n        <select disabled class=\"form-control dropDownA\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-2\">\n        <label class=\"control-label\">Year</label>\n        <select disabled class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Map Detail</label>\n        <select disabled class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-xs-offset-2 col-xs-2 col-sm-offset-0\">\n        <label class=\"control-label\">Errorbars</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\n      </div>\n\n      <div class=\"form-group nav-select col-xs-offset-2 col-xs-2 col-sm-offset-0\">\n        <label class=\"control-label\">Large&nbsp;Charts</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"largecharts\">\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
 },"useData":true}));
 
 Handlebars.registerPartial("footer", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -38,7 +38,11 @@ Handlebars.registerPartial("halfChart", Handlebars.template({"1":function(depth0
   },"5":function(depth0,helpers,partials,data) {
   return "\n        <form class=\"form-horizontal\">\n\n          <div class=\"form-group nav-select\">\n            <label class=\"col-sm-3 control-label\">Location</label>\n            <div class=\"col-sm-9\">\n              <select class=\"form-control dropDownA\">\n              </select>\n            </div>\n          </div>\n\n          <div class=\"form-group nav-select\">\n            <label class=\"col-sm-3 control-label\">Variable B</label>\n            <div class=\"col-sm-9\">\n              <select class=\"form-control dropDownB\">\n              </select>\n            </div>\n          </div>\n\n          <div class=\"form-group nav-select\">\n            <label class=\"col-sm-3 control-label\">Variable C</label>\n            <div class=\"col-sm-9\">\n              <select class=\"form-control dropDownC\">\n              </select>\n            </div>\n          </div>\n\n        </form>\n\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div class=\"col-xs-12 col-md-6 chartContainer\">\n  <div class=\"chart col-xs-12\"></div>\n\n";
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div id=\"chartContainer"
+    + escapeExpression(((helper = (helper = helpers.num || (depth0 != null ? depth0.num : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"num","hash":{},"data":data}) : helper)))
+    + "\" class=\"col-xs-12 col-md-6 chartContainer smallChart\">\n  <div id=\"chart"
+    + escapeExpression(((helper = (helper = helpers.num || (depth0 != null ? depth0.num : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"num","hash":{},"data":data}) : helper)))
+    + "\" class=\"chart col-xs-12\"></div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.details : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
@@ -62,24 +66,24 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <hr>\n\n  <h1>\n    <span clas=\"pull-left\">ICTR Data Dissemination</span>\n    <!-- <button id=\"randomData\" class=\"btn btn-default pull-right\">Randomize the Data!</button> -->\n  </h1>\n\n  <!-- <h3 class=\"padding-bottom\">\n    Number of Charts:\n    <div class=\"btn-group\" data-toggle=\"buttons\">\n      <label id=\"on\" class=\"btn btn-default\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"1\">1 Chart\n      </label>\n      <label id=\"off\" class=\"btn btn-default active\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"2\" checked>2 Charts\n      </label>\n    </div>\n  </h3> -->\n\n  <br></br>\n\n  <h2 id=\"val\">Value: No region selected</h2>\n\n  <div class=\"row\">\n";
+  buffer += "\n  <hr>\n\n  <h1>\n    <span clas=\"pull-left\">ICTR Data Dissemination</span>\n    <!-- <button id=\"randomData\" class=\"btn btn-default pull-right\">Randomize the Data!</button> -->\n  </h1>\n\n  <!-- <h3 class=\"padding-bottom\">\n    Number of Charts:\n    <div class=\"btn-group\" data-toggle=\"buttons\">\n      <label id=\"on\" class=\"btn btn-default\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"1\">1 Chart\n      </label>\n      <label id=\"off\" class=\"btn btn-default active\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"2\" checked>2 Charts\n      </label>\n    </div>\n  </h3> -->\n\n  <br></br>\n\n  <h2 id=\"val\">Value: No region selected</h2>\n\n";
+  stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'map': (true),
-    'num': ("1")
+    'num': ("0")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'column': (true),
-    'num': ("2")
+    'num': ("1")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n";
-  stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <!-- <div class=\"btn-group\" data-toggle=\"buttons\">\n    <label id=\"on\" class=\"btn btn-default\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"true\">Show Errorbars\n    </label>\n    <label id=\"off\" class=\"btn btn-default active\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"false\" checked>Hide Errorbars\n    </label>\n  </div> -->\n\n  <div class=\"row\">\n";
+  buffer += "  </div>\n\n\n\n  <!-- <div class=\"btn-group\" data-toggle=\"buttons\">\n    <label id=\"on\" class=\"btn btn-default\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"true\">Show Errorbars\n    </label>\n    <label id=\"off\" class=\"btn btn-default active\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"false\" checked>Hide Errorbars\n    </label>\n  </div> -->\n\n\n  <!-- <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.linechart, '    ', 'linechart', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n  <hr>\n\n  <!-- <div class=\"row\">\n";
+  buffer += "  </div> -->\n\n  <!-- <hr> -->\n\n  <!-- <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.table, '    ', 'table', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "  </div> -->\n\n";
