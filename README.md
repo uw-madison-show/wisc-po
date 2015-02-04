@@ -8,7 +8,7 @@ The Survey of the Health of Wisconsin is launching a web data portal to help pub
 Check back for updates as we develop this tool the community!
 
 Setting up your environment to work with the code
-=======
+-----
 
 Before beginning, a few different tools are required to develop and work with the code on our Github repository.
 
@@ -33,7 +33,8 @@ Finally to install other required dependencies, navigate into the `wisc-po` dire
 All dependencies have now been set up.
 
 Building the Site
-=====
+-----
+
 To build and work with the code, start up grunt. This can be done by navigating into `wisc-po/src` and then starting grunt via `grunt serve`.
 
 To make a version that is deployable, run the shell script named `build.sh` in `wisc-po/src` or while inside the `src` folder by typing the following commands:
@@ -44,7 +45,7 @@ To make a version that is deployable, run the shell script named `build.sh` in `
 This build will now be located inside `wisc-po/dist` and can be copied to a server for deployment.
 
 List of JS Libraries Used
-=====
+-----
 
 - Highcharts
 - jQuery
