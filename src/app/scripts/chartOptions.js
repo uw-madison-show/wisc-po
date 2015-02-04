@@ -101,7 +101,8 @@ var mapSeries = {
               style: {
                 fontSize: '11pt'
               }
-            }
+            },
+            zIndex: 99
           }
         );
 
@@ -129,8 +130,11 @@ var mapSeries = {
           var region = this.region;
           var chart = $('.chart:eq(1)').highcharts();
           chart.yAxis[0].removePlotLine('plot-band-1');
-          chart.series[(region-1)*2].hide();
           $('#val').text('Value: No region selected');
+
+          if (region) {
+            chart.series[(region-1)*2].hide();
+          }
         }
       }
     }

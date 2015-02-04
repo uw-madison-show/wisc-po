@@ -262,7 +262,12 @@ $.get('data/data.csv', function(data) {
   $('.dropDownC').prop('disabled', false);
 
   createMap($('.chart:eq(0)'), $.extend(true, {}, csv[0]).data, county, csv[0].name);
-  createChart($('.chart:eq(1)'), 'column', garbage, x, y);
+  // createChart($('.chart:eq(1)'), 'column', garbage, x, y);
+  createChart($('.chart:eq(1)'), 'line', garbage, x, y);
+
+  var index = 0;
+  $('.chart:eq(0)').highcharts().setTitle({text: csv[index*2].name});
+  $('.chart:eq(1)').highcharts().setTitle({text: csv[index*2].name});
 
 });
 

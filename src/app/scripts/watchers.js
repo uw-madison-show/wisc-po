@@ -49,6 +49,8 @@ $('.chartSelect .dropDownA').change(function() {
   if (type === 'State - County') {
     map.series[0].update({name:csv[index*2].name}, false);
     map.setTitle({text: csv[index*2].name});
+    chart.setTitle({text: csv[index*2].name});
+
     map.series[0].setData(csv[index*2].data);
 
     chart.yAxis[0].removePlotLine('plot-band-1');
