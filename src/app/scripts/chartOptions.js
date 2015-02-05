@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, data */
+/* global Highcharts, csv */
 /* exported chartOptions, mapSeries */
 
 'use strict';
@@ -38,7 +38,7 @@ var chartOptions = {
     shared: true
   },
   series : [{
-    data : data,
+
     dataLabels: {
       enabled: true,
       formatter: function() {
@@ -54,7 +54,7 @@ var chartOptions = {
 };
 
 var mapSeries = {
-  data : data,
+
   mapData: Highcharts.maps['countries/us/us-wi-all'],
   joinBy: 'hc-key',
   //name: 'Random data',
@@ -84,25 +84,38 @@ var mapSeries = {
         }
         var color = '#005645';
         var chart = $('.chart:eq(1)').highcharts();
-        $('#val').text('Value: ' + this.name + ' - ' + value);
+        $('#val').text('Value: ' + this.name + ' - ' + value.toFixed(2));
 
         // remove previously region line
+        chart.yAxis[0].removePlotLine('plot-line-1');
         chart.yAxis[0].removePlotLine('plot-band-1');
         chart.yAxis[0].addPlotLine(
           {
             value: value,
             width: 3,
             color: color,
-            id: 'plot-band-1',
+            id: 'plot-line-1',
             dashStyle: 'longdash',
             label: {
-              text: this.name + ' (' + this.value + ')',
+              text: this.name + ' (' + this.value.toFixed(2) + ')',
               align: 'right',
               style: {
                 fontSize: '11pt'
               }
             },
             zIndex: 99
+          }
+        );
+
+        var index = $('.chartSelect .dropDownA option:selected').index();
+        var error = csv[index*2+1].data[this.index];
+
+        chart.yAxis[0].addPlotBand(
+          {
+            from : error[0],
+            to : error[1],
+            color : 'rgba(50, 50, 50, 0.2)',
+            id: 'plot-band-1'
           }
         );
 
@@ -116,9 +129,9 @@ var mapSeries = {
           }
           chart.series[(region-1)*2].show();
 
-          var error = $('input[name="errorbar"]').bootstrapSwitch('state');
+          var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
           var linked = chart.series[(region-1)*2];
-          if (!error && linked.linkedSeries) {
+          if (!errorbar && linked.linkedSeries) {
             linked.linkedSeries[0].hide();
           }
         }
@@ -129,6 +142,7 @@ var mapSeries = {
         if (this.selected) {
           var region = this.region;
           var chart = $('.chart:eq(1)').highcharts();
+          chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');
           $('#val').text('Value: No region selected');
 

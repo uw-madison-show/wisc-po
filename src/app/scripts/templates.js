@@ -66,7 +66,7 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <!-- <h1>\n    <span clas=\"pull-left\">ICTR Data Dissemination</span>\n    <!-- <button id=\"randomData\" class=\"btn btn-default pull-right\">Randomize the Data!</button> -->\n  <!-- </h1> -->\n\n  <!-- <h3 class=\"padding-bottom\">\n    Number of Charts:\n    <div class=\"btn-group\" data-toggle=\"buttons\">\n      <label id=\"on\" class=\"btn btn-default\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"1\">1 Chart\n      </label>\n      <label id=\"off\" class=\"btn btn-default active\">\n        <input type=\"radio\" name=\"numcharts\" autocomplete=\"off\" value=\"2\" checked>2 Charts\n      </label>\n    </div>\n  </h3> -->\n\n\n\n";
+  buffer += "\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n  <h2 id=\"val\">Selected Value: No region selected</h2>\n\n  <div class=\"row\">\n";
@@ -80,13 +80,7 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
     'num': ("1")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n\n\n  <!-- <div class=\"btn-group\" data-toggle=\"buttons\">\n    <label id=\"on\" class=\"btn btn-default\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"true\">Show Errorbars\n    </label>\n    <label id=\"off\" class=\"btn btn-default active\">\n      <input type=\"radio\" name=\"errorbar\" autocomplete=\"off\" value=\"false\" checked>Hide Errorbars\n    </label>\n  </div> -->\n\n\n  <!-- <div class=\"row\">\n";
-  stack1 = this.invokePartial(partials.linechart, '    ', 'linechart', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div> -->\n\n  <!-- <hr> -->\n\n  <!-- <div class=\"row\">\n";
-  stack1 = this.invokePartial(partials.table, '    ', 'table', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div> -->\n\n";
+  buffer += "  </div>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";

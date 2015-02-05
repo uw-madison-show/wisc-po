@@ -15,37 +15,12 @@ $('#collapseOne').on('show.bs.collapse', function () {
   $('#minusIcon').show();
 });
 
-// $('.chartSelect #chartType li').on('click', function() {
-//   var type = this.getAttribute('data-type');
-//   var container = $(this).closest('.chartContainer');
-//   var chart = container.find('.chart');
-//
-//   if (type) {
-//
-//     //disable form dropdown
-//     /*
-//     if (type === 'map') {
-//       container.find('.dropDownC').prop('disabled', true);
-//     } else {
-//       container.find('.dropDownC').prop('disabled', false);
-//     }
-//     */
-//
-//     chart.highcharts().destroy();
-//     createChart(chart, type);
-//   }
-// });
-
 $('.chartSelect .dropDownA').change(function() {
   var index = $('option:selected', this).index();
   var type = $('.dropDownC option:selected').val();
   var map = $('.chart:eq(0)').highcharts();
   var chart = $('.chart:eq(1)').highcharts();
-  // for (var i = 0; i < numVars * 2; i += 2) {
-  //   chart.series[i].hide();
-  // }
-  // chart.series[index*2].show();
-  //console.log(csv[index*2]);
+
   if (type === 'State - County') {
     map.series[0].update({name:csv[index*2].name}, false);
     map.setTitle({text: csv[index*2].name});
@@ -64,9 +39,9 @@ $('.chartSelect .dropDownC').change(function() {
   console.log('new map - ' + $(this).val());
   var chart = $('.chart:eq(0)');
   var index = $('.dropDownA option:selected').index();
-  //chart.highcharts().destroy();
-  $('.chart:eq(0)').highcharts().destroy();
+  chart.highcharts().destroy();
   console.log($('.chartSelect .dropDownA').val());
+
   switch ($(this).val()) {
     case 'State - County':
       createMap($('.chart:eq(0)'), $.extend(true, {}, csv[index*2]).data, county);
@@ -107,16 +82,6 @@ $('input[name="numcharts"]').change(function() {
 $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
   // Make animations a bit cleaner (animate chart after switch toggle)
   setTimeout(function() {
-    // var lineChart = $('.lineChart').highcharts();
-    // for(var i = 0; i < lineChart.series.length; i++) {
-    //   if (lineChart.series[i].type === 'errorbar' && lineChart.series[i-1].visible) {
-    //     if (state) {
-    //       lineChart.series[i].show();
-    //     } else {
-    //       lineChart.series[i].hide();
-    //     }
-    //   }
-    // }
 
     var chart = $('.chart:eq(1)').highcharts();
     for (var i = 0; i < garbage.length; i++) {
@@ -129,7 +94,6 @@ $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, s
       }
     }
   }, 500);
-  //var
 });
 
 $('input[name="largecharts"]').on('switchChange.bootstrapSwitch', function() {
@@ -148,12 +112,5 @@ $('input[name="largecharts"]').on('switchChange.bootstrapSwitch', function() {
   chart2.highcharts().reflow();
   chart2.highcharts().redraw();
 });
-
-// $('.nav-select select').change(function() {
-//   console.log('Selected: ' + $('option:selected', this).text());
-//   $(".chart:eq(1)").highcharts().yAxis[0].removePlotLine('plot-band-1');
-//   $('#val').text('Value: No region selected');
-//   randomData();
-// });
 
 /* End watchers */
