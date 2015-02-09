@@ -1,6 +1,198 @@
 // JSHint options:
 /* exported data, dataRegion, dataCountry, garbage, regionDictionary */
 
+// Garbage region, state and country data
+// var garbage = [
+//   {
+//     data: [30,40,80,20,0],
+//     name: 'Region 1',
+//     visible: false
+//   },
+//   {
+//     data: [10,20,30,40,50],
+//     name: 'Region 2',
+//     visible: false
+//   },
+//   {
+//     data: [90,80,70,30,50],
+//     name: 'Region 3',
+//     visible: false
+//   },
+//   {
+//     data: [40,50,40,30,10],
+//     name: 'Region 4',
+//     visible: false
+//   },
+//   {
+//     data: [50,70,40,60,50],
+//     name: 'Region 5',
+//     visible: false
+//   },
+//   {
+//     data: [60, 30, 40, 50, 55],
+//     name: 'State',
+//     visible: true
+//   },
+//   {
+//     data: [75, 72, 70, 64, 50],
+//     name: 'Country',
+//     visible: true
+//   }
+// ];
+//
+// var meh = [];
+// for (i = 0; i < garbage.length; i++) {
+//   var temp = [];
+//   for (j = 0; j < garbage[i].data.length; j++) {
+//     var high = Math.random() * 5;
+//     var low = Math.random() * 5;
+//     temp.push([garbage[i].data[j] - low, garbage[i].data[j] + high]);
+//   }
+//
+//   var title = garbage[i].name + ' Error';
+//   meh.push(garbage[i]);
+//   meh.push({name: title, data: temp, type: 'errorbar', visible: false});
+// }
+//
+// garbage = meh;
+
+// Garbage region, state and country data
+var garbage = [
+{
+  'data': [30, 40, 80, 20, 0],
+  'name': 'Region 1',
+  'visible': false,
+  '_colorIndex': 0,
+  '_symbolIndex': 0
+},
+{
+  'name': 'Region 1 Error',
+  'data': [
+  [26.552194418618456, 34.27807675441727],
+  [35.5119459645357, 40.00523746362887],
+  [77.2784998815041, 83.48514350363985],
+  [19.446787275373936, 24.267097195843235],
+  [-4.8523786722216755, 0.5033664219081402]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [10, 20, 30, 40, 50],
+  'name': 'Region 2',
+  'visible': false,
+  '_colorIndex': 1,
+  '_symbolIndex': 1
+},
+{
+  'name': 'Region 2 Error',
+  'data': [
+  [6.39028369798325, 13.391455309465528],
+  [16.445126238977537, 23.741745294537395],
+  [29.57130510127172, 34.796150882029906],
+  [38.87180492281914, 44.327019724296406],
+  [48.45504522207193, 51.88944304245524]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [90, 80, 70, 30, 50],
+  'name': 'Region 3',
+  'visible': false,
+  '_colorIndex': 2,
+  '_symbolIndex': 2
+},
+{
+  'name': 'Region 3 Error',
+  'data': [
+  [88.5130394785665, 91.01143028354272],
+  [75.6683817517478, 83.95366478711367],
+  [65.84965593763627, 74.63274455047213],
+  [26.774855798576027, 31.44193877466023],
+  [48.79155076108873, 53.90742286806926]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [40, 50, 40, 30, 10],
+  'name': 'Region 4',
+  'visible': false,
+  '_colorIndex': 3,
+  '_symbolIndex': 3
+},
+{
+  'name': 'Region 4 Error',
+  'data': [
+  [36.64937285822816, 43.88398942304775],
+  [46.651853495277464, 52.408086601644754],
+  [38.73383634723723, 41.60794218652882],
+  [29.40999201964587, 33.18971052067354],
+  [7.741138974670321, 13.236417466541752]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [50, 70, 40, 60, 50],
+  'name': 'Region 5',
+  'visible': false,
+  '_colorIndex': 4,
+  '_symbolIndex': 4
+},
+{
+  'name': 'Region 5 Error',
+  'data': [
+  [48.99160056957044, 52.68250454450026],
+  [66.59493681625463, 71.7766970617231],
+  [39.426092584617436, 42.61673888657242],
+  [59.32327919523232, 62.83144695451483],
+  [48.760333319660276, 50.79653343418613]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [60, 30, 40, 50, 55],
+  'name': 'State',
+  'visible': true,
+  '_colorIndex': 5,
+  '_symbolIndex': 0
+},
+{
+  'name': 'State Error',
+  'data': [
+  [55.79297718824819, 60.64025986008346],
+  [29.60797902313061, 32.399350717896596],
+  [36.13362151198089, 43.38928934070282],
+  [48.7548151856754, 51.19164619478397],
+  [52.87300078663975, 59.79075173265301]
+  ],
+  'type': 'errorbar',
+  'visible': false
+},
+{
+  'data': [75, 72, 70, 64, 50],
+  'name': 'Country',
+  'visible': true,
+  '_colorIndex': 6,
+  '_symbolIndex': 1
+},
+{
+  'name': 'Country Error',
+  'data': [
+  [74.11770019913092, 76.10819792258553],
+  [70.18076680647209, 74.51010738196783],
+  [67.54769559134729, 71.39169643167406],
+  [62.62440677708946, 68.26992271910422],
+  [49.365348406136036, 52.87911617197096]
+  ],
+  'type': 'errorbar',
+  'visible': false
+}
+];
+
 var regionDictionary = {
   'Sauk': 2,
   'Iowa': 2,
@@ -75,45 +267,6 @@ var regionDictionary = {
   'Kenosha': 1,
   'Manitowoc': 5
 };
-
-// Garbage region, state and country data
-var garbage = [
-  {
-    data: [30,40,80,20,0],
-    name: 'Region 1',
-    visible: false
-  },
-  {
-    data: [10,20,30,40,50],
-    name: 'Region 2',
-    visible: false
-  },
-  {
-    data: [90,80,70,30,50],
-    name: 'Region 3',
-    visible: false
-  },
-  {
-    data: [40,50,40,30,10],
-    name: 'Region 4',
-    visible: false
-  },
-  {
-    data: [50,70,40,60,50],
-    name: 'Region 5',
-    visible: false
-  },
-  {
-    data: [60, 30, 40, 50, 55],
-    name: 'State',
-    visible: true
-  },
-  {
-    data: [75, 72, 70, 64, 50],
-    name: 'Country',
-    visible: true
-  }
-];
 
 // Prepare demo data
 var data =

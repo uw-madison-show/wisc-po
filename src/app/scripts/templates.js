@@ -48,9 +48,26 @@ Handlebars.registerPartial("halfChart", Handlebars.template({"1":function(depth0
   return buffer + "\n</div>\n";
 },"useData":true}));
 
-Handlebars.registerPartial("header", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  return "<header>\n  <nav role=\"navigation\" class=\"navbar navbar-default\">\n\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <span class=\"navbar-brand\">Wisconsin Portal - ICTR Data Dissemination</span>\n    </div>\n\n    <!-- Collection of nav links and other content for toggling -->\n    <div id=\"navbarCollapse\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li><a href=\"#\">Home</a></li>\n        <li class=\"active\"><a href=\"#\">Data</a></li>\n        <li><a href=\"#\">About</a></li>\n        <li><a href=\"#\">Contact</a></li>\n      </ul>\n    </div>\n  </nav>\n</header>\n\n<div class=\"jumbotron\">\n  <img class=\"img-responsive\" src=\"images/logo.png\" alt=\"\">\n</div>\n";
-  },"useData":true}));
+Handlebars.registerPartial("header", Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  return "active";
+  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<header>\n  <nav role=\"navigation\" class=\"navbar navbar-default\">\n\n    <!-- Brand and toggle get grouped for better mobile display -->\n    <div class=\"navbar-header\">\n      <button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <span class=\"navbar-brand\">Wisconsin Portal - ICTR Data Dissemination</span>\n    </div>\n\n    <!-- Collection of nav links and other content for toggling -->\n    <div id=\"navbarCollapse\" class=\"collapse navbar-collapse\">\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_home : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\"><a href=\"#\">Home</a></li>\n        <li class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_charts : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\"><a href=\"#charts\">Charts</a></li>\n        <li class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_data : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\"><a href=\"#data\">Data</a></li>\n        <li class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_about : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\"><a href=\"#about\">About</a></li>\n        <li class=\"";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_contact : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\"><a href=\"#contact\">Contact</a></li>\n      </ul>\n    </div>\n  </nav>\n</header>\n\n<div class=\"jumbotron\">\n  <img class=\"img-responsive\" src=\"images/logo.png\" alt=\"\">\n</div>\n";
+},"useData":true}));
 
 Handlebars.registerPartial("linechart", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"chart lineChart col-xs-12\"></div>";
@@ -62,9 +79,25 @@ Handlebars.registerPartial("table", Handlebars.template({"compiler":[6,">= 2.0.0
 
 this["templates"] = this["templates"] || {};
 
-this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
-  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, undefined, helpers, partials, data);
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_about': (true)
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <h1>About Us</h1>\n\n";
+  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n</div>\n";
+},"usePartial":true,"useData":true});
+
+
+
+this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"container\">\n\n";
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_charts': (true)
+  }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
@@ -81,6 +114,48 @@ this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "  </div>\n\n";
+  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n</div>\n";
+},"usePartial":true,"useData":true});
+
+
+
+this["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"container\">\n\n";
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_contact': (true)
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <h1>Contact Us</h1>\n\n";
+  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n</div>\n";
+},"usePartial":true,"useData":true});
+
+
+
+this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"container\">\n\n";
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_data': (true)
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <h1>Data</h1>\n\n";
+  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n</div>\n";
+},"usePartial":true,"useData":true});
+
+
+
+this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"container\">\n\n";
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_home': (true)
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <h1>Welcome to SHOW</h1>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
