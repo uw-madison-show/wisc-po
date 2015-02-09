@@ -1,5 +1,6 @@
 // JSHint options:
-/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage, templates */
+/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage, templates, initCharts */
+/* exported chartWatchers */
 
 'use strict';
 

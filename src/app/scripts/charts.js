@@ -1,7 +1,10 @@
 // JSHint options:
-/* global $, garbage, humanize, createChart, createMap, regionDictionary, numVars, dropDownOptsA, dropDownOptsB, dropDownOptsC, county, csv, x, y, chartWatchers */
+/* global $, garbage, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, county, x, y, chartWatchers */
 /* exported initCharts */
 'use strict';
+
+var numVars;
+var csv = [];
 
 function setupCharts() {
   // Init toggle switches
@@ -41,7 +44,7 @@ function setupCharts() {
 function initCharts() {
   // get csv and parse it
   if (csv.length < 1) {
-    $.get('data/data.csv', function(data) {
+    $.get('data/county.csv', function(data) {
 
       var lines = data.split('\n');
 
@@ -83,20 +86,27 @@ function initCharts() {
             var item = items[i*2+2].trim();
             var value = parseFloat(item);
             var error = items[i*2+3].trim();
-
-            if (value < 1.0) {
-              value *= 100;
-              error *= 100;
-            }
-
-            var errorNeg = value - parseFloat(error);
-            var errorPos = value + parseFloat(error);
-
             var name = items[1].trim();
+
+            var errorNeg, errorPos;
+
+            if (value) {
+              if (value < 1.0) {
+                value *= 100;
+                error *= 100;
+              }
+
+              errorNeg = value - parseFloat(error) * 1.96;
+              errorPos = value + parseFloat(error) * 1.96;
+            } else {
+              value = -1;
+              //errorNeg = 'No Data';
+              //errorPos = 'No Data';
+            }
 
             csv[i*2].data.push(
               {
-                'hc-key': 'us-wi-' + items[0].trim().substr(2),
+                'hc-key': 'us-wi-' + items[0].trim(),
                 'name': name,
                 'value': value,
                 'y': value,

@@ -1,6 +1,6 @@
 // JSHint options:
 /* global $, Highcharts, templates, initCharts */
-/* exported color2, county, region, country, dropDownOptsA, dropDownOptsB, dropDownOptsC, x, y, i, j, csv, numVars */
+/* exported color2, county, region, country, dropDownOptsA, dropDownOptsB, dropDownOptsC, x, y, i, j, numVars */
 'use strict';
 
 /* Global variables */
@@ -30,9 +30,6 @@ var country = Highcharts.maps['countries/us/us-all'];
 
 var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012'] };
 var y = { title: { text: 'Values'}, min: 0, max: 100 };
-
-var csv = [];
-var numVars;
 
 /* End global variables */
 

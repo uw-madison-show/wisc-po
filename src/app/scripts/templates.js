@@ -99,7 +99,7 @@ this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.
     'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n";
+  buffer += "\n  <h1>Data Charts</h1>\n  <hr/>\n\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n  <h2 id=\"val\">Selected Value: No region selected</h2>\n\n  <div class=\"row\">\n";
@@ -141,7 +141,7 @@ this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"
     'active_data': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <h1>Data</h1>\n\n";
+  buffer += "\n  <h1>Get Our Data</h1>\n  <hr/>\n\n  <p>The data that we have is availible to the public. Below we have packaged the sample data\n    that is used on this site. If you would like a more specific set of data, you can work\n    with our group to tailor our data to your needs using the self-guided\n    <a href=\"#contact\">data request tool</a> in our contact page.\n  </p>\n\n  <h3>Data Download</h3>\n\n  <p>\n    <a href=\"data/county.csv\" class=\"btn btn-primary btn-lg\" role=\"button\">Download</a>\n  </p>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";

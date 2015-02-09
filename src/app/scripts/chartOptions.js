@@ -31,6 +31,9 @@ var chartOptions = {
           }
         }
       }
+    },
+    map: {
+      borderColor: '#f0f0f0'
     }
   },
   tooltip: {
@@ -78,61 +81,63 @@ var mapSeries = {
   point: {
     events: {
       select: function() {
-        var value = this.value;
-        if (value === -1) {
-          value = 'No Data';
-        }
-        var color = '#005645';
-        var chart = $('.chart:eq(1)').highcharts();
-        $('#val').text('Value: ' + this.name + ' - ' + value.toFixed(2));
+        var value = this.value.toFixed(2);
+        if (value < 0) {
+          $('#val').text('Selected Value: ' + this.name + ' - No Data');
+        } else {
 
-        // remove previously region line
-        chart.yAxis[0].removePlotLine('plot-line-1');
-        chart.yAxis[0].removePlotLine('plot-band-1');
-        chart.yAxis[0].addPlotLine(
-          {
-            value: value,
-            width: 3,
-            color: color,
-            id: 'plot-line-1',
-            dashStyle: 'longdash',
-            label: {
-              text: this.name + ' (' + this.value.toFixed(2) + ')',
-              align: 'right',
-              style: {
-                fontSize: '11pt'
-              }
-            },
-            zIndex: 99
-          }
-        );
+          var color = '#005645';
+          $('#val').text('Selected Value: ' + this.name + ' - ' + value);
+          var chart = $('.chart:eq(1)').highcharts();
 
-        var index = $('.chartSelect .dropDownA option:selected').index();
-        var error = csv[index*2+1].data[this.index];
+          // remove previously region line
+          chart.yAxis[0].removePlotLine('plot-line-1');
+          chart.yAxis[0].removePlotLine('plot-band-1');
+          chart.yAxis[0].addPlotLine(
+            {
+              value: value,
+              width: 3,
+              color: color,
+              id: 'plot-line-1',
+              dashStyle: 'longdash',
+              label: {
+                text: this.name + ' (' + this.value.toFixed(2) + ')',
+                align: 'right',
+                style: {
+                  fontSize: '11pt'
+                }
+              },
+              zIndex: 99
+            }
+          );
 
-        chart.yAxis[0].addPlotBand(
-          {
-            from : error[0],
-            to : error[1],
-            color : 'rgba(50, 50, 50, 0.2)',
-            id: 'plot-band-1'
-          }
-        );
+          var index = $('.chartSelect .dropDownA option:selected').index();
+          var error = csv[index*2+1].data[this.index];
 
-        // Bring label to front
-        $('.chart:eq(1)').highcharts().yAxis[0].plotLinesAndBands[0].label.toFront();
+          chart.yAxis[0].addPlotBand(
+            {
+              from : error[0],
+              to : error[1],
+              color : 'rgba(50, 50, 50, 0.2)',
+              id: 'plot-band-1'
+            }
+          );
 
-        if (this.region) {
-          var region = this.region;
-          for (var i = 0; i < 5; i++) {
-            chart.series[i*2].hide();
-          }
-          chart.series[(region-1)*2].show();
+          // Bring label to front
+          $('.chart:eq(1)').highcharts().yAxis[0].plotLinesAndBands[0].label.toFront();
 
-          var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
-          var linked = chart.series[(region-1)*2];
-          if (!errorbar && linked.linkedSeries) {
-            linked.linkedSeries[0].hide();
+          if (this.region) {
+            var region = this.region;
+            for (var i = 0; i < 5; i++) {
+              chart.series[i*2].hide();
+            }
+            chart.series[(region-1)*2].show();
+
+            var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
+            var linked = chart.series[(region-1)*2];
+            if (!errorbar && linked.linkedSeries) {
+              linked.linkedSeries[0].hide();
+            }
           }
         }
 
@@ -144,7 +149,7 @@ var mapSeries = {
           var chart = $('.chart:eq(1)').highcharts();
           chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');
-          $('#val').text('Value: No region selected');
+          $('#val').text('Selected Value: No region selected');
 
           if (region) {
             chart.series[(region-1)*2].hide();

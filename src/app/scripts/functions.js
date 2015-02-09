@@ -47,28 +47,34 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
       options.chart.type = 'map';
 
       options.colorAxis = {
-        min: 0,
-        minColor: '#E6E7E8',
-        maxColor: '#005645'
+        stops: [
+        [0, '#666666'],
+        [0.001, '#fbfbfb'],
+        [1.0, '#005645'],
+        ],
+        min: 0
       };
 
       options.tooltip = {
         formatter: function () {
-          var val = this.point.value;
+          var val = this.point.value.toFixed(2);
           if (this.point.value === -1) {
             val = 'No Data';
           }
+
           var index = $('.chartSelect .dropDownA option:selected').index();
           var error = csv[index*2+1].data[this.point.index];
           var err;
 
-          if (error) {
+          if (error[0] && error[1]) {
             err = 'Error Range: (' + error[0].toFixed(2) + ' - ' + error[1].toFixed(2) + ')';
+          } else {
+            err = '';
           }
 
           return '<b>' + this.series.name + '</b><br>' +
           'Point name: ' + this.point.name + '<br>' +
-          'Value: ' + val.toFixed(2) + '<br>' + err;
+          'Value: ' + val + '<br>' + err;
         }
       };
 
