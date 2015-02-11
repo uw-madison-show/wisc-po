@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, garbage, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, templates, county, x, y, chartWatchers */
+/* global $, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, templates, county, y, chartWatchers */
 /* exported initCharts */
 'use strict';
 
@@ -41,11 +41,9 @@ function setupCharts() {
 
   var region = [];
   for (var i = 0; i < tempRegion.length; i++) {
-    region.push(tempRegion[i][categories[defaultIndex*2]]);
-    region.push(tempRegion[i][categories[defaultIndex*2+1]]);
+    region.push($.extend(true, {}, tempRegion[i][categories[defaultIndex*2]]));
+    region.push($.extend(true, {},tempRegion[i][categories[defaultIndex*2+1]]));
   }
-
-  console.log(region);
 
   createChart($('.chart:eq(1)'), 'line', region, [], y, categories[defaultIndex*2]);
 
@@ -74,7 +72,7 @@ function getRegion() {
       numVars = (categories.length - headerSize) / 2;
 
       for (i = 0; i < numRegions; i++) {
-        tempRegion.push([]);
+        tempRegion.push({});
         for (j = 0; j < categories.length; j++) {
           var type = 'line';
           var showInLegend = true;

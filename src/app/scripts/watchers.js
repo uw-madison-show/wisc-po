@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage, initCharts */
+/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, tempRegion, categories, initCharts */
 /* exported chartWatchers */
 
 'use strict';
@@ -22,14 +22,20 @@ function chartWatchers() {
       chart.setTitle({text: csv[index*2].name});
       map.series[0].setData(csv[index*2].data);
 
-      chart.yAxis[0].removePlotLine('plot-band-1');
-      for (var i = 0; i < 5; i++) {
-        //chart.series[i*2].hide();
-      }
+      chart.yAxis[0].removePlotLine('plot-line-1');
+      chart.yAxis[0].removePlotBand('plot-band-1');
+      $('#val').text('Selected Value: No region selected');
+
+      //  for (var i = 0; i < 5; i++) {
+      //    chart.series[i*2].hide();
+      //  }
     }
 
-    chart.series[0].setData(tempRegion[index*2]);
-    chart.series[1].setData(tempRegion[index*2+1]);
+    for (var i = 0; i < tempRegion.length; i++) {
+      chart.series[i*2].setData(tempRegion[i][categories[index*2]].data);
+      chart.series[i*2+1].setData(tempRegion[i][categories[index*2+1]].data);
+    }
+
   });
 
   $('.chartSelect .dropDownC').change(function() {
@@ -54,34 +60,12 @@ function chartWatchers() {
     }
   });
 
-  // $('#randomData').on('click', function() { randomData(); } );
-
-  $('input[name="numcharts"]').change(function() {
-    var chart1 = $('.chart:eq(0)');
-    var chart2 = $('.chart:eq(1)');
-    if ($(this).val() === '1') {
-      chart1.parent().removeClass('col-md-6');
-      chart2.parent().hide();
-      chart1.highcharts().reflow();
-      chart1.highcharts().redraw();
-      // chart1.highcharts().series[0].setData(data);
-
-    } else {
-      chart1.parent().addClass('col-md-6');
-      chart2.parent().show();
-      chart1.highcharts().reflow();
-      chart1.highcharts().redraw();
-      chart2.highcharts().reflow();
-      chart2.highcharts().redraw();
-    }
-  });
-
   $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
     // Make animations a bit cleaner (animate chart after switch toggle)
     setTimeout(function() {
 
       var chart = $('.chart:eq(1)').highcharts();
-      for (var i = 0; i < garbage.length; i++) {
+      for (var i = 0; i < chart.series.length; i++) {
         if (chart.series[i].type === 'errorbar' && chart.series[i-1].visible) {
           if (state) {
             chart.series[i].show();
