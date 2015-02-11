@@ -1,10 +1,12 @@
 // JSHint options:
-/* global $, garbage, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, county, x, y, chartWatchers */
+/* global $, garbage, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, templates, county, x, y, chartWatchers */
 /* exported initCharts */
 'use strict';
 
 var numVars;
+var categories;
 var csv = [];
+var tempRegion = [];
 
 function setupCharts() {
   // Init toggle switches
@@ -26,27 +28,113 @@ function setupCharts() {
     selectorC.append('<option>' + this + '</option>');
   });
 
-  // Add other data to csv
-  for (var i = 0; i < garbage.length; i++) {
-    //csv.push(garbage[i]);
-  }
-
   $('.dropDownA').prop('disabled', false);
   $('.dropDownC').prop('disabled', false);
 
-  createMap($('.chart:eq(0)'), $.extend(true, {}, csv[0]).data, county, csv[0].name);
+  // default measure to be shown (0-indexed)
+  var defaultIndex = 1;
+
+  $('.dropDownA').val(categories[defaultIndex*2]);
+
+  createMap($('.chart:eq(0)'), $.extend(true, {}, csv[defaultIndex*2]).data, county, categories[defaultIndex*2]);
   // createChart($('.chart:eq(1)'), 'column', garbage, x, y);
-  createChart($('.chart:eq(1)'), 'line', garbage, x, y, csv[0].name);
+
+  var region = [];
+  for (var i = 0; i < tempRegion.length; i++) {
+    region.push(tempRegion[i][categories[defaultIndex*2]]);
+    region.push(tempRegion[i][categories[defaultIndex*2+1]]);
+  }
+
+  console.log(region);
+
+  createChart($('.chart:eq(1)'), 'line', region, [], y, categories[defaultIndex*2]);
 
   chartWatchers();
 }
 
-function initCharts() {
+function getRegion() {
+  // get csv and parse it
+  if (tempRegion.length < 1) {
+    $.get('data/region.csv', function(data) {
+
+      var i, j;
+
+      var lines = data.trim().split('\n');
+
+      var numRegions = 5;
+      var headerSize = 3;
+
+      // Add categories
+      categories = lines[0].trim().split(',');
+      categories.splice(0, headerSize);
+      for (i = 0; i < categories.length; i++) {
+        categories[i] = humanize(categories[i]);
+      }
+
+      numVars = (categories.length - headerSize) / 2;
+
+      for (i = 0; i < numRegions; i++) {
+        tempRegion.push([]);
+        for (j = 0; j < categories.length; j++) {
+          var type = 'line';
+          var showInLegend = true;
+          if (j % 2) {
+            type = 'errorbar';
+            showInLegend = false;
+          }
+
+          tempRegion[i][categories[j]] = {
+            // name: categories[j] + ' - Region ' + (i+1),
+            name: 'Region ' + (i+1),
+            type: type,
+            data: [],
+            showInLegend: showInLegend,
+            visible: false
+          };
+        }
+      }
+
+      $.each(lines, function(lineNo, line) {
+        var items = line.split(',');
+        var year = parseFloat(items[2]);
+        if (lineNo !== 0 && items[0].trim()) {
+          for (var i = 0; i < categories.length; i++) {
+            if (i % 2) {
+              var errorNeg = parseFloat(items[i + headerSize - 1]) - parseFloat(items[i + headerSize]) * 1.96;
+              var errorPos = parseFloat(items[i + headerSize - 1]) + parseFloat(items[i + headerSize]) * 1.96;
+              if (errorNeg < 1.0 || errorPos < 1.0) {
+                errorNeg *= 100;
+                errorPos *= 100;
+              }
+
+              tempRegion[items[0]-1][categories[i]].data.push([year, errorNeg,errorPos]);
+            } else {
+              var value = parseFloat(items[i + headerSize]);
+              if (value < 1.0) {
+                value *= 100;
+              }
+
+              tempRegion[items[0]-1][categories[i]].data.push([year, value]);
+            }
+          }
+        }
+      });
+
+
+    setupCharts();
+    });
+  } else {
+    setupCharts();
+  }
+}
+
+
+function getCounty() {
   // get csv and parse it
   if (csv.length < 1) {
     $.get('data/county.csv', function(data) {
 
-      var lines = data.split('\n');
+      var lines = data.trim().split('\n');
 
       //var lines = document.getElementById('csv').innerHTML.split('\n');
       // Iterate over the lines and add categories or series
@@ -128,9 +216,27 @@ function initCharts() {
       }
       /* Done parsing csv */
 
-      setupCharts();
+      getRegion();
     });
   } else {
-    setupCharts();
+    getRegion();
+  }
+}
+
+
+function initCharts() {
+  if (window.location.href.match(/\#.*/)) {
+    var page = window.location.href.match(/\#.*/)[0].substring(1);
+    if (page === 'charts') {
+      $('#content').html(templates.charts);
+      getCounty();
+    } else if (page) {
+      $('#content').html(templates[page]);
+    } else {
+      $('#content').html(templates.index);
+    }
+
+  } else {
+    $('#content').html(templates.index);
   }
 }

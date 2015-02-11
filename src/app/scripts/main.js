@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Highcharts, templates, initCharts */
+/* global Highcharts, initCharts */
 /* exported color2, county, region, country, dropDownOptsA, dropDownOptsB, dropDownOptsC, x, y, i, j, numVars */
 'use strict';
 
@@ -34,17 +34,4 @@ var y = { title: { text: 'Values'}, min: 0, max: 100 };
 /* End global variables */
 
 // Init templates
-if (window.location.href.match(/\#.*/)) {
-  var page = window.location.href.match(/\#.*/)[0].substring(1);
-  if (page === 'charts') {
-    $('#content').html(templates.charts);
-    initCharts();
-  } else if (page) {
-    $('#content').html(templates[page]);
-  } else {
-    $('#content').html(templates.index);
-  }
-
-} else {
-  $('#content').html(templates.index);
-}
+initCharts();

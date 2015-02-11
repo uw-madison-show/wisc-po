@@ -1,25 +1,12 @@
 // JSHint options:
-/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage, templates, initCharts */
+/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, garbage, initCharts */
 /* exported chartWatchers */
 
 'use strict';
 
 /* Set up watchers */
 $(window).bind('hashchange', function() {
-  if (window.location.href.match(/\#.*/)) {
-    var page = window.location.href.match(/\#.*/)[0].substring(1);
-    if (page === 'charts') {
-      $('#content').html(templates.charts);
-      initCharts();
-    } else if (page) {
-      $('#content').html(templates[page]);
-    } else {
-      $('#content').html(templates.index);
-    }
-
-  } else {
-    $('#content').html(templates.index);
-  }
+  initCharts();
 });
 
 function chartWatchers() {
@@ -33,14 +20,16 @@ function chartWatchers() {
       map.series[0].update({name:csv[index*2].name}, false);
       map.setTitle({text: csv[index*2].name});
       chart.setTitle({text: csv[index*2].name});
-
       map.series[0].setData(csv[index*2].data);
 
       chart.yAxis[0].removePlotLine('plot-band-1');
       for (var i = 0; i < 5; i++) {
-        chart.series[i*2].hide();
+        //chart.series[i*2].hide();
       }
     }
+
+    chart.series[0].setData(tempRegion[index*2]);
+    chart.series[1].setData(tempRegion[index*2+1]);
   });
 
   $('.chartSelect .dropDownC').change(function() {

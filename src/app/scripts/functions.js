@@ -89,6 +89,7 @@ function createMap(chart, series, map, name) {
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
   seriesNew[0].name = name;
+
   createChart(chart, 'map', seriesNew, [], [], name);
 }
 
