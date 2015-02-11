@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, chartOptions, csv, mapSeries */
+/* global $, chartOptions, dataCounty, mapSeries */
 /* exported randomData, createChart, createMap, humanize */
 'use strict';
 
@@ -57,17 +57,17 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
 
       options.tooltip = {
         formatter: function () {
-          var val = this.point.value.toFixed(2);
+          var val = this.point.value;
           if (this.point.value === -1) {
             val = 'No Data';
           }
 
           var index = $('.chartSelect .dropDownA option:selected').index();
-          var error = csv[index*2+1].data[this.point.index];
+          var error = dataCounty[index*2+1].data[this.point.index];
           var err;
 
           if (error[0] && error[1]) {
-            err = 'Error Range: (' + error[0].toFixed(2) + ' - ' + error[1].toFixed(2) + ')';
+            err = 'Error Range: (' + error[0] + ' - ' + error[1] + ')';
           } else {
             err = '';
           }

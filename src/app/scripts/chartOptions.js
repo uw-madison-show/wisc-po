@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, csv */
+/* global Highcharts, dataCounty */
 /* exported chartOptions, mapSeries */
 
 'use strict';
@@ -13,7 +13,7 @@ var chartOptions = {
     text: 'Highcharts basic demo'
   },
   subtitle: {
-    text: 'Source: Random'
+    text: 'Source: SHOW Data'
   },
   plotOptions: {
     series: {
@@ -53,7 +53,12 @@ var chartOptions = {
       verticalAlign: 'top'
     },
     //name: 'Random data'
-  }]
+  }],
+  legend: {
+    itemStyle: {
+      fontSize:'14px'
+    }
+  }
 };
 
 var mapSeries = {
@@ -81,7 +86,7 @@ var mapSeries = {
   point: {
     events: {
       select: function() {
-        var value = this.value.toFixed(2);
+        var value = this.value;
         if (value < 0) {
           $('#val').text('Selected Value: ' + this.name + ' - No Data');
         } else {
@@ -112,7 +117,7 @@ var mapSeries = {
           );
 
           var index = $('.chartSelect .dropDownA option:selected').index();
-          var error = csv[index*2+1].data[this.index];
+          var error = dataCounty[index*2+1].data[this.index];
 
           chart.yAxis[0].addPlotBand(
             {

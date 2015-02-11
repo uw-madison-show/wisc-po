@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, console, createMap, csv, dataRegion, dataCountry, county, region, country, tempRegion, categories, initCharts */
+/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, initCharts */
 /* exported chartWatchers */
 
 'use strict';
@@ -17,10 +17,10 @@ function chartWatchers() {
     var chart = $('.chart:eq(1)').highcharts();
 
     if (type === 'State - County') {
-      map.series[0].update({name:csv[index*2].name}, false);
-      map.setTitle({text: csv[index*2].name});
-      chart.setTitle({text: csv[index*2].name});
-      map.series[0].setData(csv[index*2].data);
+      map.series[0].update({name: categories[index*2]}, false);
+      map.setTitle({text: categories[index*2]});
+      chart.setTitle({text: categories[index*2]});
+      map.series[0].setData(dataCounty[index*2].data);
 
       chart.yAxis[0].removePlotLine('plot-line-1');
       chart.yAxis[0].removePlotBand('plot-band-1');
@@ -31,31 +31,30 @@ function chartWatchers() {
       //  }
     }
 
-    for (var i = 0; i < tempRegion.length; i++) {
-      chart.series[i*2].setData(tempRegion[i][categories[index*2]].data);
-      chart.series[i*2+1].setData(tempRegion[i][categories[index*2+1]].data);
+    for (var i = 0; i < dataRegion.length; i++) {
+      chart.series[i*2].setData(dataRegion[i][categories[index*2]].data);
+      chart.series[i*2+1].setData(dataRegion[i][categories[index*2+1]].data);
     }
+
+    chart.series[dataRegion.length*2].setData(dataState[categories[index*2]].data);
+    chart.series[dataRegion.length*2+1].setData(dataState[categories[index*2+1]].data);
 
   });
 
   $('.chartSelect .dropDownC').change(function() {
-    console.log('new map - ' + $(this).val());
     var chart = $('.chart:eq(0)');
     var index = $('.dropDownA option:selected').index();
     chart.highcharts().destroy();
-    console.log($('.chartSelect .dropDownA').val());
 
     switch ($(this).val()) {
       case 'State - County':
-        createMap($('.chart:eq(0)'), $.extend(true, {}, csv[index*2]).data, county);
+        createMap($('.chart:eq(0)'), $.extend(true, {}, dataCounty[index*2]).data, county);
         break;
       case 'State - Region':
         createMap(chart, dataRegion, region);
-        $('.chart:eq(1)').highcharts().series[0].setData([]);
         break;
       case 'Country':
         createMap(chart, dataCountry, country);
-        $('.chart:eq(1)').highcharts().series[0].setData([]);
         break;
     }
   });
