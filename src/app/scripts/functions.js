@@ -47,10 +47,20 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
       options.chart.type = 'map';
 
       options.colorAxis = {
-        stops: [
-        [0, '#666666'],
-        [0.001, '#fbfbfb'],
-        [1.0, '#005645'],
+        stops:
+        [
+          [0, '#666666'],
+          // [0.001, '#fbfbfb'],
+          // [1.0, '#005645'],
+          [0.001,'#f7fcf5'],
+          [0.125,'#e5f5e0'],
+          [0.25,'#c7e9c0'],
+          [0.375,'#a1d99b'],
+          [0.5,'#74c476'],
+          [0.625,'#41ab5d'],
+          [0.75,'#238b45'],
+          [0.875,'#006d2c'],
+          [1.0,'#00441b'],
         ],
         min: 0
       };

@@ -29,7 +29,7 @@ var region = Highcharts.maps['countries/us/us-wi-region'];
 var country = Highcharts.maps['countries/us/us-all'];
 
 var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'] };
-var y = { title: { text: 'Percent %'}, min: 0, max: 100 };
+var y = { title: { text: 'Percent %'}, min: 0 };
 
 /* End global variables */
 

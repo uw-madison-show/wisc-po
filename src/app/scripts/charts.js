@@ -4,7 +4,8 @@
 'use strict';
 
 var numVars;
-var categories;
+var categories = [];
+var percent = {};
 var dataCounty = [];
 var dataRegion = [];
 var dataState = [];
@@ -33,7 +34,7 @@ function setupCharts() {
   //$('.dropDownC').prop('disabled', false);
 
   // default measure to be shown (0-indexed)
-  var defaultIndex = 1;
+  var defaultIndex = 0;
 
   $('.dropDownA').val(categories[defaultIndex*2]);
 
@@ -50,6 +51,16 @@ function setupCharts() {
 
   createChart($('.chart:eq(1)'), 'line', line, [], y, categories[defaultIndex*2]);
 
+  var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
+  var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
+  $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
+
+  if (!percent[categories[defaultIndex*2]]) {
+    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
+  } else {
+    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
+  }
+
   chartWatchers();
 }
 
@@ -61,8 +72,6 @@ function getState() {
       var i;
       var lines = data.trim().split('\n');
       var headerSize = 1;
-
-      numVars = (categories.length - headerSize) / 2;
 
       for (i = 0; i < categories.length; i++) {
         var type = 'line';
@@ -92,7 +101,7 @@ function getState() {
             if (i % 2) {
               var errorNeg = parseFloat(items[i + headerSize - 1]) - parseFloat(items[i + headerSize]);
               var errorPos = parseFloat(items[i + headerSize - 1]) + parseFloat(items[i + headerSize]);
-              if (errorNeg < 1.0 || errorPos < 1.0) {
+              if ((errorNeg < 1.0 || errorPos < 1.0) && errorNeg > 0 && errorPos > 0) {
                 errorNeg *= 100;
                 errorPos *= 100;
               }
@@ -106,7 +115,7 @@ function getState() {
               dataState[categories[i]].data.push([year, errorNeg,errorPos]);
             } else {
               var value = parseFloat(items[i + headerSize]);
-              if (value < 1.0) {
+              if (value < 1.0 && value > 0) {
                 value *= 100;
               }
 
@@ -138,14 +147,7 @@ function getRegion() {
       var numRegions = 5;
       var headerSize = 3;
 
-      // Add categories
-      categories = lines[0].trim().split(',');
-      categories.splice(0, headerSize);
-      for (i = 0; i < categories.length; i++) {
-        categories[i] = humanize(categories[i]);
-      }
 
-      numVars = (categories.length - headerSize) / 2;
 
       for (i = 0; i < numRegions; i++) {
         dataRegion.push({});
@@ -178,7 +180,7 @@ function getRegion() {
             if (i % 2) {
               var errorNeg = parseFloat(items[i + headerSize - 1]) - parseFloat(items[i + headerSize]);
               var errorPos = parseFloat(items[i + headerSize - 1]) + parseFloat(items[i + headerSize]);
-              if (errorNeg < 1.0 || errorPos < 1.0) {
+              if ((errorNeg < 1.0 || errorPos < 1.0) && errorNeg > 0 && errorPos > 0) {
                 errorNeg *= 100;
                 errorPos *= 100;
               }
@@ -192,7 +194,7 @@ function getRegion() {
               dataRegion[items[0]-1][categories[i]].data.push([year, errorNeg,errorPos]);
             } else {
               var value = parseFloat(items[i + headerSize]);
-              if (value < 1.0) {
+              if (value < 1.0 && value > 0) {
                 value *= 100;
               }
 
@@ -220,28 +222,46 @@ function getCounty() {
 
       var lines = data.trim().split('\n');
 
+      for (var i = 0; i < lines.length; i++) {
+        lines[i] = lines[i].trim();
+      }
+
       //var lines = document.getElementById('csv').innerHTML.split('\n');
       // Iterate over the lines and add categories or series
-      var categories = lines[0].split(',');
-      numVars = (categories.length - 2) / 2;
+
+      //var categories = lines[0].split(',');
+      //numVars = (categories.length - 2) / 2;
+
+      // Add categories
+      var headerSize = 2;
+
+      categories = lines[0].split(',');
+      categories.splice(0, headerSize);
+
+      for (i = 0; i < categories.length; i++) {
+        categories[i] = humanize(categories[i]);
+      }
+
+      numVars = categories.length / 2;
 
       // Get drop down opt from csv
 
       // Make vars * 2 series (to account for errorbars too)
-      for (var i = 0; i < numVars*2; i++) {
+      for (i = 0; i < categories.length; i++) {
         var type = 'line';
-        var category = humanize(categories[i+2]);
 
         // If errorbar
         if (i % 2) {
           type = 'errorbar';
         } else {
-          dropDownOptsA.push(category);
+          dropDownOptsA.push(categories[i]);
         }
+
+        percent[categories[i]] = false;
 
         var series = {
           data: [],
-          name: category,
+          name: categories[i],
           type: type,
           showInLegend: false
         };
@@ -249,23 +269,28 @@ function getCounty() {
         dataCounty.push(series);
       }
 
+      // console.log(JSON.stringify(categories));
+
       $.each(lines, function(lineNo, line) {
         var items = line.split(',');
 
-        if (lineNo !== 0 && items[0].trim()){
+        if (lineNo !== 0 && items[0].trim()) {
 
-          for (i = 0; i < numVars; i ++) {
-            var item = items[i*2+2].trim();
+          for (i = 0; i < categories.length / 2; i ++) {
+            var item = items[i*2+headerSize].trim();
             var value = parseFloat(item);
-            var error = parseFloat(items[i*2+3].trim());
+            var error = parseFloat(items[i*2+1+headerSize].trim());
             var name = items[1].trim();
 
             var errorNeg, errorPos;
 
             if (value) {
-              if (value < 1.0) {
+              if (value < 1.0 && value > 0) {
                 value *= 100;
                 error *= 100;
+
+                percent[categories[i*2]] = true;
+                percent[categories[i*2+1]] = true;
               }
               value = parseFloat(value.toFixed(3));
 

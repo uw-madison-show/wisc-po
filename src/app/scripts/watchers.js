@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, initCharts */
+/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, percent, initCharts */
 /* exported chartWatchers */
 
 'use strict';
@@ -38,6 +38,16 @@ function chartWatchers() {
 
     chart.series[dataRegion.length*2].setData(dataState[categories[index*2]].data);
     chart.series[dataRegion.length*2+1].setData(dataState[categories[index*2+1]].data);
+
+    var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
+    var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
+    $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
+
+    if (!percent[categories[index*2]]) {
+      $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
+    } else {
+      $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
+    }
 
   });
 
