@@ -8,6 +8,7 @@
 function createChart(chart, type, series, xAxis, yAxis, name) {
   var options = $.extend(true, {}, chartOptions);
   //var container = chart.closest('.chartContainer');
+
   options.series = series;
 
   if (xAxis) {
@@ -65,6 +66,12 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
         min: 0
       };
 
+      options.plotOptions = {
+        mapline: {
+          lineWidth: 3
+        }
+      };
+
       options.tooltip = {
         formatter: function () {
           var val = this.point.value;
@@ -76,7 +83,7 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
           var error = dataCounty[index*2+1].data[this.point.index];
           var err;
 
-          if (error[0] && error[1]) {
+          if (error[0] !== -1 && error[1] !== -1) {
             err = 'Error Range: (' + error[0] + ' - ' + error[1] + ')';
           } else {
             err = '';
@@ -96,6 +103,14 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
 
 function createMap(chart, series, map, name) {
   var seriesNew = new Array($.extend(true, {}, mapSeries));
+
+  seriesNew.push({
+    'type': 'mapline',
+    'name': 'Borders',
+    'color': 'red',
+    'data': []
+  });
+
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
   seriesNew[0].name = name;

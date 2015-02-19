@@ -10,6 +10,69 @@ var dataCounty = [];
 var dataRegion = [];
 var dataState = [];
 
+/*
+var temp = {
+  'include_error': true,
+  'year': {
+    'enabled': false,
+    'years': []
+  },
+  'series': {
+    'Count Walk To Mean': {},
+    'Count Walk To Error': {},
+    'Overweight Mean': {},
+    'Overweight Error': {},
+    'Asthma Mean': {},
+    'Asthma Error': {},
+    'Flu Shot Mean': {},
+    'Flu Shot Error': {},
+    'Poor Oral Health Mean': {},
+    'Poor Oral Health Error': {},
+    'Hypertension Mean': {},
+    'Hypertension Error': {}
+  }
+};
+*/
+
+/* Parse region
+for (var x = 0; x < dataRegion.length; x++) {
+  var name = 'Region ' + (x+1);
+  for (var y = 0; y < categories.length; y++) {
+    temp.series[categories[y]][name] = {id: x, name: name, data: dataRegion[x][categories[y]].data};
+  }
+}
+copy(JSON.stringify(temp));
+*/
+
+/* Parse State
+var name = 'State';
+for (var x = 0; x < categories.length; x++) {
+  temp.series[categories[x]][name] = {id: 1, name: name, data: dataState[categories[x]].data};
+}
+copy(JSON.stringify(temp));
+*/
+
+/* Parse county
+for (var x = 0; x < dataCounty.length; x++) {
+  for (var y = 0; y < dataCounty[x].data.length; y++) {
+    if (x % 2) {
+      var name = dataCounty[x-1].data[y].name;
+      var key = dataCounty[x-1].data[y]['hc-key'];
+      var value = dataCounty[x].data[y];
+      temp.series[categories[x]][name] = {'hc-key': key, name: name, value: value};
+      //temp.series[categories[x]][name] = {'hc-key': key, value: value};
+    } else {
+      var name = dataCounty[x].data[y].name;
+      var value = dataCounty[x].data[y].value;
+      var key = dataCounty[x].data[y]['hc-key'];
+      temp.series[categories[x]][name] = {'hc-key': key, name: name, value: value};
+      //temp.series[categories[x]][name] = {'hc-key': key, value: value};
+    }
+  }
+}
+copy(JSON.stringify(temp));
+*/
+
 function setupCharts() {
   // Init toggle switches
   $('.bootstrapSwitch').bootstrapSwitch();
@@ -38,7 +101,7 @@ function setupCharts() {
 
   $('.dropDownA').val(categories[defaultIndex*2]);
 
-  createMap($('.chart:eq(0)'), $.extend(true, {}, dataCounty[defaultIndex*2]).data, county, categories[defaultIndex*2]);
+  createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
 
   var line = [];
   for (var i = 0; i < dataRegion.length; i++) {
@@ -297,12 +360,14 @@ function getCounty() {
               errorNeg = value - error; // * 1.96;
               errorPos = value + error; // * 1.96;
 
-              errorNeg = errorNeg.toFixed(3);
-              errorPos = errorPos.toFixed(3);
+              errorNeg = parseFloat(errorNeg.toFixed(3));
+              errorPos = parseFloat(errorPos.toFixed(3));
             } else {
               value = -1;
               //errorNeg = 'No Data';
               //errorPos = 'No Data';
+              errorNeg = -1;
+              errorPos = -1;
             }
 
             dataCounty[i*2].data.push(
@@ -315,9 +380,11 @@ function getCounty() {
               }
             );
 
+            var errorArray = [errorNeg, errorPos];
             dataCounty[i*2 + 1].data.push(
-              [errorNeg, errorPos]
+              errorArray
             );
+
           }
 
         }
