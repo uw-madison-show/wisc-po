@@ -13,9 +13,80 @@
 
   <h3>Data Download</h3>
 
-  <p>
-    <a href="data/county.csv" class="btn btn-primary btn-lg" role="button">Download</a>
-  </p>
+  <div class="row">
+    <div class="form-group nav-select col-xs-4 col-sm-3">
+      <label class="control-label">County&nbsp;Data</label>
+      <br>
+      <input class="bootstrapSwitch" type="checkbox" name="county">
+    </div>
+    <div class="form-group nav-select col-xs-4 col-sm-3">
+      <label class="control-label">Region&nbsp;Data</label>
+      <br>
+      <input class="bootstrapSwitch" type="checkbox" name="region">
+    </div>
+    <div class="form-group nav-select col-xs-4 col-sm-3">
+      <label class="control-label">State&nbsp;Data</label>
+      <br>
+      <input class="bootstrapSwitch" type="checkbox" name="state">
+    </div>
+    <div class="form-group nav-select col-xs-4 col-sm-3">
+      <label class="control-label">Country&nbsp;Data</label>
+      <br>
+      <input class="bootstrapSwitch" type="checkbox" name="country">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group nav-select col-xs-6">
+      <label class="control-label">County</label>
+      <select disable class="form-control dropDownCounty">
+        {{!-- Filled from database served header? --}}
+      </select>
+    </div>
+    <div class="form-group nav-select col-xs-6">
+      <label class="control-label">Factor</label>
+      <select class="form-control dropDownA">
+        {{!-- Filled from database served header? --}}
+      </select>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+    <div class="panel panel-default">
+      <div data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false"
+      aria-controls="collapseOne"class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title pull-left">Data Table</h4>
+        <span id="minusIcon" class="glyphicon glyphicon-minus pull-right"></span>
+        <span id="plusIcon" class="glyphicon glyphicon-plus pull-right"></span>
+        <div class="clearfix"></div>
+      </div>
+
+      <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <table id="myTable" class="table table-striped table-responsive">
+            <thead>
+              <tr>
+                <th>Area</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+
+</div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <a id="download" onClick="downloadData()" class="btn btn-primary btn-lg" role="button">Download</a>
+    </div>
+  </div>
 
   {{> footer}}
 
