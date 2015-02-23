@@ -1,28 +1,35 @@
 // JSHint options:
-/* global $, chartOptions, dataCounty, mapSeries, templates, getCounty, downloadWatchers */
+/* global $, chartOptions, dataCounty, mapSeries, templates, getData, downloadWatchers */
 /* exported randomData, createChart, createMap, humanize, initTemplates */
 'use strict';
 
 /* Helper functions */
 
 function initTemplates() {
-  getCounty();
-  if (window.location.href.match(/\#.*/)) {
-    var page = window.location.href.match(/\#.*/)[0].substring(1);
-    if (page) {
-      $('#content').html(templates[page]);
+  var d1 = $.Deferred();
 
-      if (page === 'data') {
-        downloadWatchers();
-        $('#minusIcon').hide();
-        // Init toggle switches
-        $('.bootstrapSwitch').bootstrapSwitch();
+  getData(d1);
+
+  $.when(d1).done(function() {
+
+    if (window.location.href.match(/\#.*/)) {
+      var page = window.location.href.match(/\#.*/)[0].substring(1);
+      if (page) {
+
+        $('#content').html(templates[page]);
+
+        if (page === 'data') {
+          downloadWatchers();
+          $('#minusIcon').hide();
+          // Init toggle switches
+          $('.bootstrapSwitch').bootstrapSwitch();
+        }
+      } else {
+        $('#content').html(templates.index);
       }
-    } else {
-      $('#content').html(templates.index);
-    }
 
-  }
+    }
+  });
 }
 
 function createChart(chart, type, series, xAxis, yAxis, name) {

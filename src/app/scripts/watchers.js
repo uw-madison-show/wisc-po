@@ -24,9 +24,9 @@ function downloadWatchers() {
     $('.dropDownCounty').prop('disabled', !state);
   });
 
-  $('input').on('switchChange.bootstrapSwitch', function() {
-    fillTable();
-  });
+  // $('input').on('switchChange.bootstrapSwitch', function() {
+  //   fillTable();
+  // });
 }
 
 function chartWatchers() {
