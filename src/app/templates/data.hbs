@@ -61,14 +61,7 @@
     </div>
     <div class="panel-body">
       <table id="myTable" class="table table-striped table-responsive">
-        <thead>
-          <tr>
-            <th>Area</th>
-          </tr>
-        </thead>
 
-        <tbody>
-        </tbody>
       </table>
     </div>
   </div>
@@ -77,7 +70,11 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <a id="download" onClick="downloadData()" class="btn btn-primary btn-lg" role="button">Download</a>
+      <!-- <a id="download" onClick="downloadData()" class="btn btn-primary btn-lg" role="button">Download</a> -->
+      <a download="data.csv" href="#" onclick="return ExcellentExport.csv(this, 'myTable');"
+        class="btn btn-primary btn-lg" role="button">Download as CSV</a>
+      <a download="data.xls" href="#" onclick="return ExcellentExport.excel(this, 'myTable');"
+        class="btn btn-success btn-lg marginLeft" role="button">Download for Excel</a>
     </div>
   </div>
 

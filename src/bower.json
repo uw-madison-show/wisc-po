@@ -5,6 +5,7 @@
     "bootstrap": "~3.2.0",
     "highcharts": "~4.0.4",
     "handlebars": "~2.0.0",
-    "bootstrap-switch": "~3.3.2"
+    "bootstrap-switch": "~3.3.2",
+    "excellentexport": "*"
   }
 }

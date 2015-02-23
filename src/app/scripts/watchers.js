@@ -40,12 +40,15 @@ function chartWatchers() {
     var map = $('.chart:eq(0)').highcharts();
     var chart = $('.chart:eq(1)').highcharts();
 
-    if (type === 'State - County') {
-      map.series[0].update({name: categories[index*2]}, false);
+    // if (type === 'State - County') {
       map.setTitle({text: categories[index*2]});
-      chart.setTitle({text: categories[index*2]});
       map.series[0].setData(dataCounty[index*2].data);
 
+      // map.series[0].update({name: categories[index*2]}, false);
+
+      map.redraw();
+
+      chart.setTitle({text: categories[index*2]});
       chart.yAxis[0].removePlotLine('plot-line-1');
       chart.yAxis[0].removePlotBand('plot-band-1');
       $('#val').text('Selected Value: No region selected');
@@ -53,7 +56,7 @@ function chartWatchers() {
       //  for (var i = 0; i < 5; i++) {
       //    chart.series[i*2].hide();
       //  }
-    }
+    // }
 
     for (var i = 0; i < dataRegion.length; i++) {
       chart.series[i*2].setData(dataRegion[i][categories[index*2]].data);

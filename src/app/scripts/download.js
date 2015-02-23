@@ -20,17 +20,16 @@ function fillTable() {
   var region = $('input[name="region"]').bootstrapSwitch('state');
   var state = $('input[name="state"]').bootstrapSwitch('state');
   // var country = $('input[name="country"]').bootstrapSwitch('state');
+  $('#myTable').empty();
 
-  $('#myTable thead tr').empty();
-  $('#myTable tbody').empty();
-
-  $('#myTable thead tr').append('<th>Name</th>' + '<th>Year</th>');
-  $('#myTable thead tr').append('<th>' + dropDownOptsA[indexIndicator] + '</th>');
-  $('#myTable thead tr').append('<th>' + dropDownOptsA[indexIndicator] + ' - Error</th>');
+  $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +
+    dropDownOptsA[indexIndicator] + '</th><th>' + dropDownOptsA[indexIndicator] +
+    ' - Error</th></tr>');
 
   if (county) {
-    $('#myTable tbody').append('<tr>');
-    $('#myTable tbody').append('<td>' + dataCounty[0].data[indexCounty].name + '</td>' + '<td></td>');
+    var html = '';
+    html +='<tr>';
+    html += '<td>' + dataCounty[0].data[indexCounty].name + '</td>' + '<td></td>';
     var value = dataCounty[indexIndicator*2].data[indexCounty].value;
     var errNeg = dataCounty[indexIndicator*2+1].data[indexCounty][0];
     var separator = ' - ';
@@ -41,15 +40,17 @@ function fillTable() {
       separator = errPos = '';
     }
 
-    $('#myTable tbody').append('<td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>');
-    $('#myTable tbody').append('</tr>');
+    html += '<td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
+    html += '</tr>';
+    $('#myTable').append(html);
   }
 
   if (region) {
     for (var i = 0; i < dataRegion.length; i++) {
       for (var j = 0; j < dataRegion[i][categories[indexIndicator*2]].data.length; j++) {
-        $('#myTable tbody').append('<tr>');
-        $('#myTable tbody').append('<td>Region ' + (i+1) + ' </td>');
+        var html = '';
+        html += '<tr>';
+        html += '<td>Region ' + (i+1) + ' </td>';
 
         var year = dataRegion[i][categories[indexIndicator*2]].data[j][0];
         var value = dataRegion[i][categories[indexIndicator*2]].data[j][1];
@@ -62,8 +63,9 @@ function fillTable() {
           separator = errPos = '';
         }
 
-        $('#myTable tbody').append('<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>');
-        $('#myTable tbody').append('</tr>');
+        html += '<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
+        html += '</tr>';
+        $('#myTable').append(html);
       }
     }
 
@@ -71,8 +73,9 @@ function fillTable() {
 
   if (state) {
     for (var i = 0; i < dataState[categories[indexIndicator*2]].data.length; i++) {
-      $('#myTable tbody').append('<tr>');
-      $('#myTable tbody').append('<td>State</td>');
+      var html = '';
+      html += '<tr>';
+      html += '<td>State</td>';
 
       var year = dataState[categories[indexIndicator*2]].data[i][0];
       var value = dataState[categories[indexIndicator*2]].data[i][1];
@@ -85,8 +88,9 @@ function fillTable() {
         separator = errPos = '';
       }
 
-      $('#myTable tbody').append('<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>');
-      $('#myTable tbody').append('</tr>');
+      html += '<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
+      html += '</tr>';
+      $('#myTable').append(html);
     }
   }
   // $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
