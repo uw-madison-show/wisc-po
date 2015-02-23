@@ -37,7 +37,7 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
   var options = $.extend(true, {}, chartOptions);
   //var container = chart.closest('.chartContainer');
 
-  options.series = series;
+  options.series = $.extend(true, [], series);
 
   if (xAxis) {
     if (xAxis.length !== 0) {
@@ -136,8 +136,9 @@ function createMap(chart, series, map, name) {
   seriesNew.push({
     'type': 'mapline',
     'name': 'Borders',
-    'color': 'red',
-    'data': []
+    'color': 'black',
+    'data': [regionMaps[0].data[0], regionMaps[1].data[0], regionMaps[2].data[0],
+      regionMaps[3].data[0], regionMaps[4].data[0]]
   });
 
   seriesNew[0].data = series;

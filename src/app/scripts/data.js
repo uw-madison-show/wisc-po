@@ -21,7 +21,7 @@ var regionDictionary = {
   'Dunn': 3,
   'Eau Claire': 3,
   'Florence': 4,
-  'Fond du Lac': 5,
+  'Fond Du Lac': 5,
   'Forest': 4,
   'Grant': 2,
   'Green': 2,

@@ -345,9 +345,7 @@ function parseCounty(data) {
         );
 
         var errorArray = [errorNeg, errorPos];
-        dataCounty[i*2 + 1].data.push(
-          errorArray
-        );
+        dataCounty[i*2 + 1].data.push(errorArray);
 
       }
 

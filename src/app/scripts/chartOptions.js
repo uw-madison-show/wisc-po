@@ -95,8 +95,8 @@ var mapSeries = {
           $('#val').text('Selected Value: ' + this.name + ' - ' + value);
           var chart = $('.chart:eq(1)').highcharts();
 
-          var map = $.extend(true, {}, regionMaps[this.region-1]);
-          $('.chart:eq(0)').highcharts().series[1].setData(map.data);
+          //var map = $.extend(true, {}, regionMaps[this.region-1]);
+          //$('.chart:eq(0)').highcharts().series[1].setData(map.data);
 
           // remove previously region line
           chart.yAxis[0].removePlotLine('plot-line-1');
@@ -161,7 +161,7 @@ var mapSeries = {
 
           if (region) {
             chart.series[(region-1)*2].hide();
-            $('.chart:eq(0)').highcharts().series[1].setData({});
+            //$('.chart:eq(0)').highcharts().series[1].setData({});
           }
         }
       }
