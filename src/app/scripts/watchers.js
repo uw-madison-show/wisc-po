@@ -10,23 +10,27 @@ $(window).bind('hashchange', function() {
 });
 
 function downloadWatchers() {
-  $('#collapseOne').on('hide.bs.collapse', function () {
-    $('#plusIcon').show();
-    $('#minusIcon').hide();
-  });
-
-  $('#collapseOne').on('show.bs.collapse', function () {
-    $('#plusIcon').hide();
-    $('#minusIcon').show();
-  });
+  // $('#collapseOne').on('hide.bs.collapse', function () {
+  //   $('#plusIcon').show();
+  //   $('#minusIcon').hide();
+  // });
+  //
+  // $('#collapseOne').on('show.bs.collapse', function () {
+  //   $('#plusIcon').hide();
+  //   $('#minusIcon').show();
+  // });
 
   $('input[name="county"]').on('switchChange.bootstrapSwitch', function(event, state) {
     $('.dropDownCounty').prop('disabled', !state);
   });
 
-  // $('input').on('switchChange.bootstrapSwitch', function() {
-  //   fillTable();
-  // });
+  $('input').on('switchChange.bootstrapSwitch', function() {
+    fillTable();
+  });
+
+  $('select').change(function () {
+    fillTable();
+  });
 }
 
 function chartWatchers() {

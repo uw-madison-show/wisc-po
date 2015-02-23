@@ -74,35 +74,16 @@ copy(JSON.stringify(temp));
 */
 
 function setupCharts() {
-  dropDownASetup();
 
   if (window.location.href.match(/\#.*/)) {
     var page = window.location.href.match(/\#.*/)[0].substring(1);
     if (page === 'charts') {
 
-      // Init selectors
-      var selectorA = $('.dropDownA');
-      $.each(dropDownOptsA, function() {
-        selectorA.append('<option>' + this + '</option>');
-      });
-
-      var selectorB = $('.dropDownB');
-      $.each(dropDownOptsB, function() {
-        selectorB.append('<option>' + this + '</option>');
-      });
-
-      var selectorC = $('.dropDownC');
-      $.each(dropDownOptsC, function() {
-        selectorC.append('<option>' + this + '</option>');
-      });
-
       $('.dropDownA').prop('disabled', false);
       //$('.dropDownC').prop('disabled', false);
 
       // default measure to be shown (0-indexed)
-      var defaultIndex = 0;
-
-      $('.dropDownA').val(categories[defaultIndex*2]);
+      var defaultIndex = $('.dropDownA')[0].selectedIndex;
 
       createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
 
@@ -390,10 +371,6 @@ function getData(d1) {
     parseCounty(aData[0]);
     parseRegion(bData[0]);
     parseState(cData[0]);
-
-    if (window.location.href.match(/\#.*/)[0].substring(1) === 'charts') {
-      setupCharts();
-    }
 
     dropDownSetup();
 

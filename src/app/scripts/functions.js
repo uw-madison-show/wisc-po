@@ -11,23 +11,24 @@ function initTemplates() {
   getData(d1);
 
   $.when(d1).done(function() {
-
     if (window.location.href.match(/\#.*/)) {
       var page = window.location.href.match(/\#.*/)[0].substring(1);
       if (page) {
-
         $('#content').html(templates[page]);
 
-        if (page === 'data') {
-          downloadWatchers();
-          $('#minusIcon').hide();
-          // Init toggle switches
-          $('.bootstrapSwitch').bootstrapSwitch();
-        }
-      } else {
-        $('#content').html(templates.index);
-      }
+        // Init toggle switches
+        $('.bootstrapSwitch').bootstrapSwitch();
 
+        if (page === 'data') {
+          $('#minusIcon').hide();
+          fillTable();
+          downloadWatchers();
+        } else if (page === 'charts') {
+          setupCharts();
+        }
+      }
+    } else {
+      $('#content').html(templates.index);
     }
   });
 }
