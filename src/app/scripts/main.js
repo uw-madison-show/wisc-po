@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, initCharts */
+/* global Highcharts, initTemplates */
 /* exported color2, county, region, country, dropDownOptsA, dropDownOptsB, dropDownOptsC, x, y, i, j, numVars */
 'use strict';
 
@@ -34,4 +34,4 @@ var y = { title: { text: 'Percent %'}, min: 0 };
 /* End global variables */
 
 // Init templates
-initCharts();
+initTemplates();

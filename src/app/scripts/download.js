@@ -16,7 +16,6 @@ function downloadData() {
 function fillTable() {
   $('#myTable tbody').empty();
 
-  $('.dropDownA').prop('disabled', false);
   for (var i = 0; i < dropDownOptsA.length; i++) {
     $('#myTable thead tr').append('<th>'+ dropDownOptsA[i] + '</th>');
   }

@@ -87,7 +87,7 @@ var mapSeries = {
     events: {
       select: function() {
         var value = this.value;
-        if (value < 0) {
+        if (value === -1) {
           $('#val').text('Selected Value: ' + this.name + ' - No Data');
         } else {
 

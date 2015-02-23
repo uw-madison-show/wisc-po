@@ -1,6 +1,6 @@
 // JSHint options:
-/* global $, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, templates, county, y, chartWatchers */
-/* exported initCharts */
+/* global $, humanize, createChart, createMap, regionDictionary, dropDownOptsA, dropDownOptsB, dropDownOptsC, county, y, chartWatchers */
+/* exported initCharts, getCounty */
 'use strict';
 
 var numVars;
@@ -74,57 +74,62 @@ copy(JSON.stringify(temp));
 */
 
 function setupCharts() {
-  // Init toggle switches
-  $('.bootstrapSwitch').bootstrapSwitch();
+  dropDownASetup();
 
-  // Init selectors
-  var selectorA = $('.dropDownA');
-  $.each(dropDownOptsA, function() {
-    selectorA.append('<option>' + this + '</option>');
-  });
+  if (window.location.href.match(/\#.*/)) {
+    var page = window.location.href.match(/\#.*/)[0].substring(1);
+    if (page === 'charts') {
 
-  var selectorB = $('.dropDownB');
-  $.each(dropDownOptsB, function() {
-    selectorB.append('<option>' + this + '</option>');
-  });
+      // Init selectors
+      var selectorA = $('.dropDownA');
+      $.each(dropDownOptsA, function() {
+        selectorA.append('<option>' + this + '</option>');
+      });
 
-  var selectorC = $('.dropDownC');
-  $.each(dropDownOptsC, function() {
-    selectorC.append('<option>' + this + '</option>');
-  });
+      var selectorB = $('.dropDownB');
+      $.each(dropDownOptsB, function() {
+        selectorB.append('<option>' + this + '</option>');
+      });
 
-  $('.dropDownA').prop('disabled', false);
-  //$('.dropDownC').prop('disabled', false);
+      var selectorC = $('.dropDownC');
+      $.each(dropDownOptsC, function() {
+        selectorC.append('<option>' + this + '</option>');
+      });
 
-  // default measure to be shown (0-indexed)
-  var defaultIndex = 0;
+      $('.dropDownA').prop('disabled', false);
+      //$('.dropDownC').prop('disabled', false);
 
-  $('.dropDownA').val(categories[defaultIndex*2]);
+      // default measure to be shown (0-indexed)
+      var defaultIndex = 0;
 
-  createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
+      $('.dropDownA').val(categories[defaultIndex*2]);
 
-  var line = [];
-  for (var i = 0; i < dataRegion.length; i++) {
-    line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2]]));
-    line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2+1]]));
+      createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
+
+      var line = [];
+      for (var i = 0; i < dataRegion.length; i++) {
+        line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2]]));
+        line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2+1]]));
+      }
+
+      line.push($.extend(true, {}, dataState[categories[defaultIndex*2]]));
+      line.push($.extend(true, {}, dataState[categories[defaultIndex*2+1]]));
+
+      createChart($('.chart:eq(1)'), 'line', line, [], y, categories[defaultIndex*2]);
+
+      var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
+      var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
+      $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
+
+      if (!percent[categories[defaultIndex*2]]) {
+        $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
+      } else {
+        $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
+      }
+
+      chartWatchers();
+    }
   }
-
-  line.push($.extend(true, {}, dataState[categories[defaultIndex*2]]));
-  line.push($.extend(true, {}, dataState[categories[defaultIndex*2+1]]));
-
-  createChart($('.chart:eq(1)'), 'line', line, [], y, categories[defaultIndex*2]);
-
-  var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
-  var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
-  $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
-
-  if (!percent[categories[defaultIndex*2]]) {
-    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
-  } else {
-    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
-  }
-
-  chartWatchers();
 }
 
 function getState() {
@@ -400,23 +405,5 @@ function getCounty() {
     });
   } else {
     getRegion();
-  }
-}
-
-
-function initCharts() {
-  if (window.location.href.match(/\#.*/)) {
-    var page = window.location.href.match(/\#.*/)[0].substring(1);
-    if (page === 'charts') {
-      $('#content').html(templates.charts);
-      getCounty();
-    } else if (page) {
-      $('#content').html(templates[page]);
-    } else {
-      $('#content').html(templates.index);
-    }
-
-  } else {
-    $('#content').html(templates.index);
   }
 }

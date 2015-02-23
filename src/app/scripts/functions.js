@@ -1,9 +1,29 @@
 // JSHint options:
-/* global $, chartOptions, dataCounty, mapSeries */
-/* exported randomData, createChart, createMap, humanize */
+/* global $, chartOptions, dataCounty, mapSeries, templates, getCounty, downloadWatchers */
+/* exported randomData, createChart, createMap, humanize, initTemplates */
 'use strict';
 
 /* Helper functions */
+
+function initTemplates() {
+  getCounty();
+  if (window.location.href.match(/\#.*/)) {
+    var page = window.location.href.match(/\#.*/)[0].substring(1);
+    if (page) {
+      $('#content').html(templates[page]);
+
+      if (page === 'data') {
+        downloadWatchers();
+        $('#minusIcon').hide();
+        // Init toggle switches
+        $('.bootstrapSwitch').bootstrapSwitch();
+      }
+    } else {
+      $('#content').html(templates.index);
+    }
+
+  }
+}
 
 function createChart(chart, type, series, xAxis, yAxis, name) {
   var options = $.extend(true, {}, chartOptions);
@@ -91,6 +111,7 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
 
           return '<b>' + this.series.name + '</b><br>' +
           'Point name: ' + this.point.name + '<br>' +
+          'Region: ' + this.point.region + '<br>' +
           'Value: ' + val + '<br>' + err;
         }
       };

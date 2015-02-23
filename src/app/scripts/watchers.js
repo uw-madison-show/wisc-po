@@ -1,13 +1,33 @@
 // JSHint options:
-/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, percent, initCharts */
-/* exported chartWatchers */
+/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, percent, initTemplates */
+/* exported chartWatchers, downloadWatchers */
 
 'use strict';
 
 /* Set up watchers */
 $(window).bind('hashchange', function() {
-  initCharts();
+  initTemplates();
 });
+
+function downloadWatchers() {
+  $('#collapseOne').on('hide.bs.collapse', function () {
+    $('#plusIcon').show();
+    $('#minusIcon').hide();
+  });
+
+  $('#collapseOne').on('show.bs.collapse', function () {
+    $('#plusIcon').hide();
+    $('#minusIcon').show();
+  });
+
+  $('input[name="county"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.dropDownCounty').prop('disabled', !state);
+  });
+
+  $('input').on('switchChange.bootstrapSwitch', function() {
+    fillTable();
+  });
+}
 
 function chartWatchers() {
   $('.chartSelect .dropDownA').change(function() {
