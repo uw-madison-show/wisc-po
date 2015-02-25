@@ -52,3 +52,4 @@ List of JS Libraries Used
 - Twitter Bootstrap
 - Bootstrap-Switch
 - Handlebars
+- excellentexport
