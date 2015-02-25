@@ -43,6 +43,10 @@ function chartWatchers() {
     map.series[0].name = categories[index*2];
     map.series[0].setData(dataCounty[index*2].data);
 
+    // Reset map regions when updating map - prevents problems after a resize
+    map.series[1].setData([regionMaps[0].data[0], regionMaps[1].data[0], regionMaps[2].data[0],
+      regionMaps[3].data[0], regionMaps[4].data[0]]);
+
     map.redraw();
 
     chart.setTitle({text: categories[index*2]});

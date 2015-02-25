@@ -131,8 +131,16 @@ var mapSeries = {
             }
           );
 
+          var min = chart.yAxis[0].getExtremes().min;
+          var max = chart.yAxis[0].getExtremes().max;
+          var tick = chart.yAxis[0].tickInterval;
+
+          if (max - (tick / 2) < error[1]) {
+            chart.yAxis[0].setExtremes(min, error[1] + tick);
+          }
+
           // Bring label to front
-          $('.chart:eq(1)').highcharts().yAxis[0].plotLinesAndBands[0].label.toFront();
+          chart.yAxis[0].plotLinesAndBands[0].label.toFront();
 
           if (this.region) {
             var region = this.region;
