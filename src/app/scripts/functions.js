@@ -4,11 +4,17 @@
 'use strict';
 
 /* Helper functions */
+var gotData = false;
 
 function initTemplates() {
   var d1 = $.Deferred();
 
-  getData(d1);
+  if (!gotData) {
+    getData(d1);
+    gotData = true;
+  } else {
+    d1.resolve();
+  }
 
   $.when(d1).done(function() {
     if (window.location.href.match(/\#.*/)) {
@@ -26,6 +32,8 @@ function initTemplates() {
         } else if (page === 'charts') {
           setupCharts();
         }
+      } else {
+        $('#content').html(templates.index);
       }
     } else {
       $('#content').html(templates.index);

@@ -1,8 +1,10 @@
+this["templates"] = this["templates"] || {};
+
 Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Factor</label>\n        <select disabled class=\"form-control dropDownA\">\n          "
+  return "<nav role=\"navigation\" class=\"navbar navbar-default chartSelect\">\n\n  <!-- Brand and toggle get grouped for better mobile display -->\n  <div class=\"navbar-header\">\n    <button type=\"button\" data-target=\"#dataCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\n      <span class=\"sr-only\">Toggle navigation</span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n      <span class=\"icon-bar\"></span>\n    </button>\n    <span class=\"navbar-brand\">Options</span>\n  </div>\n\n\n  <div class=\"clearfix\"></div>\n\n  <!-- Collection of nav links and other content for toggling -->\n  <div id=\"dataCollapse\" class=\"collapse navbar-collapse\">\n    <form>\n\n      <div class=\"form-group nav-select col-sm-6\">\n        <label class=\"control-label\">Factor</label>\n        <select disabled class=\"form-control dropDownA\">\n          "
     + escapeExpression(((helper = (helper = helpers.dropDownIndicators || (depth0 != null ? depth0.dropDownIndicators : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"dropDownIndicators","hash":{},"data":data}) : helper)))
-    + "\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-2\">\n        <label class=\"control-label\">Year</label>\n        <select disabled class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Map Detail</label>\n        <select disabled class=\"form-control dropDownC\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-xs-offset-2 col-xs-2 col-sm-offset-0\">\n        <label class=\"control-label\">Errorbars</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\n      </div>\n\n      <div class=\"form-group nav-select col-xs-offset-2 col-xs-2 col-sm-offset-0\">\n        <label class=\"control-label\">Large&nbsp;Charts</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"largecharts\">\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
+    + "\n        </select>\n      </div>\n\n      <!-- <div class=\"form-group nav-select col-sm-2\">\n        <label class=\"control-label\">Year</label>\n        <select disabled class=\"form-control dropDownB\">\n        </select>\n      </div>\n\n      <div class=\"form-group nav-select col-sm-3\">\n        <label class=\"control-label\">Map Detail</label>\n        <select disabled class=\"form-control dropDownC\">\n        </select>\n      </div> -->\n\n      <div class=\"form-group nav-select col-xs-3\">\n        <label class=\"control-label\">Errorbars</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\n      </div>\n\n      <div class=\"form-group nav-select col-xs-3\">\n        <label class=\"control-label\">Large&nbsp;Charts</label>\n        <br>\n        <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"largecharts\">\n      </div>\n\n    </form>\n  </div>\n\n\n</nav>\n";
 },"useData":true}));
 
 Handlebars.registerPartial("footer", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -80,8 +82,6 @@ Handlebars.registerPartial("table", Handlebars.template({"compiler":[6,">= 2.0.0
   return "<div class=\"col-xs-12\">\n\n  <div class=\"panel-group\" id=\"accordion\" role=\"tablist\" aria-multiselectable=\"true\">\n\n    <div class=\"panel panel-default\">\n      <div data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\" aria-expanded=\"true\"\n      aria-controls=\"collapseOne\"class=\"panel-heading\" role=\"tab\" id=\"headingOne\">\n        <h4 class=\"panel-title pull-left\">Data Table</h4>\n        <span id=\"minusIcon\" class=\"glyphicon glyphicon-minus pull-right\"></span>\n        <span id=\"plusIcon\" class=\"glyphicon glyphicon-plus pull-right\"></span>\n        <div class=\"clearfix\"></div>\n      </div>\n      <div id=\"collapseOne\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"headingOne\">\n        <div class=\"panel-body\">\n          <table id=\"myTable\" class=\"table table-striped table-responsive\">\n            <thead>\n              <tr>\n                <th>Index</th>\n                <th>County Name</th>\n                <th>Region</th>\n                <th>Data</th>\n                <th>HighCharts Id</th>\n              </tr>\n            </thead>\n\n            <tbody>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n</div>";
   },"useData":true}));
 
-this["templates"] = this["templates"] || {};
-
 this["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
@@ -93,8 +93,6 @@ this["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
-
-
 
 this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
@@ -122,8 +120,6 @@ this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
 
-
-
 this["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
@@ -135,8 +131,6 @@ this["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
-
-
 
 this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"container\">\n\n";
@@ -153,8 +147,6 @@ this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
-
-
 
 this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";

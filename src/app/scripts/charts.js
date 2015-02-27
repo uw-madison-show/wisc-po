@@ -73,7 +73,60 @@ for (var x = 0; x < dataCounty.length; x++) {
 copy(JSON.stringify(temp));
 */
 
-function setupCharts() {
+function getCounty(indicator) {
+  var regionData = data.series.county[indicator];
+  var tempData = {
+    name: regionData.name,
+    data_type: regionData.data_type,
+    data: []
+  };
+  var percent = false;
+
+  if (regionData.data_type === 'percent') {
+    percent = true;
+  }
+
+  tempData.name = regionData.name;
+  tempData.data_type = regionData.data_type;
+
+  $.each(regionData, function() {
+    if (this.data) {
+      var value = -1;
+      var errPos = -1;
+      var errNeg = -1;
+
+      if (this.data[0][1]) {
+        value = this.data[0][1];
+        errPos = value + this.data[0][2];
+        errNeg = value - this.data[0][2];
+
+        if (percent) {
+          value *= 100;
+          errPos *= 100;
+          errNeg *= 100;
+        }
+      }
+
+      tempData.data.push({
+        'name': this.name,
+        'hc-key': this.id,
+        'value': value,
+        'error': [errNeg, errPos]
+      });
+    }
+  });
+  return tempData;
+}
+
+function getMyData(area, indicator) {
+  if (area === 'county') {
+    return getCounty(indicator);
+  } else {
+    // All other area levels should be similar (I think...)
+  }
+}
+
+function setupCharts () {
 
   if (window.location.href.match(/\#.*/)) {
     var page = window.location.href.match(/\#.*/)[0].substring(1);
@@ -84,6 +137,12 @@ function setupCharts() {
 
       // default measure to be shown (0-indexed)
       var defaultIndex = $('.dropDownA')[0].selectedIndex;
+
+      defaultIndex = 0;
+
+      // New way of getting data
+      var defaultIndicator = 'asthma';
+      console.log(getMyData('county', defaultIndicator));
 
       createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
 
@@ -281,7 +340,7 @@ function parseCounty(data) {
     if (i % 2) {
       type = 'errorbar';
     } else {
-      dropDownOptsA.push(categories[i]);
+      //dropDownOptsA.push(categories[i]);
     }
 
     percent[categories[i]] = false;
@@ -360,17 +419,29 @@ function parseCounty(data) {
 
 }
 
+var data = {};
+
 function getData(d1) {
   var a = $.get('data/county.csv');
   var b = $.get('data/region.csv');
   var c = $.get('data/state.csv');
+  var d = $.getJSON('data/data.json');
 
-  $.when(a, b, c).done(function(aData, bData, cData) {
+  $.when(a, b, c, d).done(function(aData, bData, cData, dData) {
     parseCounty(aData[0]);
     parseRegion(bData[0]);
     parseState(cData[0]);
 
-    dropDownSetup();
+    data = dData[0];
+
+    // Set up dropdowns
+    $.each(data.series, function(level) {
+      $.each(this, function(item) {
+        dropDownOptsA[item] = this.name;
+      });
+    });
+
+    helperSetup();
 
     d1.resolve();
   });

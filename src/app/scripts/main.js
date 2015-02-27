@@ -5,7 +5,7 @@
 
 /* Global variables */
 
-var dropDownOptsA = [];
+var dropDownOptsA = {};
 
 var dropDownOptsB = [
   '2008',

@@ -4,18 +4,27 @@ Usage: <select><option>Please select</option>{{renderCountryOpts "Australia"}}</
 Found At: http://htmlr.tumblr.com/post/33202449716/
 */
 
-function dropDownSetup() {
+function helperSetup() {
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
-    var ret = "";
+    var ret;
 
-    for (var i=0; i < dropDownOptsA.length; i++){
-      var selectedVal = "";
+    // for (var i=0; i < dropDownOptsA.length; i++){
+    //   var selectedVal = "";
+    //
+    //   if(dropDownOptsA[i] === selected){
+    //     selectedVal = "selected";
+    //   }
+    //   ret+="<option "+selectedVal+" value='"+dropDownOptsA[i]+"'>"+dropDownOptsA[i]+"</option>";
+    // }
 
-      if(dropDownOptsA[i] === selected){
+    $.each(dropDownOptsA, function() {
+      var selectedVal = '';
+      if(this === selected){
         selectedVal = "selected";
       }
-      ret+="<option "+selectedVal+" value='"+dropDownOptsA[i]+"'>"+dropDownOptsA[i]+"</option>";
-    }
+      ret+="<option "+selectedVal+" value='"+this+"'>"+this+"</option>";
+    });
+
     return new Handlebars.SafeString(ret);
 
   });
