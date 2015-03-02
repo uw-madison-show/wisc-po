@@ -4,6 +4,8 @@
 
 'use strict';
 
+// TODO: fix JSHint
+
 /* Set up watchers */
 $(window).bind('hashchange', function() {
   initTemplates();
@@ -34,62 +36,27 @@ function downloadWatchers() {
 }
 
 function chartWatchers() {
-  $('.chartSelect .dropDownA').change(function() {
-    var index = $('option:selected', this).index();
+  $('.dropDownIndicators').change(function() {
+    var indicator = $('option:selected', this).data('variable');
+    var name = $('option:selected', this).val();
     var map = $('.chart:eq(0)').highcharts();
     var chart = $('.chart:eq(1)').highcharts();
 
-    map.setTitle({text: categories[index*2]});
-    map.series[0].name = categories[index*2];
-    map.series[0].setData(dataCounty[index*2].data);
-
-    // Reset map regions when updating map - prevents problems after a resize
-    map.series[1].setData([regionMaps[0].data[0], regionMaps[1].data[0], regionMaps[2].data[0],
-      regionMaps[3].data[0], regionMaps[4].data[0]]);
-
-    map.redraw();
-
-    chart.setTitle({text: categories[index*2]});
-    chart.yAxis[0].removePlotLine('plot-line-1');
-    chart.yAxis[0].removePlotBand('plot-band-1');
     $('#val').text('Selected Value: No region selected');
 
-    for (var i = 0; i < dataRegion.length; i++) {
-      chart.series[i*2].setData(dataRegion[i][categories[index*2]].data);
-      chart.series[i*2+1].setData(dataRegion[i][categories[index*2+1]].data);
-    }
+    // TODO: For now, just destroying charts as it seems just as quick and reduces
+    //       the amount of edge case errors that we were getting before
 
-    chart.series[dataRegion.length*2].setData(dataState[categories[index*2]].data);
-    chart.series[dataRegion.length*2+1].setData(dataState[categories[index*2+1]].data);
+    // Destroy and make new map
+    var countyData = getAreaData('county', indicator);
+    map.destroy();
+    createMap($('.chart:eq(0)'), countyData.observations, county, name);
 
-    var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
-    var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
-    $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
+    // Destroy and make new chart
+    var lineData = getLineData(indicator);
+    chart.destroy();
+    createChart($('.chart:eq(1)'), 'line', lineData, [], y, name);
 
-    if (!percent[categories[index*2]]) {
-      $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
-    } else {
-      $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
-    }
-
-  });
-
-  $('.chartSelect .dropDownC').change(function() {
-    var chart = $('.chart:eq(0)');
-    var index = $('.dropDownA option:selected').index();
-    chart.highcharts().destroy();
-
-    switch ($(this).val()) {
-      case 'State - County':
-        createMap($('.chart:eq(0)'), $.extend(true, {}, dataCounty[index*2]).data, county);
-        break;
-      case 'State - Region':
-        createMap(chart, dataRegion, region);
-        break;
-      case 'Country':
-        createMap(chart, dataCountry, country);
-        break;
-    }
   });
 
   $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {

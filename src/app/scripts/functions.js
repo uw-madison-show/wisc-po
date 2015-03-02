@@ -3,6 +3,8 @@
 /* exported randomData, createChart, createMap, humanize, initTemplates */
 'use strict';
 
+// TODO: fix JSHint
+
 /* Helper functions */
 var gotData = false;
 
@@ -117,12 +119,10 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
 
           var index = $('.chartSelect .dropDownA option:selected').index();
           var error = dataCounty[index*2+1].data[this.point.index];
-          var err;
+          var err = '';
 
           if (error[0] !== -1 && error[1] !== -1) {
             err = 'Error Range: (' + error[0] + ' - ' + error[1] + ')';
-          } else {
-            err = '';
           }
 
           return '<b>' + this.series.name + '</b><br>' +

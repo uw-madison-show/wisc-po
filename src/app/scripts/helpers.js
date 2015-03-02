@@ -4,6 +4,8 @@ Usage: <select><option>Please select</option>{{renderCountryOpts "Australia"}}</
 Found At: http://htmlr.tumblr.com/post/33202449716/
 */
 
+// TODO: fix JSHint
+
 function helperSetup() {
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
     var ret;
@@ -35,7 +37,7 @@ function helperSetup() {
       county.push(key);
     }
 
-    var ret = "";
+    var ret = '';
     for (var i=0; i < county.length; i++){
       var selectedVal = '';
       if(county[i] === selected){

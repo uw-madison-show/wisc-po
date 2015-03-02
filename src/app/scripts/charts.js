@@ -3,75 +3,14 @@
 /* exported initCharts, getCounty */
 'use strict';
 
+// TODO: fix JSHint
+
 var numVars;
 var categories = [];
 var percent = {};
 var dataCounty = [];
 var dataRegion = [];
 var dataState = [];
-
-/*
-var temp = {
-  'include_error': true,
-  'year': {
-    'enabled': false,
-    'years': []
-  },
-  'series': {
-    'Count Walk To Mean': {},
-    'Count Walk To Error': {},
-    'Overweight Mean': {},
-    'Overweight Error': {},
-    'Asthma Mean': {},
-    'Asthma Error': {},
-    'Flu Shot Mean': {},
-    'Flu Shot Error': {},
-    'Poor Oral Health Mean': {},
-    'Poor Oral Health Error': {},
-    'Hypertension Mean': {},
-    'Hypertension Error': {}
-  }
-};
-*/
-
-/* Parse region
-for (var x = 0; x < dataRegion.length; x++) {
-  var name = 'Region ' + (x+1);
-  for (var y = 0; y < categories.length; y++) {
-    temp.series[categories[y]][name] = {id: x, name: name, data: dataRegion[x][categories[y]].data};
-  }
-}
-copy(JSON.stringify(temp));
-*/
-
-/* Parse State
-var name = 'State';
-for (var x = 0; x < categories.length; x++) {
-  temp.series[categories[x]][name] = {id: 1, name: name, data: dataState[categories[x]].data};
-}
-copy(JSON.stringify(temp));
-*/
-
-/* Parse county
-for (var x = 0; x < dataCounty.length; x++) {
-  for (var y = 0; y < dataCounty[x].data.length; y++) {
-    if (x % 2) {
-      var name = dataCounty[x-1].data[y].name;
-      var key = dataCounty[x-1].data[y]['hc-key'];
-      var value = dataCounty[x].data[y];
-      temp.series[categories[x]][name] = {'hc-key': key, name: name, value: value};
-      //temp.series[categories[x]][name] = {'hc-key': key, value: value};
-    } else {
-      var name = dataCounty[x].data[y].name;
-      var value = dataCounty[x].data[y].value;
-      var key = dataCounty[x].data[y]['hc-key'];
-      temp.series[categories[x]][name] = {'hc-key': key, name: name, value: value};
-      //temp.series[categories[x]][name] = {'hc-key': key, value: value};
-    }
-  }
-}
-copy(JSON.stringify(temp));
-*/
 
 function transformData(value, error, percent) {
   var errorPos = -1;
@@ -88,7 +27,7 @@ function transformData(value, error, percent) {
 }
 
 function getAreaData(area, indicator) {
-  var areaData = jQuery.extend(true, {}, data.series[area][indicator]);
+  var areaData = $.extend(true, {}, data[area][indicator]);
   var percent = (areaData['data_type'] === 'percent');
 
   if (areaData) {
@@ -137,48 +76,36 @@ function getCountyData(county, indicator) {
   return data[0];
 }
 
+function getLineData(indicator) {
+  var regionData = getAreaData('region', indicator);
+  var stateData = getAreaData('state', indicator);
+  var lineData = [];
+
+  $.each(regionData.observations, function() {
+    this.visible = false;
+    lineData.push(this);
+  });
+  lineData.push(stateData.observations[0]);
+
+  return lineData;
+}
+
 function setupCharts() {
 
-  if (window.location.href.match(/\#.*/)) {
-    var page = window.location.href.match(/\#.*/)[0].substring(1);
-    if (page === 'charts') {
+  // New way of getting data
+  var defaultIndicator = 'asthma';
 
-      //$('.dropDownA').prop('disabled', false);
-      //$('.dropDownC').prop('disabled', false);
+  var countyData = getAreaData('county', defaultIndicator);
+  createMap($('.chart:eq(0)'), countyData.observations, county, countyData.name);
 
-      // default measure to be shown (0-indexed)
-      var defaultIndex = $('.dropDownA')[0].selectedIndex;
+  var lineData = getLineData(defaultIndicator);
+  createChart($('.chart:eq(1)'), 'line', lineData, [], y, countyData.name);
 
-      defaultIndex = 0;
+  var percent = (countyData['data_type'] === 'percent');
+  var label = percent ? 'Percent %' : 'Value';
+  $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
 
-      // New way of getting data
-      var defaultIndicator = 'asthma';
-      var countyData = getAreaData('county', defaultIndicator);
-      var regionData = getAreaData('region', defaultIndicator);
-      var stateData = getAreaData('state', defaultIndicator);
-
-      createMap($('.chart:eq(0)'), countyData.observations, county, countyData.name);
-      // createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
-
-      var lineData = [];
-
-      $.each(regionData.observations, function() {
-        lineData.push(this);
-      });
-      lineData.push(stateData.observations[0]);
-
-      createChart($('.chart:eq(1)'), 'line', lineData, [], y, countyData.name);
-
-
-      if (!percent[categories[defaultIndex*2]]) {
-        $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
-      } else {
-        $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Percent %'});
-      }
-
-      chartWatchers();
-    }
-  }
+  chartWatchers();
 }
 
 function parseState(data) {
@@ -444,7 +371,7 @@ function getData(d1) {
     data = dData[0];
 
     // Set up dropdowns
-    $.each(data.series, function(level) {
+    $.each(data, function(level) {
       $.each(this, function(name) {
         dropDownIndicators[name] = [this.name, name];
       });
