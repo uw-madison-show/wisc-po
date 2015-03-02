@@ -73,58 +73,64 @@ for (var x = 0; x < dataCounty.length; x++) {
 copy(JSON.stringify(temp));
 */
 
-function getCounty(indicator) {
-  var regionData = data.series.county[indicator];
-  var tempData = {
-    name: regionData.name,
-    data_type: regionData.data_type,
-    data: []
-  };
-  var percent = false;
+function transformData(value, error, percent) {
+  var errorPos = -1;
+  var errorNeg = -1;
 
-  if (regionData.data_type === 'percent') {
-    percent = true;
+  if (value) {
+    errorPos = (value + error) * (percent ? 100 : 1);
+    errorNeg = (value - error) * (percent ? 100 : 1);
+    value = (value) * (percent ? 100 : 1);
+  } else {
+    value = -1;
   }
+  return [value, errorNeg, errorPos];
+}
 
-  tempData.name = regionData.name;
-  tempData.data_type = regionData.data_type;
+function getAreaData(area, indicator) {
+  var areaData = jQuery.extend(true, {}, data.series[area][indicator]);
+  var percent = (areaData['data_type'] === 'percent');
 
-  $.each(regionData, function() {
-    if (this.data) {
-      var value = -1;
-      var errPos = -1;
-      var errNeg = -1;
+  if (areaData) {
+    areaData.error = [];
+    $.each(areaData.observations, function(i1, observation) {
+      areaData.error.push({});
+      areaData.error[i1].data = [];
+      areaData.error[i1].id = observation.id;
+      areaData.error[i1].name = observation.name;
+      areaData.error[i1].parent = observation.parent;
 
-      if (this.data[0][1]) {
-        value = this.data[0][1];
-        errPos = value + this.data[0][2];
-        errNeg = value - this.data[0][2];
+      $.each(observation.data, function(i2, data) {
 
-        if (percent) {
-          value *= 100;
-          errPos *= 100;
-          errNeg *= 100;
-        }
+        var newData = transformData(data[1], data[2], percent);
+        areaData.error[i1].data[i2] = [newData[1], newData[2]];
+        data[1] = newData[0];
+
+        // Cut out error from data
+        data.splice(2, 1);
+      });
+
+
+      if (area === 'county') {
+        observation.value = observation.data[0][1];
+        delete observation.data;
       }
 
-      tempData.data.push({
-        'name': this.name,
-        'hc-key': this.id,
-        'value': value,
-        'error': [errNeg, errPos]
-      });
-    }
-  });
-  return tempData;
-}
+      observation.region = observation.parent;
+      observation['hc-key'] = observation.id;
 
-function getMyData(area, indicator) {
-  if (area === 'county') {
-    return getCounty(indicator);
+      delete observation.id;
+      delete observation.parent;
+    });
+
+    return areaData;
+
   } else {
-    // All other area levels should be similar (I think...)
+    return {};
   }
 }
+
+var tempStuff;
 
 function setupCharts () {
 
@@ -142,11 +148,20 @@ function setupCharts () {
 
       // New way of getting data
       var defaultIndicator = 'asthma';
-      console.log(getMyData('county', defaultIndicator));
+      var countyData = (getAreaData('county', defaultIndicator));
+      var regionData = (getAreaData('region', defaultIndicator));
+      var stateData = (getAreaData('state', defaultIndicator));
 
-      createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
+      createMap($('.chart:eq(0)'), countyData.observations, county, countyData.name);
+      // createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
 
+      var lineData = [];
       var line = [];
+
+      $.each(regionData.observations, function() {
+        lineData.push(this);
+      });
+
       for (var i = 0; i < dataRegion.length; i++) {
         line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2]]));
         line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2+1]]));
@@ -155,7 +170,11 @@ function setupCharts () {
       line.push($.extend(true, {}, dataState[categories[defaultIndex*2]]));
       line.push($.extend(true, {}, dataState[categories[defaultIndex*2+1]]));
 
-      createChart($('.chart:eq(1)'), 'line', line, [], y, categories[defaultIndex*2]);
+
+      console.log(line);
+      console.log(lineData);
+
+      createChart($('.chart:eq(1)'), 'line', lineData, [], y, countyData.name);
 
       var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
       var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
