@@ -110,7 +110,6 @@ function getAreaData(area, indicator) {
         data.splice(2, 1);
       });
 
-
       if (area === 'county') {
         observation.value = observation.data[0][1];
         delete observation.data;
@@ -118,7 +117,6 @@ function getAreaData(area, indicator) {
 
       observation.region = observation.parent;
       observation['hc-key'] = observation.id;
-
       delete observation.id;
       delete observation.parent;
     });
@@ -130,15 +128,22 @@ function getAreaData(area, indicator) {
   }
 }
 
-var tempStuff;
+function getCountyData(county, indicator) {
+  var countyData = getAreaData('county', indicator);
 
-function setupCharts () {
+  var data = $.grep(countyData.observations, function (item) {
+    return item.name === county;
+  });
+  return data[0];
+}
+
+function setupCharts() {
 
   if (window.location.href.match(/\#.*/)) {
     var page = window.location.href.match(/\#.*/)[0].substring(1);
     if (page === 'charts') {
 
-      $('.dropDownA').prop('disabled', false);
+      //$('.dropDownA').prop('disabled', false);
       //$('.dropDownC').prop('disabled', false);
 
       // default measure to be shown (0-indexed)
@@ -148,37 +153,22 @@ function setupCharts () {
 
       // New way of getting data
       var defaultIndicator = 'asthma';
-      var countyData = (getAreaData('county', defaultIndicator));
-      var regionData = (getAreaData('region', defaultIndicator));
-      var stateData = (getAreaData('state', defaultIndicator));
+      var countyData = getAreaData('county', defaultIndicator);
+      var regionData = getAreaData('region', defaultIndicator);
+      var stateData = getAreaData('state', defaultIndicator);
 
       createMap($('.chart:eq(0)'), countyData.observations, county, countyData.name);
       // createMap($('.chart:eq(0)'), dataCounty[defaultIndex*2].data, county, categories[defaultIndex*2]);
 
       var lineData = [];
-      var line = [];
 
       $.each(regionData.observations, function() {
         lineData.push(this);
       });
-
-      for (var i = 0; i < dataRegion.length; i++) {
-        line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2]]));
-        line.push($.extend(true, {}, dataRegion[i][categories[defaultIndex*2+1]]));
-      }
-
-      line.push($.extend(true, {}, dataState[categories[defaultIndex*2]]));
-      line.push($.extend(true, {}, dataState[categories[defaultIndex*2+1]]));
-
-
-      console.log(line);
-      console.log(lineData);
+      lineData.push(stateData.observations[0]);
 
       createChart($('.chart:eq(1)'), 'line', lineData, [], y, countyData.name);
 
-      var max = $('.chart:eq(0)').highcharts().series[0].valueMax;
-      var min = $('.chart:eq(0)').highcharts().series[0].valueMin;
-      $('.chart:eq(1)').highcharts().yAxis[0].setExtremes(0, max + 0.5 * min);
 
       if (!percent[categories[defaultIndex*2]]) {
         $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: 'Value'});
@@ -455,8 +445,8 @@ function getData(d1) {
 
     // Set up dropdowns
     $.each(data.series, function(level) {
-      $.each(this, function(item) {
-        dropDownOptsA[item] = this.name;
+      $.each(this, function(name) {
+        dropDownIndicators[name] = [this.name, name];
       });
     });
 

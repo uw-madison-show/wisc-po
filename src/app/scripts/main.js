@@ -5,24 +5,7 @@
 
 /* Global variables */
 
-var dropDownOptsA = {};
-
-var dropDownOptsB = [
-  '2008',
-  '2009',
-  '2010',
-  '2011',
-  '2012',
-  '2013',
-  '2014',
-  '2015'
-];
-
-var dropDownOptsC = [
-  'State - County',
-  'State - Region',
-  'Country'
-];
+var dropDownIndicators = {};
 
 var county = Highcharts.maps['countries/us/us-wi-all'];
 var region = Highcharts.maps['countries/us/us-wi-region'];

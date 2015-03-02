@@ -17,12 +17,12 @@ function helperSetup() {
     //   ret+="<option "+selectedVal+" value='"+dropDownOptsA[i]+"'>"+dropDownOptsA[i]+"</option>";
     // }
 
-    $.each(dropDownOptsA, function() {
+    $.each(dropDownIndicators, function() {
       var selectedVal = '';
-      if(this === selected){
-        selectedVal = "selected";
+      if(this[0] === selected){
+        selectedVal = 'selected';
       }
-      ret+="<option "+selectedVal+" value='"+this+"'>"+this+"</option>";
+      ret+='<option '+selectedVal+' value="'+this[0]+'" data-variable="' + this[1] + '">'+this[0]+'</option>';
     });
 
     return new Handlebars.SafeString(ret);
@@ -37,11 +37,11 @@ function helperSetup() {
 
     var ret = "";
     for (var i=0; i < county.length; i++){
-      var selectedVal = "";
+      var selectedVal = '';
       if(county[i] === selected){
-        selectedVal = "selected";
+        selectedVal = 'selected';
       }
-      ret+="<option "+selectedVal+" value='"+county[i]+"'>"+county[i]+"</option>";
+      ret+='<option '+selectedVal+' value="'+county[i]+'">'+county[i]+'</option>';
     }
     return new Handlebars.SafeString(ret);
 
