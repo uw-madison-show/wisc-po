@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, getCurrentCountyError, rounding */
+/* global Highcharts, getCurrentCountyError, regionNames */
 /* exported chartOptions, mapOptions, mapSeries */
 
 'use strict';

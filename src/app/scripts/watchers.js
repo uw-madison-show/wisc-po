@@ -1,12 +1,11 @@
 // JSHint options:
-/* global $, createMap, dataCounty, dataRegion, dataState, dataCountry, county, region, country, categories, percent, initTemplates */
+/* global $, currentLine, currentMap, createChart, createMap, county, fillTable, getAreaData, getLineData, initTemplates, y */
 /* exported chartWatchers, downloadWatchers */
+/* jshint -W020 */
 
 'use strict';
 
-// TODO: fix JSHint
-
-/* Set up watchers */
+/* Set up templates */
 $(window).bind('hashchange', function() {
   initTemplates();
 });
@@ -71,7 +70,7 @@ function chartWatchers() {
     // });
 
     // Label things by percent or value
-    var percent = (currentLine['data_type'] === 'percent');
+    var percent = (currentLine.data_type === 'percent');
     var label = percent ? 'Percent %' : 'Value';
     $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
   });
