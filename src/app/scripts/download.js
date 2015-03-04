@@ -44,7 +44,9 @@ function addArea(areaName, indicator) {
       value = getCurrentCountyData(name).value;
       error = getCurrentCountyError(name);
     }
-    addRow(name, year, value, error[1], error[2]);
+    if (value !== -1) {
+      addRow(name, year, value, error[1], error[2]);
+    }
   });
 }
 
