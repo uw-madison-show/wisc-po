@@ -1,98 +1,84 @@
 // JSHint options:
-/* global $, dataCounty, dataRegion */
+/* global $, currentMap, getAreaData, getCurrentCountyData, getCurrentCountyError */
 /* exported downloadData, fillTable */
+/* jshint -W020 */
+
 'use strict';
 
-function setupDownload(filename, text) {
-  var link = $('#download');
-  link[0].setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  link[0].setAttribute('download', filename);
+function addRow(name, year, value, errNeg, errPos) {
+  var errSep = ' - ';
+
+  if (value === -1) {
+    value = 'No Data';
+    errNeg = 'No Data';
+    errSep = '';
+    errPos = '';
+  }
+
+  $('#myTable').append('<tr><td>' + name + '</td><td>' + year + '</td><td>' + value +
+    '</td><td>' + errNeg + errSep + errPos + '</td>');
 }
 
-function downloadData() {
-  setupDownload('data.txt', JSON.stringify(dataRegion, null, '  '));
+// Loop through area and add all to the chart
+function addArea(areaName, indicator) {
+  var areaData = getAreaData(areaName, indicator);
+  if (areaName === 'county') {
+    currentMap = areaData;
+  }
+
+  $.each(areaData.observations, function(i1, area) {
+    var name = area.name;
+    var year = '';
+    var value = '';
+    var error = '';
+
+    if (areaName !== 'county') {
+      $.each(area.data, function(i2, data) {
+        year = data[0];
+        value = data[1];
+        error = areaData.error[i1].data[i2];
+
+        addRow(name, year, value, error[1], error[2]);
+      });
+    } else {
+      value = getCurrentCountyData(name).value;
+      error = getCurrentCountyError(name);
+    }
+    addRow(name, year, value, error[1], error[2]);
+  });
 }
 
 function fillTable() {
-  var county = $('.dropDownCounty')[0].val();
-  var indicator = $('.dropDownIndicators')[0].val();
+  var indicator = $('.dropDownIndicators option:selected').data('variable');
+  var indicatorName = $('.dropDownIndicators option:selected').text();
+  var county = $('.dropDownCounty option:selected').text();
   var countyEnable = $('input[name="county"]').bootstrapSwitch('state');
   var regionEnable = $('input[name="region"]').bootstrapSwitch('state');
   var stateEnable = $('input[name="state"]').bootstrapSwitch('state');
+
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
+  $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +
+    indicatorName + '</th><th>' + indicatorName + ' - Error</th></tr>');
 
-  // $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +
-  //   dropDownOptsA[indexIndicator] + '</th><th>' + dropDownOptsA[indexIndicator] +
-  //   ' - Error</th></tr>');
-  //
-  // if (countyEnable) {
-  //   var html = '';
-  //   html +='<tr>';
-  //   html += '<td>' + dataCounty[0].data[indexCounty].name + '</td>' + '<td></td>';
-  //   var value = dataCounty[indexIndicator*2].data[indexCounty].value;
-  //   var errNeg = dataCounty[indexIndicator*2+1].data[indexCounty][0];
-  //   var separator = ' - ';
-  //   var errPos = dataCounty[indexIndicator*2+1].data[indexCounty][1];
-  //
-  //   if (value === -1) {
-  //     value = errNeg = 'No Data';
-  //     separator = errPos = '';
-  //   }
-  //
-  //   html += '<td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
-  //   html += '</tr>';
-  //   $('#myTable').append(html);
-  // }
-  //
-  // if (regionEnable) {
-  //   for (var i = 0; i < dataRegion.length; i++) {
-  //     for (var j = 0; j < dataRegion[i][categories[indexIndicator*2]].data.length; j++) {
-  //       var html = '';
-  //       html += '<tr>';
-  //       html += '<td>Region ' + (i+1) + ' </td>';
-  //
-  //       var year = dataRegion[i][categories[indexIndicator*2]].data[j][0];
-  //       var value = dataRegion[i][categories[indexIndicator*2]].data[j][1];
-  //       var errNeg = dataRegion[i][categories[indexIndicator*2+1]].data[j][1]
-  //       var separator = ' - ';
-  //       var errPos = dataRegion[i][categories[indexIndicator*2+1]].data[j][2];
-  //
-  //       if (value === -1) {
-  //         value = errNeg = 'No Data';
-  //         separator = errPos = '';
-  //       }
-  //
-  //       html += '<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
-  //       html += '</tr>';
-  //       $('#myTable').append(html);
-  //     }
-  //   }
-  //
-  // }
-  //
-  // if (stateEnable) {
-  //   for (var i = 0; i < dataState[categories[indexIndicator*2]].data.length; i++) {
-  //     var html = '';
-  //     html += '<tr>';
-  //     html += '<td>State</td>';
-  //
-  //     var year = dataState[categories[indexIndicator*2]].data[i][0];
-  //     var value = dataState[categories[indexIndicator*2]].data[i][1];
-  //     var errNeg = dataState[categories[indexIndicator*2+1]].data[i][1]
-  //     var separator = ' - ';
-  //     var errPos = dataState[categories[indexIndicator*2+1]].data[i][2];
-  //
-  //     if (value === -1) {
-  //       value = errNeg = 'No Data';
-  //       separator = errPos = '';
-  //     }
-  //
-  //     html += '<td>' + year + '</td><td>' + value + '</td><td>' + errNeg + separator + errPos + '</td>';
-  //     html += '</tr>';
-  //     $('#myTable').append(html);
-  //   }
-  // }
-  // $('#myTable tbody').append('<tr><td>' + i + '</td><td>' + data[i].name + '</td><td>' + data[i].region +
-  //       '</td><td>' + data[i].value + '</td><td>' + data[i]['hc-key'] + '</td></tr>');
+  if (countyEnable) {
+    if (county === 'All Counties') {
+      addArea('county', indicator);
+    } else {
+      currentMap = getAreaData('county', indicator);
+      var value = getCurrentCountyData(county).value;
+      var error = getCurrentCountyError(county);
+
+      addRow(county, '', value, error[1], error[2]);
+    }
+  }
+
+  if (regionEnable) {
+    addArea('region', indicator);
+  }
+
+  if (stateEnable) {
+    addArea('state', indicator);
+  }
+
 }

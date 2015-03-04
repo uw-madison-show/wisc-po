@@ -1,6 +1,6 @@
 // JSHint options:
 /* global Highcharts, initTemplates */
-/* exported dropDownIndicators, county, region, country, currentCounty, currentRegion, currentState, x, y */
+/* exported dropDownIndicators, county, region, country, rounding, x, y */
 'use strict';
 
 /* Global variables */
@@ -10,10 +10,6 @@ var dropDownIndicators = {};
 var county = Highcharts.maps['countries/us/us-wi-all'];
 var region = Highcharts.maps['countries/us/us-wi-region'];
 var country = Highcharts.maps['countries/us/us-all'];
-
-var currentCounty = {};
-var currentRegion = {};
-var currentState = {};
 
 var rounding = 3;
 

@@ -41,7 +41,7 @@ function getAreaData(area, indicator) {
 
       $.each(observation.data, function(i2, data) {
 
-        var newData = transformData(data[1], data[2], percent);
+        newData = transformData(data[1], data[2], percent);
         areaData.error[i1].data[i2] = [data[0], newData[1], newData[2]];
         data[1] = newData[0];
 
@@ -49,9 +49,9 @@ function getAreaData(area, indicator) {
         data.splice(2, 1);
       });
 
+
       if (area === 'county') {
         observation.value = observation.data[0][1];
-        observation.error = [newData[1], newData[2]];
         observation.region = observation.parent;
         observation['hc-key'] = observation.id;
         delete observation.parent;
@@ -62,9 +62,8 @@ function getAreaData(area, indicator) {
 
       // delete observation.id;
     });
-
+    
     return areaData;
-
   } else {
     return {};
   }

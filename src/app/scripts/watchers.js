@@ -30,6 +30,10 @@ function downloadWatchers() {
   });
 
   $('select').change(function () {
+    var indicator = $('.dropDownIndicators option:selected').data('variable');
+    currentMap = getAreaData('county', indicator);
+    currentLine = getLineData(indicator);
+
     fillTable();
   });
 }
@@ -58,16 +62,6 @@ function chartWatchers() {
 
     // Reset reference to chart
     chart = $('.chart:eq(1)').highcharts();
-
-    // var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
-    // // Hide all except WI and US, show/hide errorbars based on value of checkbox
-    // $.each(chart.series, function() {
-    //   if (this.name === 'Wisconsin' || this.name === 'United States') {
-    //     this.show();
-    //   } else if (this.options.type !== 'errorbar' || !errorbar) {
-    //     this.hide();
-    //   }
-    // });
 
     // Label things by percent or value
     var percent = (currentLine.data_type === 'percent');

@@ -1,5 +1,6 @@
 // JSHint options:
 /* global Highcharts */
+/* exported regionMaps */
 
 Highcharts.maps['countries/us/us-wi-region'] = [
 

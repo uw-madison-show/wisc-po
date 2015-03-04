@@ -33,6 +33,9 @@ function helperSetup() {
 
   Handlebars.registerHelper('dropDownCounty', function(selected) {
     var county = [];
+
+    county.push('All Counties');
+
     for (var key in regionDictionary) {
       county.push(key);
     }
