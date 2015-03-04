@@ -48,14 +48,14 @@ function chartWatchers() {
     //       the amount of edge case errors that we were getting before
 
     // Destroy and make new map
-    var countyData = getAreaData('county', indicator);
+    currentMap = getAreaData('county', indicator);
     map.destroy();
-    createMap($('.chart:eq(0)'), countyData.observations, county, name);
+    createMap($('.chart:eq(0)'), currentMap.observations, county, name);
 
     // Destroy and make new chart
-    var lineData = getLineData(indicator);
+    currentLine = getLineData(indicator);
     chart.destroy();
-    createChart($('.chart:eq(1)'), 'line', lineData, [], y, name);
+    createChart($('.chart:eq(1)'), 'line', currentLine, [], y, name);
 
   });
 

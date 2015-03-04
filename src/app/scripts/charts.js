@@ -12,6 +12,9 @@ var dataCounty = [];
 var dataRegion = [];
 var dataState = [];
 
+var currentMap = {};
+var currentLine = {};
+
 function transformData(value, error, percent) {
   var errorPos = -1;
   var errorNeg = -1;
@@ -23,6 +26,7 @@ function transformData(value, error, percent) {
   } else {
     value = -1;
   }
+
   return [value, errorNeg, errorPos];
 }
 
@@ -39,6 +43,8 @@ function getAreaData(area, indicator) {
       areaData.error[i1].name = observation.name;
       areaData.error[i1].parent = observation.parent;
 
+      var newData = [];
+
       $.each(observation.data, function(i2, data) {
 
         var newData = transformData(data[1], data[2], percent);
@@ -51,6 +57,7 @@ function getAreaData(area, indicator) {
 
       if (area === 'county') {
         observation.value = observation.data[0][1];
+        observation.error = [newData[1], newData[2]];
         delete observation.data;
       }
 
@@ -67,13 +74,18 @@ function getAreaData(area, indicator) {
   }
 }
 
-function getCountyData(county, indicator) {
-  var countyData = getAreaData('county', indicator);
-
-  var data = $.grep(countyData.observations, function (item) {
+function getCurrentCountyData(county) {
+  var data = $.grep(currentMap.observations, function (item) {
     return item.name === county;
   });
   return data[0];
+}
+
+function getCurrentCountyError(county) {
+  var data = $.grep(currentMap.error, function (item) {
+    return item.name === county;
+  });
+  return data[0].data[0];
 }
 
 function getLineData(indicator) {
@@ -92,19 +104,24 @@ function getLineData(indicator) {
 
 function setupCharts() {
 
-  // New way of getting data
-  var defaultIndicator = 'asthma';
+  // Set default indicator and name based on dropdown default
+  var defaultIndicator = $('.dropDownIndicators option:selected').data('variable');
+  var name = $('.dropDownIndicators option:selected').val();
 
-  var countyData = getAreaData('county', defaultIndicator);
-  createMap($('.chart:eq(0)'), countyData.observations, county, countyData.name);
+  // Set up map
+  currentMap = getAreaData('county', defaultIndicator);
+  createMap($('.chart:eq(0)'), currentMap.observations, county, name);
 
-  var lineData = getLineData(defaultIndicator);
-  createChart($('.chart:eq(1)'), 'line', lineData, [], y, countyData.name);
+  // Set up line chart
+  currentLine = getLineData(defaultIndicator);
+  createChart($('.chart:eq(1)'), 'line', currentLine, [], y, name);
 
-  var percent = (countyData['data_type'] === 'percent');
+  // Label things by percent or value
+  var percent = (currentLine['data_type'] === 'percent');
   var label = percent ? 'Percent %' : 'Value';
   $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
 
+  // Set up watchers for charts and options
   chartWatchers();
 }
 

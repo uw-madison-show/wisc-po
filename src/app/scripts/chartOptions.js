@@ -1,6 +1,6 @@
 // JSHint options:
-/* global Highcharts, dataCounty */
-/* exported chartOptions, mapSeries */
+/* global Highcharts, getCurrentCountyError, rounding */
+/* exported chartOptions, mapOptions, mapSeries */
 
 'use strict';
 
@@ -34,6 +34,9 @@ var chartOptions = {
     },
     map: {
       borderColor: '#f0f0f0'
+    },
+    mapline: {
+      lineWidth: 3
     }
   },
   tooltip: {
@@ -57,6 +60,44 @@ var chartOptions = {
   legend: {
     itemStyle: {
       fontSize:'14px'
+    }
+  }
+};
+
+var mapOptions = {
+  colorAxis: {
+    stops:
+    [
+    [0, '#666666'],
+    // [0.001, '#fbfbfb'],
+    // [1.0, '#005645'],
+    [0.001,'#f7fcf5'],
+    [0.125,'#e5f5e0'],
+    [0.25,'#c7e9c0'],
+    [0.375,'#a1d99b'],
+    [0.5,'#74c476'],
+    [0.625,'#41ab5d'],
+    [0.75,'#238b45'],
+    [0.875,'#006d2c'],
+    [1.0,'#00441b'],
+    ],
+    min: 0
+  },
+  tooltip: {
+    formatter: function () {
+      var val = this.point.value.toFixed(2);
+      var err = '';
+      if (this.point.value === -1) {
+        val = 'No Data';
+      } else {
+        var error = getCurrentCountyError(this.point.name);
+        err = 'Error Range: (' + error[0].toFixed(rounding) + ' - ' + error[1].toFixed(rounding) + ')';
+      }
+
+      return '<b>' + this.series.name + '</b><br>' +
+      'Point name: ' + this.point.name + '<br>' +
+      'Region: ' + this.point.region + '<br>' +
+      'Value: ' + val + '<br>' + err;
     }
   }
 };
@@ -119,13 +160,12 @@ var mapSeries = {
             }
           );
 
-          var index = $('.chartSelect .dropDownA option:selected').index();
-          var error = dataCounty[index*2+1].data[this.index];
+          var error = getCurrentCountyError(this.name);
 
           chart.yAxis[0].addPlotBand(
             {
-              from : error[0],
-              to : error[1],
+              from : error[0].toFixed(rounding),
+              to : error[1].toFixed(rounding),
               color : 'rgba(50, 50, 50, 0.2)',
               id: 'plot-band-1'
             }
@@ -144,16 +184,20 @@ var mapSeries = {
 
           if (this.region) {
             var region = this.region;
-            for (var i = 0; i < 5; i++) {
-              chart.series[i*2].hide();
-            }
-            chart.series[(region-1)*2].show();
+            $.each(chart.series, function(index, series) {
 
-            var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
-            var linked = chart.series[(region-1)*2];
-            if (!errorbar && linked.linkedSeries) {
-              linked.linkedSeries[0].hide();
-            }
+              if (series.name === regionNames[region-1] || series.name === 'Wisconsin') {
+                series.show();
+              } else {
+                series.hide();
+              }
+            });
+
+            // var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
+            // var linked = chart.series[(region-1)*2];
+            // if (!errorbar && linked.linkedSeries) {
+            //   linked.linkedSeries[0].hide();
+            // }
           }
         }
 

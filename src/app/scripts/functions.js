@@ -84,56 +84,11 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
       break;
     case 'map':
       options.chart.type = 'map';
-
-      options.colorAxis = {
-        stops:
-        [
-          [0, '#666666'],
-          // [0.001, '#fbfbfb'],
-          // [1.0, '#005645'],
-          [0.001,'#f7fcf5'],
-          [0.125,'#e5f5e0'],
-          [0.25,'#c7e9c0'],
-          [0.375,'#a1d99b'],
-          [0.5,'#74c476'],
-          [0.625,'#41ab5d'],
-          [0.75,'#238b45'],
-          [0.875,'#006d2c'],
-          [1.0,'#00441b'],
-        ],
-        min: 0
-      };
-
-      options.plotOptions = {
-        mapline: {
-          lineWidth: 3
-        }
-      };
-
-      options.tooltip = {
-        formatter: function () {
-          var val = this.point.value;
-          if (this.point.value === -1) {
-            val = 'No Data';
-          }
-
-          var index = $('.chartSelect .dropDownA option:selected').index();
-          var error = dataCounty[index*2+1].data[this.point.index];
-          var err = '';
-
-          if (error[0] !== -1 && error[1] !== -1) {
-            err = 'Error Range: (' + error[0] + ' - ' + error[1] + ')';
-          }
-
-          return '<b>' + this.series.name + '</b><br>' +
-          'Point name: ' + this.point.name + '<br>' +
-          'Region: ' + this.point.region + '<br>' +
-          'Value: ' + val + '<br>' + err;
-        }
-      };
+      var mapOpts = $.extend(true, {}, mapOptions);
+      options.colorAxis = mapOpts.colorAxis;
+      options.tooltip = mapOpts.tooltip;
 
       chart.highcharts('Map', options);
-      //container.find('.dropDownC').prop('disabled', true);
       break;
   }
 }
@@ -141,17 +96,18 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
 function createMap(chart, series, map, name) {
   var seriesNew = new Array($.extend(true, {}, mapSeries));
 
+  seriesNew[0].data = series;
+  seriesNew[0].mapData = map;
+  seriesNew[0].name = name;
+
   seriesNew.push({
     'type': 'mapline',
     'name': 'Borders',
     'color': 'black',
     'data': [regionMaps[0].data[0], regionMaps[1].data[0], regionMaps[2].data[0],
-      regionMaps[3].data[0], regionMaps[4].data[0]]
+      regionMaps[3].data[0], regionMaps[4].data[0]],
+    'enableMouseTracking': false
   });
-
-  seriesNew[0].data = series;
-  seriesNew[0].mapData = map;
-  seriesNew[0].name = name;
 
   createChart(chart, 'map', seriesNew, [], [], name);
 }

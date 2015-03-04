@@ -15,6 +15,8 @@ var currentCounty = {};
 var currentRegion = {};
 var currentState = {};
 
+var rounding = 2;
+
 var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'] };
 var y = { title: { text: 'Percent %'}, min: 0 };
 

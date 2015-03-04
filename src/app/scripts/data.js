@@ -1,5 +1,9 @@
 // JSHint options:
-/* exported dataCountry, regionDictionary */
+/* exported dataCountry, regionDictionary, regionNames */
+
+var regionNames = [
+  'Southeast', 'South', 'West', 'North', 'Northeast'
+];
 
 var regionDictionary = {
   'Adams': 2,
