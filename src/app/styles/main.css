@@ -78,3 +78,12 @@ nav {
 .marginLeft {
   margin-left: 15px;
 }
+
+.socialIcon img {
+  width: 75px;
+  padding-right: 15px;
+}
+
+.socialIcon {
+  padding-top: 15px;
+}
