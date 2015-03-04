@@ -9,16 +9,18 @@ var data = {};
 var currentMap = {};
 var currentLine = {};
 
-function transformData(value, error, percent) {
-  var errorPos = -1;
-  var errorNeg = -1;
+function transformData(value, error, percent, area) {
+  var errorPos;
+  var errorNeg;
 
   if (value) {
     errorPos = parseFloat(((value + error) * (percent ? 100 : 1)).toFixed(rounding));
     errorNeg = parseFloat(((value - error) * (percent ? 100 : 1)).toFixed(rounding));
     value = parseFloat(((value) * (percent ? 100 : 1)).toFixed(rounding));
   } else {
-    value = -1;
+    errorPos = ((area === 'county') ? -1 : null);
+    errorNeg = ((area === 'county') ? -1 : null);
+    value = ((area === 'county') ? -1 : null);
   }
 
   return [value, errorNeg, errorPos];
@@ -41,7 +43,7 @@ function getAreaData(area, indicator) {
 
       $.each(observation.data, function(i2, data) {
 
-        newData = transformData(data[1], data[2], percent);
+        newData = transformData(data[1], data[2], percent, area);
         areaData.error[i1].data[i2] = [data[0], newData[1], newData[2]];
         data[1] = newData[0];
 
@@ -62,7 +64,7 @@ function getAreaData(area, indicator) {
 
       // delete observation.id;
     });
-    
+
     return areaData;
   } else {
     return {};
