@@ -85,13 +85,13 @@ var mapOptions = {
   },
   tooltip: {
     formatter: function () {
-      var val = this.point.value.toFixed(2);
+      var val = this.point.value;
       var err = '';
       if (this.point.value === -1) {
         val = 'No Data';
       } else {
         var error = getCurrentCountyError(this.point.name);
-        err = 'Error Range: (' + error[0].toFixed(rounding) + ' - ' + error[1].toFixed(rounding) + ')';
+        err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
       }
 
       return '<b>' + this.series.name + '</b><br>' +
@@ -150,55 +150,55 @@ var mapSeries = {
               id: 'plot-line-1',
               dashStyle: 'longdash',
               label: {
-                text: this.name + ' (' + this.value.toFixed(2) + ')',
+                text: this.name + ' (' + this.value + ')',
                 align: 'right',
                 style: {
                   fontSize: '11pt'
                 }
-              },
-              zIndex: 99
+              }
+
             }
           );
 
-          var error = getCurrentCountyError(this.name);
+          // Bring label to front
+          // console.log(chart.yAxis[0].plotLinesAndBands[0]);
+          // chart.yAxis[0].plotLinesAndBands[0].options.label.toFront();
 
+          var error = getCurrentCountyError(this.name);
           chart.yAxis[0].addPlotBand(
             {
-              from : error[0].toFixed(rounding),
-              to : error[1].toFixed(rounding),
+              from : error[1],
+              to : error[2],
               color : 'rgba(50, 50, 50, 0.2)',
               id: 'plot-band-1'
             }
           );
 
-          var min = chart.yAxis[0].getExtremes().min;
-          var max = chart.yAxis[0].getExtremes().max;
-          var tick = chart.yAxis[0].tickInterval;
 
-          if (max - (tick / 2) < error[1]) {
-            chart.yAxis[0].setExtremes(min, error[1] + tick);
-          }
-
-          // Bring label to front
-          chart.yAxis[0].plotLinesAndBands[0].label.toFront();
 
           if (this.region) {
             var region = this.region;
             $.each(chart.series, function(index, series) {
 
+              // Hide all series except State and selected region
               if (series.name === regionNames[region-1] || series.name === 'Wisconsin') {
                 series.show();
               } else {
                 series.hide();
               }
             });
-
-            // var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
-            // var linked = chart.series[(region-1)*2];
-            // if (!errorbar && linked.linkedSeries) {
-            //   linked.linkedSeries[0].hide();
-            // }
           }
+
+          var min = chart.yAxis[0].getExtremes().min;
+          var max = chart.yAxis[0].getExtremes().dataMax;
+          var tick = chart.yAxis[0].tickInterval;
+
+          if (max < error[2]) {
+            chart.yAxis[0].setExtremes(min, error[2] + tick);
+          } else {
+            chart.yAxis[0].setExtremes(null, null);
+          }
+
         }
 
       },
@@ -212,11 +212,18 @@ var mapSeries = {
           $('#val').text('Selected Value: No region selected');
 
           if (region) {
-            chart.series[(region-1)*2].hide();
-            //$('.chart:eq(0)').highcharts().series[1].setData({});
+            $.each(chart.series, function(index, series) {
+              if (series.name === regionNames[region-1]) {
+                series.hide();
+              }
+            });
           }
+
+          // Reset min/max (autoscale again)
+          chart.yAxis[0].setExtremes(null, null);
         }
       }
+
     }
   }
 };

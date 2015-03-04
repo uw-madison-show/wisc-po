@@ -57,6 +57,23 @@ function chartWatchers() {
     chart.destroy();
     createChart($('.chart:eq(1)'), 'line', currentLine, [], y, name);
 
+    // Reset reference to chart
+    chart = $('.chart:eq(1)').highcharts();
+
+    // var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
+    // // Hide all except WI and US, show/hide errorbars based on value of checkbox
+    // $.each(chart.series, function() {
+    //   if (this.name === 'Wisconsin' || this.name === 'United States') {
+    //     this.show();
+    //   } else if (this.options.type !== 'errorbar' || !errorbar) {
+    //     this.hide();
+    //   }
+    // });
+
+    // Label things by percent or value
+    var percent = (currentLine['data_type'] === 'percent');
+    var label = percent ? 'Percent %' : 'Value';
+    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
   });
 
   $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
@@ -64,15 +81,18 @@ function chartWatchers() {
     setTimeout(function() {
 
       var chart = $('.chart:eq(1)').highcharts();
-      for (var i = 0; i < chart.series.length; i++) {
-        if (chart.series[i].type === 'errorbar' && chart.series[i-1].visible) {
+
+      // Hide/Show errorbars based on if active and series visible
+      $.each(chart.series, function() {
+        if (this.options.type === 'errorbar' && this.linkedParent.visible) {
           if (state) {
-            chart.series[i].show();
+            this.show();
           } else {
-            chart.series[i].hide();
+            this.hide();
           }
         }
-      }
+      });
+
     }, 500);
   });
 

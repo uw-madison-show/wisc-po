@@ -20,9 +20,9 @@ function transformData(value, error, percent) {
   var errorNeg = -1;
 
   if (value) {
-    errorPos = (value + error) * (percent ? 100 : 1);
-    errorNeg = (value - error) * (percent ? 100 : 1);
-    value = (value) * (percent ? 100 : 1);
+    errorPos = parseFloat(((value + error) * (percent ? 100 : 1)).toFixed(rounding));
+    errorNeg = parseFloat(((value - error) * (percent ? 100 : 1)).toFixed(rounding));
+    value = parseFloat(((value) * (percent ? 100 : 1)).toFixed(rounding));
   } else {
     value = -1;
   }
@@ -39,8 +39,8 @@ function getAreaData(area, indicator) {
     $.each(areaData.observations, function(i1, observation) {
       areaData.error.push({});
       areaData.error[i1].data = [];
-      areaData.error[i1].id = observation.id;
-      areaData.error[i1].name = observation.name;
+      // areaData.error[i1].id = observation.id;
+      areaData.error[i1].name = observation.name + ' - Error';
       areaData.error[i1].parent = observation.parent;
 
       var newData = [];
@@ -48,7 +48,7 @@ function getAreaData(area, indicator) {
       $.each(observation.data, function(i2, data) {
 
         var newData = transformData(data[1], data[2], percent);
-        areaData.error[i1].data[i2] = [newData[1], newData[2]];
+        areaData.error[i1].data[i2] = [data[0], newData[1], newData[2]];
         data[1] = newData[0];
 
         // Cut out error from data
@@ -58,13 +58,15 @@ function getAreaData(area, indicator) {
       if (area === 'county') {
         observation.value = observation.data[0][1];
         observation.error = [newData[1], newData[2]];
+        observation.region = observation.parent;
+        observation['hc-key'] = observation.id;
+        delete observation.parent;
         delete observation.data;
+      } else {
+        areaData.error[i1].linkedTo = observation.id;
       }
 
-      observation.region = observation.parent;
-      observation['hc-key'] = observation.id;
-      delete observation.id;
-      delete observation.parent;
+      // delete observation.id;
     });
 
     return areaData;
@@ -83,8 +85,9 @@ function getCurrentCountyData(county) {
 
 function getCurrentCountyError(county) {
   var data = $.grep(currentMap.error, function (item) {
-    return item.name === county;
+    return item.name === county + ' - Error';
   });
+
   return data[0].data[0];
 }
 
@@ -97,7 +100,20 @@ function getLineData(indicator) {
     this.visible = false;
     lineData.push(this);
   });
+
+  $.each(regionData.error, function() {
+    this.type = 'errorbar';
+    this.visible = false;
+    lineData.push(this);
+  });
+
   lineData.push(stateData.observations[0]);
+
+  var stateError = stateData.error[0];
+  stateError.type = 'errorbar';
+  stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
+  
+  lineData.push(stateError);
 
   return lineData;
 }
@@ -115,6 +131,17 @@ function setupCharts() {
   // Set up line chart
   currentLine = getLineData(defaultIndicator);
   createChart($('.chart:eq(1)'), 'line', currentLine, [], y, name);
+
+  var chart = $('.chart:eq(1)').highcharts();
+  // Hide all except WI and US, show/hide errorbars based on value of checkbox
+  var errorbar = $('input[name="errorbar"]').bootstrapSwitch('state');
+  $.each(chart.series, function() {
+    if (this.name === 'Wisconsin' || this.name === 'United States') {
+      this.show();
+    } else if (this.options.type !== 'errorbar' || !errorbar) {
+      this.hide();
+    }
+  });
 
   // Label things by percent or value
   var percent = (currentLine['data_type'] === 'percent');

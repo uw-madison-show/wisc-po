@@ -45,9 +45,9 @@ Handlebars.registerPartial("halfChart", Handlebars.template({"1":function(depth0
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div id=\"chartContainer"
     + escapeExpression(((helper = (helper = helpers.num || (depth0 != null ? depth0.num : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"num","hash":{},"data":data}) : helper)))
-    + "\" class=\"col-xs-12 col-md-6 chartContainer smallChart\">\n  <div id=\"chart"
+    + "\" class=\"col-sm-12 col-md-6 chartContainer smallChart\">\n  <div id=\"chart"
     + escapeExpression(((helper = (helper = helpers.num || (depth0 != null ? depth0.num : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"num","hash":{},"data":data}) : helper)))
-    + "\" class=\"chart col-xs-12\"></div>\n\n";
+    + "\" class=\"chart col-sm-12\"></div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.details : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
@@ -71,7 +71,7 @@ Handlebars.registerPartial("header", Handlebars.template({"1":function(depth0,he
   buffer += "\"><a href=\"#about\">About</a></li>\n        <li class=\"";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_contact : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "\"><a href=\"#contact\">Contact</a></li>\n      </ul>\n    </div>\n  </nav>\n</header>\n\n<div class=\"jumbotron\">\n  <img class=\"img-responsive\" src=\"images/logo.png\" alt=\"\">\n</div>\n";
+  return buffer + "\"><a href=\"#contact\">Contact</a></li>\n      </ul>\n    </div>\n  </nav>\n</header>\n\n<div class=\"jumbotron hidden-print\">\n  <img class=\"img-responsive\" src=\"images/logo.png\" alt=\"\">\n</div>\n\n<img class=\"img-responsive visible-print-block\" src=\"images/logo.png\" alt=\"\">\n";
 },"useData":true}));
 
 Handlebars.registerPartial("linechart", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -103,7 +103,7 @@ this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.
   buffer += "\n  <h1>Data Charts</h1>\n  <hr/>\n\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <h2 id=\"val\">Selected Value: No region selected</h2>\n\n  <div class=\"row\">\n";
+  buffer += "\n  <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2>\n\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'map': (true),
     'num': ("0")
