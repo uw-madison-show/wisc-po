@@ -66,7 +66,9 @@ function chartWatchers() {
     // Label things by percent or value
     var percent = (currentLine.data_type === 'percent');
     var label = percent ? 'Percent %' : 'Value';
-    $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
+    console.log(currentLine);
+    console.log(label);
+    chart.yAxis[0].setTitle({text: label});
   });
 
   $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {

@@ -13,7 +13,7 @@ var chartOptions = {
     text: 'Highcharts basic demo'
   },
   subtitle: {
-    text: 'Source: SHOW Data'
+    text: 'Source: UW SHOW Data'
   },
   plotOptions: {
     series: {

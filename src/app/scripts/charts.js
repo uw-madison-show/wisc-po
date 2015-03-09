@@ -1,10 +1,9 @@
 // JSHint options:
 /* global $, createChart, createMap, dropDownIndicators, county, rounding, y, chartWatchers, helperSetup */
-/* exported initCharts, getCounty, getCurrentCountyData, getCurrentCountyError, getData, percent, setupCharts */
+/* exported initCharts, getCounty, getCurrentCountyData, getCurrentCountyError, getData, setupCharts */
 
 'use strict';
 
-var percent = {};
 var data = {};
 var currentMap = {};
 var currentLine = {};
@@ -107,8 +106,9 @@ function getLineData(indicator) {
   var stateError = stateData.error[0];
   stateError.type = 'errorbar';
   stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
-
   lineData.push(stateError);
+
+  lineData.data_type = regionData.data_type;
 
   return lineData;
 }
