@@ -15,8 +15,11 @@ function addRow(name, year, value, errNeg, errPos) {
     errPos = '';
   }
 
+  var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
+  var error = errorEnable ? '<td>' + errNeg + errSep + errPos + '</td>' : '';
+
   $('#myTable').append('<tr><td>' + name + '</td><td>' + year + '</td><td>' + value +
-    '</td><td>' + errNeg + errSep + errPos + '</td>');
+    '</td>' + error);
 }
 
 // Loop through area and add all to the chart
@@ -57,11 +60,13 @@ function fillTable() {
   var countyEnable = $('input[name="county"]').bootstrapSwitch('state');
   var regionEnable = $('input[name="region"]').bootstrapSwitch('state');
   var stateEnable = $('input[name="state"]').bootstrapSwitch('state');
+  var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
 
+  var errors = errorEnable ? '<th>' + indicatorName + ' - Error</th>' : '';
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
   $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +
-    indicatorName + '</th><th>' + indicatorName + ' - Error</th></tr>');
+    indicatorName + '</th>' + errors + '</tr>');
 
   if (countyEnable) {
     if (county === 'All Counties') {

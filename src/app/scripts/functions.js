@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, chartOptions, dataCounty, mapSeries, templates, getData, downloadWatchers */
+/* global $, chartOptions, downloadWatchers, fillTable, getData, mapOptions, mapSeries, regionMaps, setupCharts, templates */
 /* exported randomData, createChart, createMap, humanize, initTemplates */
 'use strict';
 

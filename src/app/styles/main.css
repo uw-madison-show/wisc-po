@@ -43,7 +43,7 @@ nav {
 }
 
 .panel-heading:hover {
-  cursor: pointer;
+  /*cursor: pointer;*/
 }
 
 .panel-title h3 {

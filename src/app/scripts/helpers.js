@@ -1,23 +1,18 @@
+// JSHint options:
+/* global $, Handlebars, dropDownIndicators, regionDictionary */
+/* exported helperSetup */
+'use strict';
+
+/* Helpers for Handlebars templating */
+
 /*
 Renders select box options for countries and sets selected based on value
 Usage: <select><option>Please select</option>{{renderCountryOpts "Australia"}}</select>
 Found At: http://htmlr.tumblr.com/post/33202449716/
 */
-
-// TODO: fix JSHint
-
 function helperSetup() {
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
     var ret;
-
-    // for (var i=0; i < dropDownOptsA.length; i++){
-    //   var selectedVal = "";
-    //
-    //   if(dropDownOptsA[i] === selected){
-    //     selectedVal = "selected";
-    //   }
-    //   ret+="<option "+selectedVal+" value='"+dropDownOptsA[i]+"'>"+dropDownOptsA[i]+"</option>";
-    // }
 
     $.each(dropDownIndicators, function() {
       var selectedVal = '';
@@ -28,12 +23,10 @@ function helperSetup() {
     });
 
     return new Handlebars.SafeString(ret);
-
   });
 
   Handlebars.registerHelper('dropDownCounty', function(selected) {
     var county = [];
-
     county.push('All Counties');
 
     for (var key in regionDictionary) {
@@ -41,14 +34,14 @@ function helperSetup() {
     }
 
     var ret = '';
-    for (var i=0; i < county.length; i++){
+    $.each(county, function() {
       var selectedVal = '';
-      if(county[i] === selected){
+      if (this === selected) {
         selectedVal = 'selected';
       }
-      ret+='<option '+selectedVal+' value="'+county[i]+'">'+county[i]+'</option>';
-    }
-    return new Handlebars.SafeString(ret);
+      ret+='<option '+selectedVal+' value="'+this+'">'+this+'</option>';
+    });
 
+    return new Handlebars.SafeString(ret);
   });
 }
