@@ -16,8 +16,8 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  // Load handlebars and single quotes
-  grunt.loadNpmTasks('grunt-contrib-handlebars');
+  // Load handlebars and jsdoc
+  grunt.loadNpmTasks('grunt-contrib-handlebars', 'grunt-jsdoc');
 
   // Configurable paths
   var config = {
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        tasks: ['jshint', 'jsdoc'],
         options: {
           livereload: true
         }
@@ -141,6 +141,16 @@ module.exports = function (grunt) {
         'test/spec/{,*/}*.js',
         '!<%= config.app %>/scripts/templates.js'
       ]
+    },
+
+    // JSDoc Genration
+    jsdoc : {
+      dist : {
+        src: ['<%= config.app %>/scripts/*.js', '../README.md'],
+        options: {
+          destination: 'doc'
+        }
+      }
     },
 
     // Mocha testing framework configuration options
@@ -325,7 +335,8 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'handlebars',
-        'copy:styles'
+        'copy:styles',
+        'jsdoc'
       ],
       test: [
         'copy:styles'
@@ -333,6 +344,7 @@ module.exports = function (grunt) {
       dist: [
         'handlebars',
         'copy:styles',
+        'jsdoc',
         'imagemin',
         'svgmin'
       ]

@@ -37,12 +37,15 @@ Building the Site
 
 To build and work with the code, start up grunt. This can be done by navigating into `wisc-po/src` and then starting grunt via `grunt serve`.
 
-To make a version that is deployable, run the shell script named `build.sh` in `wisc-po/src` or while inside the `src` folder by typing the following commands:
-- `rm -rf ../dist`
+To make a version that is deployable, run the shell script named `build.sh` in `wisc-po/src` or while inside the `src` folder by typing `grunt build`. Or to then move this temporary build elsewhere, type the following commands:
 - `grunt build`
+- `rm -rf ../dist`
 - `cp -R dist ../`
 
 This build will now be located inside `wisc-po/dist` and can be copied to a server for deployment.
+
+Additionally, there is a script titled deploy.sh. This script will deploy a new instance of the website, but requires a
+vpn connection to UW Madison as well as the proper ssh keys on the server. Therefore it is not useful if you are personally trying the code.
 
 List of JS Libraries Used
 -----

@@ -1,7 +1,6 @@
 // JSHint options:
-/* global $, currentLine, currentMap, createChart, createMap, county, fillTable, getAreaData, getLineData, initTemplates, y */
+/* global $, createChart, createMap, fillTable, initTemplates, App */
 /* exported chartWatchers, downloadWatchers */
-/* jshint -W020 */
 
 'use strict';
 
@@ -11,16 +10,6 @@ $(window).bind('hashchange', function() {
 });
 
 function downloadWatchers() {
-  // $('#collapseOne').on('hide.bs.collapse', function () {
-  //   $('#plusIcon').show();
-  //   $('#minusIcon').hide();
-  // });
-  //
-  // $('#collapseOne').on('show.bs.collapse', function () {
-  //   $('#plusIcon').hide();
-  //   $('#minusIcon').show();
-  // });
-
   $('input[name="county"]').on('switchChange.bootstrapSwitch', function(event, state) {
     $('.dropDownCounty').prop('disabled', !state);
   });
@@ -31,8 +20,8 @@ function downloadWatchers() {
 
   $('select').change(function () {
     var indicator = $('.dropDownIndicators option:selected').data('variable');
-    currentMap = getAreaData('county', indicator);
-    currentLine = getLineData(indicator);
+    App.data.currentMap = App.data.getAreaData('county', indicator);
+    App.data.currentLine = App.data.getLineData(indicator);
 
     fillTable();
   });
@@ -51,23 +40,21 @@ function chartWatchers() {
     //       the amount of edge case errors that we were getting before
 
     // Destroy and make new map
-    currentMap = getAreaData('county', indicator);
+    App.data.currentMap = App.data.getAreaData('county', indicator);
     map.destroy();
-    createMap($('.chart:eq(0)'), currentMap.observations, county, name);
+    createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
 
     // Destroy and make new chart
-    currentLine = getLineData(indicator);
+    App.data.currentLine = App.data.getLineData(indicator);
     chart.destroy();
-    createChart($('.chart:eq(1)'), 'line', currentLine, [], y, name);
+    createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.data.y, name);
 
     // Reset reference to chart
     chart = $('.chart:eq(1)').highcharts();
 
     // Label things by percent or value
-    var percent = (currentLine.data_type === 'percent');
+    var percent = (App.data.currentLine.data_type === 'percent');
     var label = percent ? 'Percent %' : 'Value';
-    console.log(currentLine);
-    console.log(label);
     chart.yAxis[0].setTitle({text: label});
   });
 

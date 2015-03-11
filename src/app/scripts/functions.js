@@ -1,9 +1,7 @@
 // JSHint options:
-/* global $, chartOptions, downloadWatchers, fillTable, getData, mapOptions, mapSeries, regionMaps, setupCharts, templates */
-/* exported randomData, createChart, createMap, humanize, initTemplates */
+/* global $, App, chartOptions, downloadWatchers, fillTable, getData, mapOptions, mapSeries, setupCharts, templates */
+/* exported createChart, createMap, humanize, initTemplates */
 'use strict';
-
-// TODO: fix JSHint
 
 /* Helper functions */
 var gotData = false;
@@ -104,8 +102,7 @@ function createMap(chart, series, map, name) {
     'type': 'mapline',
     'name': 'Borders',
     'color': 'black',
-    'data': [regionMaps[0].data[0], regionMaps[1].data[0], regionMaps[2].data[0],
-      regionMaps[3].data[0], regionMaps[4].data[0]],
+    'data': App.maps.region,
     'enableMouseTracking': false
   });
 

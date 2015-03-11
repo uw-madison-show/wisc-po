@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, getCurrentCountyError, regionNames */
+/* global Highcharts, App, regionNames */
 /* exported chartOptions, mapOptions, mapSeries */
 
 'use strict';
@@ -90,7 +90,7 @@ var mapOptions = {
       if (this.point.value === -1) {
         val = 'No Data';
       } else {
-        var error = getCurrentCountyError(this.point.name);
+        var error = App.data.getCurrentCountyError(this.point.name);
         err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
       }
 
@@ -164,7 +164,7 @@ var mapSeries = {
           // console.log(chart.yAxis[0].plotLinesAndBands[0]);
           // chart.yAxis[0].plotLinesAndBands[0].options.label.toFront();
 
-          var error = getCurrentCountyError(this.name);
+          var error = App.data.getCurrentCountyError(this.name);
           chart.yAxis[0].addPlotBand(
             {
               from : error[1],

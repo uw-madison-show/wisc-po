@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Handlebars, dropDownIndicators, regionDictionary */
+/* global $, Handlebars, App, regionDictionary */
 /* exported helperSetup */
 'use strict';
 
@@ -14,7 +14,7 @@ function helperSetup() {
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
     var ret;
 
-    $.each(dropDownIndicators, function() {
+    $.each(App.dropDownIndicators, function() {
       var selectedVal = '';
       if(this[0] === selected){
         selectedVal = 'selected';

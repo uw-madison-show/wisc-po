@@ -1,22 +1,5 @@
 // JSHint options:
-/* global Highcharts, initTemplates */
-/* exported dropDownIndicators, county, region, country, rounding, x, y */
+/* global initTemplates */
 'use strict';
 
-/* Global variables */
-
-var dropDownIndicators = {};
-
-var county = Highcharts.maps['countries/us/us-wi-all'];
-var region = Highcharts.maps['countries/us/us-wi-region'];
-var country = Highcharts.maps['countries/us/us-all'];
-
-var rounding = 3;
-
-var x = { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'] };
-var y = { title: { text: 'Percent %'}, min: 0 };
-
-/* End global variables */
-
-// Init templates
 initTemplates();

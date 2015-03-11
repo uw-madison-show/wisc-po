@@ -1,7 +1,6 @@
 // JSHint options:
-/* global $, currentMap, getAreaData, getCurrentCountyData, getCurrentCountyError */
+/* global $, App */
 /* exported downloadData, fillTable */
-/* jshint -W020 */
 
 'use strict';
 
@@ -24,9 +23,9 @@ function addRow(name, year, value, errNeg, errPos) {
 
 // Loop through area and add all to the chart
 function addArea(areaName, indicator) {
-  var areaData = getAreaData(areaName, indicator);
+  var areaData = App.data.getAreaData(areaName, indicator);
   if (areaName === 'county') {
-    currentMap = areaData;
+    App.data.currentMap = areaData;
   }
 
   $.each(areaData.observations, function(i1, area) {
@@ -41,14 +40,17 @@ function addArea(areaName, indicator) {
         value = data[1];
         error = areaData.error[i1].data[i2];
 
-        addRow(name, year, value, error[1], error[2]);
+        if (value !== -1) {
+          addRow(name, year, value, error[1], error[2]);
+        }
       });
+
     } else {
-      value = getCurrentCountyData(name).value;
-      error = getCurrentCountyError(name);
-    }
-    if (value !== -1) {
-      addRow(name, year, value, error[1], error[2]);
+      value = App.data.getCurrentCountyData(name).value;
+      error = App.data.getCurrentCountyError(name);
+      if (value !== -1) {
+        addRow(name, year, value, error[1], error[2]);
+      }
     }
   });
 }
@@ -72,9 +74,9 @@ function fillTable() {
     if (county === 'All Counties') {
       addArea('county', indicator);
     } else {
-      currentMap = getAreaData('county', indicator);
-      var value = getCurrentCountyData(county).value;
-      var error = getCurrentCountyError(county);
+      App.data.currentMap = App.data.getAreaData('county', indicator);
+      var value = App.data.getCurrentCountyData(county).value;
+      var error = App.data.getCurrentCountyError(county);
 
       addRow(county, '', value, error[1], error[2]);
     }
