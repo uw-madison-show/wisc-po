@@ -3,18 +3,6 @@
 
 'use strict';
 
-/**
-* @namespace App.data
-* @memberof App
-* @type {Object}
-* @desc Chart object which holds important functions and templates for all charts/maps
-* @property {Object}  data.currentMap   Current county data for the map
-* @property {Object}  data.currentLine  Current data series for the line chart
-* @property {Object}  data.gotData      If the app has yet retrieved and parsed the json data
-* @property {Object}  data.json         Json data retrieved
-* @property {Object}  data.x            Default x axis configuration
-* @property {Object}  data.y            Default y axis configuration
-*/
 App.data = {
   currentMap: {},
   currentLine: {},
@@ -24,17 +12,6 @@ App.data = {
   y: { title: { text: 'Percent %'}, min: 0 }
 };
 
-
-/**
-* @function
-* @memberof App.data
-* @desc                       Transform data into an array which has errors calculated and deals with null values
-* @param    {number}  value   Original data value
-* @param    {number}  error   Error amount
-* @param    {boolean} percent Whether the values are percentages
-* @param    {string}  area    The area that the data is from
-* @returns  {array}           Array of new values in the form [value, errorNeg, errorPos]
-*/
 App.data.transformData = function(value, error, percent, area) {
   var errorPos;
   var errorNeg;
@@ -52,14 +29,6 @@ App.data.transformData = function(value, error, percent, area) {
   return [value, errorNeg, errorPos];
 };
 
-/**
-* @function
-* @memberof App.data
-* @desc                           Get data for the given area and indicator
-* @param    {string}  area        Area to return data for
-* @param    {string}  indicator   Indicator to return data for
-* @returns  {object}              Object containing the requested data, or an empty object if no data exists
-*/
 App.data.getAreaData = function(area, indicator) {
   var areaData = $.extend(true, {}, App.data.json[area][indicator]);
   var percent = (areaData.data_type === 'percent');
@@ -109,13 +78,6 @@ App.data.getAreaData = function(area, indicator) {
   }
 };
 
-/**
-* @function
-* @memberof App.data
-* @desc                           Get data value for the given county based on {@link currentMap} data
-* @param    {string}  county      County to return data for
-* @returns  {object}              Object containing the requested county's data
-*/
 App.data.getCurrentCountyData = function(county) {
   var data = $.grep(App.data.currentMap.observations, function (item) {
     return item.name === county;
@@ -123,13 +85,6 @@ App.data.getCurrentCountyData = function(county) {
   return data[0];
 };
 
-/**
-* @function
-* @memberof App.data
-* @desc                           Get data error for the given county based on {@link currentMap} data
-* @param    {string}  county      County to return data for
-* @returns  {object}              Object containing the requested county's error data
-*/
 App.data.getCurrentCountyError = function(county) {
   var data = $.grep(App.data.currentMap.error, function (item) {
     return item.name === county + ' - Error';
@@ -138,13 +93,6 @@ App.data.getCurrentCountyError = function(county) {
   return data[0].data[0];
 };
 
-/**
-* @function
-* @memberof App.data
-* @desc                           Get the data (and error data) for the given indicator in all areas excluding county
-* @param    {string}  indicator   Indicator to get data for
-* @returns  {object}              Object containing the requested indicator's data and error data
-*/
 App.data.getLineData = function(indicator) {
   var regionData = App.data.getAreaData('region', indicator);
   var stateData = App.data.getAreaData('state', indicator);
@@ -173,12 +121,6 @@ App.data.getLineData = function(indicator) {
   return lineData;
 };
 
-/**
-* @function
-* @memberof App.data
-* @desc                           Get the json data for all areas and assign it to {@link App.data.json}
-* @param    {deferred}  d1        A deferred object that must be resolved to continue (similar to a callback)
-*/
 App.data.getData = function(d1) {
   $.getJSON('data/data.json', function(jsonData) {
 
