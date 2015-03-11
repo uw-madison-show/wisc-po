@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, Handlebars, App, regionDictionary */
+/* global $, Handlebars, App */
 /* exported helperSetup */
 'use strict';
 
@@ -29,7 +29,7 @@ function helperSetup() {
     var county = [];
     county.push('All Counties');
 
-    for (var key in regionDictionary) {
+    for (var key in App.maps.regionDictionary) {
       county.push(key);
     }
 

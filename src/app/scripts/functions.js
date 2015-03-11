@@ -1,17 +1,15 @@
 // JSHint options:
-/* global $, App, chartOptions, downloadWatchers, fillTable, getData, mapOptions, mapSeries, setupCharts, templates */
+/* global $, App, downloadWatchers, fillTable, templates */
 /* exported createChart, createMap, humanize, initTemplates */
 'use strict';
 
 /* Helper functions */
-var gotData = false;
 
 function initTemplates() {
   var d1 = $.Deferred();
 
-  if (!gotData) {
-    getData(d1);
-    gotData = true;
+  if (!App.data.gotData) {
+    App.data.getData(d1);
   } else {
     d1.resolve();
   }
@@ -30,7 +28,7 @@ function initTemplates() {
           fillTable();
           downloadWatchers();
         } else if (page === 'charts') {
-          setupCharts();
+          App.charts.setupCharts();
         }
       } else {
         $('#content').html(templates.index);
@@ -39,74 +37,6 @@ function initTemplates() {
       $('#content').html(templates.index);
     }
   });
-}
-
-function createChart(chart, type, series, xAxis, yAxis, name) {
-  var options = $.extend(true, {}, chartOptions);
-  //var container = chart.closest('.chartContainer');
-
-  options.series = $.extend(true, [], series);
-
-  if (xAxis) {
-    if (xAxis.length !== 0) {
-      options.xAxis = xAxis;
-    }
-  }
-
-  if (yAxis) {
-    if (yAxis.length !== 0) {
-      options.yAxis = yAxis;
-    }
-  }
-
-  if (name) {
-    options.title.text = name;
-  }
-
-  switch (type) {
-    case 'line':
-      options.chart.type = 'line';
-      chart.highcharts(options);
-      break;
-    case 'spline':
-      options.chart.type = 'spline';
-      chart.highcharts(options);
-      break;
-    case 'column':
-      options.chart.type = 'column';
-      chart.highcharts(options);
-      break;
-    case 'pie':
-      options.chart.type = 'pie';
-      chart.highcharts(options);
-      break;
-    case 'map':
-      options.chart.type = 'map';
-      var mapOpts = $.extend(true, {}, mapOptions);
-      options.colorAxis = mapOpts.colorAxis;
-      options.tooltip = mapOpts.tooltip;
-
-      chart.highcharts('Map', options);
-      break;
-  }
-}
-
-function createMap(chart, series, map, name) {
-  var seriesNew = new Array($.extend(true, {}, mapSeries));
-
-  seriesNew[0].data = series;
-  seriesNew[0].mapData = map;
-  seriesNew[0].name = name;
-
-  seriesNew.push({
-    'type': 'mapline',
-    'name': 'Borders',
-    'color': 'black',
-    'data': App.maps.region,
-    'enableMouseTracking': false
-  });
-
-  createChart(chart, 'map', seriesNew, [], [], name);
 }
 
 /* Useful little function found at:

@@ -1,5 +1,5 @@
 // JSHint options:
-/* global Highcharts, App, regionNames */
+/* global Highcharts, App */
 /* exported chartOptions, mapOptions, mapSeries */
 
 'use strict';
@@ -65,30 +65,16 @@ var chartOptions = {
 };
 
 var mapOptions = {
-  colorAxis: {
-    stops:
-    [
-    [0, '#666666'],
-    // [0.001, '#fbfbfb'],
-    // [1.0, '#005645'],
-    [0.001,'#f7fcf5'],
-    [0.125,'#e5f5e0'],
-    [0.25,'#c7e9c0'],
-    [0.375,'#a1d99b'],
-    [0.5,'#74c476'],
-    [0.625,'#41ab5d'],
-    [0.75,'#238b45'],
-    [0.875,'#006d2c'],
-    [1.0,'#00441b'],
-    ],
-    min: 0
-  },
   tooltip: {
     formatter: function () {
-      var val = this.point.value;
+      var val = 'Value: ' + this.point.value;
       var err = '';
       if (this.point.value === -1) {
-        val = 'No Data';
+        if (this.point.sample) {
+          val = 'Sample Size: ' + this.point.sample;
+        } else {
+          val = 'No Data';
+        }
       } else {
         var error = App.data.getCurrentCountyError(this.point.name);
         err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
@@ -96,11 +82,34 @@ var mapOptions = {
 
       return '<b>' + this.series.name + '</b><br>' +
       'Point name: ' + this.point.name + '<br>' +
-      'Region: ' + this.point.region + '<br>' +
-      'Value: ' + val + '<br>' + err;
+      'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
+      val + '<br>' + err;
     }
   }
 };
+
+var sample = true;
+
+if (!sample) {
+  mapOptions.colorAxis = {
+    stops:
+      [
+        [0, '#666666'],
+        // [0.001, '#fbfbfb'],
+        // [1.0, '#005645'],
+        [0.001,'#f7fcf5'],
+        [0.125,'#e5f5e0'],
+        [0.25,'#c7e9c0'],
+        [0.375,'#a1d99b'],
+        [0.5,'#74c476'],
+        [0.625,'#41ab5d'],
+        [0.75,'#238b45'],
+        [0.875,'#006d2c'],
+        [1.0,'#00441b'],
+      ],
+    min: 0
+  };
+}
 
 var mapSeries = {
 
@@ -128,17 +137,22 @@ var mapSeries = {
     events: {
       select: function() {
         var value = this.value;
-        if (value === -1) {
-          $('#val').text('Selected Value: ' + this.name + ' - No Data');
-        } else {
+        var color = '#005645';
 
-          var color = '#005645';
-          $('#val').text('Selected Value: ' + this.name + ' - ' + value);
-          var chart = $('.chart:eq(1)').highcharts();
+        if (!sample) {
+          if (value === -1) {
+            $('#val').text('Selected Value: ' + this.name + ' - No Data');
+          } else {
+            $('#val').text('Selected Value: ' + this.name + ' - ' + value);
+          }
+        }
 
-          //var map = $.extend(true, {}, regionMaps[this.region-1]);
-          //$('.chart:eq(0)').highcharts().series[1].setData(map.data);
+        var chart = $('.chart:eq(1)').highcharts();
 
+        //var map = $.extend(true, {}, regionMaps[this.region-1]);
+        //$('.chart:eq(0)').highcharts().series[1].setData(map.data);
+
+        if (!sample) {
           // remove previously region line
           chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');
@@ -174,21 +188,6 @@ var mapSeries = {
             }
           );
 
-
-
-          if (this.region) {
-            var region = this.region;
-            $.each(chart.series, function(index, series) {
-
-              // Hide all series except State and selected region
-              if (series.name === regionNames[region-1] || series.name === 'Wisconsin') {
-                series.show();
-              } else {
-                series.hide();
-              }
-            });
-          }
-
           var min = chart.yAxis[0].getExtremes().min;
           var max = chart.yAxis[0].getExtremes().dataMax;
           var tick = chart.yAxis[0].tickInterval;
@@ -198,7 +197,19 @@ var mapSeries = {
           } else {
             chart.yAxis[0].setExtremes(null, null);
           }
+        }
 
+        if (this.region) {
+          var region = this.region;
+          $.each(chart.series, function(index, series) {
+
+            // Hide all series except State and selected region
+            if (series.name === App.maps.regionNames[region-1] || series.name === 'Wisconsin') {
+              series.show();
+            } else {
+              series.hide();
+            }
+          });
         }
 
       },
@@ -213,7 +224,7 @@ var mapSeries = {
 
           if (region) {
             $.each(chart.series, function(index, series) {
-              if (series.name === regionNames[region-1]) {
+              if (series.name === App.maps.regionNames[region-1]) {
                 series.hide();
               }
             });
