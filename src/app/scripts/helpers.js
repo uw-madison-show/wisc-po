@@ -1,16 +1,18 @@
 // JSHint options:
 /* global $, Handlebars, App */
-/* exported helperSetup */
+
 'use strict';
 
 /* Helpers for Handlebars templating */
+
+App.helpers = {};
 
 /*
 Renders select box options for countries and sets selected based on value
 Usage: <select><option>Please select</option>{{renderCountryOpts "Australia"}}</select>
 Found At: http://htmlr.tumblr.com/post/33202449716/
 */
-function helperSetup() {
+App.helpers.helperSetup = function() {
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
     var ret;
 
@@ -44,4 +46,4 @@ function helperSetup() {
 
     return new Handlebars.SafeString(ret);
   });
-}
+};

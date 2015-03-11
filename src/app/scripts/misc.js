@@ -1,11 +1,10 @@
 // JSHint options:
-/* global $, App, downloadWatchers, fillTable, templates */
-/* exported createChart, createMap, humanize, initTemplates */
+/* global $, App, templates */
 'use strict';
 
-/* Helper functions */
+App.misc = {};
 
-function initTemplates() {
+App.misc.initTemplates = function() {
   var d1 = $.Deferred();
 
   if (!App.data.gotData) {
@@ -24,9 +23,9 @@ function initTemplates() {
         $('.bootstrapSwitch').bootstrapSwitch();
 
         if (page === 'data') {
-          $('#minusIcon').hide();
-          fillTable();
-          downloadWatchers();
+          // $('#minusIcon').hide();
+          App.download.fillTable();
+          App.watchers.downloadWatchers();
         } else if (page === 'charts') {
           App.charts.setupCharts();
         }
@@ -37,17 +36,15 @@ function initTemplates() {
       $('#content').html(templates.index);
     }
   });
-}
+};
 
 /* Useful little function found at:
   http://stackoverflow.com/questions/21792367/replace-underscores-with-spaces-and-capitalize-words
 */
-function humanize(str) {
+App.misc.humanize = function(str) {
   var frags = str.split('_');
   for (var i = 0; i < frags.length; i++) {
     frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
   }
   return frags.join(' ');
-}
-
-/* End helper funtions */
+};

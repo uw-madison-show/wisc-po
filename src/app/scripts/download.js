@@ -1,10 +1,11 @@
 // JSHint options:
 /* global $, App */
-/* exported downloadData, fillTable */
 
 'use strict';
 
-function addRow(name, year, value, errNeg, errPos) {
+App.download = {};
+
+App.download.addRow = function(name, year, value, errNeg, errPos) {
   var errSep = ' - ';
 
   if (value === -1) {
@@ -19,10 +20,10 @@ function addRow(name, year, value, errNeg, errPos) {
 
   $('#myTable').append('<tr><td>' + name + '</td><td>' + year + '</td><td>' + value +
     '</td>' + error);
-}
+};
 
 // Loop through area and add all to the chart
-function addArea(areaName, indicator) {
+App.download.addArea = function(areaName, indicator) {
   var areaData = App.data.getAreaData(areaName, indicator);
   if (areaName === 'county') {
     App.data.currentMap = areaData;
@@ -41,7 +42,7 @@ function addArea(areaName, indicator) {
         error = areaData.error[i1].data[i2];
 
         if (value !== -1) {
-          addRow(name, year, value, error[1], error[2]);
+          App.download.addRow(name, year, value, error[1], error[2]);
         }
       });
 
@@ -49,13 +50,13 @@ function addArea(areaName, indicator) {
       value = App.data.getCurrentCountyData(name).value;
       error = App.data.getCurrentCountyError(name);
       if (value !== -1) {
-        addRow(name, year, value, error[1], error[2]);
+        App.download.addRow(name, year, value, error[1], error[2]);
       }
     }
   });
-}
+};
 
-function fillTable() {
+App.download.fillTable = function() {
   var indicator = $('.dropDownIndicators option:selected').data('variable');
   var indicatorName = $('.dropDownIndicators option:selected').text();
   var county = $('.dropDownCounty option:selected').text();
@@ -72,22 +73,22 @@ function fillTable() {
 
   if (countyEnable) {
     if (county === 'All Counties') {
-      addArea('county', indicator);
+      App.download.addArea('county', indicator);
     } else {
       App.data.currentMap = App.data.getAreaData('county', indicator);
       var value = App.data.getCurrentCountyData(county).value;
       var error = App.data.getCurrentCountyError(county);
 
-      addRow(county, '', value, error[1], error[2]);
+      App.download.addRow(county, '', value, error[1], error[2]);
     }
   }
 
   if (regionEnable) {
-    addArea('region', indicator);
+    App.download.addArea('region', indicator);
   }
 
   if (stateEnable) {
-    addArea('state', indicator);
+    App.download.addArea('state', indicator);
   }
 
-}
+};

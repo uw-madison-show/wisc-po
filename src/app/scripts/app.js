@@ -1,6 +1,7 @@
 // JSHint options:
 /* global Highcharts */
 /* exported App */
+
 'use strict';
 
 /** Main global app namespace, in which everything is contained

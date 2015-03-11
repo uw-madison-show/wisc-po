@@ -1,13 +1,12 @@
 // JSHint options:
-/* global $, App, chartOptions, mapOptions, mapSeries, chartWatchers */
-/* exported createChart, createMap, humanize, initTemplates */
+/* global $, App */
 
 'use strict';
 
 App.charts = {};
 
-function createChart(chart, type, series, xAxis, yAxis, name) {
-  var options = $.extend(true, {}, chartOptions);
+App.charts.createChart = function(chart, type, series, xAxis, yAxis, name) {
+  var options = $.extend(true, {}, App.charts.chartOptions);
   //var container = chart.closest('.chartContainer');
 
   options.series = $.extend(true, [], series);
@@ -47,17 +46,17 @@ function createChart(chart, type, series, xAxis, yAxis, name) {
     break;
     case 'map':
       options.chart.type = 'map';
-      var mapOpts = $.extend(true, {}, mapOptions);
+      var mapOpts = $.extend(true, {}, App.charts.mapOptions);
       options.colorAxis = mapOpts.colorAxis;
       options.tooltip = mapOpts.tooltip;
-
+      options.legend = mapOpts.legend;
       chart.highcharts('Map', options);
     break;
   }
-}
+};
 
-function createMap(chart, series, map, name) {
-  var seriesNew = new Array($.extend(true, {}, mapSeries));
+App.charts.createMap = function(chart, series, map, name) {
+  var seriesNew = new Array($.extend(true, {}, App.charts.mapSeries));
 
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
@@ -71,8 +70,8 @@ function createMap(chart, series, map, name) {
     'enableMouseTracking': false
   });
 
-  createChart(chart, 'map', seriesNew, [], [], name);
-}
+  App.charts.createChart(chart, 'map', seriesNew, [], [], name);
+};
 
 App.charts.setupCharts = function() {
 
@@ -82,11 +81,11 @@ App.charts.setupCharts = function() {
 
   // Set up map
   App.data.currentMap = App.data.getAreaData('county', defaultIndicator);
-  createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
+  App.charts.createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
 
   // Set up line chart
   App.data.currentLine = App.data.getLineData(defaultIndicator);
-  createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.data.y, name);
+  App.charts.createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.data.y, name);
 
   var chart = $('.chart:eq(1)').highcharts();
   // Hide all except WI and US, show/hide errorbars based on value of checkbox
@@ -105,5 +104,5 @@ App.charts.setupCharts = function() {
   $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
 
   // Set up watchers for charts and options
-  chartWatchers();
+  App.watchers.chartWatchers();
 };

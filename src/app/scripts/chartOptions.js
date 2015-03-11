@@ -1,10 +1,9 @@
 // JSHint options:
 /* global Highcharts, App */
-/* exported chartOptions, mapOptions, mapSeries */
 
 'use strict';
 
-var chartOptions = {
+App.charts.chartOptions = {
   chart: {
     type: 'column',
     backgroundColor: null
@@ -64,7 +63,10 @@ var chartOptions = {
   }
 };
 
-var mapOptions = {
+App.charts.mapOptions = {
+  legend: {
+    enabled: false
+  },
   tooltip: {
     formatter: function () {
       var val = 'Value: ' + this.point.value;
@@ -91,7 +93,7 @@ var mapOptions = {
 var sample = true;
 
 if (!sample) {
-  mapOptions.colorAxis = {
+  App.chart.mapOptions.colorAxis = {
     stops:
       [
         [0, '#666666'],
@@ -111,7 +113,7 @@ if (!sample) {
   };
 }
 
-var mapSeries = {
+App.charts.mapSeries = {
 
   mapData: Highcharts.maps['countries/us/us-wi-all'],
   joinBy: 'hc-key',

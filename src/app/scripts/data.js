@@ -1,6 +1,5 @@
 // JSHint options:
-/* global $, helperSetup, App */
-/* exported getData */
+/* global $, App */
 
 'use strict';
 
@@ -194,11 +193,11 @@ App.data.getData = function(d1) {
     });
 
     // Set up template helpers after data retrieved
-    helperSetup();
+    App.helpers.helperSetup();
 
     App.data.gotData = true;
 
-    // Resolve callback after data gotten to begin data processing and then charts
+    // Resolve callback after data downloaded
     d1.resolve();
   });
 };

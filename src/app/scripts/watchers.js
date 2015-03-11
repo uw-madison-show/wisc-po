@@ -1,21 +1,22 @@
 // JSHint options:
-/* global $, createChart, createMap, fillTable, initTemplates, App */
-/* exported chartWatchers, downloadWatchers */
+/* global $, App */
 
 'use strict';
 
+App.watchers = {};
+
 /* Set up templates */
 $(window).bind('hashchange', function() {
-  initTemplates();
+  App.misc.initTemplates();
 });
 
-function downloadWatchers() {
+App.watchers.downloadWatchers = function() {
   $('input[name="county"]').on('switchChange.bootstrapSwitch', function(event, state) {
     $('.dropDownCounty').prop('disabled', !state);
   });
 
   $('input').on('switchChange.bootstrapSwitch', function() {
-    fillTable();
+    App.download.fillTable();
   });
 
   $('select').change(function () {
@@ -23,11 +24,11 @@ function downloadWatchers() {
     App.data.currentMap = App.data.getAreaData('county', indicator);
     App.data.currentLine = App.data.getLineData(indicator);
 
-    fillTable();
+    App.download.fillTable();
   });
-}
+};
 
-function chartWatchers() {
+App.watchers.chartWatchers = function() {
   $('.dropDownIndicators').change(function() {
     var indicator = $('option:selected', this).data('variable');
     var name = $('option:selected', this).val();
@@ -42,12 +43,12 @@ function chartWatchers() {
     // Destroy and make new map
     App.data.currentMap = App.data.getAreaData('county', indicator);
     map.destroy();
-    createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
+    App.charts.createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
 
     // Destroy and make new chart
     App.data.currentLine = App.data.getLineData(indicator);
     chart.destroy();
-    createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.data.y, name);
+    App.charts.createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.data.y, name);
 
     // Reset reference to chart
     chart = $('.chart:eq(1)').highcharts();
@@ -95,6 +96,6 @@ function chartWatchers() {
     chart2.highcharts().redraw();
   });
 
-}
+};
 
 /* End watchers */
