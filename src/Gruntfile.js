@@ -148,7 +148,7 @@ module.exports = function (grunt) {
       dist : {
         src: ['<%= config.app %>/scripts/*.js', '../README.md'],
         options: {
-          destination: 'doc'
+          destination: '../doc'
         }
       }
     },

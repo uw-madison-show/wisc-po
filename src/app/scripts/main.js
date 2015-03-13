@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, App */
+/* global App */
 'use strict';
 
 App.misc.initTemplates();
