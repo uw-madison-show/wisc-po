@@ -257,13 +257,13 @@ App.charts.mapSeries = {
           $.each(chart.series, function(index, series) {
 
             // Hide all series except State and selected region
-            if (series.name === name || series.name === (name + ' - Error') || series.name === 'Wisconsin') {
+            if (series.name === name || series.name === 'Wisconsin') {
               series.show();
-              if (!errorbars && series.name === (name + ' - Error')) {
-                series.hide();
+              if (!errorbars) {
+                series.linkedSeries[0].hide();
               }
             } else {
-              if (series.visible) {
+              if (series.visible && series.type !== 'errorbar') {
                 series.hide();
               }
             }
@@ -288,9 +288,11 @@ App.charts.mapSeries = {
           chart.yAxis[0].removePlotLine('plot-band-1');
           $('#val').text('Selected Value: No region selected');
 
+
           if (region) {
+            var name = App.maps.regionNames[region-1];
             $.each(chart.series, function(index, series) {
-              if (series.name === App.maps.regionNames[region-1]) {
+              if (series.name === name || series.name === (name + ' - Error')) {
                 series.hide();
               }
             });

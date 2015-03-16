@@ -38,7 +38,7 @@ App.maps = {
   ],
 
   regionColors: [
-    '#d7191c', '#fdae61', '#ffffbf', '#abdda4', '#2b83ba',
+    '#f7a35c', '#90ee7e', '#7798BF', '#7cb5ec', '#434348'
   ],
 
   regionDictionary: {
@@ -104,7 +104,7 @@ App.maps = {
     'St. Croix': 3,
     'Taylor': 4,
     'Trempealeau': 3,
-    'Vernon': 2,
+    'Vernon': 3,
     'Vilas': 4,
     'Walworth': 1,
     'Washburn': 3,
