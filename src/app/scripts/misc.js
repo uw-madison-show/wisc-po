@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, App, templates */
+/* global $, App */
 'use strict';
 
 /**
@@ -8,9 +8,10 @@
 App.misc = {};
 
 /**
- * Main function that is called when the page is loaded. This function checks
- * to see if all data has been loaded and then continues on to try and
- * initialize the template for the current page (based on # in address).
+ * Main function that is called when the page is loaded. This function uses a
+ * deferred object (d1) to see if all data has been loaded from {@link App.data.getData}
+ * and then continues on to try and initialize the template for the current page
+ * (based on # in address).
  * @method initTemplates
  * @memberof App.misc
  * @return {Void}
@@ -27,8 +28,8 @@ App.misc.initTemplates = function() {
   $.when(d1).done(function() {
     if (window.location.href.match(/\#.*/)) {
       var page = window.location.href.match(/\#.*/)[0].substring(1);
-      if (page) {
-        $('#content').html(templates[page]);
+      if (page && page !== 'error') {
+        $('#content').html(App.templates[page]);
 
         // Init toggle switches
         $('.bootstrapSwitch').bootstrapSwitch();
@@ -41,10 +42,11 @@ App.misc.initTemplates = function() {
           App.charts.setupCharts();
         }
       } else {
-        $('#content').html(templates.index);
+        $('#content').html(App.templates.index);
+        window.location.hash = '#';
       }
     } else {
-      $('#content').html(templates.index);
+      $('#content').html(App.templates.index);
     }
   });
 };

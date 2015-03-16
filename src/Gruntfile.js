@@ -354,7 +354,7 @@ module.exports = function (grunt) {
     handlebars: {
       options: {
         // configure a namespace for your templates
-        namespace: 'templates',
+        namespace: 'App.templates',
 
         // convert file path into a function name
         // in this example, I convert grab just the filename without the extension

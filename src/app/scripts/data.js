@@ -45,12 +45,12 @@ App.data.transformData = function(value, error, percent, area) {
 };
 
 /**
- * Description
+ * Get data for the given area, returns a series usable by highcharts
  * @method getAreaData
  * @memberof App.data
- * @param {} area
- * @param {} indicator
- * @return {Object}
+ * @param {String} area       The area ('county', 'region', 'state', etc)
+ * @param {String} indicator  The variable name of the indicator
+ * @return {Object}           A series representation of the indicator
  */
 App.data.getAreaData = function(area, indicator) {
   var areaData = $.extend(true, {}, App.data.json[area][indicator]);
@@ -102,11 +102,11 @@ App.data.getAreaData = function(area, indicator) {
 };
 
 /**
- * Description
+ * Get data for the given county. Will use the current indicator as defined by {@link App.data.currentMap}
  * @method getCurrentCountyData
  * @memberof App.data
- * @param {} county
- * @return {Object}
+ * @param {String} county   The county to retrieve data for
+ * @return {Object}         The data for the given county
  */
 App.data.getCurrentCountyData = function(county) {
   var data = $.grep(App.data.currentMap.observations, function (item) {
@@ -116,11 +116,11 @@ App.data.getCurrentCountyData = function(county) {
 };
 
 /**
- * Description
+ * Get error data for the given county. Will use the current indicator as defined by {@link App.data.currentMap}
  * @method getCurrentCountyError
  * @memberof App.data
- * @param {} county
- * @return {Object}
+ * @param {String} county   The county to retrieve data for
+ * @return {Object}         The error data for the given county
  */
 App.data.getCurrentCountyError = function(county) {
   var data = $.grep(App.data.currentMap.error, function (item) {
@@ -131,10 +131,11 @@ App.data.getCurrentCountyError = function(county) {
 };
 
 /**
- * Description
+ * Get all data for the given indicator for the line chart. This currently
+ * includes region and state data.
  * @method getLineData
  * @memberof App.data
- * @param {} indicator
+ * @param {String} indicator  The given indicator to get data for
  * @return {array}
  */
 App.data.getLineData = function(indicator) {
@@ -166,10 +167,11 @@ App.data.getLineData = function(indicator) {
 };
 
 /**
- * Description
+ * Download the data.json file from the server, handle errors as well
  * @method getData
  * @memberof App.data
- * @param {} d1
+ * @param {Deferred} d1   An object which is used to handle a callback in
+ * {@link App.misc.initTemplates}
  * @return {Void}
  */
 App.data.getData = function(d1) {
@@ -190,5 +192,8 @@ App.data.getData = function(d1) {
 
     // Resolve callback after data downloaded
     d1.resolve();
+  }).fail(function() {
+    $('#content').html(App.templates.error);
+    d1.fail();
   });
 };

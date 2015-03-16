@@ -7,10 +7,23 @@
 */
 App.watchers = {};
 
+/* Handle all errors with error screen */
+window.onerror = function() {
+//window.onerror = function(message, file, line) {
+
+  $('#content').html(App.templates.error);
+
+  // TODO set up to use with google analytics
+  // _gaq.push(['_trackEvent', "Global", "Exception", file + "(" + line + "): " + message]);
+
+  return false;
+};
+
 /* Set up templates */
 $(window).bind('hashchange', function() {
   App.misc.initTemplates();
 });
+
 
 /**
  * Set up watchers for the download page when called

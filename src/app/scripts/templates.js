@@ -1,4 +1,5 @@
-this["templates"] = this["templates"] || {};
+this["App"] = this["App"] || {};
+this["App"]["templates"] = this["App"]["templates"] || {};
 
 Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
@@ -82,7 +83,7 @@ Handlebars.registerPartial("table", Handlebars.template({"compiler":[6,">= 2.0.0
   return "<div class=\"col-xs-12\">\n\n  <div class=\"panel-group\" id=\"accordion\" role=\"tablist\" aria-multiselectable=\"true\">\n\n    <div class=\"panel panel-default\">\n      <div data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#collapseOne\" aria-expanded=\"true\"\n      aria-controls=\"collapseOne\"class=\"panel-heading\" role=\"tab\" id=\"headingOne\">\n        <h4 class=\"panel-title pull-left\">Data Table</h4>\n        <span id=\"minusIcon\" class=\"glyphicon glyphicon-minus pull-right\"></span>\n        <span id=\"plusIcon\" class=\"glyphicon glyphicon-plus pull-right\"></span>\n        <div class=\"clearfix\"></div>\n      </div>\n      <div id=\"collapseOne\" class=\"panel-collapse collapse\" role=\"tabpanel\" aria-labelledby=\"headingOne\">\n        <div class=\"panel-body\">\n          <table id=\"myTable\" class=\"table table-striped table-responsive\">\n            <thead>\n              <tr>\n                <th>Index</th>\n                <th>County Name</th>\n                <th>Region</th>\n                <th>Data</th>\n                <th>HighCharts Id</th>\n              </tr>\n            </thead>\n\n            <tbody>\n            </tbody>\n          </table>\n        </div>\n      </div>\n    </div>\n\n  </div>\n\n</div>";
   },"useData":true}));
 
-this["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["App"]["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_about': (true)
@@ -94,7 +95,7 @@ this["templates"]["about"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
 
-this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_charts': (true)
@@ -120,7 +121,7 @@ this["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
 
-this["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["App"]["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_contact': (true)
@@ -132,7 +133,7 @@ this["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
 
-this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["App"]["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_data': (true)
@@ -148,7 +149,19 @@ this["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"
   return buffer + "\n</div>\n";
 },"usePartial":true,"useData":true});
 
-this["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, buffer = "<div class=\"container\">\n\n";
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
+    'active_home': (true)
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n  <h1>\n    <span class=\"glyphicon glyphicon-remove-circle\"></span>\n    We're sorry, something went wrong.\n    <br>\n    Please refresh the page.\n  </h1>\n\n";
+  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n</div>\n";
+},"usePartial":true,"useData":true});
+
+this["App"]["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_home': (true)
