@@ -25,6 +25,7 @@ var App = App || {
 * @prop region            {Object}  Reference to the Highmaps Region map
 * @prop county            {Object}  Reference to the Highmaps County map
 * @prop regionNames       {Array}   Array of region names - indexed in order of defined regions
+* @prop regionColors      {Array}   Array of colors for the region map
 * @prop regionDictionary  {Object}  Dictionary of counties and their associated regions
 */
 App.maps = {
@@ -33,7 +34,11 @@ App.maps = {
   county: Highcharts.maps['countries/us/us-wi-all'],
 
   regionNames: [
-  'Southeast', 'South', 'West', 'North', 'Northeast'
+    'Southeast', 'South', 'West', 'North', 'Northeast'
+  ],
+
+  regionColors: [
+    '#d7191c', '#fdae61', '#ffffbf', '#abdda4', '#2b83ba',
   ],
 
   regionDictionary: {

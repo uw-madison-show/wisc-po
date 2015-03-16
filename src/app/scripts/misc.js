@@ -45,7 +45,6 @@ App.misc.initTemplates = function() {
         $('.bootstrapSwitch').bootstrapSwitch();
       } else {
         $('#content').html(App.templates.index);
-        window.location.hash = '#';
       }
     } else {
       $('#content').html(App.templates.index);

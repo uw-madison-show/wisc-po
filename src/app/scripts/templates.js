@@ -155,7 +155,7 @@ this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0
     'active_home': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <h1>\n    <span class=\"glyphicon glyphicon-remove-circle\"></span>\n    We're sorry, something went wrong.\n    <br>\n    Please refresh the page.\n  </h1>\n\n";
+  buffer += "\n  <div class=\"col-xs-1\">\n    <h1>\n      <span class=\"glyphicon glyphicon-remove-circle\"></span>\n    </h1>\n  </div>\n\n  <div class=\"col-xs-11\">\n    <h1>We're sorry, something went wrong.\n      <br>Please refresh the page.\n    </h1>\n  </div>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";

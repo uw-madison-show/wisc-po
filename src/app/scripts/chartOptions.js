@@ -17,10 +17,10 @@ App.charts.chartOptions = {
     series: {
       events: {
         /**
-         * Description
+         * Legend item series function, shows/hides error bars based on errorbar options
          * @method legendItemClick
          * @memberof App.charts.chartOptions
-         * @return {boolean}
+         * @return {boolean}  Overrides the defualt behavior
          */
         legendItemClick: function() {
           if (!this.visible) {
@@ -45,17 +45,30 @@ App.charts.chartOptions = {
   },
   tooltip: {
     crosshairs: true,
-    shared: true
+    shared: true,
+    // pointFormat: '<span style="color:{series.color}">●</span> {series.name}: <b>{point.y}</b>, Sample Size: <br/>',
+    formatter: function() {
+      console.log(this);
+      var str = '<span style="font-size: 10px">' + this.points[0].key + '</span><br/>';
+
+      $.each(this.points, function() {
+        var sample = App.data.currentLine[this.series.index].sample[this.point.x];
+        str += '<span style="color:' + this.series.color + '">●</span> ' +
+        this.series.name + ': <b>' + this.point.y + '</b>, Sample Size: ' + sample + '<br/>';
+      });
+
+      return str;
+    }
   },
   series : [{
 
     dataLabels: {
       enabled: true,
       /**
-       * Description
+       * Formatter for data labels, not useful except for bar charts
        * @method formatter
        * @memberof App.charts.chartOptions
-       * @return MemberExpression
+       * @return {String}   Formatted string for dataLabels
        */
       formatter: function() {
         if (this.point.x % 3 !== 0) {
@@ -80,17 +93,18 @@ App.charts.mapOptions = {
   },
   tooltip: {
     /**
-     * Description
+     * Format the the tooltip for the map
      * @method formatter
      * @memberof App.charts.mapOptions
-     * @return BinaryExpression
+     * @return {String}   String represenation of the tooltip
      */
     formatter: function () {
       var val = 'Value: ' + this.point.value;
       var err = '';
       if (this.point.value === -1) {
-        if (this.point.sample) {
-          val = 'Sample Size: ' + this.point.sample;
+
+        if (this.point.sample[2008]) {
+          val = 'Sample Size: ' + this.point.sample[2008];
         } else {
           val = 'No Data';
         }
@@ -153,7 +167,7 @@ App.charts.mapSeries = {
   point: {
     events: {
       /**
-       * Description
+       * Select event fired on map click
        * @method select
        * @memberof App.charts.mapSeries
        * @return {Void}
@@ -238,7 +252,7 @@ App.charts.mapSeries = {
       },
 
       /**
-       * Description
+       * Unselect event fired on de-selection of an area on the map
        * @method unselect
        * @memberof App.charts.mapSeries
        * @return {Void}

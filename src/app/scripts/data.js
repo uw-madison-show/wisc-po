@@ -53,10 +53,11 @@ App.data.transformData = function(value, error, percent, area) {
  * @return {Object}           A series representation of the indicator
  */
 App.data.getAreaData = function(area, indicator) {
-  var areaData = $.extend(true, {}, App.data.json[area][indicator]);
-  var percent = (areaData.data_type === 'percent');
 
-  if (areaData) {
+  if (App.data.json[area][indicator]) {
+    var areaData = $.extend(true, {}, App.data.json[area][indicator]);
+    var percent = (areaData.data_type === 'percent');
+
     areaData.error = [];
     $.each(areaData.observations, function(i1, observation) {
       areaData.error.push({});
@@ -67,14 +68,16 @@ App.data.getAreaData = function(area, indicator) {
 
       var newData = [];
 
+      observation.sample = {};
+
       $.each(observation.data, function(i2, data) {
 
         newData = App.data.transformData(data[1], data[2], percent, area);
         areaData.error[i1].data[i2] = [data[0], newData[1], newData[2]];
         data[1] = newData[0];
 
-        // Add sample size to Object
-        observation.sample = data[3];
+        // Add sample size to Object as a property
+        observation.sample[data[0]] = data[3];
 
         // Cut out error and sample size from data
         data.splice(2, 2);
@@ -85,7 +88,7 @@ App.data.getAreaData = function(area, indicator) {
         observation.value = observation.data[0][1];
         observation.region = observation.parent;
         observation['hc-key'] = observation.id;
-        // observation.sample = observation.data[0][3];
+        observation.color = App.maps.regionColors[observation.region-1];
         delete observation.parent;
         delete observation.data;
       } else {
@@ -143,25 +146,29 @@ App.data.getLineData = function(indicator) {
   var stateData = App.data.getAreaData('state', indicator);
   var lineData = [];
 
-  lineData.data_type = regionData.data_type;
+  if (!$.isEmptyObject(regionData)) {
+    lineData.data_type = regionData.data_type;
 
-  $.each(regionData.observations, function() {
-    this.visible = false;
-    lineData.push(this);
-  });
+    $.each(regionData.observations, function() {
+      this.visible = false;
+      lineData.push(this);
+    });
 
-  $.each(regionData.error, function() {
-    this.type = 'errorbar';
-    this.visible = false;
-    lineData.push(this);
-  });
+    $.each(regionData.error, function() {
+      this.type = 'errorbar';
+      this.visible = false;
+      lineData.push(this);
+    });
+  }
 
-  lineData.push(stateData.observations[0]);
+  if (!$.isEmptyObject(stateData)) {
+    lineData.push(stateData.observations[0]);
 
-  var stateError = stateData.error[0];
-  stateError.type = 'errorbar';
-  stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
-  lineData.push(stateError);
+    var stateError = stateData.error[0];
+    stateError.type = 'errorbar';
+    stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
+    lineData.push(stateError);
+  }
 
   return lineData;
 };
