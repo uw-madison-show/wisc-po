@@ -31,16 +31,18 @@ App.misc.initTemplates = function() {
       if (page && page !== 'error') {
         $('#content').html(App.templates[page]);
 
-        // Init toggle switches
-        $('.bootstrapSwitch').bootstrapSwitch();
-
         if (page === 'data') {
           // $('#minusIcon').hide();
+          $('input[name="county"]').prop('disabled', App.sample);
+
           App.download.fillTable();
           App.watchers.downloadWatchers();
         } else if (page === 'charts') {
           App.charts.setupCharts();
         }
+
+        // Init toggle switches
+        $('.bootstrapSwitch').bootstrapSwitch();
       } else {
         $('#content').html(App.templates.index);
         window.location.hash = '#';

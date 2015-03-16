@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, App */
+/* global $, App, _gaq */
 'use strict';
 
 /**
@@ -7,14 +7,13 @@
 */
 App.watchers = {};
 
-/* Handle all errors with error screen */
-window.onerror = function() {
-//window.onerror = function(message, file, line) {
-
+/* Handle all errors with error screen, and log to google analytics if used */
+window.onerror = function(message, file, line) {
   $('#content').html(App.templates.error);
 
-  // TODO set up to use with google analytics
-  // _gaq.push(['_trackEvent', "Global", "Exception", file + "(" + line + "): " + message]);
+  if (_gaq) {
+    _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
+  }
 
   return false;
 };

@@ -107,9 +107,7 @@ App.charts.mapOptions = {
   }
 };
 
-var sample = true;
-
-if (!sample) {
+if (!App.sample) {
   App.chart.mapOptions.colorAxis = {
     stops:
       [
@@ -164,7 +162,7 @@ App.charts.mapSeries = {
         var value = this.value;
         var color = '#005645';
 
-        if (!sample) {
+        if (!App.sample) {
           if (value === -1) {
             $('#val').text('Selected Value: ' + this.name + ' - No Data');
           } else {
@@ -177,7 +175,7 @@ App.charts.mapSeries = {
         //var map = $.extend(true, {}, regionMaps[this.region-1]);
         //$('.chart:eq(0)').highcharts().series[1].setData(map.data);
 
-        if (!sample) {
+        if (!App.sample) {
           // remove previously region line
           chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');

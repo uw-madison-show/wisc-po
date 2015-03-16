@@ -91,7 +91,7 @@ App.download.fillTable = function() {
   var regionEnable = $('input[name="region"]').bootstrapSwitch('state');
   var stateEnable = $('input[name="state"]').bootstrapSwitch('state');
   var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
-
+  
   var errors = errorEnable ? '<th>' + indicatorName + ' - Error</th>' : '';
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
