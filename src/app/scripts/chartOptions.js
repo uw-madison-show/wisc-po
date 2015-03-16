@@ -46,15 +46,28 @@ App.charts.chartOptions = {
   tooltip: {
     crosshairs: true,
     shared: true,
-    // pointFormat: '<span style="color:{series.color}">●</span> {series.name}: <b>{point.y}</b>, Sample Size: <br/>',
+
     formatter: function() {
-      console.log(this);
+      // console.log(this);
       var str = '<span style="font-size: 10px">' + this.points[0].key + '</span><br/>';
 
       $.each(this.points, function() {
-        var sample = App.data.currentLine[this.series.index].sample[this.point.x];
-        str += '<span style="color:' + this.series.color + '">●</span> ' +
-        this.series.name + ': <b>' + this.point.y + '</b>, Sample Size: ' + sample + '<br/>';
+        var sample = '';
+        if (App.data.currentLine[this.series.index].sample) {
+          sample = ', Sample Size: ' + App.data.currentLine[this.series.index].sample[this.point.x];
+        }
+
+        var value;
+        if (this.point.low && this.point.high) {
+          value = this.point.low + ' - ' + this.point.high;
+        } else {
+          value = this.point.y;
+        }
+
+        var color = this.series.color !== '#000000' ? this.series.color : '#aaaaaa';
+
+        str += '<span style="color:' + color + '">●</span> ' +
+        this.series.name + ': <b>' + value + '</b>' + sample + '<br/>';
       });
 
       return str;
@@ -238,15 +251,24 @@ App.charts.mapSeries = {
 
         if (this.region) {
           var region = this.region;
+          var errorbars = $('input[name="errorbar"]').bootstrapSwitch('state');
+          var name = App.maps.regionNames[region-1];
+
           $.each(chart.series, function(index, series) {
 
             // Hide all series except State and selected region
-            if (series.name === App.maps.regionNames[region-1] || series.name === 'Wisconsin') {
+            if (series.name === name || series.name === (name + ' - Error') || series.name === 'Wisconsin') {
               series.show();
+              if (!errorbars && series.name === (name + ' - Error')) {
+                series.hide();
+              }
             } else {
-              series.hide();
+              if (series.visible) {
+                series.hide();
+              }
             }
           });
+
         }
 
       },

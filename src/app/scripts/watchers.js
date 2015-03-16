@@ -90,22 +90,19 @@ App.watchers.chartWatchers = function() {
   // Watcher and handler for errorbar feature
   $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
     // Make animations a bit cleaner (animate chart after switch toggle)
-    setTimeout(function() {
 
-      var chart = $('.chart:eq(1)').highcharts();
+    var chart = $('.chart:eq(1)').highcharts();
 
-      // Hide/Show errorbars based on if active and series visible
-      $.each(chart.series, function() {
-        if (this.options.type === 'errorbar' && this.linkedParent.visible) {
-          if (state) {
-            this.show();
-          } else {
-            this.hide();
-          }
+    // Hide/Show errorbars based on if active and series visible
+    $.each(chart.series, function() {
+      if (this.options.type === 'errorbar' && this.linkedParent.visible) {
+        if (state) {
+          this.show();
+        } else {
+          this.hide();
         }
-      });
-
-    }, 500);
+      }
+    });
   });
 
   // Watcher and handler for large charts feature

@@ -170,6 +170,20 @@ App.data.getLineData = function(indicator) {
     lineData.push(stateError);
   }
 
+  // Sort the line data in ascending order based on name
+  lineData.sort(function(a,b) {
+    var nameA = a.name.toLowerCase();
+    var nameB = b.name.toLowerCase();
+
+    if (nameA < nameB) {
+      return -1;
+    } else if (nameA > nameB) {
+      return 1;
+    } else {
+    return 0;
+    }
+  });
+
   return lineData;
 };
 
