@@ -143,12 +143,20 @@ module.exports = function (grunt) {
       ]
     },
 
-    // JSDoc Genration
+    // JSDoc Genration, dist gives a timestamp while temp does not
     jsdoc : {
       dist : {
         src: ['<%= config.app %>/scripts/*.js', '../README.md'],
         options: {
-          destination: '../doc'
+          destination: '../doc',
+          configure: 'jsdoc_dist.conf'
+        }
+      },
+      temp : {
+        src: ['<%= config.app %>/scripts/*.js', '../README.md'],
+        options: {
+          destination: 'doc',
+          configure: 'jsdoc_temp.conf'
         }
       }
     },
@@ -336,7 +344,7 @@ module.exports = function (grunt) {
       server: [
         'handlebars',
         'copy:styles',
-        'jsdoc'
+        'jsdoc:temp'
       ],
       test: [
         'copy:styles'
@@ -344,7 +352,7 @@ module.exports = function (grunt) {
       dist: [
         'handlebars',
         'copy:styles',
-        'jsdoc',
+        'jsdoc:dist',
         'imagemin',
         'svgmin'
       ]
@@ -430,6 +438,10 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('docs', [
+    'jsdoc:dist'
   ]);
 
   grunt.registerTask('server-shutdown-listener',function(step){

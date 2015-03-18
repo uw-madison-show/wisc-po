@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: watchers.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: watchers.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// JSHint options:
+/* global $, App, _gaq */
+'use strict';
+
+/**
+* @namespace App.watchers
+*/
+App.watchers = {};
+
+/* Handle all errors with error screen, and log to google analytics if used */
+window.onerror = function(message, file, line) {
+  $('#content').html(App.templates.error);
+
+  if (_gaq) {
+    _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
+  }
+
+  return false;
+};
+
+/* Set up templates */
+$(window).bind('hashchange', function() {
+  App.misc.initTemplates();
+});
+
+
+/**
+ * Set up watchers for the download page when called
+ * @method downloadWatchers
+ * @memberof App.watchers
+ * @return {Void}
+ */
+App.watchers.downloadWatchers = function() {
+  $('input[name="county"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    $('.dropDownCounty').prop('disabled', !state);
+  });
+
+  $('input').on('switchChange.bootstrapSwitch', function() {
+    App.download.fillTable();
+  });
+
+  $('select').change(function () {
+    var indicator = $('.dropDownIndicators option:selected').data('variable');
+    App.data.currentMap = App.data.getAreaData('county', indicator);
+    App.data.currentLine = App.data.getLineData(indicator);
+
+    App.download.fillTable();
+  });
+};
+
+/**
+ * Set up watchers for the chart page when called
+ * @method chartWatchers
+ * @memberof App.watchers
+ * @return {Void}
+ */
+App.watchers.chartWatchers = function() {
+
+  // Watcher and handler for dropDownIndicators selection
+  $('.dropDownIndicators').change(function() {
+    var indicator = $('option:selected', this).data('variable');
+    var name = $('option:selected', this).val();
+    var map = $('.chart:eq(0)').highcharts();
+    var chart = $('.chart:eq(1)').highcharts();
+
+    $('#val').text('Selected Value: No region selected');
+
+    // TODO: For now, just destroying charts as it seems just as quick and reduces
+    //       the amount of edge case errors that we were getting before
+
+    // Destroy and make new map
+    App.data.currentMap = App.data.getAreaData('county', indicator);
+    map.destroy();
+    App.charts.createMap($('.chart:eq(0)'), App.data.currentMap.observations, App.maps.county, name);
+
+    // Destroy and make new chart
+    App.data.currentLine = App.data.getLineData(indicator);
+    chart.destroy();
+    App.charts.createChart($('.chart:eq(1)'), 'line', App.data.currentLine, [], App.charts.y, name);
+
+    // Reset reference to chart
+    chart = $('.chart:eq(1)').highcharts();
+
+    // Label things by percent or value
+    var percent = (App.data.currentLine.data_type === 'percent');
+    var label = percent ? 'Percent %' : 'Value';
+    chart.yAxis[0].setTitle({text: label});
+  });
+
+  // Watcher and handler for errorbar feature
+  $('input[name="errorbar"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    // Make animations a bit cleaner (animate chart after switch toggle)
+
+    var chart = $('.chart:eq(1)').highcharts();
+
+    // Hide/Show errorbars based on if active and series visible
+    $.each(chart.series, function() {
+      if (this.options.type === 'errorbar' &amp;&amp; this.linkedParent.visible) {
+        if (state) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }
+    });
+  });
+
+  // Watcher and handler for large charts feature
+  $('input[name="largecharts"]').on('switchChange.bootstrapSwitch', function() {
+    var chart1 = $('.chart:eq(0)');
+    var chart2 = $('.chart:eq(1)');
+
+    chart1.parent().toggleClass('col-md-6');
+    chart2.parent().toggleClass('col-md-6');
+    chart1.parent().toggleClass('largeChart');
+    chart2.parent().toggleClass('largeChart');
+    chart1.parent().toggleClass('smallChart');
+    chart2.parent().toggleClass('smallChart');
+
+    chart1.highcharts().reflow();
+    chart1.highcharts().redraw();
+    chart2.highcharts().reflow();
+    chart2.highcharts().redraw();
+  });
+
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="App.html">App</a></li><li><a href="App.charts.html">charts</a></li><li><a href="App.data.html">data</a></li><li><a href="App.download.html">download</a></li><li><a href="App.helpers.html">helpers</a></li><li><a href="App.maps.html">maps</a></li><li><a href="App.misc.html">misc</a></li><li><a href="App.watchers.html">watchers</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -4,8 +4,15 @@
 
 /**
 * @namespace App.misc
+* @prop colors {Object}   An object containing some useful colors to be used with
+* {@link App.misc.convertColor}
 */
-App.misc = {};
+App.misc = {
+  colors: {
+    black: { r: 0,   g: 0,   b: 0,   a: 255 },
+    white: { r: 255, g: 255, b: 255, a: 255 }
+  }
+};
 
 /**
  * Main function that is called when the page is loaded. This function uses a
