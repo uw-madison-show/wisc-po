@@ -135,7 +135,7 @@ App.charts.mapOptions = {
 };
 
 if (!App.sample) {
-  App.chart.mapOptions.colorAxis = {
+  App.charts.mapOptions.colorAxis = {
     stops:
       [
         [0, '#666666'],

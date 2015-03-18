@@ -13,7 +13,12 @@ App.helpers = {};
  * Sets up the handlebars templates for select box options which display counties
  * and indicators.
  * Found At: {@link http://htmlr.tumblr.com/post/33202449716/}
- * @example Usage: <select><option>Please select</option>{{renderCountryOpts "Australia"}}</select>
+ * @example
+ * <!-- Usage -->
+ * <select>
+ *   <option>Please select</option>
+ *   {{renderCountryOpts "Australia"}}
+ * </select>
  * @method helperSetup
  * @memberof App.helpers
  * @return {Void}
