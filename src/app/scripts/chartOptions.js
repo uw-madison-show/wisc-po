@@ -113,13 +113,12 @@ App.charts.mapOptions = {
      */
     formatter: function () {
       var val = 'Value: ' + this.point.value;
+      var sample = 'Sample Size: ' + this.point.sample[2008];
       var err = '';
       if (this.point.value === -1) {
-
-        if (this.point.sample[2008]) {
-          val = 'Sample Size: ' + this.point.sample[2008];
-        } else {
-          val = 'No Data';
+        val = '';
+        if (!this.point.sample[2008]) {
+          sample = 'No Data';
         }
       } else {
         var error = App.data.getCurrentCountyError(this.point.name);
@@ -127,9 +126,9 @@ App.charts.mapOptions = {
       }
 
       return '<b>' + this.series.name + '</b><br>' +
-      'Point name: ' + this.point.name + '<br>' +
-      'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
-      val + '<br>' + err;
+        'Point name: ' + this.point.name + '<br>' +
+        'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
+        val + '<br>' + err + '<br>' + sample;
     }
   }
 };

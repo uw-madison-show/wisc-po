@@ -14,7 +14,7 @@
 var App = App || {
   dropDownIndicators: {},
   rounding: 3,
-  sample: true,
+  sample: false,
   templates: {}
 };
 
