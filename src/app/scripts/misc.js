@@ -9,8 +9,8 @@
 */
 App.misc = {
   colors: {
-    black: { r: 0,   g: 0,   b: 0,   a: 255 },
-    white: { r: 255, g: 255, b: 255, a: 255 }
+    black: [0,   0,   0  ],
+    white: [255, 255, 255]
   }
 };
 
@@ -82,26 +82,38 @@ App.misc.humanize = function(str) {
  * @method convertColor
  * @example
  * // A sample color
- * var color = {
- *   r: 50,
- *   g: 150,
- *   b: 20,
- *   a: 255
- * };
+ * var color = [
+ *   50,  // r
+ *   150, // g
+ *   20,  // b
+ *   255  // a
+ * ];
  * @memberof App.misc
- * @param {Object} Source   An object containing an rgba color
- * @param {Object} BG       An object containing an rgba color
- * @return {Object}         An object containing the blended rgb color.
+ * @param {Array} Source   An array containing an rgba color
+ * @param {Array} BG       An array containing an rgba color (alpha = 1)
+ * @return {Object}        An array containing the blended rgb color.
  */
-App.misc.convertColor = function(Source, BG) {
-  var finalColor = {};
+App.misc.convertColor = function(Source, alpha, BG) {
+  var finalColor = [];
 
   // R value
-  finalColor.r = ((1 - Source.a) * BG.r) + (Source.a * Source.r);
+  finalColor[0] = ((1 - alpha) * BG[0]) + (alpha * Source[0]);
   // G value
-  finalColor.g = ((1 - Source.a) * BG.g) + (Source.a * Source.g);
+  finalColor[1] = ((1 - alpha) * BG[1]) + (alpha * Source[1]);
   // B value
-  finalColor.b = ((1 - Source.a) * BG.b) + (Source.a * Source.b);
+  finalColor[2] = ((1 - alpha) * BG[2]) + (alpha * Source[2]);
 
   return finalColor;
+};
+
+/**
+ * Function to convert a color arry to an rgb string, uses a color as explained
+ * in {@link App.misc.convertColor}
+ * @method toRGB
+ * @memberof App.misc
+ * @param {Array}   color   An array containing an rgb color
+ * @return {String}         A string representation of the color
+ */
+App.misc.toRGB = function(color) {
+  return 'rgba(' + Math.floor(color[0]) + ', ' + Math.floor(color[1]) + ', ' + Math.floor(color[2]) + ', 1.0)';
 };
