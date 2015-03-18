@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint', 'jsdoc'],
+        tasks: ['jshint', 'jsdoc:temp'],
         options: {
           livereload: true
         }
@@ -419,6 +419,10 @@ module.exports = function (grunt) {
     ]);
   });
 
+  grunt.registerTask('docs', [
+    'jsdoc:dist'
+  ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -431,17 +435,14 @@ module.exports = function (grunt) {
     'copy:dist',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'docs'
   ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
     'build'
-  ]);
-
-  grunt.registerTask('docs', [
-    'jsdoc:dist'
   ]);
 
   grunt.registerTask('server-shutdown-listener',function(step){

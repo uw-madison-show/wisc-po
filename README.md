@@ -70,15 +70,16 @@ Documentation
 
 The documentation for this project is generated with JSDoc, an open source API
 documentation generator which allows for quick and simple documentation of
-Javascript projects. In the grunt tasks, there is a task titled `jsdoc`, which
-handles the documentation generation. This task is called both on the `build`
-task, as well as when Grunt is watching the preoject via `grunt serve` To just
+Javascript projects. In the grunt tasks, there are two configurations titled
+`jsdoc:temp and `jsdoc:dist`, which handles the documentation generation based on
+if building a new distribution or in testing environment. This doc generation is
+done during the `build` task (output is wisc-po/doc), as well as when Grunt is
+watching the project with the `serve` task (output is wisc-po/src/doc). To just
 generate a new version of the documentation, issue the command (from wisc-po/src):
 
-`grunt jsdoc`
+`grunt docs`
 
-The documentation is a web page that is generated at `wisc-po/doc`, with a main
-starting point of `index.html`.
+The documentation is a web page generated with a main starting point of `index.html`.
 
 List of Javascript Libraries/Plugins Used
 -----

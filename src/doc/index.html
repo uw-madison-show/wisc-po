@@ -93,13 +93,14 @@ the proper ssh keys on the server. Therefore it is not useful if you are
 personally trying the code.</p>
 <h2>Documentation</h2><p>The documentation for this project is generated with JSDoc, an open source API
 documentation generator which allows for quick and simple documentation of
-Javascript projects. In the grunt tasks, there is a task titled <code>jsdoc</code>, which
-handles the documentation generation. This task is called both on the <code>build</code>
-task, as well as when Grunt is watching the preoject via <code>grunt serve</code> To just
+Javascript projects. In the grunt tasks, there are two configurations titled
+<code>jsdoc:temp and</code>jsdoc:dist<code>, which handles the documentation generation based on
+if building a new distribution or in testing environment. This doc generation is
+done during the</code>build<code>task (output is wisc-po/doc), as well as when Grunt is
+watching the project with the</code>serve` task (output is wisc-po/src/doc). To just
 generate a new version of the documentation, issue the command (from wisc-po/src):</p>
-<p><code>grunt jsdoc</code></p>
-<p>The documentation is a web page that is generated at <code>wisc-po/doc</code>, with a main
-starting point of <code>index.html</code>.</p>
+<p><code>grunt docs</code></p>
+<p>The documentation is a web page generated with a main starting point of <code>index.html</code>.</p>
 <h2>List of Javascript Libraries/Plugins Used</h2><p>In this project, we used the following Javascript Libraries and plugins for the
 actual website. A list is below:</p>
 <ul>
