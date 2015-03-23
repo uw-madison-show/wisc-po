@@ -117,14 +117,14 @@ App.charts.mapOptions = {
        var size;
        var sample = this.point.sample[2008];
 
-       if (sample > 75) {
+       if (sample >= 75) {
          color = '#008000';
          size = 'Excellent';
-       } else if (sample > 40) {
+       } else if (sample >= 40) {
          color = '#CC6600';
          size = 'Fair';
        } else if (sample) {
-         color = '#cc0000';
+         color = '#CC0000';
          size = 'Poor';
        }
 
@@ -204,12 +204,10 @@ App.charts.mapSeries = {
         var value = this.value;
         var color = '#005645';
 
-        if (!App.sample) {
-          if (value === -1) {
-            $('#val').text('Selected Value: ' + this.name + ' - No Data');
-          } else {
-            $('#val').text('Selected Value: ' + this.name + ' - ' + value);
-          }
+        if (this.sample[2008] < 40) {
+          $('#sampleAlert').slideDown();
+        } else {
+          $('#sampleAlert').slideUp();
         }
 
         var chart = $('.chart:eq(1)').highcharts();
@@ -301,7 +299,7 @@ App.charts.mapSeries = {
           var chart = $('.chart:eq(1)').highcharts();
           chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');
-          $('#val').text('Selected Value: No region selected');
+          $('#sampleAlert').slideUp();
 
 
           if (region) {

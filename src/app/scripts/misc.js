@@ -45,6 +45,7 @@ App.misc.initTemplates = function() {
           App.watchers.downloadWatchers();
         } else if (page === 'charts') {
           App.charts.setupCharts();
+          $('.alert').hide();
         }
 
         // Init toggle switches
@@ -95,6 +96,9 @@ App.misc.humanize = function(str) {
  */
 App.misc.convertColor = function(Source, alpha, BG) {
   var finalColor = [];
+  if (alpha > 0) {
+    alpha += 0.25;
+  }
 
   // R value
   finalColor[0] = ((1 - alpha) * BG[0]) + (alpha * Source[0]);

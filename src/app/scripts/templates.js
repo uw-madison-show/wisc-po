@@ -104,7 +104,7 @@ this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.
   buffer += "\n  <h1>Data Charts</h1>\n  <hr/>\n\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\n\n  <div class=\"row\">\n";
+  buffer += "\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\n\n  <div id=\"sampleAlert\" class=\"alert alert-danger\" role=\"alert\">\n    <b>Warning: </b>This county has a small sample size, take caution when making\n    any assumptions based on this data. It is prone to have a large error.\n  </div>\n\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'map': (true),
     'num': ("0")
