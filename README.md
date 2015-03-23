@@ -71,13 +71,13 @@ Documentation
 The documentation for this project is generated with JSDoc, an open source API
 documentation generator which allows for quick and simple documentation of
 Javascript projects. In the grunt tasks, there are two configurations titled
-`jsdoc:temp and `jsdoc:dist`, which handles the documentation generation based on
-if building a new distribution or in testing environment. This doc generation is
+`jsdoc:temp` and `jsdoc:dist`, which handle the documentation generation based on
+if building a new distribution version or if in testing environment. This doc generation is
 done during the `build` task (output is wisc-po/doc), as well as when Grunt is
 watching the project with the `serve` task (output is wisc-po/src/doc). To just
 generate a new version of the documentation, issue the command (from wisc-po/src):
 
-`grunt docs`
+`grunt docs` or `build.sh` to build a new version of the website as well as the docs
 
 The documentation is a web page generated with a main starting point of `index.html`.
 
