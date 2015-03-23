@@ -131,7 +131,7 @@ App.charts.mapOptions = {
        var val = 'Value: ' + this.point.value;
        sample = '<span style="color: ' + color + '">Sample Size: ' + this.point.sample[2008] + ' (' + size + ')</span>';
        var err = '';
-       if (this.point.value === -1) {
+       if (this.point.value === -1 || App.sample) {
          val = '';
          if (!this.point.sample[2008]) {
            sample = 'No Data';
