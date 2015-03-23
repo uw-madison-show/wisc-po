@@ -105,31 +105,47 @@ App.charts.mapOptions = {
     enabled: false
   },
   tooltip: {
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     /**
      * Format the the tooltip for the map
      * @method formatter
      * @memberof App.charts.mapOptions
      * @return {String}   String represenation of the tooltip
      */
-    formatter: function () {
-      var val = 'Value: ' + this.point.value;
-      var sample = 'Sample Size: ' + this.point.sample[2008];
-      var err = '';
-      if (this.point.value === -1) {
-        val = '';
-        if (!this.point.sample[2008]) {
-          sample = 'No Data';
-        }
-      } else {
-        var error = App.data.getCurrentCountyError(this.point.name);
-        err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
-      }
+     formatter: function () {
+       var color;
+       var size;
+       var sample = this.point.sample[2008];
 
-      return '<b>' + this.series.name + '</b><br>' +
-        'Point name: ' + this.point.name + '<br>' +
-        'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
-        val + '<br>' + err + '<br>' + sample;
-    }
+       if (sample > 75) {
+         color = '#008000';
+         size = 'Excellent';
+       } else if (sample > 40) {
+         color = '#CC6600';
+         size = 'Fair';
+       } else if (sample) {
+         color = '#cc0000';
+         size = 'Poor';
+       }
+
+       var val = 'Value: ' + this.point.value;
+       sample = '<span style="color: ' + color + '">Sample Size: ' + this.point.sample[2008] + ' (' + size + ')</span>';
+       var err = '';
+       if (this.point.value === -1) {
+         val = '';
+         if (!this.point.sample[2008]) {
+           sample = 'No Data';
+         }
+       } else {
+         var error = App.data.getCurrentCountyError(this.point.name);
+         err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
+       }
+
+       return '<b>' + this.series.name + '</b><br>' +
+       'Point name: ' + this.point.name + '<br>' +
+       'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
+       val + '<br>' + err + '<br>' + sample;
+     }
   }
 };
 
