@@ -117,14 +117,14 @@ App.charts.mapOptions = {
        var size;
        var sample = this.point.sample[2008];
 
-       if (sample > 75) {
+       if (sample >= 75) {
          color = '#008000';
          size = 'Excellent';
-       } else if (sample > 40) {
+       } else if (sample >= 40) {
          color = '#CC6600';
          size = 'Fair';
        } else if (sample) {
-         color = '#cc0000';
+         color = '#CC0000';
          size = 'Poor';
        }
 
@@ -149,26 +149,26 @@ App.charts.mapOptions = {
   }
 };
 
-if (!App.sample) {
-  App.charts.mapOptions.colorAxis = {
-    stops:
-      [
-        [0, '#666666'],
-        // [0.001, '#fbfbfb'],
-        // [1.0, '#005645'],
-        [0.001,'#f7fcf5'],
-        [0.125,'#e5f5e0'],
-        [0.25,'#c7e9c0'],
-        [0.375,'#a1d99b'],
-        [0.5,'#74c476'],
-        [0.625,'#41ab5d'],
-        [0.75,'#238b45'],
-        [0.875,'#006d2c'],
-        [1.0,'#00441b'],
-      ],
-    min: 0
-  };
-}
+// if (!App.sample) {
+//   App.charts.mapOptions.colorAxis = {
+//     stops:
+//       [
+//         [0, '#666666'],
+//         // [0.001, '#fbfbfb'],
+//         // [1.0, '#005645'],
+//         [0.001,'#f7fcf5'],
+//         [0.125,'#e5f5e0'],
+//         [0.25,'#c7e9c0'],
+//         [0.375,'#a1d99b'],
+//         [0.5,'#74c476'],
+//         [0.625,'#41ab5d'],
+//         [0.75,'#238b45'],
+//         [0.875,'#006d2c'],
+//         [1.0,'#00441b'],
+//       ],
+//     min: 0
+//   };
+// }
 
 App.charts.mapSeries = {
 
@@ -204,12 +204,10 @@ App.charts.mapSeries = {
         var value = this.value;
         var color = '#005645';
 
-        if (!App.sample) {
-          if (value === -1) {
-            $('#val').text('Selected Value: ' + this.name + ' - No Data');
-          } else {
-            $('#val').text('Selected Value: ' + this.name + ' - ' + value);
-          }
+        if (this.sample[2008] < 40) {
+          $('#sampleAlert').slideDown();
+        } else {
+          $('#sampleAlert').slideUp();
         }
 
         var chart = $('.chart:eq(1)').highcharts();
@@ -301,7 +299,7 @@ App.charts.mapSeries = {
           var chart = $('.chart:eq(1)').highcharts();
           chart.yAxis[0].removePlotLine('plot-line-1');
           chart.yAxis[0].removePlotLine('plot-band-1');
-          $('#val').text('Selected Value: No region selected');
+          $('#sampleAlert').slideUp();
 
 
           if (region) {

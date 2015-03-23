@@ -88,7 +88,9 @@ App.data.getAreaData = function(area, indicator) {
         observation.value = observation.data[0][1];
         observation.region = observation.parent;
         observation['hc-key'] = observation.id;
-        observation.color = App.maps.regionColors[observation.region-1];
+        var color = App.misc.convertColor(App.maps.regionColors[observation.region-1], observation.value / 50, App.misc.colors.white);
+        observation.color = App.misc.toRGB(color);
+
         delete observation.parent;
         delete observation.data;
       } else {

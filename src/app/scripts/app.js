@@ -14,7 +14,7 @@
 var App = App || {
   dropDownIndicators: {},
   rounding: 3,
-  sample: true,
+  sample: false,
   templates: {}
 };
 
@@ -38,7 +38,8 @@ App.maps = {
   ],
 
   regionColors: [
-    '#f7a35c', '#90ee7e', '#7798BF', '#7cb5ec', '#434348'
+    //'#f7a35c', '#90ee7e', '#7798BF', '#7cb5ec', '#434348'
+    [247, 163, 92], [144, 238, 126], [119, 152, 191], [124, 181, 236], [67, 67, 72]
   ],
 
   regionDictionary: {
