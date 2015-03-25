@@ -151,9 +151,7 @@ this["App"]["templates"]["data"] = Handlebars.template({"compiler":[6,">= 2.0.0-
 
 this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\n\n";
-  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
-    'active_home': (true)
-  }, helpers, partials, data);
+  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\n  <div class=\"col-xs-1\">\n    <h1>\n      <span class=\"glyphicon glyphicon-remove-circle\"></span>\n    </h1>\n  </div>\n\n  <div class=\"col-xs-11\">\n    <h1>We're sorry, something went wrong.\n      <br>Please refresh the page.\n    </h1>\n  </div>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);

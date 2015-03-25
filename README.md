@@ -36,13 +36,13 @@ Next, you will need to clone our git repository via the command:
 
 `git clone git@github.com:uw-madison-show/wisc-po.git`
 
-Finally to install other required dependencies, navigate into the `wisc-po`
+Finally to install other required dependencies, navigate into the `wisc-po/src`
 directory and then type in the following commands:
 
 - `npm install`
 - `bower install`
 
-All dependencies have now been set up.
+This will install local dependencies. Now all dependencies have been set up.
 
 Building the Site
 -----
