@@ -14,6 +14,18 @@
     any assumptions based on this data. It is prone to have a large error.
   </div>
 
+  <div id="newTour" class="alert aler-dismissable alert-success" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p>
+      It looks like you are new to the Wisc-Portal website. If you
+      have never used this portal before, you should take a quick tour of how to
+      use this tool!<br><br>
+      <button id="startTour" class="btn btn-success">Start Tour</button>
+    </p>
+  </div>
+
   <div class="row">
     {{> halfChart num='0' map=true}}
     {{> halfChart num='1' column=true}}

@@ -11,9 +11,9 @@ App.watchers = {};
 window.onerror = function(message, file, line) {
   $('#content').html(App.templates.error);
 
-  if (_gaq) {
+  // if (_gaq) {
     // _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
-  }
+  // }
 
   return false;
 };
@@ -121,6 +121,11 @@ App.watchers.chartWatchers = function() {
     chart1.highcharts().redraw();
     chart2.highcharts().reflow();
     chart2.highcharts().redraw();
+  });
+
+  $('#startTour').click(function() {
+    $('#newTour').slideUp();
+    App.tour.start();
   });
 
 };

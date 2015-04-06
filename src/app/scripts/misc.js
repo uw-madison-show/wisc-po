@@ -46,6 +46,10 @@ App.misc.initTemplates = function() {
         } else if (page === 'charts') {
           App.charts.setupCharts();
           $('.alert').hide();
+          if (App.misc.getCookie('visitedCharts') !== 'true' || true) {
+            $('#newTour').show();
+            App.misc.setCookie('visitedCharts', 'true', 60);
+          }
         }
 
         // Init toggle switches
@@ -120,4 +124,46 @@ App.misc.convertColor = function(Source, alpha, BG) {
  */
 App.misc.toRGB = function(color) {
   return 'rgba(' + Math.floor(color[0]) + ', ' + Math.floor(color[1]) + ', ' + Math.floor(color[2]) + ', 1.0)';
+};
+
+/**
+ * Function to read the value of a given cookie, found at:
+ * {@link http://www.w3schools.com/js/js_cookies.asp}
+ *
+ * @method getCookie
+ * @memberof App.misc
+ * @param {String}  cname   Name of the cookie to retrieve
+ * @return {String}         The string value of the requested cookie
+ */
+App.misc.getCookie = function(cname) {
+  var name = cname + '=';
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0)=== ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length,c.length);
+    }
+  }
+
+  return '';
+};
+
+/**
+* Function to set the value of a given cookie, found at:
+* {@link http://www.w3schools.com/js/js_cookies.asp}
+*
+* @method setCookie
+* @memberof App.misc
+* @param {String}  cname   Name of the cookie to set
+* @param {String}  cvalue  Value to set the cookie
+* @param {String}  exdays  Number of days before the cookie expires
+*/
+App.misc.setCookie = function(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = 'expires='+d.toUTCString();
+  document.cookie = cname + '=' + cvalue + '; ' + expires;
 };
