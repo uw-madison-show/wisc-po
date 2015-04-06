@@ -118,10 +118,16 @@ App.data.getAreaData = function(area, indicator) {
  * @return {Object}         The data for the given county
  */
 App.data.getCurrentCountyData = function(county) {
+  console.log(county);
   var data = $.grep(App.data.currentMap.observations, function (item) {
-    return item.name === county;
+    return item.name.toLowerCase() === county.toLowerCase();
   });
-  return data[0];
+
+  if (data[0]) {
+    return data[0].data[0];
+  } else {
+    return [2008, -1, -1];
+  }
 };
 
 /**
@@ -133,10 +139,14 @@ App.data.getCurrentCountyData = function(county) {
  */
 App.data.getCurrentCountyError = function(county) {
   var data = $.grep(App.data.currentMap.error, function (item) {
-    return item.name === county + ' - Error';
+    return item.name.toLowerCase() === (county + ' - Error').toLowerCase();
   });
 
-  return data[0].data[0];
+  if (data[0]) {
+    return data[0].data[0];
+  } else {
+    return [2008, -1, -1];
+  }
 };
 
 /**

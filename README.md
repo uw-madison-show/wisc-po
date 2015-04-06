@@ -91,5 +91,6 @@ actual website. A list is below:
 - [jQuery](http://jquery.com/ "jQuery")
 - [Twitter Bootstrap](http://getbootstrap.com/ "Twitter Bootstrap")
 - [Bootstrap-Switch](http://www.bootstrap-switch.org/ "Boostrap-Switch")
+- [Bootstrap-Tour](http://bootstraptour.com/ "Bootstrap Tour")
 - [Handlebars](http://handlebarsjs.com/ "Handlebars")
 - [excellentexport](https://github.com/jmaister/excellentexport "excellentexport")

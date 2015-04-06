@@ -138,7 +138,11 @@ App.charts.mapOptions = {
          }
        } else {
          var error = App.data.getCurrentCountyError(this.point.name);
-         err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
+         if (error[1] !== -1 && error[2] !== -1) {
+          err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
+        } else {
+          err = 'Error Range: No Data';
+        }
        }
 
        return '<b>' + this.series.name + '</b><br>' +

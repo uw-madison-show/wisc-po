@@ -14,7 +14,7 @@
 var App = App || {
   dropDownIndicators: {},
   rounding: 3,
-  sample: true,
+  sample: false,
   templates: {}
 };
 
@@ -70,7 +70,7 @@ App.maps = {
     'Iowa': 2,
     'Iron': 4,
     'Jackson': 3,
-    'Jefferson': 1,
+    'Jefferson': 2,
     'Juneau': 2,
     'Kenosha': 1,
     'Kewaunee': 5,
@@ -105,7 +105,7 @@ App.maps = {
     'St. Croix': 3,
     'Taylor': 4,
     'Trempealeau': 3,
-    'Vernon': 3,
+    'Vernon': 2,
     'Vilas': 4,
     'Walworth': 1,
     'Washburn': 3,

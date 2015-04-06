@@ -12,7 +12,7 @@ window.onerror = function(message, file, line) {
   $('#content').html(App.templates.error);
 
   if (_gaq) {
-    _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
+    // _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
   }
 
   return false;
