@@ -94,8 +94,9 @@ App.misc.humanize = function(str) {
  *   255  // a
  * ];
  * @memberof App.misc
- * @param {Array} Source   An array containing an rgba color
- * @param {Array} BG       An array containing an rgba color (alpha = 1)
+ * @param {Array}   Source   An array containing an rgba color
+ * @param {Number}  Alpha    Alpha for the source color
+ * @param {Array}   BG       An array containing an rgba color (alpha = 1)
  * @return {Object}        An array containing the blended rgb color.
  */
 App.misc.convertColor = function(Source, alpha, BG) {

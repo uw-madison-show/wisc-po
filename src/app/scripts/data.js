@@ -161,6 +161,9 @@ App.data.getLineData = function(indicator) {
   var stateData = App.data.getAreaData('state', indicator);
   var lineData = [];
 
+  var lineWidth = 2;
+  var alpha = 0.5;
+
   if (!$.isEmptyObject(regionData)) {
     lineData.data_type = regionData.data_type;
 
@@ -169,10 +172,14 @@ App.data.getLineData = function(indicator) {
       lineData.push(this);
     });
 
+
     $.each(regionData.error, function(i) {
       this.type = 'errorbar';
-      this.color = App.misc.toRGB(App.maps.regionColors[i]);
-      this.lineWidth = '1.5';
+      this.color = 'rgba(' +
+        App.maps.regionColors[i][0] + ',' +
+        App.maps.regionColors[i][1] + ',' +
+        App.maps.regionColors[i][2] + ',' + alpha + ')';
+      this.lineWidth = lineWidth;
       this.visible = false;
       lineData.push(this);
     });
@@ -184,7 +191,8 @@ App.data.getLineData = function(indicator) {
     var stateError = stateData.error[0];
     stateError.type = 'errorbar';
     stateError.color = '#f15c80';
-    stateError.lineWidth = '1.5';
+    stateError.color = 'rgba(241, 92, 128, ' + alpha + ')';
+    stateError.lineWidth = lineWidth;
     stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
     lineData.push(stateError);
   }
