@@ -20,7 +20,7 @@ App.tour = new Tour({
       placement: 'top',
       onShow: function() {
         $('.dropDownIndicators option:first').prop('selected', true);
-        $('.dropDownIndicators option:first').trigger("change");
+        $('.dropDownIndicators option:first').trigger('change');
       }
     },
     {

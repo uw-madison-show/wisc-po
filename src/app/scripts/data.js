@@ -169,8 +169,10 @@ App.data.getLineData = function(indicator) {
       lineData.push(this);
     });
 
-    $.each(regionData.error, function() {
+    $.each(regionData.error, function(i) {
       this.type = 'errorbar';
+      var color = App.maps.regionColors[i];
+      this.color = App.misc.toRGB(color);
       this.visible = false;
       lineData.push(this);
     });
@@ -181,6 +183,7 @@ App.data.getLineData = function(indicator) {
 
     var stateError = stateData.error[0];
     stateError.type = 'errorbar';
+    stateError.color = "#f15c80";
     stateError.visible = $('input[name="errorbar"]').bootstrapSwitch('state');
     lineData.push(stateError);
   }
