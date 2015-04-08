@@ -288,7 +288,7 @@ with custom reigons.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line79">line 79</a>
+        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -344,6 +344,160 @@ var color = [
   20,  // b
   255  // a
 ];</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".getCookie"><span class="type-signature">(static) </span>getCookie<span class="signature">(cname)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Function to read the value of a given cookie, found at:
+<a href="http://www.w3schools.com/js/js_cookies.asp">http://www.w3schools.com/js/js_cookies.asp</a>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name of the cookie to retrieve</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line129">line 129</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The string value of the requested cookie
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -454,7 +608,7 @@ like 'abc_tHIs_IS_cool' into 'Abc This Is Cool'
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line62">line 62</a>
+        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -610,6 +764,184 @@ which is based on the # in address.
 
     
 
+    <h4 class="name" id=".setCookie"><span class="type-signature">(static) </span>setCookie<span class="signature">(cname, cvalue, exdays)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Function to set the value of a given cookie, found at:
+<a href="http://www.w3schools.com/js/js_cookies.asp">http://www.w3schools.com/js/js_cookies.asp</a>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cname</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Name of the cookie to set</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cvalue</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Value to set the cookie</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>exdays</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Number of days before the cookie expires</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id=".toRGB"><span class="type-signature">(static) </span>toRGB<span class="signature">(color)</span><span class="type-signature"> &rarr; {String}</span></h4>
 
     
@@ -711,7 +1043,7 @@ in <a href="App.misc.html#.convertColor">App.misc.convertColor</a>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line113">line 113</a>
+        <a href="misc.js.html">misc.js</a>, <a href="misc.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -781,7 +1113,7 @@ in <a href="App.misc.html#.convertColor">App.misc.convertColor</a>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Mon Mar 23 2015 15:17:43 GMT-0500 (CDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Wed Apr 08 2015 13:21:24 GMT-0500 (CDT)
 </footer>
 
 <script> prettyPrint(); </script>
