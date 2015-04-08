@@ -6,9 +6,9 @@ Wisconsin Health Data Portal
 The Survey of the Health of Wisconsin is launching a web data portal to help
 public health officers in the state improve the health of our communities.
 
-We are happy to announce our v1.0a release of this tool. Right now, it is still
+We are happy to announce our v1.1a release of this tool. Right now, it is still
 very much under development but would like to share this news as we continue
-forward! To view a live preview of this alpha version, please download a copy from [here](https://github.com/uw-madison-show/wisc-po/releases/tag/v1.0-a "Version 1.0a Release")
+forward! To view a live preview of this alpha version, please download a copy from [here](https://github.com/uw-madison-show/wisc-po/releases/tag/v1.1-a "Version 1.1a Release")
 
 Check back for updates as we develop this tool for the community!
 
