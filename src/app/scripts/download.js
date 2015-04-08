@@ -19,17 +19,15 @@ App.download = {};
  * @return {Void}
  */
 App.download.addRow = function(name, year, value, errNeg, errPos) {
-  var errSep = ' - ';
 
   if (value === -1) {
     value = 'No Data';
     errNeg = 'No Data';
-    errSep = '';
-    errPos = '';
+    errPos = 'No Data';
   }
 
   var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
-  var error = errorEnable ? '<td>' + errNeg + errSep + errPos + '</td>' : '';
+  var error = errorEnable ? '<td>' + errNeg + '</td><td>' + errPos + '</td>' : '';
 
   $('#myTable').append('<tr><td>' + name + '</td><td>' + year + '</td><td>' + value +
     '</td>' + error);
@@ -92,7 +90,7 @@ App.download.fillTable = function() {
   var stateEnable = $('input[name="state"]').bootstrapSwitch('state');
   var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
 
-  var errors = errorEnable ? '<th>' + indicatorName + ' - Confidence</th>' : '';
+  var errors = errorEnable ? '<th>' + 'Confidence (+)</th><th>Confidence(-)</th>' : '';
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
   $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +

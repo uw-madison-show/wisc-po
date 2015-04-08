@@ -44,18 +44,6 @@ App.tour = new Tour({
       placement: 'top'
     },
     {
-      element: '',
-      title: '',
-      content: '',
-      placement: 'top'
-    },
-    {
-      element: '',
-      title: '',
-      content: '',
-      placement: 'top'
-    },
-    {
       element: '.highcharts-legend',
       title: 'Chart Legend',
       content: 'The chart legend shows which data series are currently shown on the chart. If you click on a series, it will toggle on/off.',
