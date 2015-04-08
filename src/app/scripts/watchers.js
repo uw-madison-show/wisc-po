@@ -126,8 +126,9 @@ App.watchers.chartWatchers = function() {
   });
 
   $('#startTour').click(function() {
-    $('#newTour').slideUp();
-    App.tour.start();
+    $('#newTour').slideUp(function() {
+      App.tour.start();
+    });
   });
 
 };

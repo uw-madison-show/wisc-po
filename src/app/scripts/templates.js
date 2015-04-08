@@ -101,10 +101,10 @@ this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.
     'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <h1>Data Charts</h1>\n  <hr/>\n\n";
+  buffer += "\n  <h1>Data Charts</h1>\n  <hr/>\n\n  <div id=\"newTour\" class=\"alert aler-dismissable alert-success hidden-print\" role=\"alert\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n    <p>\n      It looks like you are new to the Wisc-Portal website. If you\n      have never used this portal before, you should take our quick tour of how to\n      use this tool!<br><br>\n      <button id=\"startTour\" class=\"btn btn-success\">Start Tour</button>\n    </p>\n  </div>\n\n";
   stack1 = this.invokePartial(partials.dropdown, '  ', 'dropdown', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\n\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\n    <b>Warning: </b>This county has a small sample size, take caution when making\n    any assumptions based on this data. It is prone to have a large error.\n  </div>\n\n  <div id=\"newTour\" class=\"alert aler-dismissable alert-success hidden-print\" role=\"alert\">\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n    <p>\n      It looks like you are new to the Wisc-Portal website. If you\n      have never used this portal before, you should take our quick tour of how to\n      use this tool!<br><br>\n      <button id=\"startTour\" class=\"btn btn-success\">Start Tour</button>\n    </p>\n  </div>\n\n  <div class=\"row\">\n";
+  buffer += "\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\n\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\n    <b>Warning: </b>This county has a small sample size, take caution when making\n    any assumptions based on this data. It is prone to have a large error.\n  </div>\n\n  <div class=\"row\">\n";
   stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
     'map': (true),
     'num': ("0")
