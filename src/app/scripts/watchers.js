@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, App, _gaq */
+/* global $, App */
 'use strict';
 
 /**
@@ -10,7 +10,7 @@ App.watchers = {};
 /* Handle all errors with error screen, and log to google analytics if used */
 window.onerror = function(message, file, line) {
   $('#content').html(App.templates.error);
-
+  console.error(file + '(' + line + ') ' + message);
   // if (_gaq) {
     // _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
   // }
@@ -64,6 +64,7 @@ App.watchers.chartWatchers = function() {
     var chart = $('.chart:eq(1)').highcharts();
 
     $('#val').text('Selected Value: No region selected');
+    $('#sampleAlert').slideUp();
 
     // TODO: For now, just destroying charts as it seems just as quick and reduces
     //       the amount of edge case errors that we were getting before

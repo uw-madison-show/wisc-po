@@ -1,5 +1,6 @@
 // JSHint options:
-/* global App */
+/* global App, Highcharts */
 'use strict';
 
+Highcharts.setOptions({lang: {printChart: 'Print'}});
 App.misc.initTemplates();

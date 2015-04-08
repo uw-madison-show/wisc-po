@@ -63,7 +63,7 @@ App.data.getAreaData = function(area, indicator) {
       areaData.error.push({});
       areaData.error[i1].data = [];
       // areaData.error[i1].id = observation.id;
-      areaData.error[i1].name = observation.name + ' - Error';
+      areaData.error[i1].name = observation.name + ' - Confidence';
       areaData.error[i1].parent = observation.parent;
 
       var newData = [];
@@ -139,7 +139,7 @@ App.data.getCurrentCountyData = function(county) {
  */
 App.data.getCurrentCountyError = function(county) {
   var data = $.grep(App.data.currentMap.error, function (item) {
-    return item.name.toLowerCase() === (county + ' - Error').toLowerCase();
+    return item.name.toLowerCase() === (county + ' - Confidence').toLowerCase();
   });
 
   if (data[0]) {
