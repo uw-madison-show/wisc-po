@@ -90,7 +90,7 @@ App.download.fillTable = function() {
   var stateEnable = $('input[name="state"]').bootstrapSwitch('state');
   var errorEnable = $('input[name="errors"]').bootstrapSwitch('state');
 
-  var errors = errorEnable ? '<th>' + 'Confidence (+)</th><th>Confidence(-)</th>' : '';
+  var errors = errorEnable ? '<th>' + 'Confidence (-)</th><th>Confidence(+)</th>' : '';
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
   $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +

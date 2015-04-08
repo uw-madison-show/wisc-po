@@ -8,9 +8,10 @@
 App.watchers = {};
 
 /* Handle all errors with error screen, and log to google analytics if used */
-window.onerror = function(message, file, line) {
+window.onerror = function() {
   $('#content').html(App.templates.error);
-  
+
+// window.onerror = function(message, file, line) {
   // if (_gaq) {
     // _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
   // }
