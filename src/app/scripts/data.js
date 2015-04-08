@@ -118,13 +118,12 @@ App.data.getAreaData = function(area, indicator) {
  * @return {Object}         The data for the given county
  */
 App.data.getCurrentCountyData = function(county) {
-  console.log(county);
   var data = $.grep(App.data.currentMap.observations, function (item) {
     return item.name.toLowerCase() === county.toLowerCase();
   });
 
   if (data[0]) {
-    return data[0].data[0];
+    return data[0];
   } else {
     return [2008, -1, -1];
   }

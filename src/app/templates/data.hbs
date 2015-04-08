@@ -15,7 +15,7 @@
 
   <h3>Data Download</h3>
 
-  <div class="row">
+  <div class="row hidden-print">
     <div class="form-group nav-select col-xs-4 col-sm-3">
       <label class="control-label">County&nbsp;Data</label>
       <br>
@@ -43,7 +43,7 @@
     </div> -->
   </div>
 
-  <div class="row">
+  <div class="row hidden-print">
     <div class="form-group nav-select col-xs-6">
       <label class="control-label">County</label>
       <select disabled class="form-control dropDownCounty">
@@ -75,7 +75,7 @@
 
 </div>
 
-  <div class="row">
+  <div class="row hidden-print">
     <div class="col-xs-12">
       <!-- <a id="download" onClick="downloadData()" class="btn btn-primary btn-lg" role="button">Download</a> -->
       <a download="data.csv" href="#" onclick="return ExcellentExport.csv(this, 'myTable');"
