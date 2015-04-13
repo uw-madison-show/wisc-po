@@ -23,7 +23,11 @@ App.initTemplates = function() {
   $.when(d1).done(function() {
     if (window.location.href.match(/\#.*/)) {
       var page = window.location.href.match(/\#.*/)[0].substring(1);
-      if (page && page !== 'error') {
+      if (page !== 'error') {
+        if (page === '') {
+          page = 'index';
+        }
+
         $('#content').html(App.templates[page]);
 
         if (page === 'data') {
@@ -34,25 +38,38 @@ App.initTemplates = function() {
 
           if (App.misc.getCookie('visitedData') !== 'true' || true) {
             $('#newTour').show();
-            App.misc.setCookie('visitedData', 'true', 90);
+            if (App.misc.getCookie('acceptCookie') === 'true') {
+              App.misc.setCookie('visitedData', 'true', 90);
+            }
           }
         } else if (page === 'charts') {
           App.charts.setupCharts();
-          $('.alert').hide();
+          $('#sampleAlert').hide();
 
           if (App.misc.getCookie('visitedCharts') !== 'true' || true) {
             $('#newTour').show();
-            App.misc.setCookie('visitedCharts', 'true', 90);
+            if (App.misc.getCookie('acceptCookie') === 'true') {
+              App.misc.setCookie('visitedCharts', 'true', 90);
+            }
           }
         }
-
-        // Init toggle switches
-        $('.bootstrapSwitch').bootstrapSwitch();
       } else {
         $('#content').html(App.templates.index);
       }
     } else {
       $('#content').html(App.templates.index);
+    }
+
+
+    // Init toggle switches
+    $('.bootstrapSwitch').bootstrapSwitch();
+
+    $('#cookies').on('close.bs.alert', function () {
+      App.misc.setCookie('acceptCookie', 'true', 90);
+    });
+
+    if (App.misc.getCookie('acceptCookie') === 'true') {
+      $('#cookies').hide();
     }
   });
 };

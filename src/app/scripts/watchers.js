@@ -24,7 +24,6 @@ $(window).bind('hashchange', function() {
   App.initTemplates();
 });
 
-
 /**
  * Set up watchers for the download page when called
  * @method downloadWatchers
