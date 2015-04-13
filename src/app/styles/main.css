@@ -27,10 +27,35 @@ body {
   color: #333;
 }
 
+/* Navbar styling */
+nav {
+  padding: 12px;
+}
+
 .navbar-right {
   margin-right: 0px !important;
 }
 
+.navbar-nav > li > a, .navbar-brand {
+  padding: 8px 12px !important;
+  height: auto !important;
+  border-radius: 5px;
+}
+
+.navbar {
+  min-height: 32px !important
+}
+
+
+.navbar-default {
+  background-color: rgba(248, 248, 248, 0.95);
+}
+
+.nav-select {
+  margin-top: 12px;
+}
+
+/* Additional Bootstrap custom styling */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
@@ -47,14 +72,6 @@ hr {
   border-top: 1px solid #ddd;
 }
 
-nav {
-  padding: 12px;
-}
-
-.navbar-default .navbar-nav > li > a {
-  border-radius: 5px;
-}
-
 .panel-heading:hover {
   /*cursor: pointer;*/
 }
@@ -63,10 +80,7 @@ nav {
   margin-top: 10px;
 }
 
-#logo {
-  max-height: 96px;
-}
-
+/* Styling for charts */
 .chart {
   height: 100%;
   padding: 40px 0;
@@ -80,8 +94,9 @@ nav {
   height: 800px;
 }
 
-.nav-select {
-  margin-top: 12px;
+/* Other misc styling */
+#logo {
+  max-height: 96px;
 }
 
 .padding-bottom {
