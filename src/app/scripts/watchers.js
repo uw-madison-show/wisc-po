@@ -21,7 +21,7 @@ window.onerror = function() {
 
 /* Set up templates */
 $(window).bind('hashchange', function() {
-  App.misc.initTemplates();
+  App.initTemplates();
 });
 
 
@@ -46,6 +46,12 @@ App.watchers.downloadWatchers = function() {
     App.data.currentLine = App.data.getLineData(indicator);
 
     App.download.fillTable();
+  });
+
+  $('#startTour').click(function() {
+    $('#newTour').slideUp(function() {
+      App.tourData.start();
+    });
   });
 };
 
@@ -127,7 +133,7 @@ App.watchers.chartWatchers = function() {
 
   $('#startTour').click(function() {
     $('#newTour').slideUp(function() {
-      App.tour.start();
+      App.tourCharts.start();
     });
   });
 

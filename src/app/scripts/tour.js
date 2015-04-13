@@ -2,11 +2,18 @@
 /* global App, Tour */
 'use strict';
 
-App.tour = new Tour({
-  // backdrop: true,
-  // backdropPadding: 15,
+/**
+* The bootstrap-tour object that is used for the chart tour.
+* @memberof App
+*/
+App.tourCharts = new Tour({
   storage: false,
   steps: [
+    {
+      orphan: true,
+      title: 'Welcome to charts on Wisc Portal!',
+      content: 'In the following quick 2 minute walkthrough of our system, we will highlight features and important aspects of charts on the Wisc Portal.'
+    },
     {
       element: '.chartSelect',
       title: 'Options Menu',
@@ -20,7 +27,7 @@ App.tour = new Tour({
       placement: 'top',
       onShow: function() {
         $('.dropDownIndicators option:first').prop('selected', true);
-        $('.dropDownIndicators option:first').trigger('change');
+        $('.dropDownIndicators').trigger('change');
       }
     },
     {
@@ -107,19 +114,118 @@ App.tour = new Tour({
     {
       orphan: true,
       title: 'You are all set to go!',
-      content: 'We hope that you enjoy your time on Wisc Portal',
-      placement: 'top'
+      content: 'We hope that you enjoy your time using our charts on Wisc Portal'
     },
   ]
 });
 
-// App.tour.setCurrentStep(5);
-
-/*
-{
-  element: '',
-  title: '',
-  content: '',
-  placement: 'top'
-},
+/**
+* The bootstrap-tour object that is used for the data download tour.
+* @memberof App
 */
+App.tourData = new Tour({
+  // backdrop: true,
+  // backdropPadding: 15,
+  storage: false,
+  steps: [
+    {
+      orphan: true,
+      title: 'Welcome to data download on Wisc Portal!',
+      content: 'In the following quick 1 minute walkthrough of our system, we will highlight features and important aspects of data download on the Wisc Portal.'
+    },
+    {
+      element: '#topOptions',
+      title: 'Top Section of Options',
+      content: 'Use the top section of the options menu to toggle individual aspects of your data export to your needs.',
+      placement: 'top'
+    },
+    {
+      element: '#toggleCounty',
+      title: 'County Data Toggle',
+      content: 'Use this toggle to include data on a specific county (or all counties)',
+      placement: 'top',
+      onShow: function() {
+        $('input[name="county"]').bootstrapSwitch('state', true);
+      }
+    },
+    {
+      element: '#toggleRegion',
+      title: 'Region Data Toggle',
+      content: 'Use this toggle to include data on all reigons',
+      placement: 'top',
+      onShow: function() {
+        $('input[name="region"]').bootstrapSwitch('state', true);
+      },
+      onHide: function() {
+        $('input[name="region"]').bootstrapSwitch('state', false);
+      }
+    },
+    {
+      element: '#toggleState',
+      title: 'State Data Toggle',
+      content: 'Use this toggle to include data on the state',
+      placement: 'top',
+      onShow: function() {
+        $('input[name="state"]').bootstrapSwitch('state', true);
+      }
+    },
+    {
+      element: '#toggleConfidence',
+      title: 'Confidence Intervals Toggle',
+      content: 'Use this toggle to include all confidence interval data',
+      placement: 'top',
+      onShow: function() {
+        $('input[name="errors"]').bootstrapSwitch('state', true);
+      }
+    },
+    {
+      element: '#bottomOptions',
+      title: 'Use the bottom section of the options menu to select precise details for the data to export.',
+      content: '',
+      placement: 'top'
+    },
+    {
+      element: '#selectCounty',
+      title: 'County Selection',
+      content: 'This selection dropdown allows for choosing of a specific county, or all counties (if County Data Toggle enabled)',
+      placement: 'top',
+      onShow: function() {
+        $('.dropDownCounty').val('Dane');
+        $('.dropDownCounty').trigger('change');
+      }
+    },
+    {
+      element: '#selectIndicators',
+      title: 'Indicator Selection',
+      content: 'This selection dropdown allows for the choosing of the specific indicator to provide data for',
+      placement: 'top',
+      onShow: function() {
+        $('.dropDownIndicators option:eq(2)').prop('selected', true);
+        $('.dropDownIndicators').trigger('change');
+      }
+    },
+    {
+      element: '#tableTitle',
+      title: 'Data Table',
+      content: 'The data table gives a quick visual representation of the data that will be provided when you are ready to download. This table is also printer friendly by default if you just want to print it out.',
+      placement: 'top'
+    },
+    {
+      element: '#downloadCSV',
+      title: 'Download as CSV',
+      content: 'This button will produce a CSV file for your data selected (identical to the data table above)',
+      placement: 'top'
+    },
+    {
+      element: '#downloadExcel',
+      title: 'Download for Excel',
+      content: 'This button will produce an excel (xls) file for your data selected (identical to the data table above)',
+      placement: 'top'
+    },
+    {
+      orphan: true,
+      title: 'You are all set to go!',
+      content: 'We hope that you enjoy your time using the data download on Wisc Portal'
+    }
+  ]
+});

@@ -93,7 +93,7 @@ App.download.fillTable = function() {
   var errors = errorEnable ? '<th>' + 'Confidence (-)</th><th>Confidence(+)</th>' : '';
   // var country = $('input[name="country"]').bootstrapSwitch('state');
   $('#myTable').empty();
-  $('#myTable').append('<tr><th>Name</th>' + '<th>Year</th><th>' +
+  $('#myTable').append('<tr><th>Area</th>' + '<th>Year</th><th>' +
     indicatorName + '</th>' + errors + '</tr>');
 
   if (countyEnable) {

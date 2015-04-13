@@ -219,7 +219,7 @@ App.data.getLineData = function(indicator) {
  * @method getData
  * @memberof App.data
  * @param {Deferred} d1   An object which is used to handle a callback in
- * {@link App.misc.initTemplates}
+ * {@link App.initTemplates}
  * @return {Void}
  */
 App.data.getData = function(d1) {
