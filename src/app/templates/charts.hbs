@@ -31,7 +31,14 @@
     {{> halfChart num='1' column=true}}
   </div>
 
-  <p id="description"></p>
+  <div class="row">
+    <p id="description" class="col-sm-9 col-xs-12"></p>
+    <div class="col-sm-3 col-xs-12">
+      <button id="dataExport" class="btn btn-primary pull-right">Export this data</button>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
 
   {{> footer}}
 

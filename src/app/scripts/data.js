@@ -25,7 +25,6 @@ App.data = {
  * @return {String}           The description of the given indicator
  */
 App.data.getDescription = function(indicator) {
-  console.log(indicator);
   if (App.data.json.state[indicator].description) {
     return App.data.json.state[indicator].description;
   } else {

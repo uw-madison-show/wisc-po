@@ -33,7 +33,7 @@ App.helpers.helperSetup = function() {
       if(this === selected) {
         selectedVal = 'selected';
       }
-      ret+='<option '+selectedVal+' value="'+this+'" data-variable="' + this + '">'+this+'</option>';
+      ret+='<option '+selectedVal+' value="'+this+'">'+this+'</option>';
     });
 
     return new Handlebars.SafeString(ret);
@@ -62,7 +62,7 @@ App.helpers.helperSetup = function() {
       if(this[0] === selected){
         selectedVal = 'selected';
       }
-      ret+='<option '+selectedVal+' value="'+this[0]+'" data-variable="' + this[1] + '">'+this[0]+'</option>';
+      ret+='<option '+selectedVal+' value="'+this[1] + '">'+this[0]+'</option>';
     });
 
     return new Handlebars.SafeString(ret);

@@ -5,7 +5,33 @@
 /**
 * @namespace App.download
 */
-App.download = {};
+App.download = {
+  exportedData: {
+    enabled: false,
+    selectedIndicator: '',
+    selectedCounty: '',
+    enableError: false
+  }
+};
+
+/**
+ * Generate a pre-filled download section based on chart page, called from {@link App.download.fillTable}
+ * @method setupDownload
+ * @memberof App.download
+ * @return {Void}
+ */
+App.download.setupDownload = function() {
+  $('.dropDownIndicators').val(App.download.exportedData.selectedIndicator);
+  $('.dropDownCounty').val(App.download.exportedData.selectedCounty);
+
+  var county = App.download.exportedData.selectedCounty !== '';
+  $('.dropDownCounty').prop('disabled', !county);
+  $('input[name="county"]').bootstrapSwitch('state', county);
+
+  $('input[name="region"]').bootstrapSwitch('state', true);
+  $('input[name="state"]').bootstrapSwitch('state', true);
+  $('input[name="errors"]').bootstrapSwitch('state', App.download.exportedData.enableError);
+};
 
 /**
  * Add a row to the table on the download page
@@ -82,7 +108,12 @@ App.download.addArea = function(areaName, indicator) {
  * @return {Void}
  */
 App.download.fillTable = function() {
-  var indicator = $('.dropDownIndicators option:selected').data('variable');
+  if (App.download.exportedData.enabled) {
+    App.download.exportedData.enabled = false;
+    App.download.setupDownload();
+  }
+
+  var indicator = $('.dropDownIndicators option:selected').val();
   var indicatorName = $('.dropDownIndicators option:selected').text();
   var county = $('.dropDownCounty option:selected').text();
   var countyEnable = $('input[name="county"]').bootstrapSwitch('state');

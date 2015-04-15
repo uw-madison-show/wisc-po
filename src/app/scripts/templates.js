@@ -122,7 +122,7 @@ this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.
     'num': ("1")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n  <p id=\"description\"></p>\n\n";
+  buffer += "  </div>\n\n  <div class=\"row\">\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\n    <div class=\"col-sm-3 col-xs-12\">\n      <button id=\"dataExport\" class=\"btn btn-primary pull-right\">Export this data</button>\n    </div>\n  </div>\n\n  <div class=\"clearfix\"></div>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";

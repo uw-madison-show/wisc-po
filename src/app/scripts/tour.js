@@ -128,6 +128,12 @@ App.tourCharts = new Tour({
       }
     },
     {
+      element: '#dataExport',
+      title: 'Export Functionality Cont.',
+      content: 'If you would like to export this data to other formats (CSV/Excel), pressing this button will take you to our data export page.',
+      placement: 'top'
+    },
+    {
       orphan: true,
       title: 'You are all set to go!',
       content: 'We hope that you enjoy your time using our charts on Wisc Portal'

@@ -41,7 +41,7 @@ App.watchers.downloadWatchers = function() {
   });
 
   $('select').change(function () {
-    var indicator = $('.dropDownIndicators option:selected').data('variable');
+    var indicator = $('.dropDownIndicators option:selected').val();
     App.data.currentMap = App.data.getAreaData('county', indicator);
     App.data.currentLine = App.data.getLineData(indicator);
 
@@ -143,6 +143,30 @@ App.watchers.chartWatchers = function() {
     $('#newTour').slideUp(function() {
       App.tourCharts.start();
     });
+  });
+
+  $('#dataExport').click(function(e) {
+    var indicator = $('.dropDownTagsIndicators option:selected').val();
+    var county = '';
+    var error = $('input[name="errorbar"]').bootstrapSwitch('state');
+
+    App.data.currentMap = App.data.getAreaData('county', indicator);
+    App.data.currentLine = App.data.getLineData(indicator);
+
+    // Find if a county was selected on the map
+    $.each($('#chart0').highcharts().series[0].points, function() {
+      if (this.selected) {
+        county = this.name;
+      }
+    });
+
+    App.download.exportedData.enabled = true;
+    App.download.exportedData.selectedIndicator = indicator;
+    App.download.exportedData.selectedCounty = county;
+    App.download.exportedData.enableError = error;
+
+    window.location.hash = 'data';
+    e.preventDefault();
   });
 
 };
