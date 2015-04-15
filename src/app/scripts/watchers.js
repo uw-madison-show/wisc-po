@@ -92,6 +92,8 @@ App.watchers.chartWatchers = function() {
     var percent = (App.data.currentLine.data_type === 'percent');
     var label = percent ? 'Percent %' : 'Value';
     chart.yAxis[0].setTitle({text: label});
+
+    $('#description').text('*Description of Indicator: ' + App.data.getDescription('state', indicator));
   });
 
   // Watcher and handler for errorbar feature

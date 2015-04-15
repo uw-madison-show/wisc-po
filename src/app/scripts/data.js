@@ -18,6 +18,18 @@ App.data = {
 };
 
 /**
+ * Get description of the given indicator
+ *
+ */
+App.data.getDescription = function(area, indicator) {
+  if (App.data.json[area][indicator]) {
+    return App.data.json[area][indicator].description;
+  } else {
+    return 'No Description';
+  }
+};
+
+/**
  * Transform the given data to
  * @method transformData
  * @memberof App.data

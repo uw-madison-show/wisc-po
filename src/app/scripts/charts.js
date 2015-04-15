@@ -151,6 +151,8 @@ App.charts.setupCharts = function() {
   var label = percent ? 'Percent %' : 'Value';
   $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
 
+  $('#description').text('*Description of Indicator: ' + App.data.getDescription('state', defaultIndicator));
+
   // Set up watchers for charts and options
   App.watchers.chartWatchers();
 };
