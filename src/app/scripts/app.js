@@ -7,12 +7,14 @@
 * Root namespace
 * @namespace App
 * @prop dropDownIndicators {Object}   Object that contains all indicators titles and their variable names
+* @prop dropDownTags       {Object}   Object that contains all tags for indicators
 * @prop sample             {boolean}  Whether the app is only doing sample sizes for counties
 * @prop rounding           {number}   Global rounding for all data in the app
 * @prop templates          {array}    A collection of Handlebars templates generated
 */
 var App = App || {
   dropDownIndicators: {},
+  dropDownTags: {},
   rounding: 3,
   sample: false,
   templates: {}

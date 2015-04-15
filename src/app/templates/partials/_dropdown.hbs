@@ -18,34 +18,27 @@
   <div id="dataCollapse" class="collapse navbar-collapse in">
     <form>
 
-      <div id="indicatorSelect" class="form-group nav-select col-sm-5 col-xs-12">
+      <div id="tagSelect" class="form-group nav-select col-sm-6 col-xs-12">
+        <label class="control-label">Tag</label>
+        <select class="form-control dropDownTags">
+          {{dropDownTags}}
+        </select>
+      </div>
+
+      <div id="taggedSelect" class="form-group nav-select col-sm-6 col-xs-12">
         <label class="control-label">Indicator</label>
-        <select class="form-control dropDownIndicators">
-          {{dropDownIndicators}}
+        <select class="form-control dropDownTagsIndicators">
+          {{dropDownTagsIndicators}}
         </select>
       </div>
 
-      <!-- <div class="form-group nav-select col-sm-2">
-        <label class="control-label">Year</label>
-        <select disabled class="form-control dropDownB">
-          {{!-- Filled from database served header? --}}
-        </select>
-      </div>
-
-      <div class="form-group nav-select col-sm-3">
-        <label class="control-label">Map Detail</label>
-        <select disabled class="form-control dropDownC">
-          {{!-- Filled from database served header? --}}
-        </select>
-      </div> -->
-
-      <div class="form-group nav-select col-sm-offset-1 col-sm-3 col-xs-6">
+      <div class="form-group nav-select col-xs-6">
         <label id="errorbarToggle" class="control-label">Confidence Intervals</label>
         <br>
         <input class="bootstrapSwitch" type="checkbox" name="errorbar">
       </div>
 
-      <div class="form-group nav-select col-sm-3 col-xs-6">
+      <div class="form-group nav-select col-xs-6">
         <label id="largeChartToggle" class="control-label">Large&nbsp;Charts</label>
         <br>
         <input class="bootstrapSwitch" type="checkbox" name="largecharts">

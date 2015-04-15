@@ -21,13 +21,23 @@ App.tourCharts = new Tour({
       placement: 'top'
     },
     {
-      element: '#indicatorSelect',
+      element: '#tagSelect',
+      title: 'Tag Selection',
+      content: 'The tag selector allows you to choose a group of tagged data indicators to further narrow down what you are looking for.',
+      placement: 'top',
+      onShow: function() {
+        $('.dropDownTags option:first').prop('selected', true);
+        $('.dropDownTags').trigger('change');
+      }
+    },
+    {
+      element: '#taggedSelect',
       title: 'Indicator Selection',
       content: 'The indicator selector allows you to change what SHOW Indicator is displayed on the chart and map.',
       placement: 'top',
       onShow: function() {
-        $('.dropDownIndicators option:first').prop('selected', true);
-        $('.dropDownIndicators').trigger('change');
+        $('.dropDownTagsIndicators option:first').prop('selected', true);
+        $('.dropDownTagsIndicators').trigger('change');
       }
     },
     {
@@ -98,6 +108,12 @@ App.tourCharts = new Tour({
       onShow: function() {
         $('#chart1').highcharts().series[6].show();
       }
+    },
+    {
+      element: '#description',
+      title: 'Inidicator Description',
+      content: 'At the bottom of each chart, we have included a description of what our indicator represents.',
+      placement: 'top'
     },
     {
       element: '#chart0 .highcharts-button',

@@ -18,14 +18,33 @@ App.data = {
 };
 
 /**
- * Get description of the given indicator
- *
+ * Get description of the given indicator (Uses state level description)
+ * @method getDescription
+ * @memberof App.data
+ * @param {String} indicator  The variable name of the indicator
+ * @return {String}           The description of the given indicator
  */
-App.data.getDescription = function(area, indicator) {
-  if (App.data.json[area][indicator]) {
-    return App.data.json[area][indicator].description;
+App.data.getDescription = function(indicator) {
+  console.log(indicator);
+  if (App.data.json.state[indicator].description) {
+    return App.data.json.state[indicator].description;
   } else {
     return 'No Description';
+  }
+};
+
+/**
+* Get tags of the given indicator (Uses state level tags)
+* @method getDescription
+* @memberof App.data
+* @param {String} indicator  The variable name of the indicator
+* @return {array}            Array of tags for an indicator
+*/
+App.data.getTags = function(indicator) {
+  if (App.data.json.state[indicator].tags) {
+    return App.data.json.state[indicator].tags;
+  } else {
+    return [];
   }
 };
 
@@ -37,7 +56,7 @@ App.data.getDescription = function(area, indicator) {
  * @param {number}  error   Error of the data point
  * @param {boolean} percent Whether the value is a percent or not
  * @param {String}  area    Area level
- * @return ArrayExpression  The transformed data in the form [value, errorNeg, errorPos]
+ * @return {array}  The transformed data in the form [value, errorNeg, errorPos]
  */
 App.data.transformData = function(value, error, percent, area) {
   var errorPos;
@@ -100,7 +119,8 @@ App.data.getAreaData = function(area, indicator) {
         observation.value = observation.data[0][1];
         observation.region = observation.parent;
         observation['hc-key'] = observation.id;
-        var color = App.misc.convertColor(App.maps.regionColors[observation.region-1], observation.value / 50, App.misc.colors.white);
+        var alpha = percent ? 80 : 10;
+        var color = App.misc.convertColor(App.maps.regionColors[observation.region-1], observation.value / alpha, App.misc.colors.white);
 
         if (App.sample) {
           color = App.maps.regionColors[observation.region-1];
@@ -238,10 +258,18 @@ App.data.getData = function(d1) {
   $.getJSON('data/data.json', function(jsonData) {
     App.data.json = jsonData;
 
-    // Set up dropdowns
+    // Set up dropdowns and tags
     $.each(App.data.json, function() {
       $.each(this, function(name) {
         App.dropDownIndicators[name] = [this.name, name];
+        var indicator = this.name;
+        // Figure out the tags for the data
+        if (this.tags) {
+          $.each(this.tags, function() {
+            App.dropDownTags[this] = App.dropDownTags[this] || {};
+            App.dropDownTags[this][name] = indicator;
+          });
+        }
       });
     });
 

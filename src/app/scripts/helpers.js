@@ -24,6 +24,36 @@ App.helpers = {};
  * @return {Void}
  */
 App.helpers.helperSetup = function() {
+  Handlebars.registerHelper('dropDownTags', function(selected) {
+    var ret;
+    var tags = Object.keys(App.dropDownTags);
+
+    $.each(tags, function() {
+      var selectedVal = '';
+      if(this === selected) {
+        selectedVal = 'selected';
+      }
+      ret+='<option '+selectedVal+' value="'+this+'" data-variable="' + this + '">'+this+'</option>';
+    });
+
+    return new Handlebars.SafeString(ret);
+  });
+
+  Handlebars.registerHelper('dropDownTagsIndicators', function(current, selected) {
+    var ret;
+    var tag = $('.dropDownTags option:selected').text() || Object.keys(App.dropDownTags)[0];
+
+    $.each(App.dropDownTags[tag], function(i) {
+      var selectedVal = '';
+      if(this === selected) {
+        selectedVal = 'selected';
+      }
+      ret+='<option '+selectedVal+' value="'+i+'">'+this+'</option>';
+    });
+
+    return new Handlebars.SafeString(ret);
+  });
+
   Handlebars.registerHelper('dropDownIndicators', function(selected) {
     var ret;
 

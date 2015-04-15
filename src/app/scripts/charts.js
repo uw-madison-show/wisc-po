@@ -124,8 +124,8 @@ App.charts.createMap = function(chart, series, map, name) {
 App.charts.setupCharts = function() {
 
   // Set default indicator and name based on dropdown default
-  var defaultIndicator = $('.dropDownIndicators option:selected').data('variable');
-  var name = $('.dropDownIndicators option:selected').val();
+  var defaultIndicator = $('.dropDownTagsIndicators option:selected').val();
+  var name = $('.dropDownTagsIndicators option:selected').text();
 
   // Set up map
   App.data.currentMap = App.data.getAreaData('county', defaultIndicator);
@@ -151,7 +151,7 @@ App.charts.setupCharts = function() {
   var label = percent ? 'Percent %' : 'Value';
   $('.chart:eq(1)').highcharts().yAxis[0].setTitle({text: label});
 
-  $('#description').text('*Description of Indicator: ' + App.data.getDescription('state', defaultIndicator));
+  $('#description').text('*Description of Indicator: ' + App.data.getDescription(defaultIndicator));
 
   // Set up watchers for charts and options
   App.watchers.chartWatchers();

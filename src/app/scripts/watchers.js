@@ -1,5 +1,5 @@
 // JSHint options:
-/* global $, App */
+/* global $, App, Handlebars */
 'use strict';
 
 /**
@@ -10,6 +10,7 @@ App.watchers = {};
 /* Handle all errors with error screen, and log to google analytics if used */
 window.onerror = function() {
   $('#content').html(App.templates.error);
+  $('#cookies').hide();
 
 // window.onerror = function(message, file, line) {
   // if (_gaq) {
@@ -62,10 +63,16 @@ App.watchers.downloadWatchers = function() {
  */
 App.watchers.chartWatchers = function() {
 
+  $('.dropDownTags').change(function() {
+    var html = Handlebars.helpers.dropDownTagsIndicators().toString();
+    $('.dropDownTagsIndicators').html(html);
+    $('.dropDownTagsIndicators').change();
+  });
+
   // Watcher and handler for dropDownIndicators selection
-  $('.dropDownIndicators').change(function() {
-    var indicator = $('option:selected', this).data('variable');
-    var name = $('option:selected', this).val();
+  $('.dropDownTagsIndicators').change(function() {
+    var indicator = $('option:selected', this).val();
+    var name = $('option:selected', this).text();
     var map = $('.chart:eq(0)').highcharts();
     var chart = $('.chart:eq(1)').highcharts();
 
@@ -93,7 +100,7 @@ App.watchers.chartWatchers = function() {
     var label = percent ? 'Percent %' : 'Value';
     chart.yAxis[0].setTitle({text: label});
 
-    $('#description').text('*Description of Indicator: ' + App.data.getDescription('state', indicator));
+    $('#description').text('*Description of Indicator: ' + App.data.getDescription(indicator));
   });
 
   // Watcher and handler for errorbar feature
