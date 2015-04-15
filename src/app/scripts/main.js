@@ -36,21 +36,17 @@ App.initTemplates = function() {
           App.download.fillTable();
           App.watchers.downloadWatchers();
 
-          if (App.misc.getCookie('visitedData') !== 'true' || true) {
+          if (App.misc.getCookie('visitedData') !== 'true') {
             $('#newTour').show();
-            if (App.misc.getCookie('acceptCookie') === 'true') {
-              App.misc.setCookie('visitedData', 'true', 90);
-            }
+            App.misc.setCookie('visitedData', 'true', 90);
           }
         } else if (page === 'charts') {
           App.charts.setupCharts();
           $('#sampleAlert').hide();
 
-          if (App.misc.getCookie('visitedCharts') !== 'true' || true) {
+          if (App.misc.getCookie('visitedCharts') !== 'true') {
             $('#newTour').show();
-            if (App.misc.getCookie('acceptCookie') === 'true') {
-              App.misc.setCookie('visitedCharts', 'true', 90);
-            }
+            App.misc.setCookie('visitedCharts', 'true', 90);
           }
         }
       } else {
