@@ -16,8 +16,8 @@ module.exports = function (grunt) {
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
-  // Load handlebars and jsdoc
-  grunt.loadNpmTasks('grunt-contrib-handlebars', 'grunt-jsdoc');
+  // Load handlebars, jsdoc and grunt-manifest
+  grunt.loadNpmTasks('grunt-contrib-handlebars', 'grunt-jsdoc', 'grunt-manifest');
 
   // Configurable paths
   var config = {
@@ -161,6 +161,37 @@ module.exports = function (grunt) {
       }
     },
 
+    // HTML5 app cache manifest generation after build
+    manifest: {
+      generate: {
+        options: {
+          basePath: '<%= config.dist %>',
+          //cache: ['js/app.js', 'css/style.css'],
+          network: ['*'],
+          preferOnline: true,
+          verbose: true,
+          timestamp: true,
+          hash: true,
+          master: ['index.html'],
+          process: function(path) {
+            return path.substring('build/'.length);
+          }
+        },
+        src: [
+          'favicon.ico',
+          'index.html',
+          'robots.txt',
+
+          'data/data.json',
+          'fonts/*',
+          'images/*.png',
+          'scripts/*.js',
+          'styles/*.css'
+        ],
+        dest: '<%= config.dist %>/manifest.appcache'
+      }
+    },
+
     // Mocha testing framework configuration options
     mocha: {
       all: {
@@ -202,7 +233,7 @@ module.exports = function (grunt) {
           src: [
             '<%= config.dist %>/scripts/{,*/}*.js',
             '<%= config.dist %>/styles/{,*/}*.css',
-            // '<%= config.dist %>/images/{,*/}*.*',
+            '<%= config.dist %>/images/{,*/}*.*',
             '<%= config.dist %>/styles/fonts/{,*/}*.*',
             '<%= config.dist %>/*.{ico,png}'
           ]
@@ -354,7 +385,8 @@ module.exports = function (grunt) {
         'copy:styles',
         'jsdoc:dist',
         'imagemin',
-        'svgmin'
+        'svgmin',
+        'docs'
       ]
     },
 
@@ -436,7 +468,7 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin',
-    'docs'
+    'manifest'
   ]);
 
   grunt.registerTask('default', [
