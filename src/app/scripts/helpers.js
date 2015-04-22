@@ -28,6 +28,10 @@ App.helpers.helperSetup = function() {
     var ret;
     var tags = Object.keys(App.dropDownTags);
 
+    console.log(selected);
+
+    tags.sort();
+
     $.each(tags, function() {
       var selectedVal = '';
       if(this === selected) {
@@ -43,29 +47,28 @@ App.helpers.helperSetup = function() {
     var ret;
     var tag = $('.dropDownTags option:selected').text() || Object.keys(App.dropDownTags)[0];
 
-    $.each(App.dropDownTags[tag], function(i) {
+    var indicators = [];
+    for (var ind in App.dropDownTags[tag]) {
+      indicators.push([ind, App.dropDownTags[tag][ind]]);
+    }
+    indicators.sort(function(a, b) {
+      return a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0;
+    });
+
+    $.each(indicators, function() {
       var selectedVal = '';
       if(this === selected) {
         selectedVal = 'selected';
       }
-      ret+='<option '+selectedVal+' value="'+i+'">'+this+'</option>';
+
+      ret+='<option '+selectedVal+' value="'+this[0]+'">'+this[1]+'</option>';
     });
 
     return new Handlebars.SafeString(ret);
   });
 
-  Handlebars.registerHelper('dropDownIndicators', function(selected) {
-    var ret;
-
-    $.each(App.dropDownIndicators, function() {
-      var selectedVal = '';
-      if(this[0] === selected){
-        selectedVal = 'selected';
-      }
-      ret+='<option '+selectedVal+' value="'+this[1] + '">'+this[0]+'</option>';
-    });
-
-    return new Handlebars.SafeString(ret);
+  Handlebars.registerHelper('dropDownIndicators', function() {
+    return new Handlebars.SafeString(Handlebars.helpers.dropDownTagsIndicators('All'));
   });
 
   Handlebars.registerHelper('dropDownCounty', function(selected) {

@@ -32,7 +32,12 @@ App.initTemplates = function() {
 
         if (page === 'data') {
           // $('#minusIcon').hide();
-          $('input[name="county"]').prop('disabled', App.sample);
+          // $('input[name="county"]').prop('disabled', App.sample);
+          if (App.sample) {
+            $('#county, #county1').hide();
+          }
+
+
           App.download.fillTable();
           App.watchers.downloadWatchers();
 

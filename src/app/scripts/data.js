@@ -203,7 +203,7 @@ App.data.getLineData = function(indicator) {
       lineData.push(this);
     });
 
-
+    var offset = -5;
     $.each(regionData.error, function(i) {
       this.type = 'errorbar';
       this.color = 'rgba(' +
@@ -212,6 +212,7 @@ App.data.getLineData = function(indicator) {
         App.maps.regionColors[i][2] + ',' + alpha + ')';
       this.lineWidth = lineWidth;
       this.visible = false;
+      this.pointInterval = offset + 0.1*i;
       lineData.push(this);
     });
   }
@@ -257,12 +258,14 @@ App.data.getData = function(d1) {
   $.getJSON('data/data.json', function(jsonData) {
     App.data.json = jsonData;
 
+
+    App.dropDownTags.All = {};
     // Set up dropdowns and tags
     $.each(App.data.json, function() {
       $.each(this, function(name) {
-        App.dropDownIndicators[name] = [this.name, name];
         var indicator = this.name;
         // Figure out the tags for the data
+        App.dropDownTags.All[name] = indicator;
         if (this.tags) {
           $.each(this.tags, function() {
             App.dropDownTags[this] = App.dropDownTags[this] || {};

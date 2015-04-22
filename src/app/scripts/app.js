@@ -13,10 +13,9 @@
 * @prop templates          {array}    A collection of Handlebars templates generated
 */
 var App = App || {
-  dropDownIndicators: {},
   dropDownTags: {},
   rounding: 3,
-  sample: false,
+  sample: true,
   templates: {}
 };
 
