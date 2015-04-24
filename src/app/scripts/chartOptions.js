@@ -13,6 +13,11 @@ App.charts.chartOptions = {
   subtitle: {
     text: 'Source: UW SHOW Data'
   },
+  exporting: {
+    formAttributes: {
+      target: '_blank'
+    }
+  },
   plotOptions: {
     series: {
       events: {

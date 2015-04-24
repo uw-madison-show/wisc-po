@@ -47,8 +47,10 @@ nav {
 }
 
 
-.navbar-default {
-  background-color: rgba(248, 248, 248, 0.95);
+.navbar-fixed-top {
+  background-color: #F8F8F8;
+  background-color: rgba(248, 248, 248, 0.80);
+  border-bottom: .15em solid #808080;
 }
 
 .nav-select {

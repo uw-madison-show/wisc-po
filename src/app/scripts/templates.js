@@ -11,7 +11,7 @@ Handlebars.registerPartial("dropdown", Handlebars.template({"compiler":[6,">= 2.
 },"useData":true}));
 
 Handlebars.registerPartial("footer", Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  return "    <span class=\"pull-right\">\n      <a class=\"simpleLink\" href=\"#privacy\">Privacy Policy</a>\n    </span>\n";
+  return "    <span class=\"pull-right hidden-print\">\n      <a class=\"simpleLink\" href=\"#privacy\">Privacy Policy</a>\n    </span>\n";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"clearfix\"></div>\n\n<div class=\"footer\">\n  <span class=\"pull-left\">UW Madison SHOW and Andrew McOlash, 2014-2015</span>\n";
   stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.hide_privacy : depth0), {"name":"unless","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
@@ -122,7 +122,7 @@ this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.
     'num': ("1")
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\n\n  <div class=\"row\">\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\n    <div class=\"col-sm-3 col-xs-12\">\n      <button id=\"dataExport\" class=\"btn btn-primary pull-right\">Export this data</button>\n    </div>\n  </div>\n\n  <div class=\"clearfix\"></div>\n\n";
+  buffer += "  </div>\n\n  <div class=\"row\">\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\n    <div class=\"col-sm-3 col-xs-12 hidden-print\">\n      <button id=\"dataExport\" class=\"btn btn-primary pull-right\">Export this data</button>\n    </div>\n  </div>\n\n  <div class=\"clearfix\"></div>\n\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n</div>\n";
