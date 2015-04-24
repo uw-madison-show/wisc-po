@@ -208,7 +208,7 @@ App.charts.mapSeries = {
         var value = this.value;
         var color = '#005645';
 
-        if (this.sample[2008] < 40) {
+        if (this.sample[2008] < 40 && !App.sample) {
           $('#sampleAlert').slideDown();
         } else {
           $('#sampleAlert').slideUp();
