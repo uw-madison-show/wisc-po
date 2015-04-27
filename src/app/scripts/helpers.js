@@ -28,8 +28,6 @@ App.helpers.helperSetup = function() {
     var ret;
     var tags = Object.keys(App.dropDownTags);
 
-    console.log(selected);
-
     tags.sort();
 
     $.each(tags, function() {

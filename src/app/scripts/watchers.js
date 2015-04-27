@@ -12,6 +12,9 @@ window.onerror = function() {
   $('#content').html(App.templates.error);
   $('#cookies').hide();
 
+  // Stop testing - always!
+  App.testing.counter = 999999;
+
 // window.onerror = function(message, file, line) {
   // if (_gaq) {
     // _gaq.push(['_trackEvent', 'Global', 'Exception', file + '(' + line + '): ' + message]);
@@ -22,6 +25,8 @@ window.onerror = function() {
 
 /* Set up templates */
 $(window).bind('hashchange', function() {
+  App.tourData.end();
+  App.tourCharts.end();
   App.initTemplates();
 });
 
@@ -50,7 +55,7 @@ App.watchers.downloadWatchers = function() {
 
   $('#startTour').click(function() {
     $('#newTour').slideUp(function() {
-      App.tourData.start();
+      App.tourData.start(true);
     });
   });
 };
@@ -141,7 +146,7 @@ App.watchers.chartWatchers = function() {
 
   $('#startTour').click(function() {
     $('#newTour').slideUp(function() {
-      App.tourCharts.start();
+      App.tourCharts.start(true);
     });
   });
 

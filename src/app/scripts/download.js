@@ -4,6 +4,7 @@
 
 /**
 * @namespace App.download
+* @prop exportedData {Object}  Helper pass through object for exporting data from charts page
 */
 App.download = {
   exportedData: {

@@ -8,7 +8,7 @@ App.charts.chartOptions = {
     backgroundColor: null
   },
   title: {
-    text: 'Highcharts basic demo'
+    text: 'Show Data'
   },
   subtitle: {
     text: 'Source: UW SHOW Data'
