@@ -53,7 +53,7 @@ App.watchers.downloadWatchers = function() {
     App.download.fillTable();
   });
 
-  $('#startTour').click(function() {
+  $('.startTour').click(function() {
     $('#newTour').slideUp(function() {
       App.tourData.start(true);
     });
@@ -144,7 +144,7 @@ App.watchers.chartWatchers = function() {
     chart2.highcharts().redraw();
   });
 
-  $('#startTour').click(function() {
+  $('.startTour').click(function() {
     $('#newTour').slideUp(function() {
       App.tourCharts.start(true);
     });

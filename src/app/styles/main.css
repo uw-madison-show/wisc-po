@@ -121,3 +121,7 @@ hr {
 #myTable {
   margin-bottom: 0px;
 }
+
+button.pull-right.startTour {
+  margin-top: 22px;
+}
