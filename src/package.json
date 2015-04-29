@@ -1,6 +1,7 @@
 {
   "name": "wisc-po",
   "description": "A web portal for UW SHOW data",
+  "private": true,
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "grunt": "^0.4.5",
@@ -31,5 +32,9 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/uw-madison-show/wisc-po.git"
   }
 }
