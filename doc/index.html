@@ -43,12 +43,15 @@
 
 
     <section>
-        <article><h1>wisc-po</h1><p>Wisconsin Health Data Portal</p>
-<p>The Survey of the Health of Wisconsin is launching a web data portal to help
-public health officers in the state improve the health of our communities.</p>
-<p>We are happy to announce our v1.1a release of this tool. Right now, it is still
-very much under development but would like to share this news as we continue
-forward! To view a live preview of this alpha version, please download a copy from <a href="https://github.com/uw-madison-show/wisc-po/releases/tag/v1.1-a" title="Version 1.1a Release">here</a></p>
+        <article><h1>Wisc Portal</h1><p>Wisconsin Health Data Portal</p>
+<p>The Survey of the Health of Wisconsin has launched a web data portal to help
+public health officers in the state improve the health of our communities. This
+Github repository provides the source code of this web-based project.</p>
+<p>We are happy to announce our v1.2b release of this tool. At the moment, the code
+is production ready for the lifespan of this project. To view a live preview of
+this version, please download a copy from
+<a href="https://github.com/uw-madison-show/wisc-po/releases/tag/v1.2-b" title="Version 1.2b Release">here</a>.
+The actual site is hosted <a href="wwwtest.show.wisc.edu/data/" title="Wisc Portal">here</a>.</p>
 <p>Check back for updates as we develop this tool for the community!</p>
 <hr>
 <h2>Setting up your environment to work with the code</h2><p>Before beginning, a few different tools are required to develop and work with
@@ -58,7 +61,7 @@ the code on our Github repository.</p>
 <li><a href="http://git-scm.com/downloads" title="Git">git</a></li>
 <li><a href="http://nodejs.org/download/" title="nodeJS">nodeJS</a></li>
 </ul>
-<p>Now, to set up your development environment, you will need to globally install
+<p>To set up your development environment, you will need to globally install
 some node packages. Issue the following commands to install <em>Grunt</em> our task runner,
 <em>Bower</em> a Javascript package manager and <em>JSDoc</em> an API documentation generator.</p>
 <ul>
@@ -66,7 +69,7 @@ some node packages. Issue the following commands to install <em>Grunt</em> our t
 <li><code>npm install -g bower</code></li>
 <li><code>npm install -g jsdoc</code></li>
 </ul>
-<p>Next, you will need to clone our git repository via the command:</p>
+<p>You will then need to clone our git repository via the command:</p>
 <p><code>git clone git@github.com:uw-madison-show/wisc-po.git</code></p>
 <p>Finally to install other required dependencies, navigate into the <code>wisc-po/src</code>
 directory and then type in the following commands:</p>
@@ -74,20 +77,24 @@ directory and then type in the following commands:</p>
 <li><code>npm install</code></li>
 <li><code>bower install</code></li>
 </ul>
-<p>This will install local dependencies. Now all dependencies have been set up.</p>
-<h2>Building the Site</h2><p>To build and work with the code, start up grunt. This can be done by navigating
-into <code>wisc-po/src</code> and then starting grunt via <code>grunt serve</code>.</p>
-<p>To make a version that is deployable, run the shell script named <code>build.sh</code> in
-<code>wisc-po/src</code> or while inside the <code>src</code> folder by typing <code>grunt build</code>. Or to
-then move this temporary build elsewhere, type the following commands:</p>
+<p>This will install local dependencies. Now all dependencies have been set up and
+you are ready to change code and build the site.</p>
+<h2>Building the Site</h2><p>To run a temporary server on a local machine with the site, start up grunt. This
+can be done by navigating into <code>wisc-po/src</code> and then starting grunt via
+<code>grunt serve</code>. This is a local server and does not contain production-ready
+generated code.</p>
+<p>To make a version that is production-ready and deployable, run the shell script
+named <code>build.sh</code> in <code>wisc-po/src</code>.</p>
+<p>To manually do the work of <code>build.sh</code>, type the following commands (when inside
+the <code>wisc-po/src/</code> folder):</p>
 <ul>
 <li><code>grunt build</code></li>
 <li><code>rm -rf ../dist</code></li>
 <li><code>cp -R dist ../</code></li>
 </ul>
-<p>This build will now be located inside <code>wisc-po/dist</code> and can be copied to a
-server for deployment.</p>
-<p>Additionally, there is a script titled deploy.sh. This script will deploy a new
+<p>There is a script titled <code>build.sh</code> inside the <code>wisc-po/src</code> directory which
+contains the above three commands for efficiency.</p>
+<p>Additionally, there is a script titled <code>deploy.sh</code>. This script will deploy a new
 instance of the website, but requires a vpn connection to UW Madison as well as
 the proper ssh keys on the server. Therefore it is not useful if you are
 personally trying the code.</p>
@@ -95,13 +102,57 @@ personally trying the code.</p>
 documentation generator which allows for quick and simple documentation of
 Javascript projects. In the grunt tasks, there are two configurations titled
 <code>jsdoc:temp</code> and <code>jsdoc:dist</code>, which handle the documentation generation based on
-if building a new distribution version or if in testing environment. This doc generation is
-done during the <code>build</code> task (output is wisc-po/doc), as well as when Grunt is
-watching the project with the <code>serve</code> task (output is wisc-po/src/doc). To just
-generate a new version of the documentation, issue the command (from wisc-po/src):</p>
-<p><code>grunt docs</code> or <code>build.sh</code> to build a new version of the website as well as the docs</p>
-<p>The documentation is a web page generated with a main starting point of <code>index.html</code>.</p>
-<h2>List of Javascript Libraries/Plugins Used</h2><p>In this project, we used the following Javascript Libraries and plugins for the
+if building a new distribution version or if in testing environment. This doc
+generation is done during the <code>build</code> task (output is wisc-po/doc), as well as
+when Grunt is watching the project with the <code>serve</code> task (output is wisc-po/src/doc).</p>
+<p>To just generate a new version of the documentation, issue the command
+(from wisc-po/src): <code>grunt docs</code> or use the <code>build.sh</code> script to build a new
+version of the website as well as the docs.</p>
+<p>The documentation is a series of web pages generated with a main starting point of <code>index.html</code>.</p>
+<hr>
+<h2>Notes on Project Structure</h2><p>The Wisc Portal project has many different parts and the sturcture can be
+intimidating if you have never worked with a large structured project.</p>
+<p>Below, some of the different folders and key files are discussed:</p>
+<h3>Root Directory</h3><ul>
+<li><code>wisc-po/</code>: The main project folder containing everything.</li>
+<li><code>wisc-po/dist/</code>: Last full build of the website</li>
+<li><code>wisc-po/doc/</code>: Last full build of the documentation</li>
+<li><code>wisc-po/src/</code>: Source code of the project</li>
+<li><code>wisc-po/README.md</code>: This README file</li>
+</ul>
+<h3>src Directory</h3><ul>
+<li><code>wisc-po/src/app/</code>: Actual source code</li>
+<li><code>wisc-po/src/bower_components/</code>: Components installed from bower</li>
+<li><code>wisc-po/src/node_modules/</code>: Components installed from npm</li>
+<li><code>wisc-po/src/bower.json</code>: Bower dependencies for the project</li>
+<li><code>wisc-po/src/build.sh</code>: Build script for building the entire project</li>
+<li><code>wisc-po/src/deploy.sh</code>: Build script for building the project and deploying
+to server</li>
+<li><code>wisc-po/src/Gruntfile.js</code>: Grunt configuration file</li>
+<li><code>wisc-po/src/package.json</code>: Node dependencies for the project</li>
+</ul>
+<h3>app Directory</h3><ul>
+<li><code>wisc-po/src/app/data/</code>: Folder containing <code>data.json</code></li>
+<li><code>wisc-po/src/app/images/</code>: Folder containing images</li>
+<li><code>wisc-po/src/app/scripts/</code>: Folder containing javascript</li>
+<li><code>wisc-po/src/app/styles/</code>: Folder containing css</li>
+<li><code>wisc-po/src/app/templates/</code>: Folder containing Handlebars templates</li>
+<li><code>wisc-po/src/app/index.html</code>: Main HTML index file</li>
+</ul>
+<h3>scripts Directory</h3><ul>
+<li><code>wisc-po/src/app/scripts/highcharts-maps/</code>: Contains vector shapes of the maps
+used in site</li>
+<li><code>wisc-po/src/app/scripts/app.js</code>: Main App javascript which deals with
+rendering handlebars templates</li>
+</ul>
+<h3>templates Directory</h3><ul>
+<li><code>wisc-po/src/app/templates/index.hbs</code>: Main index template which contains
+container for all pages</li>
+<li><code>wisc-po/src/app/templates/partials/</code>: Folder contains partials (reusable
+templates between pages)</li>
+</ul>
+<hr>
+<h2>Attributions - Javascript Libraries</h2><p>In this project, we used the following Javascript Libraries and plugins for the
 actual website. A list is below:</p>
 <ul>
 <li><a href="http://www.highcharts.com/" title="Highcharts">Highcharts</a></li>
@@ -111,6 +162,17 @@ actual website. A list is below:</p>
 <li><a href="http://bootstraptour.com/" title="Bootstrap Tour">Bootstrap-Tour</a></li>
 <li><a href="http://handlebarsjs.com/" title="Handlebars">Handlebars</a></li>
 <li><a href="https://github.com/jmaister/excellentexport" title="excellentexport">excellentexport</a></li>
+</ul>
+<h2>Attributions - Development Tools</h2><p>In addition to the final web-based portal libraries used, we also used many
+backend tools in our development process. These tools were also used in the
+production of the website:</p>
+<ul>
+<li><a href="https://nodejs.org/" title="NodeJS">NodeJS</a></li>
+<li><a href="http://yeoman.io/" title="Yeoman">Yeoman</a></li>
+<li><a href="http://gruntjs.com/" title="GruntJS">GruntJS</a></li>
+<li><a href="http://usejsdoc.org/" title="jsDoc">jsDoc</a></li>
+<li><a href="http://git-scm.com/" title="git">git</a></li>
+<li><a href="https://github.com/" title="Github">Github</a></li>
 </ul></article>
     </section>
 
@@ -128,7 +190,7 @@ actual website. A list is below:</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Mon Apr 27 2015 14:49:09 GMT-0500 (CDT)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta2</a> on Mon May 04 2015 14:51:40 GMT-0500 (CDT)
 </footer>
 
 <script> prettyPrint(); </script>
