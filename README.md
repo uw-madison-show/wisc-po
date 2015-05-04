@@ -27,6 +27,17 @@ To set things up, you will need to install the following tools:
 - [git](http://git-scm.com/downloads "Git")
 - [nodeJS](http://nodejs.org/download/ "nodeJS")
 
+Note: If working portably, or if no access to admin rights on Windows, it is a bit
+tougher to get things working. Install git from
+[gitPortable](https://github.com/sheabunge/GitPortable "gitPortable"). To install node
+and npm, you will need to make a new directory for node. Inside this directory, download
+the latest version of [node](http://nodejs.org/dist/latest/node.exe "node") and
+[npm](http://nodejs.org/dist/npm/npm-1.4.9.zip npm). You will then need to reference
+node and npm from their local paths. Adding these two programs to your path temporarily
+can be done via a command line. Follow these two commands `set PATH=%PATH%;C:\path\to\node\`
+and `set PATH=%PATH%;C:\path\to\GitPortable\App\Git\bin`. You should be set to go now building
+the website (just remember to set your path each time).
+
 To set up your development environment, you will need to globally install
 some node packages. Issue the following commands to install _Grunt_ our task runner,
 _Bower_ a Javascript package manager and _JSDoc_ an API documentation generator.
