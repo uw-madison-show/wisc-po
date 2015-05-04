@@ -1,6 +1,6 @@
 body {
   background-image: url(../images/pw_maze_white.png);
-  margin: 95px 10px 20px;
+  margin: 85px 10px 30px;
 }
 
 .browsehappy {
@@ -28,12 +28,12 @@ body {
 }
 
 /* Navbar styling */
-nav {
-  padding: 12px;
-}
-
 .navbar-right {
   margin-right: 0px !important;
+}
+
+/*nav {
+  padding: 12px;
 }
 
 .navbar-nav > li > a, .navbar-brand {
@@ -46,16 +46,30 @@ nav {
   min-height: 32px !important
 }
 
-
 .navbar-fixed-top {
   background-color: #F8F8F8;
   background-color: rgba(248, 248, 248, 0.80);
-  border-bottom: .15em solid #808080;
+  border-bottom: .15em solid #970F10;
 }
 
 .nav-select {
   margin-top: 12px;
 }
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #970F10;
+  color: #ffffff;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #970F10;
+  color: #ffffff;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: #970F10;
+  color: #aaa;
+}*/
 
 /* Additional Bootstrap custom styling */
 .jumbotron {
@@ -72,10 +86,6 @@ nav {
 
 hr {
   border-top: 1px solid #ddd;
-}
-
-.panel-heading:hover {
-  /*cursor: pointer;*/
 }
 
 .panel-title h3 {
@@ -124,4 +134,16 @@ hr {
 
 button.pull-right.startTour {
   margin-top: 22px;
+}
+
+.options {
+  margin: 30px 0;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f7f7f7;
+  border-bottom: solid 1px #e5e5e5;
+}
+
+.options h3 {
+  margin-top: 10px;
 }

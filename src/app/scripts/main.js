@@ -53,6 +53,8 @@ App.initTemplates = function() {
             $('#newTour').show();
             App.misc.setCookie('visitedCharts', 'true', 90);
           }
+        } else if (page === 'privacy') {
+          App.misc.setCookie('acceptCookie', 'true', 90);
         }
       } else {
         $('#content').html(App.templates.index);

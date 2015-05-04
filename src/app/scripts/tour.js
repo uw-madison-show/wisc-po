@@ -15,7 +15,7 @@ App.tourCharts = new Tour({
       content: 'In the following quick 2 minute walkthrough of our system, we will highlight features and important aspects of charts on the Wisc Portal.'
     },
     {
-      element: '.chartSelect',
+      element: '.options',
       title: 'Options Menu',
       content: 'Use the options menu to control the options of the charts and maps.',
       placement: 'top'
