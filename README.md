@@ -34,8 +34,14 @@ and npm, you will need to make a new directory for node. Inside this directory, 
 the latest version of [node](http://nodejs.org/dist/latest/node.exe "node") and
 [npm](http://nodejs.org/dist/npm/npm-1.4.9.zip npm). You will then need to reference
 node and npm from their local paths. Adding these two programs to your path temporarily
-can be done via a command line. Follow these two commands `set PATH=%PATH%;C:\path\to\node\`
-and `set PATH=%PATH%;C:\path\to\GitPortable\App\Git\bin`. You should be set to go now building
+can be done via a command line. Follow these two commands 
+
+`set PATH=%PATH%;C:\path\to\node\`
+and then
+
+`set PATH=%PATH%;C:\path\to\GitPortable\App\Git\bin`
+
+You should be set to go now building
 the website (just remember to set your path each time).
 
 To set up your development environment, you will need to globally install
