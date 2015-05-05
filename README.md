@@ -37,6 +37,7 @@ node and npm from their local paths. Adding these two programs to your path temp
 can be done via a command line. Follow these two commands 
 
 `set PATH=%PATH%;C:\path\to\node\`
+
 and then
 
 `set PATH=%PATH%;C:\path\to\GitPortable\App\Git\bin`
