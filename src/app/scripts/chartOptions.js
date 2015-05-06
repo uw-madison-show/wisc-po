@@ -3,6 +3,9 @@
 'use strict';
 
 App.charts.chartOptions = {
+  colors: [
+    '#008d7a', '#e57300', '#97d700', '#cbc299', '#866d4b', '#ba0c2f'
+  ],
   chart: {
     type: 'column',
     backgroundColor: null,
