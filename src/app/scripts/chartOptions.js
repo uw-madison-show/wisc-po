@@ -5,10 +5,16 @@
 App.charts.chartOptions = {
   chart: {
     type: 'column',
-    backgroundColor: null
+    backgroundColor: null,
+    style: {
+      fontFamily: '"ITCAvantGardeW10-Book", "Tex Gyre Adventor", sans-serif'
+    }
   },
   title: {
-    text: 'Show Data'
+    text: 'Show Data',
+    style: {
+      fontFamily: '"Optima", "angie-sans", Arial, sans-serif'
+    }
   },
   subtitle: {
     text: 'Source: UW SHOW Data'
