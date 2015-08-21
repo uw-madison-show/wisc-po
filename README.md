@@ -7,7 +7,7 @@ The Survey of the Health of Wisconsin has launched a web data portal to help
 public health officers in the state improve the health of our communities. This
 Github repository provides the source code of this web-based project.
 
-We are happy to announce our v1.2b release of this tool. At the moment, the code
+We are happy to announce our v1.0 release of this tool. At the moment, the code
 is production ready for the lifespan of this project. To view a live version of
 this code, please download a copy of the code from
 [here](https://github.com/uw-madison-show/wisc-po/releases/ "Version 1.0 Release"), or
