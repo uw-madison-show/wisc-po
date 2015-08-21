@@ -11,7 +11,7 @@ We are happy to announce our v1.2b release of this tool. At the moment, the code
 is production ready for the lifespan of this project. To view a live preview of
 this version, please download a copy from
 [here](https://github.com/uw-madison-show/wisc-po/releases/tag/v1.2-b "Version 1.2b Release").
-The actual site is hosted [here](wwwtest.show.wisc.edu/data/ "Wisc Portal").
+The actual site is hosted [here](http://show.wisc.edu/data/ "Wisc Portal").
 
 Check back for updates as we develop this tool for the community!
 
