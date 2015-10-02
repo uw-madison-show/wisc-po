@@ -31,7 +31,7 @@ $(window).bind('hashchange', function() {
 });
 
 /**
- * Set up watchers for the download page when called
+ * Set up watchers for the buttons on the download page.
  * @method downloadWatchers
  * @memberof App.watchers
  * @return {Void}
@@ -61,7 +61,7 @@ App.watchers.downloadWatchers = function() {
 };
 
 /**
- * Set up watchers for the chart page when called
+ * Set up watchers for buttons on the chart page.
  * @method chartWatchers
  * @memberof App.watchers
  * @return {Void}
@@ -170,7 +170,7 @@ App.watchers.chartWatchers = function() {
     App.download.exportedData.selectedCounty = county;
     App.download.exportedData.enableError = error;
 
-    window.location.hash = 'data';
+    window.location.hash = 'chart_data';
     e.preventDefault();
   });
 
