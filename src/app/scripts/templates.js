@@ -152,10 +152,24 @@ this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0
 this["App"]["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\r\n\r\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
-    'active_home': (true)
+    'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <h1>Welcome to the SHOW Data Dissemination!</h1>\r\n  <hr/>\r\n\r\n  <p>\r\n    The Survey of the Health of Wisconsin (SHOW) is the first statewide research\r\n    survey of its kind to measure information on critical health conditions in\r\n    Wisconsin. Findings from SHOW present a comprehensive picture of the health\r\n    of Wisconsin residents, helping to identify needs and target resources where\r\n    they are most needed.\r\n  </p>\r\n  <p>\r\n    The Survey of the Health of Wisconsin is funded by the Wisconsin Partnership\r\n    Program and is under the direction of principal investigator Dr. F. Javier\r\n    Nieto and co-director Dr. Kristen Malecki and their team at the University of\r\n    Wisconsin School of Medicine and Public Health.\r\n  </p>\r\n\r\n";
+  buffer += "\r\n  <h1 class=\"pull-left\">Data Charts</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
+  stack1 = this.invokePartial(partials.options, '  ', 'options', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\r\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\r\n\r\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\r\n    <b>Warning: </b>This county has a small sample size, take caution when making\r\n    any assumptions based on this data. It is prone to have a large error.\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n";
+  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
+    'map': (true),
+    'num': ("0")
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
+    'column': (true),
+    'num': ("1")
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "  </div>\r\n\r\n  <div class=\"row\">\r\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\r\n    <div class=\"col-sm-3 col-xs-12 hidden-print\">\r\n      <button id=\"dataExport\" class=\"btn btn-lg btn-primary pull-right\">Export this data</button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"clearfix\"></div>\r\n\r\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\r\n</div>\r\n";

@@ -1,23 +1,46 @@
 <div class="container">
 
-  {{> header active_home=true}}
+  {{> header active_charts=true}}
 
-  <h1>Welcome to the SHOW Data Dissemination!</h1>
+  <h1 class="pull-left">Data Charts</h1>
+  <button class="btn btn-default pull-right startTour hidden-print">Start Tour</button>
+  <div class="clearfix"></div>
   <hr/>
 
-  <p>
-    The Survey of the Health of Wisconsin (SHOW) is the first statewide research
-    survey of its kind to measure information on critical health conditions in
-    Wisconsin. Findings from SHOW present a comprehensive picture of the health
-    of Wisconsin residents, helping to identify needs and target resources where
-    they are most needed.
-  </p>
-  <p>
-    The Survey of the Health of Wisconsin is funded by the Wisconsin Partnership
-    Program and is under the direction of principal investigator Dr. F. Javier
-    Nieto and co-director Dr. Kristen Malecki and their team at the University of
-    Wisconsin School of Medicine and Public Health.
-  </p>
+  <div id="newTour" class="alert alert-dismissable alert-success hidden-print collapse" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p>
+      It looks like you are new to the Wisc-Portal website. If you
+      have never used the charts section of this portal before, you should take
+      our quick tour of how to use this part of the tool!<br><br>
+      <button class="btn btn-success startTour">Start Tour</button>
+    </p>
+  </div>
+
+  {{> options}}
+
+  <!-- <h2 id="val" class="hidden-print">Selected Value: No region selected</h2> -->
+
+  <div id="sampleAlert" class="alert alert-danger hidden-print" role="alert">
+    <b>Warning: </b>This county has a small sample size, take caution when making
+    any assumptions based on this data. It is prone to have a large error.
+  </div>
+
+  <div class="row">
+    {{> halfChart num='0' map=true}}
+    {{> halfChart num='1' column=true}}
+  </div>
+
+  <div class="row">
+    <p id="description" class="col-sm-9 col-xs-12"></p>
+    <div class="col-sm-3 col-xs-12 hidden-print">
+      <button id="dataExport" class="btn btn-lg btn-primary pull-right">Export this data</button>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
 
   {{> footer}}
 
