@@ -47,14 +47,20 @@
   <script>try{Typekit.load();}catch(e){}</script>
   <!-- End TypeKit -->
 
-  <body>
+  <body id="page-top" style="padding-top: 55px;">
+    <a href="#content" class="sr-only">skip to content</a>
+
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <head>
+        <?php include '/data/includes/head.php'; ?>
+    </head>    
+
 
     <!-- Div for main template -->
-    <div id="content"></div>
+    <div id="content" class="container-fluid"></div>
     <!-- End div for main template -->
 
     <!-- build:js(.) scripts/vendor.js -->
