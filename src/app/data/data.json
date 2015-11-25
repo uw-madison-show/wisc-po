@@ -59,7 +59,7 @@
       "description": "Percent of people that responded yes to \"Has a doctor or other health professional ever told you that you have asthma?\"",
       "tags": [
         "Respiratory",
-        "Physcial Activity"
+        "Physical Activity"
       ],
       "observations": [
         {
@@ -147,9 +147,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.372273,
+              0.065775,
+              345
             ],
             [
               2013,
@@ -217,7 +217,7 @@
     "caregiving": {
       "name": "Currently Providing Care",
       "data_type": "percent",
-      "description": "Provided regular, unpaid care for family or friend at least once in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
+      "description": "Provided regular, unpaid care for family or friend at some time in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
       "tags": [
         "Caregiving",
         "Social",
@@ -269,65 +269,12 @@
         }
       ]
     },
-    "cognitive_function": {
-      "name": "Cognitive Function",
-      "data_type": "percent",
-      "description": "The Mini-Cog is a 3-minute instrument to screen for cognitive impairment. Subjects are told three words, asked to draw a clock diagram, and then asked to recall the words.",
-      "tags": [
-        "Mental Health"
-      ],
-      "observations": [
-        {
-          "id": "55000",
-          "name": "Wisconsin",
-          "parent": null,
-          "data": [
-            [
-              2008,
-              0.446776,
-              0.067333,
-              189
-            ],
-            [
-              2009,
-              0.438534,
-              0.081782,
-              275
-            ],
-            [
-              2010,
-              0.511368,
-              0.043118,
-              815
-            ],
-            [
-              2011,
-              0.487498,
-              0.036505,
-              790
-            ],
-            [
-              2012,
-              0.467769,
-              0.064627,
-              380
-            ],
-            [
-              2013,
-              0.47614,
-              0.058433,
-              372
-            ]
-          ]
-        }
-      ]
-    },
     "count_walk_to": {
-      "name": "Average Number of Amenities",
+      "name": "Amenities within Walking Distance",
       "data_type": "count",
       "description": "SHOW asks respondents to rate a list of 18 amenities (e.g. parks, supermarkets, post office) on the amount of time it would take to walk to it. This is a count of the number of amenities that the respondents said they could walk to in under 5 minutes.",
       "tags": [
-        "Physcial Activity",
+        "Physical Activity",
         "Built Environment"
       ],
       "observations": [
@@ -485,7 +432,7 @@
     "designated_driver": {
       "name": "Use Designated Driver",
       "data_type": "percent",
-      "description": "People that report always using a designated driver or that the question does not apply (they do not drink or they do not drive).",
+      "description": "Percentage of people that report always using a designated driver. People that report the question does not apply (they do not drink or they do not drive) are also counted in the percentage .",
       "tags": [
         "Alcohol",
         "Social",
@@ -540,7 +487,7 @@
     "diabetes": {
       "name": "Diabetes",
       "data_type": "percent",
-      "description": "A doctor has told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
+      "description": "A doctor has ever told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
       "tags": [
         "Obesity",
         "Diet",
@@ -700,7 +647,7 @@
       ]
     },
     "ever_daily_binge_drinker": {
-      "name": "Daily Binge Drinking",
+      "name": "History of Binge Drinking",
       "data_type": "percent",
       "description": "Percent of people that report at least one time in their life where they drank 5 or more drinks almost every day.",
       "tags": [
@@ -970,7 +917,7 @@
     "fruit_veg_eating": {
       "name": "Average Fruits and Veggies Per Day",
       "data_type": "count",
-      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of fruits and veggies per day is computed based on standard methods.",
+      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of servings of fruits and veggies per day is computed based on standard methods.",
       "tags": [
         "Diet"
       ],
@@ -1167,9 +1114,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.08651,
+              0.039439,
+              385
             ],
             [
               2013,
@@ -1294,7 +1241,7 @@
       "description": "Percent of people that report that they or someone they live with smokes in their home.",
       "tags": [
         "Smoking",
-        "Respitory"
+        "Respiratory"
       ],
       "observations": [
         {
@@ -1504,7 +1451,7 @@
       ]
     },
     "lung_function": {
-      "name": "Lung Function",
+      "name": "Lung Function (% Normal)",
       "data_type": "percent",
       "description": "SHOW subjects blow air through a spirometer to measure their lung function. The forced expiratory volume (FEV1%) is the flow that comes out at the beginning and the forced vital capacity (FVC) is the total lung volume. The ratio between FEV1% and FVC can indicate obstructive lung function. This is the percent ab",
       "tags": [
@@ -1720,7 +1667,7 @@
     "poor_oral_health": {
       "name": "Poor Oral Health (self-reported)",
       "data_type": "percent",
-      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health.",
+      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health. (As opposed to excellent, very good, or good condition.)",
       "tags": [
         "Dental"
       ],
@@ -1771,9 +1718,9 @@
       ]
     },
     "prescriptions": {
-      "name": "Prescription Medication",
+      "name": "Prescription Medication Use (Last 3",
       "data_type": "percent",
-      "description": "Taking at least one prescription mediation in the last 30 days.",
+      "description": "Taking at least one prescription medication in the last 30 days.",
       "tags": [
         "Health Care",
         "Prevention"
@@ -1935,7 +1882,7 @@
     "sleep_hours": {
       "name": "Average Hours of Sleep",
       "data_type": "count",
-      "description": "SHOW asks a series of questions about work/school nights and weekend nights for respondents that work. This is the average hours of sleep for all respondents.",
+      "description": "SHOW asks a series of questions about work nights, school nights and weekend nights. Non-working respondents answer separate questions. This is the average hours of sleep for all respondents regardless of their employment or school status.",
       "tags": [
         "Sleep"
       ],
@@ -2543,7 +2490,7 @@
       "description": "Percent of people that responded yes to \"Has a doctor or other health professional ever told you that you have asthma?\"",
       "tags": [
         "Respiratory",
-        "Physcial Activity"
+        "Physical Activity"
       ],
       "observations": [
         {
@@ -2803,9 +2750,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.454897,
+              0.146293,
+              99
             ],
             [
               2013,
@@ -2846,9 +2793,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.365041,
+              0.140039,
+              52
             ],
             [
               2013,
@@ -2889,9 +2836,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.289366,
+              0.23109,
+              35
             ],
             [
               2013,
@@ -2932,9 +2879,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.275906,
+              0.097222,
+              48
             ],
             [
               2013,
@@ -2975,9 +2922,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.331747,
+              0.096594,
+              111
             ],
             [
               2013,
@@ -3217,7 +3164,7 @@
     "caregiving": {
       "name": "Currently Providing Care",
       "data_type": "percent",
-      "description": "Provided regular, unpaid care for family or friend at least once in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
+      "description": "Provided regular, unpaid care for family or friend at some time in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
       "tags": [
         "Caregiving",
         "Social",
@@ -3441,237 +3388,12 @@
         }
       ]
     },
-    "cognitive_function": {
-      "name": "Cognitive Function",
-      "data_type": "percent",
-      "description": "The Mini-Cog is a 3-minute instrument to screen for cognitive impairment. Subjects are told three words, asked to draw a clock diagram, and then asked to recall the words.",
-      "tags": [
-        "Mental Health"
-      ],
-      "observations": [
-        {
-          "id": "1",
-          "name": "Southeast",
-          "parent": "55000",
-          "data": [
-            [
-              2008,
-              0.348852,
-              0.13769,
-              47
-            ],
-            [
-              2009,
-              0.438743,
-              0.103621,
-              84
-            ],
-            [
-              2010,
-              0.465659,
-              0.080023,
-              209
-            ],
-            [
-              2011,
-              0.470072,
-              0.060283,
-              206
-            ],
-            [
-              2012,
-              0.507493,
-              0.1131,
-              110
-            ],
-            [
-              2013,
-              0.489153,
-              0.113665,
-              134
-            ]
-          ]
-        },
-        {
-          "id": "2",
-          "name": "South",
-          "parent": "55000",
-          "data": [
-            [
-              2008,
-              0.581928,
-              0.126766,
-              55
-            ],
-            [
-              2009,
-              0.507442,
-              0.176329,
-              84
-            ],
-            [
-              2010,
-              0.59898,
-              0.082022,
-              171
-            ],
-            [
-              2011,
-              0.532148,
-              0.049314,
-              155
-            ],
-            [
-              2012,
-              0.48837,
-              0.188824,
-              58
-            ],
-            [
-              2013,
-              0.531239,
-              0.123715,
-              89
-            ]
-          ]
-        },
-        {
-          "id": "3",
-          "name": "West",
-          "parent": "55000",
-          "data": [
-            [
-              2008,
-              0.456852,
-              0.153126,
-              29
-            ],
-            [
-              2009,
-              0.409243,
-              0.118296,
-              58
-            ],
-            [
-              2010,
-              0.583228,
-              0.105622,
-              121
-            ],
-            [
-              2011,
-              0.453878,
-              0.133366,
-              127
-            ],
-            [
-              2012,
-              0.408646,
-              0.202867,
-              42
-            ],
-            [
-              2013,
-              0.516681,
-              0.024969,
-              32
-            ]
-          ]
-        },
-        {
-          "id": "4",
-          "name": "North",
-          "parent": "55000",
-          "data": [
-            [
-              2008,
-              0.452111,
-              0.27694,
-              22
-            ],
-            [
-              2009,
-              0.482169,
-              0.012098,
-              16
-            ],
-            [
-              2010,
-              0.413949,
-              0.099529,
-              138
-            ],
-            [
-              2011,
-              0.480139,
-              0.151721,
-              137
-            ],
-            [
-              2012,
-              0.532907,
-              0.247893,
-              50
-            ],
-            [
-              2013,
-              0.383202,
-              0.17145,
-              38
-            ]
-          ]
-        },
-        {
-          "id": "5",
-          "name": "Northeast",
-          "parent": "55000",
-          "data": [
-            [
-              2008,
-              0.344811,
-              0.174097,
-              36
-            ],
-            [
-              2009,
-              0.214938,
-              0.084881,
-              33
-            ],
-            [
-              2010,
-              0.488873,
-              0.124689,
-              176
-            ],
-            [
-              2011,
-              0.499686,
-              0.063323,
-              165
-            ],
-            [
-              2012,
-              0.393225,
-              0.100883,
-              120
-            ],
-            [
-              2013,
-              0.419439,
-              0.143414,
-              79
-            ]
-          ]
-        }
-      ]
-    },
     "count_walk_to": {
-      "name": "Average Number of Amenities",
+      "name": "Amenities within Walking Distance",
       "data_type": "count",
       "description": "SHOW asks respondents to rate a list of 18 amenities (e.g. parks, supermarkets, post office) on the amount of time it would take to walk to it. This is a count of the number of amenities that the respondents said they could walk to in under 5 minutes.",
       "tags": [
-        "Physcial Activity",
+        "Physical Activity",
         "Built Environment"
       ],
       "observations": [
@@ -4345,7 +4067,7 @@
     "designated_driver": {
       "name": "Use Designated Driver",
       "data_type": "percent",
-      "description": "People that report always using a designated driver or that the question does not apply (they do not drink or they do not drive).",
+      "description": "Percentage of people that report always using a designated driver. People that report the question does not apply (they do not drink or they do not drive) are also counted in the percentage .",
       "tags": [
         "Alcohol",
         "Social",
@@ -4572,7 +4294,7 @@
     "diabetes": {
       "name": "Diabetes",
       "data_type": "percent",
-      "description": "A doctor has told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
+      "description": "A doctor has ever told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
       "tags": [
         "Obesity",
         "Diet",
@@ -5248,7 +4970,7 @@
       ]
     },
     "ever_daily_binge_drinker": {
-      "name": "Daily Binge Drinking",
+      "name": "History of Binge Drinking",
       "data_type": "percent",
       "description": "Percent of people that report at least one time in their life where they drank 5 or more drinks almost every day.",
       "tags": [
@@ -6378,7 +6100,7 @@
     "fruit_veg_eating": {
       "name": "Average Fruits and Veggies Per Day",
       "data_type": "count",
-      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of fruits and veggies per day is computed based on standard methods.",
+      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of servings of fruits and veggies per day is computed based on standard methods.",
       "tags": [
         "Diet"
       ],
@@ -7091,9 +6813,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.096893,
+              0.089447,
+              112
             ],
             [
               2013,
@@ -7134,9 +6856,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.084009,
+              0.083412,
+              60
             ],
             [
               2013,
@@ -7177,9 +6899,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.067497,
+              0.030215,
+              42
             ],
             [
               2013,
@@ -7220,9 +6942,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0,
+              0,
+              51
             ],
             [
               2013,
@@ -7263,9 +6985,9 @@
             ],
             [
               2012,
-              null,
-              null,
-              0
+              0.117672,
+              0.055353,
+              120
             ],
             [
               2013,
@@ -7734,7 +7456,7 @@
       "description": "Percent of people that report that they or someone they live with smokes in their home.",
       "tags": [
         "Smoking",
-        "Respitory"
+        "Respiratory"
       ],
       "observations": [
         {
@@ -8632,7 +8354,7 @@
       ]
     },
     "lung_function": {
-      "name": "Lung Function",
+      "name": "Lung Function (% Normal)",
       "data_type": "percent",
       "description": "SHOW subjects blow air through a spirometer to measure their lung function. The forced expiratory volume (FEV1%) is the flow that comes out at the beginning and the forced vital capacity (FVC) is the total lung volume. The ratio between FEV1% and FVC can indicate obstructive lung function. This is the percent ab",
       "tags": [
@@ -9536,7 +9258,7 @@
     "poor_oral_health": {
       "name": "Poor Oral Health (self-reported)",
       "data_type": "percent",
-      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health.",
+      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health. (As opposed to excellent, very good, or good condition.)",
       "tags": [
         "Dental"
       ],
@@ -9759,9 +9481,9 @@
       ]
     },
     "prescriptions": {
-      "name": "Prescription Medication",
+      "name": "Prescription Medication Use (Last 3",
       "data_type": "percent",
-      "description": "Taking at least one prescription mediation in the last 30 days.",
+      "description": "Taking at least one prescription medication in the last 30 days.",
       "tags": [
         "Health Care",
         "Prevention"
@@ -10439,7 +10161,7 @@
     "sleep_hours": {
       "name": "Average Hours of Sleep",
       "data_type": "count",
-      "description": "SHOW asks a series of questions about work/school nights and weekend nights for respondents that work. This is the average hours of sleep for all respondents.",
+      "description": "SHOW asks a series of questions about work nights, school nights and weekend nights. Non-working respondents answer separate questions. This is the average hours of sleep for all respondents regardless of their employment or school status.",
       "tags": [
         "Sleep"
       ],
@@ -12972,7 +12694,7 @@
       "description": "Percent of people that responded yes to \"Has a doctor or other health professional ever told you that you have asthma?\"",
       "tags": [
         "Respiratory",
-        "Physcial Activity"
+        "Physical Activity"
       ],
       "observations": [
         {
@@ -13983,7 +13705,7 @@
               2008,
               null,
               null,
-              44
+              62
             ]
           ]
         },
@@ -14022,7 +13744,7 @@
               2008,
               null,
               null,
-              21
+              39
             ]
           ]
         },
@@ -14035,7 +13757,7 @@
               2008,
               null,
               null,
-              12
+              31
             ]
           ]
         },
@@ -14087,7 +13809,7 @@
               2008,
               null,
               null,
-              244
+              264
             ]
           ]
         },
@@ -14126,7 +13848,7 @@
               2008,
               null,
               null,
-              49
+              56
             ]
           ]
         },
@@ -14178,7 +13900,7 @@
               2008,
               null,
               null,
-              25
+              37
             ]
           ]
         },
@@ -14204,7 +13926,7 @@
               2008,
               null,
               null,
-              22
+              34
             ]
           ]
         },
@@ -14243,7 +13965,7 @@
               2008,
               null,
               null,
-              0
+              20
             ]
           ]
         },
@@ -14282,7 +14004,7 @@
               2008,
               null,
               null,
-              28
+              38
             ]
           ]
         },
@@ -14308,7 +14030,7 @@
               2008,
               null,
               null,
-              45
+              61
             ]
           ]
         },
@@ -14399,7 +14121,7 @@
               2008,
               null,
               null,
-              84
+              99
             ]
           ]
         },
@@ -14412,7 +14134,7 @@
               2008,
               null,
               null,
-              0
+              6
             ]
           ]
         },
@@ -14438,7 +14160,7 @@
               2008,
               null,
               null,
-              19
+              40
             ]
           ]
         },
@@ -14451,7 +14173,7 @@
               2008,
               null,
               null,
-              311
+              371
             ]
           ]
         },
@@ -14542,7 +14264,7 @@
               2008,
               null,
               null,
-              49
+              58
             ]
           ]
         },
@@ -14568,7 +14290,7 @@
               2008,
               null,
               null,
-              22
+              45
             ]
           ]
         },
@@ -14685,7 +14407,7 @@
               2008,
               null,
               null,
-              0
+              13
             ]
           ]
         },
@@ -14789,7 +14511,7 @@
               2008,
               null,
               null,
-              50
+              56
             ]
           ]
         },
@@ -14802,7 +14524,7 @@
               2008,
               null,
               null,
-              105
+              112
             ]
           ]
         },
@@ -14815,7 +14537,7 @@
               2008,
               null,
               null,
-              40
+              54
             ]
           ]
         },
@@ -14841,7 +14563,7 @@
               2008,
               null,
               null,
-              67
+              76
             ]
           ]
         },
@@ -14854,7 +14576,7 @@
               2008,
               null,
               null,
-              41
+              51
             ]
           ]
         }
@@ -15809,7 +15531,7 @@
     "caregiving": {
       "name": "Currently Providing Care",
       "data_type": "percent",
-      "description": "Provided regular, unpaid care for family or friend at least once in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
+      "description": "Provided regular, unpaid care for family or friend at some time in the past 12 months. Includes only care activities that are necessary because of illness or disability of the recipient.",
       "tags": [
         "Caregiving",
         "Social",
@@ -16754,958 +16476,12 @@
         }
       ]
     },
-    "cognitive_function": {
-      "name": "Cognitive Function",
-      "data_type": "percent",
-      "description": "The Mini-Cog is a 3-minute instrument to screen for cognitive impairment. Subjects are told three words, asked to draw a clock diagram, and then asked to recall the words.",
-      "tags": [
-        "Mental Health"
-      ],
-      "observations": [
-        {
-          "id": "us-wi-001",
-          "name": "Adams",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              16
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-003",
-          "name": "Ashland",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-005",
-          "name": "Barron",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              3
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-007",
-          "name": "Bayfield",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              21
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-009",
-          "name": "Brown",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              78
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-011",
-          "name": "Buffalo",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              2
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-013",
-          "name": "Burnett",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              8
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-015",
-          "name": "Calumet",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              41
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-017",
-          "name": "Chippewa",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              42
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-019",
-          "name": "Clark",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              2
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-021",
-          "name": "Columbia",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              18
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-023",
-          "name": "Crawford",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-025",
-          "name": "Dane",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              281
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-027",
-          "name": "Dodge",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              68
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-029",
-          "name": "Door",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              20
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-031",
-          "name": "Douglas",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              64
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-033",
-          "name": "Dunn",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              19
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-035",
-          "name": "Eau Claire",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              53
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-037",
-          "name": "Florence",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-039",
-          "name": "Fond Du Lac",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              41
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-041",
-          "name": "Forest",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              21
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-043",
-          "name": "Grant",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              37
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-045",
-          "name": "Green",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              8
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-047",
-          "name": "Green Lake",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              29
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-049",
-          "name": "Iowa",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              24
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-051",
-          "name": "Iron",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              23
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-053",
-          "name": "Jackson",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-055",
-          "name": "Jefferson",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              40
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-057",
-          "name": "Juneau",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              10
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-059",
-          "name": "Kenosha",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              69
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-061",
-          "name": "Kewaunee",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-063",
-          "name": "La Crosse",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              69
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-065",
-          "name": "Lafayette",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              4
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-067",
-          "name": "Langlade",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-069",
-          "name": "Lincoln",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              41
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-071",
-          "name": "Manitowoc",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              59
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-073",
-          "name": "Marathon",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              104
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-075",
-          "name": "Marinette",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              6
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-077",
-          "name": "Marquette",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-078",
-          "name": "Menominee",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              39
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-079",
-          "name": "Milwaukee",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              381
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-081",
-          "name": "Monroe",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              14
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-083",
-          "name": "Oconto",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              5
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-085",
-          "name": "Oneida",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              18
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-087",
-          "name": "Outagamie",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              96
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-089",
-          "name": "Ozaukee",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              7
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-091",
-          "name": "Pepin",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-093",
-          "name": "Pierce",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              66
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-095",
-          "name": "Polk",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              28
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-097",
-          "name": "Portage",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              49
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-099",
-          "name": "Price",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              11
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-101",
-          "name": "Racine",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              68
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-103",
-          "name": "Richland",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              11
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-105",
-          "name": "Rock",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              82
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-107",
-          "name": "Rusk",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              2
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-109",
-          "name": "St. Croix",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              22
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-111",
-          "name": "Sauk",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              40
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-113",
-          "name": "Sawyer",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-115",
-          "name": "Shawano",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              13
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-117",
-          "name": "Sheboygan",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              28
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-119",
-          "name": "Taylor",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              30
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-121",
-          "name": "Trempealeau",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              15
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-123",
-          "name": "Vernon",
-          "parent": 2,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              13
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-125",
-          "name": "Vilas",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              21
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-127",
-          "name": "Walworth",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              30
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-129",
-          "name": "Washburn",
-          "parent": 3,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-131",
-          "name": "Washington",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              63
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-133",
-          "name": "Waukesha",
-          "parent": 1,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              132
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-135",
-          "name": "Waupaca",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              63
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-137",
-          "name": "Waushara",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              9
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-139",
-          "name": "Winnebago",
-          "parent": 5,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              82
-            ]
-          ]
-        },
-        {
-          "id": "us-wi-141",
-          "name": "Wood",
-          "parent": 4,
-          "data": [
-            [
-              2008,
-              null,
-              null,
-              62
-            ]
-          ]
-        }
-      ]
-    },
     "count_walk_to": {
-      "name": "Average Number of Amenities",
+      "name": "Amenities within Walking Distance",
       "data_type": "count",
       "description": "SHOW asks respondents to rate a list of 18 amenities (e.g. parks, supermarkets, post office) on the amount of time it would take to walk to it. This is a count of the number of amenities that the respondents said they could walk to in under 5 minutes.",
       "tags": [
-        "Physcial Activity",
+        "Physical Activity",
         "Built Environment"
       ],
       "observations": [
@@ -20542,7 +19318,7 @@
     "designated_driver": {
       "name": "Use Designated Driver",
       "data_type": "percent",
-      "description": "People that report always using a designated driver or that the question does not apply (they do not drink or they do not drive).",
+      "description": "Percentage of people that report always using a designated driver. People that report the question does not apply (they do not drink or they do not drive) are also counted in the percentage .",
       "tags": [
         "Alcohol",
         "Social",
@@ -21490,7 +20266,7 @@
     "diabetes": {
       "name": "Diabetes",
       "data_type": "percent",
-      "description": "A doctor has told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
+      "description": "A doctor has ever told you that you have type 1 or type 2 diabetes. (Excludes gestational diabetes and pre-diabetes.)",
       "tags": [
         "Obesity",
         "Diet",
@@ -24329,7 +23105,7 @@
       ]
     },
     "ever_daily_binge_drinker": {
-      "name": "Daily Binge Drinking",
+      "name": "History of Binge Drinking",
       "data_type": "percent",
       "description": "Percent of people that report at least one time in their life where they drank 5 or more drinks almost every day.",
       "tags": [
@@ -29064,7 +27840,7 @@
     "fruit_veg_eating": {
       "name": "Average Fruits and Veggies Per Day",
       "data_type": "count",
-      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of fruits and veggies per day is computed based on standard methods.",
+      "description": "SHOW asks respondents for various information about their normal eating habits. Based on their answers an average number of servings of fruits and veggies per day is computed based on standard methods.",
       "tags": [
         "Diet"
       ],
@@ -31970,7 +30746,7 @@
               2008,
               null,
               null,
-              55
+              77
             ]
           ]
         },
@@ -32009,7 +30785,7 @@
               2008,
               null,
               null,
-              19
+              39
             ]
           ]
         },
@@ -32022,7 +30798,7 @@
               2008,
               null,
               null,
-              18
+              42
             ]
           ]
         },
@@ -32074,7 +30850,7 @@
               2008,
               null,
               null,
-              270
+              293
             ]
           ]
         },
@@ -32113,7 +30889,7 @@
               2008,
               null,
               null,
-              53
+              61
             ]
           ]
         },
@@ -32165,7 +30941,7 @@
               2008,
               null,
               null,
-              26
+              40
             ]
           ]
         },
@@ -32191,7 +30967,7 @@
               2008,
               null,
               null,
-              26
+              37
             ]
           ]
         },
@@ -32230,7 +31006,7 @@
               2008,
               null,
               null,
-              0
+              26
             ]
           ]
         },
@@ -32269,7 +31045,7 @@
               2008,
               null,
               null,
-              31
+              46
             ]
           ]
         },
@@ -32295,7 +31071,7 @@
               2008,
               null,
               null,
-              51
+              69
             ]
           ]
         },
@@ -32386,7 +31162,7 @@
               2008,
               null,
               null,
-              88
+              104
             ]
           ]
         },
@@ -32399,7 +31175,7 @@
               2008,
               null,
               null,
-              0
+              6
             ]
           ]
         },
@@ -32425,7 +31201,7 @@
               2008,
               null,
               null,
-              19
+              39
             ]
           ]
         },
@@ -32438,7 +31214,7 @@
               2008,
               null,
               null,
-              330
+              394
             ]
           ]
         },
@@ -32529,7 +31305,7 @@
               2008,
               null,
               null,
-              54
+              64
             ]
           ]
         },
@@ -32555,7 +31331,7 @@
               2008,
               null,
               null,
-              27
+              51
             ]
           ]
         },
@@ -32672,7 +31448,7 @@
               2008,
               null,
               null,
-              0
+              13
             ]
           ]
         },
@@ -32776,7 +31552,7 @@
               2008,
               null,
               null,
-              56
+              63
             ]
           ]
         },
@@ -32789,7 +31565,7 @@
               2008,
               null,
               null,
-              126
+              134
             ]
           ]
         },
@@ -32802,7 +31578,7 @@
               2008,
               null,
               null,
-              48
+              63
             ]
           ]
         },
@@ -32828,7 +31604,7 @@
               2008,
               null,
               null,
-              74
+              84
             ]
           ]
         },
@@ -32841,7 +31617,7 @@
               2008,
               null,
               null,
-              52
+              63
             ]
           ]
         }
@@ -34746,7 +33522,7 @@
       "description": "Percent of people that report that they or someone they live with smokes in their home.",
       "tags": [
         "Smoking",
-        "Respitory"
+        "Respiratory"
       ],
       "observations": [
         {
@@ -38528,7 +37304,7 @@
       ]
     },
     "lung_function": {
-      "name": "Lung Function",
+      "name": "Lung Function (% Normal)",
       "data_type": "percent",
       "description": "SHOW subjects blow air through a spirometer to measure their lung function. The forced expiratory volume (FEV1%) is the flow that comes out at the beginning and the forced vital capacity (FVC) is the total lung volume. The ratio between FEV1% and FVC can indicate obstructive lung function. This is the percent ab",
       "tags": [
@@ -42316,7 +41092,7 @@
     "poor_oral_health": {
       "name": "Poor Oral Health (self-reported)",
       "data_type": "percent",
-      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health.",
+      "description": "If respondents reported the condition of their teeth was \"fair\" or \"poor\", they are counted in the percent of people reporting poor oral health. (As opposed to excellent, very good, or good condition.)",
       "tags": [
         "Dental"
       ],
@@ -43260,9 +42036,9 @@
       ]
     },
     "prescriptions": {
-      "name": "Prescription Medication",
+      "name": "Prescription Medication Use (Last 3",
       "data_type": "percent",
-      "description": "Taking at least one prescription mediation in the last 30 days.",
+      "description": "Taking at least one prescription medication in the last 30 days.",
       "tags": [
         "Health Care",
         "Prevention"
@@ -46103,7 +44879,7 @@
     "sleep_hours": {
       "name": "Average Hours of Sleep",
       "data_type": "count",
-      "description": "SHOW asks a series of questions about work/school nights and weekend nights for respondents that work. This is the average hours of sleep for all respondents.",
+      "description": "SHOW asks a series of questions about work nights, school nights and weekend nights. Non-working respondents answer separate questions. This is the average hours of sleep for all respondents regardless of their employment or school status.",
       "tags": [
         "Sleep"
       ],
