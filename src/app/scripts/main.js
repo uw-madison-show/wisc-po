@@ -21,49 +21,52 @@ App.initTemplates = function() {
   }
 
   $.when(d1).done(function() {
-    if (window.location.href.match(/\#.*/)) {
-      var page = window.location.href.match(/\#.*/)[0].substring(1);
-      if (page !== 'error') {
-        if (page === '') {
-          page = 'index';
-        }
-
-        $('#content').html(App.templates[page]);
-
-        if (page === 'data') {
-          // $('#minusIcon').hide();
-          // $('input[name="county"]').prop('disabled', App.sample);
-          if (App.sample) {
-            $('#county, #county1').hide();
-          }
+    console.log(window.location.href);
 
 
-          App.download.fillTable();
-          App.watchers.downloadWatchers();
-
-          if (App.misc.getCookie('visitedData') !== 'true') {
-            $('#newTour').show();
-            App.misc.setCookie('visitedData', 'true', 90);
-          }
-        } else if (page === 'charts') {
-          App.charts.setupCharts();
-          $('#sampleAlert').hide();
-
-          if (App.misc.getCookie('visitedCharts') !== 'true') {
-            $('#newTour').show();
-            App.misc.setCookie('visitedCharts', 'true', 90);
-          }
-        } else if (page === 'privacy') {
-          App.misc.setCookie('acceptCookie', 'true', 90);
-        }
-      } else {
-        $('#content').html(App.templates.index);
+    if (!window.location.href.match(/\#.*/)) {
+      // we have no bookmarks, process index page
+      $('#content').html(App.templates.index);
+      // i now want the index to show the charts
+      App.charts.setupCharts();
+      $('#sampleAlert').hide();
+      if (App.misc.getCookie('visitedCharts') !== 'true') {
+        $('#newTour').show();
+        App.misc.setCookie('visitedCharts', 'true', 90);
       }
     } else {
-      $('#content').html(App.templates.index);
-    }
+      // we have a bookmark, find out what page we want
+      var page = window.location.href.match(/\#.*/)[0].substring(1);
+      // initialize this page content
+      $('#content').html(App.templates[page]);
 
+      // and figure out what js to run
+      if ( page === 'error' ) {
 
+        $('#content').html(App.templates.index);
+
+      } else if ( page === 'chart_data') {
+
+        if (App.sample) {
+          $('#county, #county1').hide();
+        }
+        App.download.fillTable();
+        App.watchers.downloadWatchers();
+        if (App.misc.getCookie('visitedData') !== 'true') {
+          $('#newTour').show();
+          App.misc.setCookie('visitedData', 'true', 90);
+        }
+
+      } else if ( page === 'privacy' ) {
+
+        App.misc.setCookie('acceptCookie', 'true', 90);
+
+      } else {
+        // you requested a page that we do not have so here is the default
+        $('#content').html(App.templates.index);
+      } // end if for which bookmark
+    } // end if we are on the index page
+      
     // Init toggle switches
     $('.bootstrapSwitch').bootstrapSwitch();
 

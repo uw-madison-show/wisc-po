@@ -28,7 +28,11 @@ App.helpers.helperSetup = function() {
     var ret;
     var tags = Object.keys(App.dropDownTags);
 
+    // put 'All' on top
+    var spot = $.inArray('All', tags);
+    if ( spot > -1 ) { tags.splice(spot, 1); }
     tags.sort();
+    if ( spot > -1 ) { tags.unshift('All'); }
 
     $.each(tags, function() {
       var selectedVal = '';

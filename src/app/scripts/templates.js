@@ -52,23 +52,9 @@ Handlebars.registerPartial("halfChart", Handlebars.template({"1":function(depth0
   return buffer + "\r\n</div>\r\n";
 },"useData":true}));
 
-Handlebars.registerPartial("header", Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  return "active";
-  },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<header>\r\n  <nav role=\"navigation\" class=\"navbar navbar-sm navbar-default navbar-fixed-top\">\r\n\r\n    <!-- Brand and toggle get grouped for better mobile display -->\r\n    <div class=\"navbar-header\">\r\n      <button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\r\n        <span class=\"sr-only\">Toggle navigation</span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n        <span class=\"icon-bar\"></span>\r\n      </button>\r\n      <span class=\"navbar-brand\">Wisconsin Portal - SHOW Data Dissemination</span>\r\n    </div>\r\n\r\n    <!-- Collection of nav links and other content for toggling -->\r\n    <div id=\"navbarCollapse\" class=\"collapse navbar-collapse\">\r\n      <ul class=\"nav navbar-nav navbar-right\">\r\n        <li class=\"";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_home : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\"><a href=\"#\">Home</a></li>\r\n        <li class=\"";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_charts : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\"><a href=\"#charts\">Charts</a></li>\r\n        <li class=\"";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_about : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\"><a href=\"#about\">About</a></li>\r\n        <li class=\"";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.active_contact : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "\"><a href=\"#contact\">Contact</a></li>\r\n      </ul>\r\n    </div>\r\n  </nav>\r\n\r\n  <div id=\"cookies\" class=\"alert alert-dismissable alert-warning hidden-print\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      We use cookies on your computer to help make this website better. More details can be found in our <a class=\"simpleLink\" href=\"#privacy\">privacy policy</a>\r\n    </p>\r\n  </div>\r\n\r\n</header>\r\n\r\n<div class=\"padding-bottom hidden-print\">\r\n  <img class=\"img-responsive hidden-sm hidden-xs\" src=\"images/logo.png\" alt=\"\">\r\n  <img class=\"img-responsive visible-sm visible-xs\" src=\"images/logo-mobile.png\" alt=\"\">\r\n</div>\r\n\r\n<img class=\"img-responsive visible-print-block\" src=\"images/logo.png\" alt=\"\">\r\n";
-},"useData":true}));
+Handlebars.registerPartial("header", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  return "<header>\r\n  <nav role=\"navigation\" class=\"navbar navbar-sm navbar-default navbar-fixed-top\">\r\n    <div class=\"container\">\r\n      <!-- Brand and toggle get grouped for better mobile display -->\r\n      <div class=\"navbar-header\">\r\n        <button type=\"button\" data-target=\"#navbarCollapse\" data-toggle=\"collapse\" class=\"navbar-toggle\">\r\n          <span class=\"sr-only\">Toggle navigation</span>\r\n          <span class=\"icon-bar\"></span>\r\n          <span class=\"icon-bar\"></span>\r\n          <span class=\"icon-bar\"></span>\r\n        </button>\r\n        <span class=\"navbar-brand\">SHOW Data Dissemination</span>\r\n      </div>\r\n\r\n      <!-- Collection of nav links and other content for toggling -->\r\n      <div id=\"navbarCollapse\" class=\"collapse navbar-collapse\">\r\n        <ul class=\"nav navbar-nav navbar-right\">\r\n          <li class=\"\"><a href=\"/data/\">Home</a></li>\r\n          <li class=\"\"><a href=\"/data/charts\">Charts</a></li>\r\n          <li class=\"\"><a href=\"/data/codebooks\">Codebooks</a></li>\r\n          <li class=\"\"><a href=\"/data/documents\">Documentation</a></li>\r\n          <li class=\"\"><a href=\"/data/contact\">Contact</a></li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </nav>\r\n\r\n\r\n  <div id=\"cookies\" class=\"alert alert-dismissable alert-warning hidden-print\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      We use cookies on your computer to help make this website better. More details can be found in our <a class=\"simpleLink\" href=\"#privacy\">privacy policy</a>\r\n    </p>\r\n  </div>\r\n\r\n</header>\r\n\r\n<div class=\"padding-bottom hidden-print\">\r\n  <img class=\"img-responsive hidden-sm hidden-xs\" src=\"images/logo.png\" alt=\"\">\r\n  <img class=\"img-responsive visible-sm visible-xs\" src=\"images/logo-mobile.png\" alt=\"\">\r\n</div>\r\n\r\n<img class=\"img-responsive visible-print-block\" src=\"images/logo.png\" alt=\"\">\r\n";
+  },"useData":true}));
 
 Handlebars.registerPartial("linechart", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   return "<div class=\"chart lineChart col-xs-12\"></div>";
@@ -76,11 +62,11 @@ Handlebars.registerPartial("linechart", Handlebars.template({"compiler":[6,">= 2
 
 Handlebars.registerPartial("options", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var helper, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
-  return "<div class=\"row options padding-bottom\">\r\n  <form>\r\n\r\n    <div class=\"col-xs-12\">\r\n      <h3>Options</h3>\r\n      <hr>\r\n    </div>\r\n\r\n    <div id=\"tagSelect\" class=\"form-group nav-select col-sm-6 col-xs-12\">\r\n      <label class=\"control-label\">Tag</label>\r\n      <select class=\"form-control dropDownTags\">\r\n        "
+  return "<div class=\"row options padding-bottom\">\r\n  <form>\r\n\r\n    <div class=\"col-xs-12\">\r\n      <h3>Options</h3>\r\n      <hr>\r\n    </div>\r\n\r\n    <div id=\"tagSelect\" class=\"form-group nav-select col-sm-6 col-xs-12\">\r\n      <label class=\"control-label\">Category</label>\r\n      <select class=\"form-control dropDownTags\">\r\n        "
     + escapeExpression(((helpers.dropDownTags || (depth0 && depth0.dropDownTags) || helperMissing).call(depth0, "All", {"name":"dropDownTags","hash":{},"data":data})))
-    + "\r\n      </select>\r\n    </div>\r\n\r\n    <div id=\"taggedSelect\" class=\"form-group nav-select col-sm-6 col-xs-12\">\r\n      <label class=\"control-label\">Indicator</label>\r\n      <select class=\"form-control dropDownTagsIndicators\">\r\n        "
+    + "\r\n      </select>\r\n    </div>\r\n\r\n    <div id=\"taggedSelect\" class=\"form-group nav-select col-sm-6 col-xs-12\">\r\n      <label class=\"control-label\">Health Indicator</label>\r\n      <select class=\"form-control dropDownTagsIndicators\">\r\n        "
     + escapeExpression(((helper = (helper = helpers.dropDownTagsIndicators || (depth0 != null ? depth0.dropDownTagsIndicators : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"dropDownTagsIndicators","hash":{},"data":data}) : helper)))
-    + "\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"form-group nav-select col-sm-4 col-xs-6\">\r\n      <label id=\"errorbarToggle\" class=\"control-label\">Confidence Intervals</label>\r\n      <br>\r\n      <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\r\n    </div>\r\n\r\n    <div class=\"form-group nav-select col-sm-4 col-xs-6\">\r\n      <label id=\"largeChartToggle\" class=\"control-label\">Large&nbsp;Charts</label>\r\n      <br>\r\n      <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"largecharts\">\r\n    </div>\r\n\r\n  </form>\r\n</div>\r\n";
+    + "\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"form-group nav-select col-sm-4 col-xs-6\">\r\n      <label id=\"errorbarToggle\" class=\"control-label\">Margin of Error</label>\r\n      <br>\r\n      <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"errorbar\">\r\n    </div>\r\n\r\n    <div class=\"form-group nav-select col-sm-4 col-xs-6\">\r\n      <label id=\"largeChartToggle\" class=\"control-label\">Large&nbsp;Charts</label>\r\n      <br>\r\n      <input class=\"bootstrapSwitch\" type=\"checkbox\" name=\"largecharts\">\r\n    </div>\r\n\r\n  </form>\r\n</div>\r\n";
 },"useData":true}));
 
 Handlebars.registerPartial("table", Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -121,7 +107,7 @@ this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.
     'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <h1 class=\"pull-left\">Data Charts</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
+  buffer += "\r\n  <h1 class=\"pull-left\">Trends and Data foobarbaz</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
   stack1 = this.invokePartial(partials.options, '  ', 'options', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\r\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\r\n\r\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\r\n    <b>Warning: </b>This county has a small sample size, take caution when making\r\n    any assumptions based on this data. It is prone to have a large error.\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n";
@@ -166,10 +152,24 @@ this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0
 this["App"]["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\r\n\r\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
-    'active_home': (true)
+    'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <h1>Welcome to the SHOW Data Dissemination!</h1>\r\n  <hr/>\r\n\r\n  <p>\r\n    The Survey of the Health of Wisconsin (SHOW) is the first statewide research\r\n    survey of its kind to measure information on critical health conditions in\r\n    Wisconsin. Findings from SHOW present a comprehensive picture of the health\r\n    of Wisconsin residents, helping to identify needs and target resources where\r\n    they are most needed.\r\n  </p>\r\n  <p>\r\n    The Survey of the Health of Wisconsin is funded by the Wisconsin Partnership\r\n    Program and is under the direction of principal investigator Dr. F. Javier\r\n    Nieto and co-director Dr. Kristen Malecki and their team at the University of\r\n    Wisconsin School of Medicine and Public Health.\r\n  </p>\r\n\r\n";
+  buffer += "\r\n  <h1 class=\"pull-left\">Data Charts</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
+  stack1 = this.invokePartial(partials.options, '  ', 'options', depth0, undefined, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\r\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\r\n\r\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\r\n    <b>Warning: </b>This county has a small sample size, take caution when making\r\n    any assumptions based on this data. It is prone to have a large error.\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n";
+  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
+    'map': (true),
+    'num': ("0")
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
+    'column': (true),
+    'num': ("1")
+  }, helpers, partials, data);
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "  </div>\r\n\r\n  <div class=\"row\">\r\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\r\n    <div class=\"col-sm-3 col-xs-12 hidden-print\">\r\n      <button id=\"dataExport\" class=\"btn btn-lg btn-primary pull-right\">Export this data</button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"clearfix\"></div>\r\n\r\n";
   stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\r\n</div>\r\n";

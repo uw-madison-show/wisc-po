@@ -39,8 +39,8 @@ App.tourCharts = new Tour({
   steps: [
     {
       orphan: true,
-      title: 'Welcome to charts on Wisc Portal!',
-      content: 'In the following quick 2 minute walkthrough of our system, we will highlight features and important aspects of charts on the Wisc Portal.'
+      title: 'Welcome.',
+      content: 'This is a 2 minute walk through of our system. We will highlight features and important aspects of charts on the SHOW\'s data dissemination portal.'
     },
     {
       element: '.options',
@@ -50,8 +50,8 @@ App.tourCharts = new Tour({
     },
     {
       element: '#tagSelect',
-      title: 'Tag Selection',
-      content: 'The tag selector allows you to choose a group of tagged data indicators to further narrow down what you are looking for.',
+      title: 'Categories',
+      content: 'We grouped the health indicators into broad categories like Diet and Mental Health.',
       placement: 'top',
       onShow: function() {
         $('.dropDownTags option:first').prop('selected', true);
@@ -61,7 +61,7 @@ App.tourCharts = new Tour({
     {
       element: '#taggedSelect',
       title: 'Indicator Selection',
-      content: 'The indicator selector allows you to change what SHOW Indicator is displayed on the chart and map.',
+      content: 'Pick the health indicator that you are interested in. This is just a sample of SHOW\'s data.',
       placement: 'top',
       onShow: function() {
         $('.dropDownTagsIndicators option:first').prop('selected', true);
@@ -70,8 +70,8 @@ App.tourCharts = new Tour({
     },
     {
       element: '#errorbarToggle',
-      title: 'Confidence Interval Toggle',
-      content: 'The confidence interval toggle allows you to see the confidence we have for our data based on sample sizes.',
+      title: 'Toggle Margin of Error',
+      content: 'Use this switch to add error bars to the chart based on the sample size of SHOW\'s survey.',
       placement: 'top',
       onShow: function() {
         $('input[name="errorbar"]').bootstrapSwitch('state', true);
@@ -104,7 +104,7 @@ App.tourCharts = new Tour({
     {
       element: '.highcharts-name-dane',
       title: 'County Map',
-      content: 'Clicking on a county will "select" it and highlight it on the data chart to the right.',
+      content: 'Clicking on a county will "select" it and display the data for the region on the chart.',
       placement: 'top',
       onShow: function() {
         $('#chart0').highcharts().series[0].points[12].select(true);
@@ -114,24 +114,9 @@ App.tourCharts = new Tour({
       }
     },
     {
-      element: '#chart1 .highcharts-markers.highcharts-tracker:eq(2)',
-      title: 'County Map',
-      content: 'Here, you can see the current county on the graph, as well as the confidence levels for the indicator (indicated in grey)',
-      placement: 'top',
-      onNext: function() {
-        $('#chart0').highcharts().series[0].points[12].select(false);
-      }
-    },
-    {
-      element: '.highcharts-name-dane',
-      title: 'County Map',
-      content: 'Clicking on a county again will "unselect" it and remove it from the data chart to the right.',
-      placement: 'top'
-    },
-    {
       element: '#chart1 .highcharts-legend .highcharts-legend-item:eq(3)',
       title: 'Chart Legend',
-      content: 'The chart legend shows which data series are currently shown on the chart. If you click on a series, it will toggle on/off.',
+      content: 'You can also click on the regions in the legend to toggle them on and off.',
       placement: 'top',
       onShow: function() {
         $('#chart1').highcharts().series[6].show();
@@ -140,13 +125,13 @@ App.tourCharts = new Tour({
     {
       element: '#description',
       title: 'Inidicator Description',
-      content: 'At the bottom of each chart, we have included a description of what our indicator represents.',
+      content: 'Here are some of the details about how we calculated the health indicators.',
       placement: 'top'
     },
     {
       element: '#chart0 .highcharts-button',
       title: 'Export Functionality',
-      content: 'Pressing the export button will allow you to export or print the given map/chart',
+      content: 'Pressing the export button will allow you to download or print the maps and charts.',
       placement: 'top',
       onShow: function() {
         $('#chart0 .highcharts-button').click();
@@ -157,14 +142,14 @@ App.tourCharts = new Tour({
     },
     {
       element: '#dataExport',
-      title: 'Export Functionality Cont.',
-      content: 'If you would like to export this data to other formats (CSV/Excel), pressing this button will take you to our data export page.',
+      title: 'Export the Data',
+      content: 'You can also export the data in CSV or Excel formats so you can make your own graphs.',
       placement: 'top'
     },
     {
       orphan: true,
       title: 'You are all set to go!',
-      content: 'We hope that you enjoy your time using our charts on Wisc Portal'
+      content: 'SHOW collects over 3000 variables every year on Wisconsinites. If you have questions or want to work on research with us, please get in touch at &lt;a href="mailto:data@show.wisc.edu">data@show.wisc.edu.&lt;/a>'
     },
   ]
 });
@@ -295,7 +280,7 @@ App.tourData = new Tour({
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Wed May 06 2015 16:19:25 GMT-0500 (Central Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-beta3</a> on Tue Dec 01 2015 11:37:23 GMT-0600 (Central Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
