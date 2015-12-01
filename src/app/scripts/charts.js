@@ -10,9 +10,29 @@
 * @prop x             {number}  Default x axis configuration
 * @prop y             {number}  Current data that is loaded into the chart (everything but county data)
 */
-App.charts = {
-  x: { title: { text: 'Year'}, categories: ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015'] },
-  y: { title: { text: 'Percent %'}, min: 0 }
+App.charts = {  
+  x:{  
+    title:{  
+      text:'Year'
+    },
+    categories:[  
+      '2008',
+      '2009',
+      '2010',
+      '2011',
+      '2012',
+      '2013',
+      '2014',
+      '2015'
+    ]
+  },
+  y:{  
+    title:{  
+      text:'Percent %'
+    },
+    min: -1,
+    startOnTick: false
+  }
 };
 
 /**

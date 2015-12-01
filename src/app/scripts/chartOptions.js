@@ -128,22 +128,10 @@ App.charts.mapOptions = {
      */
      formatter: function () {
        var color;
-       var size;
        var sample = this.point.sample[2008];
 
-       if (sample >= 75) {
-         color = '#008000';
-         size = 'Excellent';
-       } else if (sample >= 40) {
-         color = '#CC6600';
-         size = 'Fair';
-       } else if (sample) {
-         color = '#CC0000';
-         size = 'Poor';
-       }
-
        var val = 'Value: ' + this.point.value;
-       sample = '<span style="color: ' + color + '">Sample Size: ' + this.point.sample[2008] + ' (' + size + ')</span>';
+       sample = '<span style="color: ' + color + '">Sample Size: ' + this.point.sample[2008] + '</span>';
        var err = '';
        if (this.point.value === -1 || App.sample) {
          val = '';
@@ -160,7 +148,7 @@ App.charts.mapOptions = {
        }
 
        return '<b>' + this.series.name + '</b><br>' +
-       'Point name: ' + this.point.name + '<br>' +
+       'County: ' + this.point.name + '<br>' +
        'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
        val + '<br>' + err + '<br>' + sample;
      }
