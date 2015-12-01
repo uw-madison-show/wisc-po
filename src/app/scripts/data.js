@@ -68,7 +68,7 @@ App.data.transformData = function(value, error, percent, area) {
   } else {
     errorPos = ((area === 'county') ? -1 : null);
     errorNeg = ((area === 'county') ? -1 : null);
-    value = ((area === 'county') ? -1 : null);
+    value = ((area === 'county') ? -1 : 0);
   }
 
   return [value, errorNeg, errorPos];
@@ -100,11 +100,24 @@ App.data.getAreaData = function(area, indicator) {
 
       observation.sample = {};
 
+      // console.log(area + ' ' + observation.name + ' ' + indicator);
+
       $.each(observation.data, function(i2, data) {
 
+        // console.log('data: ' + data);
         newData = App.data.transformData(data[1], data[2], percent, area);
+        // console.log('newData: ' + newData);
+        // If Margin of error less than zero, set to zero
+        newData[1] = (newData[1] < 0 ) ? 0 : newData[1];
+        newData[2] = (newData[2] < 0 ) ? 0 : newData[2];
         areaData.error[i1].data[i2] = [data[0], newData[1], newData[2]];
-        data[1] = newData[0];
+
+        // If sample size is zero then data is null
+        if (data[3] <= 0) {
+          data[1] = null;
+        } else {
+          data[1] = newData[0];
+        }
 
         // Add sample size to Object as a property
         observation.sample[data[0]] = data[3];

@@ -30,7 +30,8 @@ App.charts = {
     title:{  
       text:'Percent %'
     },
-    min: -1,
+    min: -0.5,
+    minTickInterval: 1,
     startOnTick: false
   }
 };
