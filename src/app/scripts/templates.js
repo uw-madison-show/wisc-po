@@ -101,32 +101,6 @@ this["App"]["templates"]["chart_data"] = Handlebars.template({"compiler":[6,">= 
   return buffer + "\r\n</div>\r\n";
 },"usePartial":true,"useData":true});
 
-this["App"]["templates"]["charts"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div class=\"container\">\r\n\r\n";
-  stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
-    'active_charts': (true)
-  }, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <h1 class=\"pull-left\">Trends and Data foobarbaz</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
-  stack1 = this.invokePartial(partials.options, '  ', 'options', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\r\n\r\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\r\n    <b>Warning: </b>This county has a small sample size, take caution when making\r\n    any assumptions based on this data. It is prone to have a large error.\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n";
-  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
-    'map': (true),
-    'num': ("0")
-  }, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  stack1 = this.invokePartial(partials.halfChart, '    ', 'halfChart', depth0, {
-    'column': (true),
-    'num': ("1")
-  }, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "  </div>\r\n\r\n  <div class=\"row\">\r\n    <p id=\"description\" class=\"col-sm-9 col-xs-12\"></p>\r\n    <div class=\"col-sm-3 col-xs-12 hidden-print\">\r\n      <button id=\"dataExport\" class=\"btn btn-lg btn-primary pull-right\">Export this data</button>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"clearfix\"></div>\r\n\r\n";
-  stack1 = this.invokePartial(partials.footer, '  ', 'footer', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "\r\n</div>\r\n";
-},"usePartial":true,"useData":true});
-
 this["App"]["templates"]["contact"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, buffer = "<div class=\"container\">\r\n\r\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
@@ -155,7 +129,7 @@ this["App"]["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0
     'active_charts': (true)
   }, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
-  buffer += "\r\n  <h1 class=\"pull-left\">Data Charts</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
+  buffer += "\r\n  <h1 class=\"pull-left\">Trends and Data</h1>\r\n  <button class=\"btn btn-default pull-right startTour hidden-print\">Start Tour</button>\r\n  <div class=\"clearfix\"></div>\r\n  <hr/>\r\n\r\n  <div id=\"newTour\" class=\"alert alert-dismissable alert-success hidden-print collapse\" role=\"alert\">\r\n    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    <p>\r\n      It looks like you are new to the Wisc-Portal website. If you\r\n      have never used the charts section of this portal before, you should take\r\n      our quick tour of how to use this part of the tool!<br><br>\r\n      <button class=\"btn btn-success startTour\">Start Tour</button>\r\n    </p>\r\n  </div>\r\n\r\n";
   stack1 = this.invokePartial(partials.options, '  ', 'options', depth0, undefined, helpers, partials, data);
   if (stack1 != null) { buffer += stack1; }
   buffer += "\r\n  <!-- <h2 id=\"val\" class=\"hidden-print\">Selected Value: No region selected</h2> -->\r\n\r\n  <div id=\"sampleAlert\" class=\"alert alert-danger hidden-print\" role=\"alert\">\r\n    <b>Warning: </b>This county has a small sample size, take caution when making\r\n    any assumptions based on this data. It is prone to have a large error.\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n";
