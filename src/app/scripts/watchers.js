@@ -68,24 +68,23 @@ App.watchers.downloadWatchers = function() {
  */
 App.watchers.chartWatchers = function() {
 
-  $('.dropDownTags').change(function() {
-    var html = Handlebars.helpers.dropDownTagsIndicators().toString();
-    $('.dropDownTagsIndicators').html(html);
-    $('.dropDownTagsIndicators').change();
-  });
 
-  // Watcher and handler for dropDownIndicators selection
-  $('.dropDownTagsIndicators').change(function() {
-    var indicator = $('option:selected', this).val();
-    var name = $('option:selected', this).text();
+  /**
+   * Helper function to detroy and recreate both the map and the chart.
+   * @method destroyAndRecreate
+   * @memberof App.charts.chartWatchers
+   * @param {String}      name    Text of the drop down.
+   * @param {String}      indicator    Value of the drop down.
+   * @return {Void}
+   */
+  var destroyAndRecreate = function (indicator, name) {
     var map = $('.chart:eq(0)').highcharts();
     var chart = $('.chart:eq(1)').highcharts();
 
-    $('#val').text('Selected Value: No region selected');
-    $('#sampleAlert').slideUp();
-
     // TODO: For now, just destroying charts as it seems just as quick and reduces
     //       the amount of edge case errors that we were getting before
+    //       there is something odd in the reflow() function in highcharts in the way
+    //       it handles null and zero values. maybe?
 
     // Destroy and make new map
     App.data.currentMap = App.data.getAreaData('county', indicator);
@@ -106,6 +105,23 @@ App.watchers.chartWatchers = function() {
     chart.yAxis[0].setTitle({text: label});
 
     $('#description').text('*Description of Indicator: ' + App.data.getDescription(indicator));
+  };
+
+  $('.dropDownTags').change(function() {
+    var html = Handlebars.helpers.dropDownTagsIndicators().toString();
+    $('.dropDownTagsIndicators').html(html);
+    $('.dropDownTagsIndicators').change();
+  });
+
+  // Watcher and handler for dropDownIndicators selection
+  $('.dropDownTagsIndicators').change(function() {
+    var indicator = $('option:selected', this).val();
+    var name = $('option:selected', this).text();
+
+    $('#val').text('Selected Value: No region selected');
+    $('#sampleAlert').slideUp();
+
+    destroyAndRecreate( indicator, name );
   });
 
   // Watcher and handler for errorbar feature
@@ -130,18 +146,24 @@ App.watchers.chartWatchers = function() {
   $('input[name="largecharts"]').on('switchChange.bootstrapSwitch', function() {
     var chart1 = $('.chart:eq(0)');
     var chart2 = $('.chart:eq(1)');
+    var indicator = $('.dropDownTagsIndicators option:selected').val();
+    var name = $('.dropDownTagsIndicators option:selected').text();
+
+    console.log(indicator + ' || ' + name);
 
     chart1.parent().toggleClass('col-md-6');
-    chart2.parent().toggleClass('col-md-6');
     chart1.parent().toggleClass('largeChart');
-    chart2.parent().toggleClass('largeChart');
     chart1.parent().toggleClass('smallChart');
+    
+    chart2.parent().toggleClass('col-md-6');
+    chart2.parent().toggleClass('largeChart');
     chart2.parent().toggleClass('smallChart');
 
-    chart1.highcharts().reflow();
-    chart1.highcharts().redraw();
-    chart2.highcharts().reflow();
-    chart2.highcharts().redraw();
+    // chart1.highcharts().reflow();
+    // chart1.highcharts().redraw();
+    // chart2.highcharts().reflow();
+    // chart2.highcharts().redraw();
+    destroyAndRecreate( indicator, name );
   });
 
   $('.startTour').click(function() {

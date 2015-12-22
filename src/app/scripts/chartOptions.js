@@ -119,6 +119,7 @@ App.charts.mapOptions = {
     enabled: false
   },
   tooltip: {
+    enabled: true,
     backgroundColor: 'rgba(255, 255, 255, 0.95)',
     /**
      * Format the the tooltip for the map
@@ -127,30 +128,27 @@ App.charts.mapOptions = {
      * @return {String}   String represenation of the tooltip
      */
      formatter: function () {
-       var color;
-       var sample = this.point.sample[2008];
+       var val = '';
+       var sample = '';
 
-       var val = 'Value: ' + this.point.value;
-       sample = '<span style="color: ' + color + '">Sample Size: ' + this.point.sample[2008] + '</span>';
-       var err = '';
-       if (this.point.value === -1 || App.sample) {
-         val = '';
-         if (!this.point.sample[2008]) {
-           sample = 'No Data';
-         }
+       // console.log(this.point);
+       // console.log(this.series);
+
+       if ( App.sample === false && this.point.value) {
+        val = 'Value: ' + this.point.value;
+       }
+
+       if (this.point.sample) {
+        sample = 'Sample Size: ' + this.point.sample[2008];
        } else {
-         var error = App.data.getCurrentCountyError(this.point.name);
-         if (error[1] !== -1 && error[2] !== -1) {
-          err = 'Error Range: (' + error[1] + ' - ' + error[2] + ')';
-        } else {
-          err = 'Error Range: No Data';
-        }
+        sample = 'No Data';
        }
 
        return '<b>' + this.series.name + '</b><br>' +
        'County: ' + this.point.name + '<br>' +
        'Region: ' + App.maps.regionNames[this.point.region-1] + '<br>' +
-       val + '<br>' + err + '<br>' + sample;
+       val + '<br>' + 
+       sample;
      }
   }
 };

@@ -123,6 +123,7 @@ App.charts.createMap = function(chart, series, map, name) {
   seriesNew[0].data = series;
   seriesNew[0].mapData = map;
   seriesNew[0].name = name;
+  seriesNew[0].enableMouseTracking = true;
 
   seriesNew.push({
     'type': 'mapline',

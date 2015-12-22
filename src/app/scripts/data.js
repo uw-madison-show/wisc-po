@@ -120,7 +120,7 @@ App.data.getAreaData = function(area, indicator) {
         }
 
         // Add sample size to Object as a property
-        observation.sample[data[0]] = (data[3] == null) ? 0 : data[3];
+        observation.sample[data[0]] = (data[3] === null) ? 0 : data[3];
 
         // Cut out error and sample size from data
         data.splice(2, 2);
