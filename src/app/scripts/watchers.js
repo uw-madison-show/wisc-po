@@ -196,4 +196,9 @@ App.watchers.chartWatchers = function() {
     e.preventDefault();
   });
 
+  $('#contact-us-link').click(function(e) {
+    window.location.hash = 'contact';
+    e.preventDefault();
+  });
+
 };
