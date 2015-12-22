@@ -39,9 +39,12 @@ body {
   padding: 26px;
 }
 
-.container {
+#content {
+  max-width: 1400px;
+}
+.content-container {
   background: #fff;
-  padding: 5px;
+  padding: 25px;
   border-radius: 7px;
   border: 2px solid #eaeaea;
 }

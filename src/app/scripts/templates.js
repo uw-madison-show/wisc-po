@@ -124,7 +124,7 @@ this["App"]["templates"]["error"] = Handlebars.template({"compiler":[6,">= 2.0.0
 },"usePartial":true,"useData":true});
 
 this["App"]["templates"]["index"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "<div class=\"container\">\r\n\r\n";
+  var stack1, buffer = "<div class=\"content-container\">\r\n\r\n";
   stack1 = this.invokePartial(partials.header, '  ', 'header', depth0, {
     'active_charts': (true)
   }, helpers, partials, data);
