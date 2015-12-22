@@ -120,7 +120,7 @@ App.data.getAreaData = function(area, indicator) {
         }
 
         // Add sample size to Object as a property
-        observation.sample[data[0]] = data[3];
+        observation.sample[data[0]] = (data[3] == null) ? 0 : data[3];
 
         // Cut out error and sample size from data
         data.splice(2, 2);
@@ -132,10 +132,12 @@ App.data.getAreaData = function(area, indicator) {
         observation.region = observation.parent;
         observation['hc-key'] = observation.id;
         var alpha = percent ? 80 : 10;
-        var color = App.misc.convertColor(App.maps.regionColors[observation.region-1], observation.value / alpha, App.misc.colors.white);
+        var color = App.misc.colors.white;
 
         if (App.sample) {
           color = App.maps.regionColors[observation.region-1];
+        } else {
+          color = App.misc.convertColor(App.maps.regionColors[observation.region-1], observation.value / alpha, App.misc.colors.white);
         }
         observation.color = App.misc.toRGB(color);
 
