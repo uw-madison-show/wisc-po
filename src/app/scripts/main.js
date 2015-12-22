@@ -61,6 +61,10 @@ App.initTemplates = function() {
 
         App.misc.setCookie('acceptCookie', 'true', 90);
 
+      } else if (page === 'contact' ) {
+
+        $('#content').html(App.templates.contact);
+
       } else {
         // you requested a page that we do not have so here is the default
         $('#content').html(App.templates.index);
